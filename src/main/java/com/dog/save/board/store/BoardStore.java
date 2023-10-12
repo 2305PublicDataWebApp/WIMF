@@ -14,5 +14,12 @@ public interface BoardStore {
 	 * @return
 	 */
 	List<Board> selectBoardList(SqlSession sqlSession);
+	/**
+	 * 게시글 작성 Store
+	 * @param sqlSession
+	 * @param board
+	 * @return
+	 */
+	int insertBoard(SqlSession sqlSession, Board board);
 
 }

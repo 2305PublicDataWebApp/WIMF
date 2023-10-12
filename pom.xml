@@ -17,7 +17,15 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
-	
+		
+		<!-- 코드 수정시 자동으로 시작해주는 도구 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		
 		<!-- 롬복 -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>

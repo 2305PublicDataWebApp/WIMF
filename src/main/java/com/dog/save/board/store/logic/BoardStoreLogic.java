@@ -17,4 +17,10 @@ public class BoardStoreLogic implements BoardStore{
 		return bList;
 	}
 
+	@Override
+	public int insertBoard(SqlSession sqlSession, Board board) {
+		int result = sqlSession.insert("BoardMapper.insertBoard", board);
+		return result;
+	}
+
 }

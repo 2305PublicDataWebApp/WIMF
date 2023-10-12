@@ -24,4 +24,10 @@ public class BoardServiceImpl implements BoardService{
 		return bList;
 	}
 
+	@Override
+	public int insertBoard(Board board) {
+		int result = bStore.insertBoard(sqlSession, board);
+		return result;
+	}
+
 }
