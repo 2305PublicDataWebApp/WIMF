@@ -1,0 +1,14 @@
+package com.dog.save.app.service;
+
+import java.util.List;
+
+import com.dog.save.app.domain.App;
+import com.dog.save.common.domain.PageInfo;
+
+public interface AppService {
+
+	int getTotalCount();
+
+	List<App> appAllList(PageInfo pageInfo);
+
+}
