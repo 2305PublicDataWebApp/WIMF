@@ -1,4 +1,51 @@
-.fc {
-	width: 1000px;
-	height: 500px;
+/* 월요일 날짜 검정색 */
+.fc-day-mon a {
+  color: black;
+  text-decoration: none;
+}
+
+/* 화요일 날짜 검정색 */
+.fc-day-tue a {
+  color: black;
+  text-decoration: none;
+}
+
+/* 수요일 날짜 검정색 */
+.fc-day-wed a {
+  color: black;
+  text-decoration: none;
+}
+
+/* 목요일 날짜 검정색 */
+.fc-day-thu a {
+  color: black;
+  text-decoration: none;
+}
+
+/* 금요일 날짜 검정색 */
+.fc-day-fri a {
+  color: black;
+  text-decoration: none;
+}
+
+/* 토요일 날짜 파란색 */
+.fc-day-sat a {
+  color: blue;
+  text-decoration: none;
+}
+
+/* 일요일 날짜 빨간색 */
+.fc-day-sun a {
+  color: red;
+  text-decoration: none;
+}
+
+.fc-col-header {
+  width:100%;
+}
+.fc-daygrid-body fc-daygrid-body-unbalanced {
+	width:100%;
+}
+.fc-scrollgrid-sync-table {
+	width:100%;
 }
