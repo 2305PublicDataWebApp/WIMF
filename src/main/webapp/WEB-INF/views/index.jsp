@@ -59,8 +59,25 @@
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
-        });
+          initialView: 'dayGridMonth',
+          titleFormat: function (date) {
+              year = date.date.year;
+              month = date.date.month + 1;
+
+              return year + "년 " + month + "월";
+            },
+            events : [
+                {
+                  title: '물주기',
+                  start: '2023-10-12'
+              	},
+                {
+                  title: '뚜껑 닫기',
+                  start: '2023-10-03',
+                  end: '2023-10-05'
+              	}
+              ]
+          });
         calendar.render();
       });
 
@@ -224,7 +241,7 @@
 
         <div class="row g-4">
 
-          <div class="col-lg-1">
+          <!-- <div class="col"> -->
             <!-- <div class="pricing-item">
               <h3>Free Plan</h3>
               <div class="icon">
@@ -240,13 +257,12 @@
               </ul>
               <div class="text-center"><a href="#" class="buy-btn">Buy Now</a></div>
             </div> -->
-          </div>
+          <!-- </div> -->
           <!-- End Pricing Item -->
 
-          <div class="col-lg-10">
-            <div class="pricing-item featured">
-          	<div id='calendar'></div>
-            
+          <!-- <div class="col-lg-12"> -->
+            <div class="pricing-item"> <!-- class="featured" -->
+          	<div id='calendar'></div>            
               <!-- <h3>Business Plan</h3>
               <div class="icon">
                 <i class="bi bi-rocket"></i>
@@ -262,10 +278,10 @@
               </ul>
               <div class="text-center"><a href="#" class="buy-btn">Buy Now</a></div> -->
             </div>
-          </div>
+          <!-- </div> -->
           <!-- End Pricing Item -->
 
-          <div class="col-lg-1">
+          <!-- <div class="col"> -->
             <!-- <div class="pricing-item">
               <h3>Developer Plan</h3>
               <div class="icon">
@@ -281,7 +297,7 @@
               </ul>
               <div class="text-center"><a href="#" class="buy-btn">Buy Now</a></div>
             </div> -->
-          </div>
+          <!-- </div> -->
           <!-- End Pricing Item -->
 
         </div>
