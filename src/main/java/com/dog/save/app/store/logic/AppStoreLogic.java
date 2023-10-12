@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import com.dog.save.app.domain.App;
 import com.dog.save.app.store.AppStore;
 import com.dog.save.common.domain.PageInfo;
 
+@Repository
 public class AppStoreLogic implements AppStore {
 
 	@Override
