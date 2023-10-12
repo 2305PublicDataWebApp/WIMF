@@ -84,7 +84,7 @@
               </li> -->
             </ul>
           </li>
-          <li><a href="index.html#recent-posts">소통 게시판</a></li>
+          <li><a href="/board/list.dog">소통 게시판</a></li>
           <li><a href="index.html#services">임시보호란?</a></li>
           <li><a href="index.html#about">WIMF 팀 소개</a></li>
           <li><a href="index.html#contact">Contact</a></li>

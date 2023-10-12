@@ -10,5 +10,11 @@ public interface BoardService {
 	 * @return
 	 */
 	List<Board> selectBoardList();
+	/**
+	 * 게시글 작성 Service
+	 * @param board
+	 * @return
+	 */
+	int insertBoard(Board board);
 
 }

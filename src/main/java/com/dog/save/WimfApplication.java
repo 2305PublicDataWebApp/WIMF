@@ -9,5 +9,4 @@ public class WimfApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(WimfApplication.class, args);
 	}
-
 }
