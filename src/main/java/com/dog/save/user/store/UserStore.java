@@ -8,4 +8,6 @@ public interface UserStore {
 
 	User checkDuplUserId(SqlSession session, String userId);
 
+	User checkLogin(SqlSession session, User user);
+
 }
