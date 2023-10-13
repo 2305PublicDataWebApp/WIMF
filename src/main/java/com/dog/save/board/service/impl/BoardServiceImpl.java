@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dog.save.board.domain.Board;
+import com.dog.save.board.domain.bPageInfo;
 import com.dog.save.board.service.BoardService;
 import com.dog.save.board.store.BoardStore;
 
@@ -19,8 +20,8 @@ public class BoardServiceImpl implements BoardService{
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<Board> selectBoardList() {
-		List<Board> bList = bStore.selectBoardList(sqlSession);
+	public List<Board> selectBoardList(bPageInfo bpInfo) {
+		List<Board> bList = bStore.selectBoardList(sqlSession, bpInfo);
 		return bList;
 	}
 
@@ -28,6 +29,24 @@ public class BoardServiceImpl implements BoardService{
 	public int insertBoard(Board board) {
 		int result = bStore.insertBoard(sqlSession, board);
 		return result;
+	}
+
+	@Override
+	public Board showOneByBoard(Integer boardNo) {
+		Board board = bStore.selectOneByBoard(sqlSession, boardNo);
+		return board;
+	}
+
+	@Override
+	public int getListCount() {
+		int result = bStore.selectListCount(sqlSession);
+		return result;
+	}
+
+	@Override
+	public Board selectBoardByNo(Integer boardNo) {
+		Board board = bStore.selectBoardByNo(sqlSession, boardNo);
+		return board;
 	}
 
 }

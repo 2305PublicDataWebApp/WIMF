@@ -41,7 +41,7 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
   <!-- Template Main CSS File -->
-  <link href="/css/board/communityInsert.css" rel="stylesheet">
+  <link href="/css/board/communityDetail.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Append
@@ -57,25 +57,45 @@
   <!-- ======= Header ======= -->
   <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
   
-
   <main id="main">
     <div id="container">
-      <h3 style="padding-bottom: 2%;">글 작성</h3>
+      <h3 style="padding-bottom: 2%;">글 상세</h3>
       <div id="board">
-      	<form action="/board/write.dog" method="post">
-	        <div id="board-content">
-	          <div id="borad-subject">
-	            <input id="borad-subject-value" type="text" name="boardTitle" placeholder="제목">
-	          </div>
-	          <textarea id="summernote" name="boardContent"></textarea>
-	          <div>
-	            <input id="submit-btn" type="submit" value="등록" onClick="location.href='/board/list.dog'">
-	          </div>
-	          <div>
-	            <input id="reset-btn" type="reset" value="취소" onClick="location.href='/board/list.dog'">
-	          </div>
-	        </div>
-      	</form>
+        <div id="board-content">
+          <div id="borad-subject">
+            <tr>
+            	<th><a style="font-weight:bold">${board.boardTitle }</a></th>
+            </tr>
+          </div>
+          <div id="borad-writer">
+          	<tr>
+          		<th><a style="font-weight:bold; color: tomato">작성자 : </a></th>
+	      		<th>${board.userId }</th>
+	      	</tr>
+          </div>
+          <div id="borad-create-date">
+          	<tr>
+          		<th><a style="font-weight:bold; color: tomato">작성일 : </a></th>
+	      		<th>
+	      			<fmt:formatDate pattern="yyyy-MM-dd a HH:mm:ss" value="${board.createDate }"/>
+	      		</th>
+	      	</tr>
+          </div>
+          <div id="borad-deep-content">
+            <tr>
+            	<th>${board.boardContent }</th>
+            </tr>
+          </div>
+          <div>
+            <input id="list-btn" type="submit" value="목록" onClick="location.href='/board/list.dog'">
+          </div>
+          <div>
+            <input id="submit-btn" type="submit" value="수정" onClick="location.href='/board/update.dog?boardNo=${board.boardNo}'">
+          </div>
+          <div>
+            <input id="reset-btn" type="reset" value="삭제" onClick="location.href='/board/delete.dog'">
+          </div>
+        </div>
       </div>
     </div>
   </main>
@@ -104,18 +124,6 @@
 
   <!-- Template Main JS File -->
   <script src="/js/main.js"></script>
-
-  <script>
-    $('#summernote').summernote({
-      	height: 400,                 // 에디터 높이
-		minHeight: null,             // 최소 높이
-		maxHeight: null,             // 최대 높이
-		focus: true,                 // 에디터 로딩후 포커스를 맞출지 여부
-      	placeholder: "내용을 입력하세요",
-		lang: "ko-KR",				 // 한글 설정
-		
-      });
-    </script>
 </body>
 
 </html>
