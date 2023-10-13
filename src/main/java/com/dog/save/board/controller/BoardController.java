@@ -4,13 +4,16 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dog.save.board.domain.Board;
+import com.dog.save.board.domain.bPageInfo;
 import com.dog.save.board.service.BoardService;
 
 @Controller
@@ -20,28 +23,81 @@ public class BoardController {
 	@Autowired
 	private BoardService bService;
 	
+	// ==================== 게시글 작성 페이지 ====================
 	@GetMapping("/write.dog")
-	public ModelAndView boardWriteView(ModelAndView mv) {
-		mv.setViewName("board/communityInsert");
-		return mv;
+	public String boardWriteView() {
+		return "board/communityInsert";
 	}
+	// ==================== 게시글 작성 ====================
 	@PostMapping("/write.dog")
-	public ModelAndView boardWrite(ModelAndView mv
-			, @ModelAttribute Board board) {
+	public String boardWrite(@ModelAttribute Board board, Model model) {
 		int result = bService.insertBoard(board);
 		if(result > 0) {
-			mv.setViewName("redirect:/list.dog");
+			return "redirect:/board/list.dog";
 		}else {
-			mv.addObject("msg", "게시글 등록이 완료되지 않았습니다");
-			mv.setViewName("common/error");
+			model.addAttribute("msg", "게시글 등록이 완료되지 않았습니다");
+			return "common/error";
 		}
-		return mv;
+	}
+	// ==================== 게시글 수정 페이지 ====================
+	@GetMapping("/update.dog")
+	public String boardUpdateView(Model model
+			, @RequestParam("boardNo") Integer boardNo) {
+		try {
+			Board board = bService.selectBoardByNo(boardNo);
+			if(board != null) {
+				model.addAttribute("board", board);
+				return "board/communityUpdate";
+			}else {
+				model.addAttribute("msg", "데이터 조회 실패");
+				return "common/error";
+			}
+		}catch(Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
+	}
+	// ==================== 게시글 리스트 조회 ====================
+	@GetMapping("/list.dog")
+	public String boardListView(Model model
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage) {
+		Integer totalCount = bService.getListCount();
+		bPageInfo bpInfo = this.getPageInfo(currentPage, totalCount);
+		List<Board> bList = bService.selectBoardList(bpInfo);
+		model.addAttribute("bList", bList).addAttribute("bpInfo", bpInfo);
+		return "board/communityList";
+	}
+	// ==================== 게시글 상세 조회 ====================
+	@GetMapping("/detail.dog")
+	public String boardDetailView(Model model
+			, @RequestParam("boardNo") Integer boardNo) {
+		try {
+			Board board = bService.showOneByBoard(boardNo);
+			if(board != null) {
+				model.addAttribute("board", board);
+				return "board/communityDetail";
+			}else {
+				model.addAttribute("msg", "상세 조회에 실패하였습니다.");
+				return "common/error";
+			}
+		}catch (Exception e) {
+			model.addAttribute("msg", e.getMessage());
+			return "common/error";
+		}
 	}
 	
-	@GetMapping("/list.dog")
-	public ModelAndView boardListView(ModelAndView mv) {
-		List<Board> bList = bService.selectBoardList();
-		mv.addObject("bList", bList).setViewName("board/communityList");
-		return mv;
+	// ==================== 게시글 페이징 처리 ====================
+	public bPageInfo getPageInfo(Integer currentPage, Integer totalCount) {
+		int recordCountPerPage = 7;
+		int naviCountPerPage = 5;
+		int naviTotalCount = (int)Math.ceil((double)totalCount/recordCountPerPage);
+		int startNavi = ((int)((double)currentPage/naviCountPerPage+0.9)-1)*naviCountPerPage+1;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		if(endNavi > naviTotalCount) {
+			endNavi = naviTotalCount;
+		}
+		bPageInfo bpInfo = new bPageInfo(currentPage, totalCount, naviTotalCount, recordCountPerPage, naviCountPerPage, startNavi, endNavi);
+			
+		return bpInfo;
 	}
 }

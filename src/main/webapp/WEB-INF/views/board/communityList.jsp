@@ -44,41 +44,9 @@
 <body class="index-page" data-bs-spy="scroll" data-bs-target="#navmenu">
 
   <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
-    <div class="container-fluid d-flex align-items-center justify-content-between">
-
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1>WIMF</h1>
-        <span>.</span>
-      </a>
-
-      <!-- Nav Menu -->
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="index.html#hero" class="active">Home</a></li>
-          <li><a href="index.html#team">돌봄 대기리스트</a></li>
-          <li class="dropdown has-dropdown"><a href="blog.html"><span>입양</span> <i class="bi bi-chevron-down"></i></a>
-            <ul class="dd-box-shadow">
-              <li><a href="#">돌봄 후기</a></li>
-              <li><a href="#">입양 후기</a></li>
-              <li><a href="#">입양지원서</a></li>
-            </ul>
-          </li>
-          <li><a href="/board/list.dog">소통 게시판</a></li>
-          <li><a href="index.html#services">임시보호란?</a></li>
-          <li><a href="index.html#about">WIMF 팀 소개</a></li>
-          <li><a href="index.html#contact">Contact</a></li>
-        </ul>
-
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav><!-- End Nav Menu -->
-
-      <a class="btn-getstarted" href="index.html#about">Login</a>
-
-    </div>
-  </header><!-- End Header -->
+  <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
+  
+  <!-- ====== Main ====== -->
   <main id="main">
     <div id="container">
       <h3 style="padding-bottom: 2%;">소통 게시판</h3>
@@ -110,14 +78,14 @@
             </colgroup>
             <tr>
               <th id="number-value">번호</th>
-              <th>글 내용</th>
+              <th>글 제목</th>
               <th>작성자</th>
               <th>작성일</th>
               <th id="number-value">조회수</th>
             </tr>
-            <c:forEach var="board" items="${bList }" varStatus="i">
+            <c:forEach var="board" items="${bList }">
 	            <tr>
-	              <td id="number-value">${i.count }</td>
+	              <td id="number-value">${board.boardNo }</td>
 	              <c:url var="detailUrl" value="/board/detail.dog">
 	              	<c:param name="boardNo" value="${board.boardNo }"></c:param>
 	              </c:url>
@@ -130,6 +98,30 @@
 	            </tr>
             </c:forEach>
             </table>
+            <div id="paging">
+	        	<tr align="center">
+	          	<td colspan="5">
+	          		<c:if test="${bpInfo.startNavi != 1}">
+	          			<c:url var="prevUrl" value="/board/list.dog">
+	          				<c:param name="page" value="${bpInfo.startNavi - 1 }"></c:param>
+	          			</c:url>
+	          			<a href="${prevUrl }">◀</a>
+	          		</c:if>
+	          		<c:forEach begin="${bpInfo.startNavi }" end="${bpInfo.endNavi }" var="p">
+	          			<c:url var="pageUrl" value="/board/list.dog">
+	          				<c:param name="page" value="${p }"></c:param>
+	          			</c:url>
+	          			<a href="${pageUrl }">${p }</a>&nbsp;
+	          		</c:forEach>
+	          		<c:if test="${bpInfo.endNavi != bpInfo.naviTotalCount}">
+						<c:url var="nextUrl" value="/board/list.dog">
+							<c:param name="page" value="${bpInfo.endNavi + 1 }"></c:param>
+						</c:url>          		
+	          			<a href="${nextUrl }">▶</a>
+	          		</c:if>
+	          	</td>
+	          </tr>
+            </div>
           <div id="create-btn">
             <input id="create-btn" type="button" value="글 작성" onClick="location.href='/board/write.dog'">
           </div>
@@ -137,6 +129,9 @@
       </div>
     </div>
   </main>
+  
+  <!-- footer -->
+<%--   <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include> --%>
 
 
   <!-- Scroll Top Button -->
