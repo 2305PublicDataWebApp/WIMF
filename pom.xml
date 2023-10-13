@@ -17,6 +17,21 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
+	
+		<!-- GSON : List 데이터를 JSON 데이터로 편리하게 변환해주는 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		</dependency>
+		
+		<!-- 객체 -> JSON 변환 -->
+		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
 		
 		<!-- 코드 수정시 자동으로 시작해주는 도구 -->
 		<dependency>
