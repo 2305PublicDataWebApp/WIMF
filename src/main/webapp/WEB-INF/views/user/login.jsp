@@ -60,7 +60,7 @@
                     <div class="find-user-info-box">
                         <a href="#" class="user-a-tag">아이디 찾기</a> | 
                         <a href="#" class="user-a-tag">비밀번호 찾기</a> | 
-                        <a href="#" class="user-a-tag">회원가입</a>
+                        <a href="/user/register.dog" class="user-a-tag">회원가입</a>
                     </div>
                     <div class="sns-login-box">
                         <div class="naver-login-box">
