@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+#main {
+	margin-bottom: 5%;
+}
+
 #container {
   padding-top: 8%;
   margin: 0 auto;
@@ -25,7 +29,7 @@
 
 #search {
   float: left;
-  margin-left: 40px;
+  margin-left: 10px;
 }
 #search-value {
   padding-right: 10px;
