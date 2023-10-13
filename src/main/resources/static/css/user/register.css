@@ -142,9 +142,12 @@ textarea {
     width: 70%;
     margin: 0 auto;
 }
+#register-form{
+	margin-left: 100px;
+}
 .user-info-box{
     width: 80%;
-    height : 80px;
+    height : 100px;
     margin: 0 auto;
     display: flex;
 	flex-direction: column;
@@ -154,13 +157,40 @@ textarea {
     height: 50px;
     margin-top: 10px;
     margin-bottom: 10px;
-
 }
 
-#user-info-nickname, #user-info-id, #user-info-email-check, #user-info-address{
+.error{
+	font-size: smaller;
+    margin-left: 30px;
+    color: red;
+    font-weight: bold;
+}
+.success{
+	font-size: smaller;
+    margin-left: 30px;
+    color: green;
+    font-weight: bold;
+}
+
+#user-info-nickname, #user-info-id, #user-info-email-check, #user-info-address {
     position: relative;
 }
-#user-info-nickname button, #user-info-id button, #user-info-email-check button, #user-info-address #post-btn{
+#post-btn {
+	font-size: small;
+	position: absolute;
+    width: 70px;
+    height: 25px;
+    top: 0;
+    bottom: 86px;
+    left: 279px;
+    margin: auto 0;
+    border-radius: 3px;
+    border: none;
+    color: var(--contrast-color);
+    background-color: var(--primary-color);
+}
+
+#user-info-nickname button, #user-info-id button, #user-info-email-check button{
     position: absolute;
     width: 90px;
     height: 40px;

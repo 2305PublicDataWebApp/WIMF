@@ -35,4 +35,6 @@ public class UserController {
 		User uOne = uService.checkDuplUserId(userId);
 		return (uOne != null) ? "true" : "false";
 	}
+	
+	
 }

@@ -123,15 +123,17 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
                             <form action="#" method="post" id="register-form">
 
                                 <div id="user-info-id" class="user-info-box">
-                                    <label for="user-id">아이디</label>
+                                    <label for="user-id">
+	                                    아이디
+	                                    <span id="id-msg" class="dupl-msg" style="display: none;"></span>
+                                    </label>
                                     <input type="text" id="user-id" name="userId" class="input-user-info" placeholder="아이디 입력(6~20자)" required>
 <!--                                     <button type="button" id="check-dupl-id">중복 확인</button> -->
-                                    <div id="id-msg" style="display: none;"></div>
                                 </div>
                                 
                                 <div id="user-info-pw" class="user-info-box">
                                     <label for="user-pw">비밀번호</label>
-                                    <input type="password" id="user-pw" name="userPw" class="input-user-info" placeholder="대/소문자,숫자,특수문자 포함 10~20자" required>
+                                    <input type="password" id="user-pw" name="userPw" class="input-user-info" placeholder="소문자,숫자,특수문자 포함 10~20자" required>
                                 </div>
 
                                 <div id="user-info-pwck" class="user-info-box">
@@ -147,7 +149,7 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
                                 <div id="user-info-nickname" class="user-info-box">
                                     <label for="user-nickname">닉네임</label>
                                     <input type="text" id="user-nickname" name="userNickname" class="input-user-info" placeholder="사용할 닉네임을 입력해주세요." required>
-                                    <button type="button">중복 확인</button>
+<!--                                     <button type="button">중복 확인</button> -->
                                 </div>
 
                                 <div id="user-info-ssn" class="user-info-box">
@@ -179,7 +181,7 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
                                 <div id="user-info-email-check" class="user-info-box">
                                     <label for="user-email-check">인증번호</label>
                                     <input type="text" id="user-email-check" name="userEmailCheck" class="input-user-info" placeholder="인증번호 4자리를 입력해주세요." required>
-                                    <button type="button">인증번호 전송</button>
+<!--                                     <button type="button">인증번호 전송</button> -->
                                 </div>
 
                                 <input type="reset" value="초기화">
@@ -243,10 +245,10 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 	        			success : function(data) {
 	        				var msg = "";
 	        				if(data == "true") {
-	        					$("#id-msg").show();
+	        					$("#id-msg").removeClass("success").addClass("error").show();
 	        					msg = "이미 사용중인 아이디 입니다.";
 	        				} else if(data == "false") {
-	        					$("#id-msg").show();
+	        					$("#id-msg").removeClass("error").addClass("success").show();
 		        				msg = "사용 가능한 아이디 입니다.";
 	        				} else {
 	        					$("#id-msg").show();
