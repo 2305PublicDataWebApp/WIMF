@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>돌봄 입양신청서 리스트</title>
 </head>
 <body>
 
