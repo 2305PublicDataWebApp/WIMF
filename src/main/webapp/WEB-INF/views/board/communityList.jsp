@@ -31,14 +31,6 @@
 
   <!-- Template Main CSS File -->
   <link href="/css/board/communityList.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Append
-  * Updated: Sep 18 2023 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/append-bootstrap-website-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body class="index-page" data-bs-spy="scroll" data-bs-target="#navmenu">
@@ -131,7 +123,7 @@
   </main>
   
   <!-- footer -->
-<%--   <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include> --%>
+  <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
 
   <!-- Scroll Top Button -->
