@@ -31,12 +31,22 @@ public class BoardController {
 	}
 	// ==================== 게시글 작성 ====================
 	@PostMapping("/write.dog")
-	public String boardWrite(@ModelAttribute Board board, Model model) {
-		int result = bService.insertBoard(board);
-		if(result > 0) {
-			return "redirect:/board/list.dog";
-		}else {
-			model.addAttribute("msg", "게시글 등록이 완료되지 않았습니다");
+	public String boardWrite(@ModelAttribute Board board, Model model, HttpSession session) {
+		// 작성자 session에서 userId 가져오기
+		try {
+			String boardWriter = (String)session.getAttribute("userId");
+			if(boardWriter != null && !boardWriter.equals("")) {
+				board.setBoardWriter(boardWriter);
+				int result = bService.insertBoard(board);
+				return "redirect:/board/list.dog";
+			}else {
+				model.addAttribute("msg", "게시글 등록이 완료되지 않았습니다");
+				model.addAttribute("url", "/board/list.dog");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			model.addAttribute("msg", "관리자에게 문의 바랍니다");
+			model.addAttribute("url", "/board/list.dog");
 			return "common/error";
 		}
 	}
@@ -50,20 +60,41 @@ public class BoardController {
 				model.addAttribute("board", board);
 				return "board/communityUpdate";
 			}else {
-				model.addAttribute("msg", "데이터 조회 실패");
+				model.addAttribute("msg", "게시글 수정이 완료되지 않았습니다");
+				model.addAttribute("url", "/board/list.dog");
 				return "common/error";
 			}
 		}catch(Exception e) {
-			model.addAttribute("msg", e.getMessage());
+			model.addAttribute("msg", "관리자에게 문의 바랍니다");
+			model.addAttribute("url", "/board/list.dog");
 			return "common/error";
 		}
 	}
 	// ==================== 게시글 수정 ====================
 	@PostMapping("/update.dog")
 	public String boardUpdate(@ModelAttribute Board board, Model model, HttpSession session) {
-		String userId = (String)session.getAttribute("userId");
-		
-		return null;
+		try {
+			String userId = (String)session.getAttribute("userId");
+			String boardWriter = board.getBoardWriter();
+			if(boardWriter != null && boardWriter.equals(userId)) {
+				int result = bService.updateBoardByNo(board);
+				if(result > 0) {
+					return "redirect:/board/detail.dog?boardNo="+board.getBoardNo();
+				}else {
+					model.addAttribute("msg", "게시글 수정이 완료되지 않았습니다");
+					model.addAttribute("url", "/board/list.dog");
+					return "common/error";
+				}
+			}else {
+				model.addAttribute("msg", "내가 작성한 글만 수정이 가능합니다");
+				model.addAttribute("url", "/board/list.dog");
+				return "common/error";
+			}
+		} catch(Exception e) {
+			model.addAttribute("msg", "관리자에게 문의 바랍니다");
+			model.addAttribute("url", "/board/list.dog");
+			return "common/error";
+		}
 	}
 	// ==================== 게시글 리스트 조회 ====================
 	@GetMapping("/list.dog")
@@ -85,11 +116,13 @@ public class BoardController {
 				model.addAttribute("board", board);
 				return "board/communityDetail";
 			}else {
-				model.addAttribute("msg", "상세 조회에 실패하였습니다.");
+				model.addAttribute("msg", "게시글 조회에 실패하였습니다.");
+				model.addAttribute("url", "/board/list.dog");
 				return "common/error";
 			}
 		}catch (Exception e) {
-			model.addAttribute("msg", e.getMessage());
+			model.addAttribute("msg", "관리자에게 문의 바랍니다");
+			model.addAttribute("url", "/board/list.dog");
 			return "common/error";
 		}
 	}

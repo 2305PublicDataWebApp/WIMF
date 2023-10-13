@@ -6,6 +6,10 @@
 	<insert id="insertBoard">
 		INSERT INTO BOARD_TBL VALUES(BOARD_NO_SEQ.NEXTVAL, #{boardTitle}, #{boardContent}, 'admin', DEFAULT, DEFAULT, DEFAULT)
 	</insert>
+	<!-- 게시글 수정 -->
+	<update id="updateBoard">
+		UPDATE BOARD_TBL SET BOARD_TITLE = #{boardTitle}, BOARD_CONTENT = #{boardContent}, UPDATE_DATE = DEFAULT WHERE BOARD_NO = #{boardNo}
+	</update>
 	<!-- 게시글 리스트 조회 -->
 	<select id="selectBoardList" resultType="Board">
 		SELECT * FROM BOARD_TBL ORDER BY BOARD_NO DESC

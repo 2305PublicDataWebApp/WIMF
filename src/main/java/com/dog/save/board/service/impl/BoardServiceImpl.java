@@ -49,4 +49,10 @@ public class BoardServiceImpl implements BoardService{
 		return board;
 	}
 
+	@Override
+	public int updateBoardByNo(Board board) {
+		int result = bStore.updateBoard(sqlSession, board);
+		return result;
+	}
+
 }

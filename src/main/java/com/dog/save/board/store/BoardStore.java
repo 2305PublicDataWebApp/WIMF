@@ -42,5 +42,12 @@ public interface BoardStore {
 	 * @return
 	 */
 	Board selectBoardByNo(SqlSession sqlSession, Integer boardNo);
+	/**
+	 * 게시글 수정 Store
+	 * @param sqlSession
+	 * @param board
+	 * @return
+	 */
+	int updateBoard(SqlSession sqlSession, Board board);
 
 }
