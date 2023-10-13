@@ -22,4 +22,10 @@ public class UserServiceImpl implements UserService{
 		User uOne = uStore.checkDuplUserId(session, userId);
 		return uOne;
 	}
+
+	@Override
+	public User checkLogin(User user) {
+		User uOne = uStore.checkLogin(session, user);
+		return uOne;
+	}
 }

@@ -15,4 +15,10 @@ public class UserStoreLogic implements UserStore{
 		return uOne;
 	}
 
+	@Override
+	public User checkLogin(SqlSession session, User user) {
+		User uOne = session.selectOne("UserMapper.checkLogin", user);
+		return uOne;
+	}
+
 }
