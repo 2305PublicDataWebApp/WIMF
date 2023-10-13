@@ -8,6 +8,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>WIMF - Where Is My Family?</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -55,31 +56,111 @@
   <link href='/vendor/fullcalendar-5/lib/main.css' rel='stylesheet' />
     <script src='/vendor/fullcalendar-5/lib/main.js'></script>
     <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          $(function () {
+              var request = $.ajax({
+                  url: "/calendar/list.dog", // 변경하기
+                  method: "GET",
+                  dataType: "json"
+              });
 
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth',
-          titleFormat: function (date) {
-              year = date.date.year;
-              month = date.date.month + 1;
+              request.done(function (data) {
+                  console.log(data); // log 로 데이터 찍어주기.
 
-              return year + "년 " + month + "월";
-            },
-            events : [
-                {
-                  title: '물주기',
-                  start: '2023-10-12'
-              	},
-                {
-                  title: '뚜껑 닫기',
-                  start: '2023-10-03',
-                  end: '2023-10-05'
-              	}
-              ]
+                  var calendarEl = document.getElementById('calendar');
+
+                  var calendar = new FullCalendar.Calendar(calendarEl, {
+                	  schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',	// 고급 플러그인 무료
+                	  initialView: 'dayGridMonth',
+                	  titleFormat: function (date) {	// 날짜 표시 형식
+                          year = date.date.year;
+                          month = date.date.month + 1;
+
+                          return year + "년 " + month + "월";
+                      },
+                      headerToolbar: {
+                          left: 'prev,next today',
+                          center: 'title',
+                          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                      },
+                      editable: true,
+                      droppable: true, // this allows things to be dropped onto the calendar
+                      drop: function (arg) {
+                          // is the "remove after drop" checkbox checked?
+                          if (document.getElementById('drop-remove').checked) {
+                              // if so, remove the element from the "Draggable Events" list
+                              arg.draggedEl.parentNode.removeChild(arg.draggedEl);
+                          }
+                      },
+                      /**
+                       * data 로 값이 넘어온다. log 값 전달.
+                       */
+                      events: data
+                      , eventClick: function(info) {
+                      	window.location.href(info.event.url);
+                      }
+                  });
+
+                  calendar.render();
+              });
+
+              request.fail(function( jqXHR, textStatus ) {
+                  alert( "Request failed: " + textStatus );
+              });
           });
-        calendar.render();
+
       });
+      
+      /* document.addEventListener('DOMContentLoaded', function() {
+          var calendarEl = document.getElementById('calendar');
+          var calendar = new FullCalendar.Calendar(calendarEl, {
+          	schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',	// 고급 플러그인 무료
+            initialView: 'dayGridMonth',
+            titleFormat: function (date) {	// 날짜 표시 형식
+                year = date.date.year;
+                month = date.date.month + 1;
+
+                return year + "년 " + month + "월";
+              },
+              headerToolbar: {
+                  left: 'prev,next today',
+                  center: 'title',
+                  right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+              },
+              editable: true,		// 수정 가능 여부
+              droppable: true, // this allows things to be dropped onto the calendar
+              drop: function (arg) {
+                  // is the "remove after drop" checkbox checked?
+                  if (document.getElementById('drop-remove').checked) {
+                      // if so, remove the element from the "Draggable Events" list
+                      arg.draggedEl.parentNode.removeChild(arg.draggedEl);
+                  }
+              },
+              events : [
+                  {
+                    title: '더 많은 필드 참고',
+                    start: '2023-10-12',
+                    url: 'https://fullcalendar.io/docs/v5/event-object'
+                	},
+                  {
+                    title: '뚜껑 닫기',
+                    start: '2023-10-03',
+                    end: '2023-10-05'
+                	},
+                	{
+                     title: '뚜껑 닫기',
+                     start: '2023-10-03',
+                     allday: false	// 일정이 하루 전체인지 여부
+                 	}
+                ]
+              , eventClick: function(info) {
+              	window.location.href(info.event.url);
+              }
+            });
+          calendar.render();
+        }); */
+      
+      
 
     </script>
 	<link href="/css/index/fullCalendar.css" rel="stylesheet">
@@ -237,7 +318,7 @@
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
 
-      <div class="container" data-aos="zoom-in" data-aos-delay="100">
+      <div class="container">
 
         <div class="row g-4">
 
@@ -262,7 +343,7 @@
 
           <!-- <div class="col-lg-12"> -->
             <div class="pricing-item"> <!-- class="featured" -->
-          	<div id='calendar'></div>            
+          	<div id='calendar'></div>
               <!-- <h3>Business Plan</h3>
               <div class="icon">
                 <i class="bi bi-rocket"></i>
@@ -275,8 +356,8 @@
                 <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
                 <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
                 <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-              </ul>
-              <div class="text-center"><a href="#" class="buy-btn">Buy Now</a></div> -->
+              </ul> -->
+              <button type="button" onclick="openPopup1();" class="buy-btn text-center">등록</button>
             </div>
           <!-- </div> -->
           <!-- End Pricing Item -->
@@ -1266,7 +1347,7 @@
 
   
 
-  
+
 
   <!-- Preloader -->
   <div id="preloader">
@@ -1284,6 +1365,19 @@
   <script src="/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="/vendor/aos/aos.js"></script>
   <script src="/vendor/php-email-form/validate.js"></script>
+  
+  <script>
+	  function openPopup1() {
+	      var width = 800;
+	      var height = 800;
+	      var left = (window.innerWidth - width) / 2;
+	      var top = (window.innerHeight - height) / 2;
+	      var noticeWin = window.open("/calendar/popup.dog", "", "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+	      if (!noticeWin) {
+	         alert("팝업이 차단되었습니다. 팝업차단을 해제해주세요.");
+	      }
+	   }
+  </script>
 
 </body>
 
