@@ -4,7 +4,7 @@
 <mapper namespace="BoardMapper">
 	<!-- 게시글 등록 -->
 	<insert id="insertBoard">
-		INSERT INTO BOARD_TBL VALUES(BOARD_NO_SEQ.NEXTVAL, #{boardTitle}, #{boardContent}, 'admin', #{boardFileName}, #{boardFileRename}, #{boardFilePath}, #{boardFileLength}, DEFAULT, DEFAULT, DEFAULT)
+		INSERT INTO BOARD_TBL VALUES(BOARD_NO_SEQ.NEXTVAL, #{boardTitle}, #{boardContent}, 'admin', DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	<!-- 게시글 리스트 조회 -->
 	<select id="selectBoardList" resultType="Board">

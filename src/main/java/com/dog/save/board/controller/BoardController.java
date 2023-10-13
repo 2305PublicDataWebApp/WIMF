@@ -2,6 +2,8 @@ package com.dog.save.board.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.dog.save.board.domain.Board;
 import com.dog.save.board.domain.bPageInfo;
@@ -56,6 +57,13 @@ public class BoardController {
 			model.addAttribute("msg", e.getMessage());
 			return "common/error";
 		}
+	}
+	// ==================== 게시글 수정 ====================
+	@PostMapping("/update.dog")
+	public String boardUpdate(@ModelAttribute Board board, Model model, HttpSession session) {
+		String userId = (String)session.getAttribute("userId");
+		
+		return null;
 	}
 	// ==================== 게시글 리스트 조회 ====================
 	@GetMapping("/list.dog")
