@@ -1,10 +1,12 @@
 package com.dog.save.main.controller;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpSession;
 
@@ -59,6 +61,9 @@ public class CalendarController {
         for (int i = 0; i < AllEventList.size(); i++) {
             hash.put("title", AllEventList.get(i).getSchTitle());
             hash.put("start", AllEventList.get(i).getSchStartDate());
+            Date endDate = AllEventList.get(i).getSchEndDate();
+            endDate.setTime(endDate.getTime() + TimeUnit.DAYS.toMillis(1));
+            hash.put("end", endDate);
 //            hash.put("time", AllEventList.get(i).getScheduleTime());
  
             jsonObj = new JSONObject(hash);
