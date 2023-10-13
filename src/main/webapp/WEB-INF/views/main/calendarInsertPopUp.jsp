@@ -49,7 +49,7 @@
 	            <li>종료일 : <input type="date" name="schEndDate" id=""></li>
 	            <li>강아지 : 
 	            	<select name="dogNo" id="dogNo">
-		               <option value="dogNo">이름</option>	<!-- forEach로 개 번호 이름으로 전환해서 넣기 -->
+		               <option value="1">이름</option>	<!-- forEach로 개 번호 이름으로 전환해서 넣기 -->
 		            </select>
 	            </li>
 	            <li>옵션 : 

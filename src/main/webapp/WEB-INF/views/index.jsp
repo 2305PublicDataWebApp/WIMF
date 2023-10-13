@@ -59,9 +59,8 @@
       document.addEventListener('DOMContentLoaded', function () {
           $(function () {
               var request = $.ajax({
-                  url: "/calendar/list.dog", // 변경하기
-                  method: "GET",
-                  dataType: "json"
+                  url: "/calendar/list.dog",
+                  method: "GET"
               });
 
               request.done(function (data) {
@@ -71,7 +70,7 @@
 
                   var calendar = new FullCalendar.Calendar(calendarEl, {
                 	  schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',	// 고급 플러그인 무료
-                	  initialView: 'dayGridMonth',
+                	  initialView: 'dayGridMonth',		// 처음 캘린더 형식
                 	  titleFormat: function (date) {	// 날짜 표시 형식
                           year = date.date.year;
                           month = date.date.month + 1;
@@ -92,9 +91,6 @@
                               arg.draggedEl.parentNode.removeChild(arg.draggedEl);
                           }
                       },
-                      /**
-                       * data 로 값이 넘어온다. log 값 전달.
-                       */
                       events: data
                       , eventClick: function(info) {
                       	window.location.href(info.event.url);
