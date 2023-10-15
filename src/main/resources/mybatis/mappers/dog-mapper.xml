@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DogMapper">
+	<insert id="insertDog">
+		INSERT INTO DOG_TBL 
+		VALUES	(SEQ_DOG_NO.NEXTVAL, #{dogName}, #{dogKind}, #{dogAgency}, #{dogAge}, #{dogGender}, 
+		#{dogRLocation}, #{dogWeight}, #{dogPersonality}, #{dogHealth}, #{dogRDate}, #{dogDeathDate}, 
+		DEFAULT, DEFAULT, #{dogInfo}, #{dogRegion}, DEFAULT, DEFAULT, DEFAULT )	
+	</insert>
+	
+	<insert id="insertTravelFile">
+	    INSERT INTO DOG_FILE_TBL (REF_DOG_NO, DOG_FILE_ORDER, DOG_FILE_NAME, DOG_FILE_RENAME, DOG_FILE_PATH)
+	    VALUES (
+	        #{refDogNo},
+	        (SELECT NVL(MAX(DOG_FILE_ORDER)+1, 1) FROM DOG_FILE_TBL WHERE REF_DOG_NO = #{refDogNo}),
+	        #{dogFileName},
+	        #{dogFileRename},
+	        #{dogFilePath}
+	    )
+	</insert>
+	
+	<select id="selectDogNoSeq" resultType="_int">
+		SELECT SEQ_DOG_NO.CURRVAL FROM DUAL
+	</select>	
+	
+</mapper>

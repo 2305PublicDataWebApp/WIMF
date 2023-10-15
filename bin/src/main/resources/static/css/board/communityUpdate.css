@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+#main {
+	margin-bottom: 5%;
+}
+
+#container {
+  padding-top: 8%;
+  margin: 0 auto;
+  min-width: 50%;
+  max-width: 50%;
+  height: 100%;
+}
+
+#board-content {
+  padding: 5%;
+}
+
+#board {
+  border: 5px double gray;
+  border-radius: 20px;
+}
+#borad-subject {
+  margin-bottom: 5px;
+}
+#borad-subject-value {
+  border-radius: 4px;
+  padding-left: 10px;
+  width: 100%;
+  height: 35px;
+}
+#submit-btn {
+  float: left;
+  width: 8%;
+  height: 35px;
+  border-radius: 4px;
+  border: none;
+  background-color: rgb(232, 69, 69);
+  color: white;
+  margin-left: 82%;
+}
+#reset-btn {
+  float: left;
+  width: 8%;
+  height: 35px;
+  border-radius: 4px;
+  border: none;
+  background-color: rgb(232, 69, 69);
+  color: white;
+  margin-left: 2%;
+}
+#submit-btn:hover {
+  color: var(--contrast-color);
+  background: rgba(255,99,71, 0.85);
+}
+#reset-btn:hover {
+  color: var(--contrast-color);
+  background: rgba(255,99,71, 0.85);
+}
