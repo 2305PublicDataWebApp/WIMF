@@ -20,10 +20,10 @@
   border: 5px double gray;
   border-radius: 20px;
 }
-#borad-subject {
+#board-subject {
   margin-bottom: 5px;
 }
-#borad-subject-value {
+#board-subject-value {
   border-radius: 4px;
   padding-left: 10px;
   width: 100%;

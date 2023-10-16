@@ -40,14 +40,14 @@
     <div id="container">
       <h3 style="padding-bottom: 2%;">글 작성</h3>
       <div id="board">
-      	<form action="/board/write.dog" method="post">
+      	<form action="/board/write.dog" method="post" onsubmit="return validateForm()">
 	        <div id="board-content">
-	          <div id="borad-subject">
-	            <input id="borad-subject-value" type="text" name="boardTitle" placeholder="제목">
+	          <div id="board-subject">
+	            <input id="board-subject-value" type="text" name="boardTitle" placeholder="제목">
 	          </div>
 	          <textarea id="summernote" name="boardContent"></textarea>
 	          <div>
-	            <input id="submit-btn" type="submit" value="등록" onClick="location.href='/board/list.dog'">
+	            <input id="submit-btn" type="submit" value="등록">
 	          </div>
 	          <div>
 	            <input id="reset-btn" type="reset" value="취소" onClick="location.href='/board/list.dog'">
@@ -57,6 +57,19 @@
       </div>
     </div>
   </main>
+  
+  <script>
+  function validateForm(){
+	  var title = document.getElementById("board-subject-value").value;
+	  var content = document.getElementById("summernote").value;
+	  
+	  if(title.trim() == "" || content.trim() == ""){
+		  alert("제목과 내용을 모두 입력해주세요");
+		  return false;
+	  }
+	  return true;
+  }
+  </script>
   
 	<!-- footer -->
 	<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>

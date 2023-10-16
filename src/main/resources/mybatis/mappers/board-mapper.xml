@@ -4,12 +4,16 @@
 <mapper namespace="BoardMapper">
 	<!-- 게시글 등록 -->
 	<insert id="insertBoard">
-		INSERT INTO BOARD_TBL VALUES(BOARD_NO_SEQ.NEXTVAL, #{boardTitle}, #{boardContent}, 'admin', DEFAULT, DEFAULT, DEFAULT)
+		INSERT INTO BOARD_TBL VALUES(BOARD_NO_SEQ.NEXTVAL, #{boardTitle}, #{boardContent}, #{boardWriter}, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	<!-- 게시글 수정 -->
 	<update id="updateBoard">
 		UPDATE BOARD_TBL SET BOARD_TITLE = #{boardTitle}, BOARD_CONTENT = #{boardContent}, UPDATE_DATE = DEFAULT WHERE BOARD_NO = #{boardNo}
 	</update>
+	<!-- 게시글 삭제 -->
+	<select id="deleteBoard">
+		DELETE FROM BOARD_TBL WHERE BOARD_NO = #{boardNo}
+	</select>
 	<!-- 게시글 리스트 조회 -->
 	<select id="selectBoardList" resultType="Board">
 		SELECT * FROM BOARD_TBL ORDER BY BOARD_NO DESC
@@ -25,5 +29,37 @@
 	<!-- 게시글 수정 페이지 -->
 	<select id="selectBoardByNo" resultType="Board">
 		SELECT * FROM BOARD_TBL WHERE BOARD_NO = #{boardNo}
+	</select>
+	<!-- 게시글 키워드 검색 -->
+	<select id="selectBoardByKeyword" resultType="Board">
+		SELECT * FROM BOARD_TBL 
+		<if test="searchCondition == 'all'">
+		WHERE BOARD_WRITER LIKE '%'||#{searchKeyword}||'%' OR BOARD_TITLE LIKE '%'||#{searchKeyword}||'%' OR BOARD_CONTENT LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'writer'">
+		WHERE BOARD_WRITER LIKE '%'||#{searchKeyword}||'%' 
+		</if>
+		<if test="searchCondition == 'title'">
+		WHERE BOARD_TITLE LIKE '%'||#{searchKeyword}||'%'
+		</if>
+		<if test="searchCondition == 'content'">
+		WHERE BOARD_CONTENT LIKE '%'||#{searchKeyword}||'%'
+		</if>
+	</select>
+	<!-- 키워드 제목으로 검색 -->
+	<select id="selectBoardByTitle" resultType="Board">
+		SELECT * FROM BOARD_TBL WHERE BOARD_TITLE LIKE '%'||#{searchKeyword}||'%'
+	</select>
+	<!-- 키워드 작성자로 검색 -->
+	<select id="searchBoardByWriter" resultType="Board">
+		SELECT * FROM BOARD_TBL WHERE BOARD_WRITER LIKE '%'||#{searchKeyword}||'%'
+	</select>
+	<!-- 키워드 내용으로 검색 -->
+	<select id="searchBoardByContent" resultType="Board">
+		SELECT * FROM BOARD_TBL WHERE BOARD_CONTENT LIKE '%'||#{searchKeyword}||'%'
+	</select>
+	<!-- 키워드 전체 검색 -->
+	<select id="searchBoardByAll" resultType="Board">
+		SELECT * FROM BOARD_TBL WHERE BOARD_TITLE LIKE '%'||#{searchKeyword}||'%' OR BOARD_CONTENT LIKE '%'||#{searchKeyword}||'%' OR BOARD_WRITER LIKE '%'||#{searchKeyword}||'%'
 	</select>
 </mapper>

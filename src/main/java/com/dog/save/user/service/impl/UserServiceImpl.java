@@ -28,4 +28,10 @@ public class UserServiceImpl implements UserService{
 		User uOne = uStore.checkLogin(session, user);
 		return uOne;
 	}
+	// 게시글 상세 조회 (작성자 닉네임)
+	@Override
+	public User selectOneById(String userId) {
+		User uOne = uStore.selectOneById(session, userId);
+		return uOne;
+	}
 }

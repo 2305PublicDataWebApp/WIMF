@@ -77,14 +77,14 @@
 }
 
 #list-btn {
-  float: left;
+  float: right;
   width: 8%;
   height: 35px;
   border-radius: 4px;
   border: none;
   background-color: rgb(232, 69, 69);
   color: white;
-  margin-left: 74%;
+  margin-left: 1%;
   margin-top: 1%;
 }
 #submit-btn {
@@ -95,11 +95,11 @@
   border: none;
   background-color: rgb(232, 69, 69);
   color: white;
-  margin-left: 1%;
+  margin-left: 74%;
   margin-top: 1%;
 }
 #reset-btn {
-  float: left;
+  float: right;
   width: 8%;
   height: 35px;
   border-radius: 4px;
@@ -118,6 +118,71 @@
   background: rgba(255,99,71, 0.85);
 }
 #reset-btn:hover {
+  color: var(--contrast-color);
+  background: rgba(255,99,71, 0.85);
+}
+#board-reply{
+	margin-right: 5%;
+	margin-left: 5%;
+	padding-top: 2%;
+}
+#board-reply textarea{
+	width: 91%; 
+	height: 35px;
+	border: 1px solid tomato;
+	border-radius: 4px;
+	resize: both;
+	padding: 4px;
+}
+#reply-btn {
+  float: right;
+  width: 8%;
+  height: 35px;
+  border-radius: 4px;
+  border: none;
+  background-color: rgb(232, 69, 69);
+  color: white;
+}
+#reply-btn:hover {
+  color: var(--contrast-color);
+  background: rgba(255,99,71, 0.85);
+}
+#board-reply-list {
+	margin-right: 5%;
+	margin-left: 5%;
+	margin-bottom: 5%;
+	padding-top: 2%;
+}
+#board-reply-list-table{
+	width: 100%;
+  	border-collapse: collapse;
+  	border-radius: 4px;
+  	border-style: hidden;
+  	box-shadow: 0 0 0 1px tomato;
+}
+#reply-update{
+	background-color: rgb(232, 69, 69);
+     color: white;
+     padding: 5px 10px;
+     text-align: center;
+     text-decoration: none;
+     display: inline-block;
+     border-radius: 4px;
+}
+#reply-update:hover {
+  color: var(--contrast-color);
+  background: rgba(255,99,71, 0.85);
+}
+#reply-delete{
+	background-color: rgb(232, 69, 69);
+     color: white;
+     padding: 5px 10px;
+     text-align: center;
+     text-decoration: none;
+     display: inline-block;
+     border-radius: 4px;
+}
+#reply-delete:hover {
   color: var(--contrast-color);
   background: rgba(255,99,71, 0.85);
 }

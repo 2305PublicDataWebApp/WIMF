@@ -43,12 +43,13 @@
       	<form action="/board/update.dog" method="post">
 	        <div id="board-content">
 	        	<input type="hidden" name="boardNo" value="${board.boardNo }">
+	        	<input type="hidden" name="boardWriter" value="${board.boardWriter }">
 	          <div id="borad-subject">
 	            <input id="borad-subject-value" type="text" name="boardTitle" value="${board.boardTitle }" readonly>
 	          </div>
 	          <textarea id="summernote" name="boardContent">${board.boardContent }</textarea>
 	          <div>
-	            <input id="submit-btn" type="submit" value="등록" onClick="location.href='/board/list.dog'">
+	            <input id="submit-btn" type="submit" value="등록">
 	          </div>
 	          <div>
 	            <input id="reset-btn" type="reset" value="취소" onClick="javascript:history.go(-1);">
