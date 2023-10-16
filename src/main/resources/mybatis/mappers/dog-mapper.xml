@@ -9,7 +9,7 @@
 		DEFAULT, DEFAULT, #{dogInfo}, #{dogRegion}, DEFAULT, DEFAULT, DEFAULT )	
 	</insert>
 	
-	<insert id="insertTravelFile">
+	<insert id="insertDogFiles">
 	    INSERT INTO DOG_FILE_TBL (REF_DOG_NO, DOG_FILE_ORDER, DOG_FILE_NAME, DOG_FILE_RENAME, DOG_FILE_PATH)
 	    VALUES (
 	        #{refDogNo},

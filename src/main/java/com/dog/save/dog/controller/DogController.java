@@ -49,7 +49,8 @@ public class DogController {
 			,@RequestParam(value="uploadFiles", required=false) MultipartFile[] uploadFiles
 			,HttpServletRequest request) {
 		try {			
-			int result = dService.insertDog(dog,uploadFiles,request);									
+			System.out.println(uploadFiles);
+			int result = dService.insertDog(dog,uploadFiles,request);
 			if(result > 0) {
 				mv.setViewName("redirect:/dog/list.dog");
 			}else {

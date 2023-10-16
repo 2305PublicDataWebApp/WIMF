@@ -60,9 +60,9 @@ public class DogServiceImpl implements DogService{
 	public Map<String, Object> saveFile(HttpServletRequest request, MultipartFile uploadFile) throws Exception{
 		Map<String, Object> fileMap = new HashMap<String, Object>();
 		// resources 경로 구하기
-		String root = "classpath:/static/img";
+		String root = "C:\\Users\\user1\\git\\WIMF\\src\\main\\resources\\static\\img";
 		// 파일 저장 경로 구하기
-		String savePath = root + "/dogUploadFiles";
+		String savePath = root + "\\dogUploadFiles";
 		// 파일 이름 구하기
 		String fileName = uploadFile.getOriginalFilename();
 		// 파일 확장자 구하기
@@ -82,7 +82,7 @@ public class DogServiceImpl implements DogService{
 		// 파일 정보 리턴
 		fileMap.put("dogFileName", fileName);
 		fileMap.put("dogFileRename", fileRename);
-		fileMap.put("dogFilePath", savePath+fileRename);
+		fileMap.put("dogFilePath", savePath+"/"+fileRename);
 		return fileMap;
 	}	
 	//랜덤키 생성 메소드
