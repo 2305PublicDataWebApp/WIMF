@@ -1,6 +1,8 @@
 package com.dog.save.main.service.impl;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,23 @@ public class CalendarServiceImpl implements CalendarService {
 	public List<Calendar> getAllEventList() {
 		List<Calendar> AllEventList = cStore.getAllEventList(session);
 		return AllEventList;
+	}
+
+	@Override
+	public Optional<Calendar> findEventByUserIdAndTitleAndStartDateAndEndDate(Map<String, Object> params) {
+		return cStore.findEventByUserIdAndTitleAndStartDateAndEndDate(session, params);
+	}
+
+	@Override
+	public int deleteEvent(int schNo) {
+		int result = cStore.deleteEvent(session, schNo);
+		return result;
+	}
+
+	@Override
+	public int updateEvent(Map<String, Object> newParams) {
+		int result = cStore.updateEvent(session, newParams);
+		return result;
 	}
 	
 }
