@@ -2,13 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="UserMapper">
+
+	<insert id="insertUser">
+		INSERT INTO USER_TBL VALUES(
+		#{userId} , #{userPw}, #{userName}, #{userNickname}, #{userAddress}, #{userPhone}, #{userSSN}
+		, #{userEmail}, #{userFileName}, #{userFileRename}, #{userFilePath}, #{userFileLength}, DEFAULT, DEFAULT
+		)
+	</insert>
 	
 	<select id="checkDuplUserId" resultType="User">
 		SELECT * FROM USER_TBL WHERE USER_ID = #{userId}
+	</select>
+	
+	<select id="checkDuplUserNickname" resultType="User">
+		SELECT * FROM USER_TBL WHERE USER_NICKNAME = #{userNickname}
+	</select>
+	
+	<select id="checkDuplUserEmail" resultType="User">
+		SELECT * FROM USER_TBL WHERE USER_EMAIL = #{userEmail}
 	</select>
 	
 	<select id="checkLogin" resultType="User">
 		SELECT * FROM USER_TBL WHERE USER_ID = #{userId} AND USER_PW = #{userPw}
 	</select>
 	
+	<select id="checkUserByNameEmail" resultType="User">
+		SELECT * FROM USER_TBL WHERE USER_NAME = #{userName} AND USER_EMAIL = #{userEmail}
+	</select>
+	
+	<select id="checkUserByNameIdEmail" resultType="User">
+		SELECT * FROM USER_TBL WHERE USER_NAME = #{userName} AND USER_ID = #{userId} AND USER_EMAIL = #{userEmail}
+	</select>
 </mapper>

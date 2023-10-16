@@ -39,9 +39,6 @@
                     </div>
                 </div>
                 <div id="nav-section">
-                    <!-- <div class="card-header">
-                        <h2>회원가입</h2>
-                    </div> -->
                     <div class="card-body">
                         <div id="step1" class="active">
                             <h4 class="step-title">Step 1<br>약관 동의</h4>
@@ -120,24 +117,38 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 
                     <div class="main-container2" style="display: none;">
                         <div class="register-box">
-                            <form action="#" method="post" id="register-form">
+                            <form id="register-form" enctype="multipart/form-data">
+                            	
+					            <div id="img-div">
+					                <div class="profile-image-container">
+					                    <img src="/img/user/default-profile.png" id="profile-image-preview" alt="프로필 이미지">
+					                    <input type="file" id="profile-image" name="uploadFile" >
+					                    <label for="profile-image" class="upload-icon"><img src="/img/user/camera.png" id="camera" class="upload-icon" alt=""></label>
+					                </div>
+					                <div class="profile-label">프로필 사진 선택</div>
+					            </div>
 
                                 <div id="user-info-id" class="user-info-box">
                                     <label for="user-id">
 	                                    아이디
 	                                    <span id="id-msg" class="dupl-msg" style="display: none;"></span>
                                     </label>
-                                    <input type="text" id="user-id" name="userId" class="input-user-info" placeholder="아이디 입력(6~20자)" required>
-<!--                                     <button type="button" id="check-dupl-id">중복 확인</button> -->
+                                    <input type="text" id="user-id" name="userId" class="input-user-info" placeholder="아이디 입력(6~14자)" required>
                                 </div>
                                 
                                 <div id="user-info-pw" class="user-info-box">
-                                    <label for="user-pw">비밀번호</label>
+                                    <label for="user-pw">
+                                    	비밀번호
+                                    	<span id="pw-msg" class="dupl-msg" style="display: none;"></span>
+                                    </label>
                                     <input type="password" id="user-pw" name="userPw" class="input-user-info" placeholder="소문자,숫자,특수문자 포함 10~20자" required>
                                 </div>
 
                                 <div id="user-info-pwck" class="user-info-box">
-                                    <label for="user-pw-check">비밀번호 확인</label>
+                                    <label for="user-pw-check">
+                                    	비밀번호 확인
+                                    	<span id="pw-ck-msg" class="dupl-msg" style="display: none;"></span>
+                                    </label>
                                     <input type="password" id="user-pw-check" name="userPwCheck" class="input-user-info" placeholder="비밀번호를 한 번 더 입력해주세요." required>
                                 </div>
 
@@ -147,19 +158,24 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
                                 </div>
 
                                 <div id="user-info-nickname" class="user-info-box">
-                                    <label for="user-nickname">닉네임</label>
+                                    <label for="user-nickname">
+                                    	닉네임
+                                    	<span id="nick-msg" class="dupl-msg" style="display: none;"></span>
+                                    </label>
                                     <input type="text" id="user-nickname" name="userNickname" class="input-user-info" placeholder="사용할 닉네임을 입력해주세요." required>
-<!--                                     <button type="button">중복 확인</button> -->
                                 </div>
 
                                 <div id="user-info-ssn" class="user-info-box">
-                                    <label for="user-ssn">주민번호</label>
+                                    <label for="user-ssn">
+                                    	주민번호
+                                    	<span id="ssn-msg" class="dupl-msg" style="display: none;"></span>
+                                    </label>
                                     <input type="text" id="user-ssn" name="userSSN" class="input-user-info" placeholder="-를 뺀 뒷자리 첫번째까지 입력해주세요." required>
                                 </div>
 
                                 <div id="user-info-address" class="user-info-box">
                                     <label for="user-address">주소</label>
-                                    <input type="text" id="user-address" name="userAddress" class="input-user-info" placeholder="" required readonly>
+                                    <input type="text" id="user-address" name="userAddress" class="input-user-info" placeholder="주소 찾기 버튼을 눌러 입력해주세요." required readonly>
                                     <input type="button" id="post-btn" onclick="sample4_execDaumPostcode();" value="주소 찾기">
                                 </div>
                                 
@@ -174,18 +190,21 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
                                 </div>
 
                                 <div id="user-info-email" class="user-info-box">
-                                    <label for="user-email">이메일</label>
+                                    <label for="user-email">
+                                    	이메일
+                                    	<span id="email-msg" class="dupl-msg" style="display: none;"></span>
+                                    </label>
                                     <input type="text" id="user-email" name="userEmail" class="input-user-info" placeholder="이메일을 입력해주세요." required>
                                 </div>
 
                                 <div id="user-info-email-check" class="user-info-box">
                                     <label for="user-email-check">인증번호</label>
-                                    <input type="text" id="user-email-check" name="userEmailCheck" class="input-user-info" placeholder="인증번호 4자리를 입력해주세요." required>
-<!--                                     <button type="button">인증번호 전송</button> -->
+                                    <input type="text" id="user-email-check" name="userEmailCheck" class="input-user-info" placeholder="인증번호 6자리를 입력해주세요." required>
+                                	<input type="button" id="certification-btn" value="인증번호 전송">
                                 </div>
 
                                 <input type="reset" value="초기화">
-                                <input type="submit" value="확인">
+                                <input type="submit" id="register-btn" value="확인">
 
                             </form>
                             <div id="btn-box">
@@ -203,7 +222,7 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 
                             <div class="signup-content-box">
                                 <p id="p1">회원가입이 <b>완료</b> 되었습니다!</p>
-                                <p id="p2"><b>일용자</b>님의 회원가입을 축하합니다.</p>
+                                <p id="p2"><b id="bTag"></b>님의 회원가입을 축하합니다.</p>
                             </div>
                             <hr>
                             <div class="signup-btn-box">
@@ -234,34 +253,299 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
         <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         
         <script>
+	        
+	     	// 이미지 업로드 및 미리보기 관련 JavaScript
+	        const profileImageInput = document.getElementById('profile-image');
+	        const profileImagePreview = document.getElementById('profile-image-preview');
+	        const defaultProfileImage = 'default-profile.png';
+	
+	        profileImageInput.addEventListener('change', (e) => {
+	            const file = e.target.files[0];
+	
+	            if (file) {
+	                const reader = new FileReader();
+	                reader.onload = (e) => {
+	                    profileImagePreview.src = e.target.result;
+	                };
+	
+	                reader.readAsDataURL(file);
+	            } else {
+	                // 이미지가 선택되지 않았을 때 디폴트 이미지로 변경
+	                profileImagePreview.src = defaultProfileImage;
+	            }
+	        });
+	        
+	        // formData json형태로 변환
+	        function formDataToJson(formData) {
+	            var jsonObject = {};
+	            formData.forEach(function(value, key) {
+	                jsonObject[key] = value;
+	            });
+	            return jsonObject;
+	        }
+	        
+	        // 회원가입 ajax
+	        $(document).ready(function() {
+	        	$("#register-btn").on("click", function() {
+	        		
+	        		event.preventDefault();
+	        		
+// 	        		var fileInput = document.getElementById("profile-image");
+	        		var fileInput = $("#profile-image")[0];
+	                var file = fileInput.files[0];
+
+	                if (!file) {
+	                    file = null;
+	                }
+
+	                var formData = new FormData();
+	                formData.append("uploadFile", file);
+	        		
+	                var jsonData = formDataToJson(formData);
+	                
+// 	        		var profileImageVal = $("#profile-image").val();
+	            	var userIdVal = $("#user-id").val();
+	            	var userPwVal = $("#user-pw").val();
+	            	var userNameVal = $("#user-name").val();
+	            	var userNicknameVal = $("#user-nickname").val();
+	            	var userSSNVal = $("#user-ssn").val();
+	            	var userAddressVal = $("#user-address").val();
+	            	var userDetailAddressVal = $("#user-detail-address").val();
+	            	var userPhoneVal = $("#user-phone").val();
+	            	var userEmailVal = $("#user-email").val();
+	            	
+	        		// 전부 작성 했는지 확인
+	        		if(
+	       				userIdVal != null
+	       				&& userPwVal != null
+	       				&& userNameVal != null
+	       				&& userNicknameVal != null
+	       				&& userSSNVal != null
+	       				&& userAddressVal != null
+	       				&& userDetailAddressVal != null
+	       				&& userPhoneVal != null
+	       				&& userEmailVal != null
+	       			) {
+	        			$.ajax({
+	        				url : "/user/register.dog",
+	        				type : "POST",
+	        				data : {
+	        					"uploadFile" : jsonData.uploadFile
+	        					, "userId" : userIdVal
+	        					, "userPw" : userPwVal
+	        					, "userName" : userNameVal
+	        					, "userNickname" : userNicknameVal
+	        					, "userSSN" : userSSNVal
+	        					, "userAddressVal" : userAddressVal
+	        					, "userDetailAddress" : userDetailAddressVal
+	        					, "userPhone" : userPhoneVal
+	        					, "userEmail" : userEmailVal
+	        				},
+// 	        				processData: false,
+// 	        	            contentType: false,
+	        				success : function(data) {
+	        					if(data == "true"){
+	        	                    $("#step1, #step2, #step3").removeClass("active");
+	        	                    $("#step3").addClass("active");
+	        						
+	        						$(".main-container2").hide();
+	        		                $(".main-container3").show();
+	        						$("#bTag").text(userNameVal);
+	        					} else if(data == "false"){
+	        						alert("회원가입에 실패하였습니다.");
+	        					} else {
+	        						alert("회원가입이 완료되지 않았습니다.");
+	        					}
+	        				},
+	        				error : function(){
+	        					alert("Ajax 오류, 관리자에게 문의바랍니다.");
+	        				}
+	        			});
+	        		} else {
+						
+	        		}
+	        			
+	        	});
+	        });
+        
         	// 아이디 중복체크 ajax
         	$(document).ready(function() {
-	        	$("#user-id").on("change", function() {
-	        		var userId = $("#user-id").val();
+        		var userIdTag = $("#user-id");
+        		userIdTag.on("change", function() {
+	        		var userId = userIdTag.val();
 	        		$.ajax({
 	        			url : "/user/checkDuplUserId.dog",
 	        			type : "POST",
 	        			data :{ userId : userId },
 	        			success : function(data) {
 	        				var msg = "";
+	        				var idMsg = $("#id-msg");
 	        				if(data == "true") {
-	        					$("#id-msg").removeClass("success").addClass("error").show();
+	        					idMsg.removeClass("success").addClass("error");
 	        					msg = "이미 사용중인 아이디 입니다.";
-	        				} else if(data == "false") {
-	        					$("#id-msg").removeClass("error").addClass("success").show();
+	        					
+	        				} else if(data == "false1") {
+	        					idMsg.removeClass("success").addClass("error");
+	        					msg = "소문자와 숫자를 포함한 6 ~ 14자리만 가능합니다.";
+	        					
+	        				} else if(data == "false2") {
+	        					idMsg.removeClass("error").addClass("success");
 		        				msg = "사용 가능한 아이디 입니다.";
+		        				
 	        				} else {
-	        					$("#id-msg").show();
-		        				msg = "오류";
+		        				alert("오류");
 	        				}
-	        				$("#id-msg").text(msg);
+	        				
+	        				idMsg.text(msg).show();
 	        			},
 	        			error : function() {
-	        				alert("Ajax 오류! 관리자에게 문의바랍니다.");
+	        				alert("Ajax 오류, 관리자에게 문의바랍니다.");
 	        			}
 	        		})
 	        	});
         	});
+        	
+        	// 닉네임 중복체크 ajax
+        	$(document).ready(function() {
+        		var userNicknameTag = $("#user-nickname");
+        		userNicknameTag.on("change", function() {
+        			var userNickname = userNicknameTag.val();
+        			
+        			$.ajax({
+        				url : "/user/checkDuplUserNickname.dog",
+        				type : "POST",
+        				data : { userNickname : userNickname },
+        				success : function(data) {
+        					var msg = "";
+	        				var nickMsg = $("#nick-msg");
+	        				
+	        				if(data == "true") {
+	        					nickMsg.removeClass("success").addClass("error");
+	        					msg = "이미 사용중인 닉네임 입니다.";
+	        					
+	        				} else if(data == "false1") {
+	        					nickMsg.removeClass("success").addClass("error");
+	        					msg = "한글이나 영어, 2자 ~ 15자만 가능합니다.";
+	        					
+	        				} else if(data == "false2") {
+	        					nickMsg.removeClass("error").addClass("success");
+		        				msg = "사용 가능한 닉네임 입니다.";
+		        				
+	        				} else {
+		        				alert("오류");
+	        				}
+	        				
+	        				nickMsg.text(msg).show();
+        				},
+        				error : function() {
+        					alert("Ajax 오류, 관리자에게 문의바랍니다.");
+        				}
+        			});
+        		});
+        	});
+        	
+        	// 이메일 중복체크 ajax
+        	$(document).ready(function() {
+        		var userEmailTag = $("#user-email");
+        		userEmailTag.on("change", function() {
+        			var userEmail = userEmailTag.val();
+        			
+        			$.ajax({
+        				url : "/user/checkDuplUserEmail.dog",
+        				type : "POST",
+        				data : { userEmail : userEmail },
+        				success : function(data) {
+        					var msg = "";
+	        				var emailMsg = $("#email-msg");
+	        				
+	        				if(data == "true") {
+	        					emailMsg.removeClass("success").addClass("error");
+	        					msg = "이미 사용중인 이메일 입니다.";
+	        					
+	        				} else if(data == "false1") {
+	        					emailMsg.removeClass("success").addClass("error");
+	        					msg = "이메일 형식만 가능합니다.";
+	        					
+	        				} else if(data == "false2") {
+	        					emailMsg.removeClass("error").addClass("success");
+		        				msg = "사용 가능한 이메일 입니다.";
+		        				
+	        				} else {
+		        				alert("오류");
+	        				}
+	        				
+	        				emailMsg.text(msg).show();
+        				},
+        				error : function() {
+        					alert("Ajax 오류, 관리자에게 문의바랍니다.");
+        				}
+        			});
+        		});
+        	});
+        	
+        	// 비밀번호 유효성 체크 정규식 함수
+			function validPw(pw) {
+			    // 비밀번호 10 ~ 20자
+			    if (pw.length < 10 || pw.length > 20) {
+			        return "10자 이상, 20자 이하로 작성해야 합니다.";
+			    }
+			    
+			    // 소문자 하나 이상 포함
+			    var lowercase = /[a-z]/;
+			    // 숫자 하나 이상 포함
+			    var number = /\d/;
+			    // 특수문자 하나 이상 포함
+			    var special = /[!@#\$%\^&\*\(\)_\+\-=\[\]\{\};':"\\|,.<>\/?]/;
+				
+			    // 비교
+			    if (!lowercase.test(pw) || !number.test(pw) || !special.test(pw)) {
+			        return "소문자, 숫자, 특수문자가 각각 하나 이상 포함해야 합니다.";
+			    }
+			    
+			    // 유효한 비밀번호
+			    return "";
+			}
+        	
+        	// 비밀번호 유효성 체크
+			$(document).ready(function() {
+			    var pwTag = $("#user-pw");
+			    var pwMsg = $("#pw-msg");
+			
+			    pwTag.on("change", function() {
+			        var pw = pwTag.val();
+			        var msg = validPw(pw);
+			
+			        if (msg) {
+			            // 사용 불가
+			            pwMsg.text(msg).removeClass("success").addClass("error").show();
+			        } else {
+			            // 사용 가능
+			            pwMsg.text("사용 가능한 비밀번호 입니다.").removeClass("error").addClass("success").show();
+			        }
+			    });
+			});
+        	
+        	// 비밀번호 확인 유효성 체크
+        	$(document).ready(function() {
+        		var pwCkMsg = $("#pw-ck-msg");
+        		
+        		$("#user-pw-check").on("change", function() {
+        			var pwTagVal = $("#user-pw").val();
+        			var pwCkTagVal = $("#user-pw-check").val();
+        			var msg = "";
+        			
+        			if(pwTagVal != pwCkTagVal) {
+        				msg = "입력한 비밀번호와 다릅니다.";
+        				pwCkMsg.removeClass("success").addClass("error");
+        			} else {
+        				msg = "입력한 비밀번호와 일치합니다.";
+        				pwCkMsg.removeClass("error").addClass("success");
+        			}
+        			pwCkMsg.text(msg).show();
+        		});
+        	});
+        	
+
         	
 	        // 주소 api
 			function sample4_execDaumPostcode() {

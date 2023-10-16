@@ -1,0 +1,297 @@
+@charset "UTF-8";
+
+#container{
+    padding-bottom: 30px;
+    margin: 0 auto;
+    padding-top: 100px;
+    width: 70%;
+    height : 100%;
+
+}
+#container a{
+    text-decoration: none;
+    color: black;
+}
+
+.login-div{
+    margin: 0 auto;
+    border: 1px solid black;
+    width: 70%;
+    height: 100%;
+}
+#top-section, #nav-section, #mid-section, #bottom-section, .login-div {
+    border-radius: 10px;
+    
+}
+#top-section {
+    padding-top: 80px;
+    padding-bottom: 70px;
+}
+
+.main-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card-body{
+    display: flex;
+    justify-content: space-evenly;
+}
+#step1, #step2, #step3{
+    width: 20%;
+    text-align: center;
+}   
+.step-title {
+    font-weight: bold;
+    color: #777;
+    width: 100%;
+}
+
+.main-container1{
+    margin: 0 auto;
+    width: 50%;
+    padding-bottom: 70px;
+
+}
+.main-container2{
+    padding-bottom: 50px;
+}
+.main-container3{
+    padding-bottom: 30px;
+}
+.main-box {
+    display: flex;
+    justify-content: center;
+}
+.change-id-pw-box{
+	display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+.input-user-info-box{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+.input-user-info-box label{
+    margin-bottom: 5px;
+}
+.find-user-idpw-input {
+	width: 350px;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.find-user-info-box {
+  	margin-left: 60px;
+}
+.find-btn {
+    color: var(--contrast-color);
+    background-color: var(--primary-color);
+    font-size: 18px;
+    padding: 15px 60px;
+    margin: 0;
+    border: none;
+    border-radius: 4px;
+    transition: 0.3s;
+    margin-left: 90px;
+}
+.find-btn:hover {
+    color: var(--contrast-color);
+    background: rgba(var(--primary-color-rgb), 0.85);
+}
+#id-msg, #pw-msg {
+	margin-bottom: 20px;
+    color: var(--primary-color);;
+    font-weight: bold;
+}
+/* 각 단계별 색상 */
+#step1.active .step-title {
+    color: var(--primary-color);
+}
+
+#step2.active .step-title {
+    color: var(--primary-color);
+}
+
+#step3.active .step-title {
+    color: var(--primary-color);
+}
+
+.check-certification-number-box{
+    width: 70%;
+	margin: 0 auto;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.identification{
+    width: 70%;
+    margin: 0 auto;
+	display: flex;
+    flex-direction: column;
+}
+#request-email{
+	font-weight: bold;
+	color: var(--primary-color);
+}
+#identify-email{
+	padding-bottom: 15px;
+}
+#certification-number{
+	width: 350px;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#certification-btn{
+    color: var(--contrast-color);
+    background-color: var(--primary-color);
+    font-size: 14px;
+    width: 70px;
+    height: 50px;
+    margin-right: 20px;
+    border: none;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+#certification-btn:hover{
+    color: var(--contrast-color);
+    background: rgba(var(--primary-color-rgb), 0.85);
+}
+
+.certification-box2{
+	display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.success-dog-img-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.success-dog-img{
+    width: 200px;
+    height: 200px;
+    margin-top: 20px;
+    margin-bottom: 45px;
+}
+.find-idpw-content-box{
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+}
+#p1{
+    font-size: 1.9rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#p1 b, #p2 b {
+    color: var(--primary-color);
+}
+.btn1{
+    padding: 24px 78px;
+    border-radius: 4px;
+    font-size: 14px;
+    
+}
+
+.update-pw-box{
+	width: 70%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.user-info-box{
+	display: flex;
+    flex-direction: column;
+    width: 70%;
+    margin: 0 auto;
+}
+
+#update-pw-btn{
+	color: var(--contrast-color);
+    background-color: var(--primary-color);
+    font-size: 14px;
+    width: 70%;
+    height: 50px;
+    margin: 15px auto 0px auto;
+    border: none;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+#update-pw-btn:hover{
+	color: var(--contrast-color);
+	background: rgba(var(--primary-color-rgb), 0.85);
+}
+
+
+.update-pw-title{
+	width: 70%;
+    margin: 10px auto;
+}
+#user-info-pw label, #user-info-pwck label{
+	width: 70%;
+    margin: 5px auto;
+}
+#user-pw, #user-pw-check {
+	width: 70%;
+    margin: 5px auto 15px auto;
+}
+
+#move-home-btn{
+    background-color: rgb(221, 221, 221);
+    font-weight: bold;
+}
+#move-home-btn:hover{
+    background-color: rgba(221,221,221, 0.85);
+}
+
+#move-login-btn{
+    color: var(--contrast-color);
+    background-color: var(--primary-color);
+}
+#move-login-btn:hover{
+    background: rgba(var(--primary-color-rgb), 0.85);
+}
+
+.signup-btn-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+#bottom-section{
+    padding-bottom: 70px;
+}
+
+
+
+
+#btn-box{
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 50px;
+}
+.next-btn{
+    color: var(--contrast-color);
+    background-color: var(--primary-color);
+    font-size: 14px;
+    padding: 8px 26px;
+    margin: 0;
+    border-radius: 4px;
+    transition: 0.3s;
+    border: none;
+}
+.next-btn:hover{
+    color: var(--contrast-color);
+    background: rgba(var(--primary-color-rgb), 0.85);
+}
+
