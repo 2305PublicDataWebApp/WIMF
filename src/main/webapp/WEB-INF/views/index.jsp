@@ -91,10 +91,154 @@
                               arg.draggedEl.parentNode.removeChild(arg.draggedEl);
                           }
                       },
-                      events: data
-                      , eventClick: function(info) {
+                      events: data,
+                      
+                      /**
+                       * 드래그로 이벤트 수정하기
+                       */
+                      eventDrop: function (info){
+
+                          if(confirm("'"+ info.event.title +"' 일정을 수정하시겠습니까 ?")){
+
+                          var events = new Array(); // Json 데이터를 받기 위한 배열 선언
+                          var obj = new Object();
+
+                          obj.title = info.event._def.title;
+                          obj.start = info.event._instance.range.start;
+                          obj.end = info.event._instance.range.end;
+
+                          obj.oldTitle = info.oldEvent._def.title;
+                          obj.oldStart = info.oldEvent._instance.range.start;
+                          obj.oldEnd = info.oldEvent._instance.range.end;
+
+                          events.push(obj);
+
+                          console.log(events);
+                          } else {
+                        	  updateFullCalendar();
+                          }
+                          $(function modifyData() {
+                              $.ajax({
+                            	  url: "/calendar/update.dog",
+                                  method: "POST",
+                                  dataType: "json",
+                                  data: JSON.stringify(events),
+                                  contentType: 'application/json',
+                                  success: function (response) {
+                                      // 성공적으로 등록되면 부모 창의 함수를 호출하여 메인 페이지의 풀캘린더를 업데이트
+                                      updateFullCalendar();
+                                      
+                                   	  // 등록 성공 알림
+                                      alert('일정 수정 성공');
+                                  },
+                                  error: function (error) {
+                                      console.log(error);
+                                      // 실패 시에 대한 처리 추가
+                                      
+                                   	  // 등록 실패 알림
+                                      alert('일정 수정 실패');
+                                  }
+                              })
+                          })
+                      },
+                      eventResize: function (info){
+                          console.log(info);
+                          if(confirm("'"+ info.event.title +"' 일정을 수정하시겠습니까 ?")){
+
+                          var events = new Array(); // Json 데이터를 받기 위한 배열 선언
+                          var obj = new Object();
+
+                          obj.title = info.event._def.title;
+                          obj.start = info.event._instance.range.start;
+                          obj.end = info.event._instance.range.end;
+
+                          obj.oldTitle = info.oldEvent._def.title;
+                          obj.oldStart = info.oldEvent._instance.range.start;
+                          obj.oldEnd = info.oldEvent._instance.range.end;
+
+                          events.push(obj);
+
+                          console.log(events);
+                          } else {
+                        	  updateFullCalendar();
+                          }
+                          $(function modifyData() {
+                              $.ajax({
+                                  url: "/calendar/update.dog",
+                                  method: "POST",
+                                  dataType: "json",
+                                  data: JSON.stringify(events),
+                                  contentType: 'application/json',
+                                  success: function (response) {
+                                      // 성공적으로 등록되면 부모 창의 함수를 호출하여 메인 페이지의 풀캘린더를 업데이트
+                                      updateFullCalendar();
+                                      
+                                   	  // 등록 성공 알림
+                                      alert('일정 수정 성공');
+                                  },
+                                  error: function (error) {
+                                      console.log(error);
+                                      // 실패 시에 대한 처리 추가
+                                      
+                                   	  // 등록 실패 알림
+                                      alert('일정 수정 실패');
+                                  }
+                              })
+                          })
+                      },
+                  
+                      /**
+                       * 이벤트 선택해서 삭제하기
+                       */
+                      eventClick: function (info){
+                          if(confirm("'"+ info.event.title +"' 일정을 삭제하시겠습니까 ?")){
+                              // 확인 클릭 시
+                              info.event.remove();
+
+                          console.log(info.event);
+                          var events = new Array(); // Json 데이터를 받기 위한 배열 선언
+                          var obj = new Object();
+                              obj.title = info.event._def.title;
+                              obj.start = info.event._instance.range.start;
+                              obj.end = info.event._instance.range.end;
+                              
+                              events.push(obj);
+
+                          console.log(events);
+                          }
+                          $(function deleteData(){
+                              $.ajax({
+                            	  url: "/calendar/delete.dog",
+                                  method: "POST",
+                                  dataType: "json",
+                                  data: JSON.stringify(events),
+                                  contentType: 'application/json',
+                                  success: function () {
+                                      // 성공적으로 삭제시 메인 페이지의 풀캘린더를 업데이트
+                                      updateFullCalendar();
+                                      
+                                   	  // 삭제 성공 알림
+                                      alert('일정 삭제 성공');
+                                  },
+                                  error: function () {
+                                      console.log(error);
+                                      // 실패 시에 대한 처리 추가
+                                      
+                                   	  // 삭제 실패 알림
+                                      alert('일정 삭제 실패');
+                                  }
+                              })
+                          })
+                      },
+                      locale: 'ko',
+                      // eventRemove: function (obj) { // 이벤트가 삭제되면 발생하는 이벤트
+                      //
+                      // },
+                      
+                      // url로 이동
+                      /* eventClick: function(info) {
                       	window.location.href(info.event.url);
-                      }
+                      } */
                   });
 
                   calendar.render();
@@ -107,56 +251,57 @@
 
       });
       
-      /* document.addEventListener('DOMContentLoaded', function() {
-          var calendarEl = document.getElementById('calendar');
-          var calendar = new FullCalendar.Calendar(calendarEl, {
-          	schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',	// 고급 플러그인 무료
-            initialView: 'dayGridMonth',
-            titleFormat: function (date) {	// 날짜 표시 형식
-                year = date.date.year;
-                month = date.date.month + 1;
+      function updateFullCalendar() {
+    	    var request = $.ajax({
+    	        url: "/calendar/list.dog",
+    	        method: "GET"
+    	    });
 
-                return year + "년 " + month + "월";
-              },
-              headerToolbar: {
-                  left: 'prev,next today',
-                  center: 'title',
-                  right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-              },
-              editable: true,		// 수정 가능 여부
-              droppable: true, // this allows things to be dropped onto the calendar
-              drop: function (arg) {
-                  // is the "remove after drop" checkbox checked?
-                  if (document.getElementById('drop-remove').checked) {
-                      // if so, remove the element from the "Draggable Events" list
-                      arg.draggedEl.parentNode.removeChild(arg.draggedEl);
-                  }
-              },
-              events : [
-                  {
-                    title: '더 많은 필드 참고',
-                    start: '2023-10-12',
-                    url: 'https://fullcalendar.io/docs/v5/event-object'
-                	},
-                  {
-                    title: '뚜껑 닫기',
-                    start: '2023-10-03',
-                    end: '2023-10-05'
-                	},
-                	{
-                     title: '뚜껑 닫기',
-                     start: '2023-10-03',
-                     allday: false	// 일정이 하루 전체인지 여부
-                 	}
-                ]
-              , eventClick: function(info) {
-              	window.location.href(info.event.url);
-              }
+    	    request.done(function (data) {
+    	    	console.log(data); // log 로 데이터 찍어주기.
+
+                var calendarEl = document.getElementById('calendar');
+
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+              	  schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',	// 고급 플러그인 무료
+              	  initialView: 'dayGridMonth',		// 처음 캘린더 형식
+              	  titleFormat: function (date) {	// 날짜 표시 형식
+                        year = date.date.year;
+                        month = date.date.month + 1;
+
+                        return year + "년 " + month + "월";
+                    },
+                    headerToolbar: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                    },
+                    editable: true,
+                    droppable: true, // this allows things to be dropped onto the calendar
+                    drop: function (arg) {
+                        // is the "remove after drop" checkbox checked?
+                        if (document.getElementById('drop-remove').checked) {
+                            // if so, remove the element from the "Draggable Events" list
+                            arg.draggedEl.parentNode.removeChild(arg.draggedEl);
+                        }
+                    },
+                    events: data
+                    , eventClick: function(info) {
+                    	window.location.href(info.event.url);
+                    }
+                });
+
+                calendar.render();
             });
-          calendar.render();
-        }); */
+
+    	    request.fail(function (jqXHR, textStatus) {
+    	        alert("Request failed: " + textStatus);
+    	    });
+    	}
       
-      
+      window.addEventListener('updateCalendarEvent', function () {
+	   	    updateFullCalendar();
+	   	});
 
     </script>
 	<link href="/css/index/fullCalendar.css" rel="stylesheet">
@@ -1368,7 +1513,7 @@
 	      var height = 800;
 	      var left = (window.innerWidth - width) / 2;
 	      var top = (window.innerHeight - height) / 2;
-	      var noticeWin = window.open("/calendar/popup.dog", "", "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
+	      var noticeWin = window.open("/calendar/popup.dog", "Popup", "width=" + width + ", height=" + height + ", left=" + left + ", top=" + top);
 	      if (!noticeWin) {
 	         alert("팝업이 차단되었습니다. 팝업차단을 해제해주세요.");
 	      }

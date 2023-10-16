@@ -13,4 +13,19 @@
 		SELECT * FROM SCHEDULE_TBL ORDER BY SCH_NO DESC
 	</select>
 	
+	<!-- 이름, 제목, 시작일, 종료일로 일정 가져오기 -->
+	<select id="findEventByUserIdAndTitleAndStartDateAndEndDate" resultType="Calendar" parameterType="java.util.Map">
+        SELECT * FROM SCHEDULE_TBL WHERE USER_ID = 'khuser01' AND SCH_TITLE = #{title} AND SCH_START_DATE = #{startDate} AND SCH_END_DATE = #{endDate}
+    </select>
+    
+    <!-- 일정 삭제 -->
+    <delete id="deleteEvent" parameterType="int">
+        DELETE FROM SCHEDULE_TBL WHERE SCH_NO = #{schNo}
+    </delete>
+    
+    <!-- 일정 수정 -->
+    <update id="">
+    	
+    </update>
+	
 </mapper>
