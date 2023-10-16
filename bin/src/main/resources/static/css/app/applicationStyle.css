@@ -1,0 +1,129 @@
+@charset "UTF-8";
+/* Reset some default styles */
+#application body, h1, h2, h3, p, ul, li, form, table {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f0f0f0;
+}
+
+main {
+    max-width: 800px;
+    margin: 100px auto 10px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding-top: 50px;
+}
+
+#application h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+#application table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+#application table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+#application td[colspan="2"] {
+    color: red;
+    text-align: center;
+}
+
+#application .red{
+    color: red;
+}
+
+#application #application-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column; /* 입력 필드 및 버튼을 세로로 정렬합니다 */
+    align-items: flex-start; /* 입력 필드를 좌측에 정렬합니다 */
+}
+
+/* 라디오 버튼을 가로로 배치 */
+#application .radio-group label {
+    display: inline-block;
+    margin-right: 10px; /* 라디오 버튼 사이의 간격 조절 */
+}
+
+#application .radio-group input[type="radio"] {
+    vertical-align: middle; /* 라디오 버튼과 라벨을 수직 정렬 */
+}
+
+#application label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#application input[type="text"],
+#application input[type="date"],
+#application input[type="number"]{
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+#application textarea {
+    width: 97%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#application .radio-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#application .radio-group input[type="radio"] {
+    margin-right: 5px;
+}
+
+#application button[type="submit"] {
+    background-color: #DC3545; /* 빨간 계열의 색상으로 변경합니다. */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    align-self: center; /* 버튼을 가운데로 정렬합니다 */
+}
+
+#application button[type="submit"]:hover {
+    background-color: #C82333; /* 호버 효과의 색상을 변경합니다. */
+}
+
+
+#application #p-start-date,
+#application #start-warning {
+    margin-bottom: 20px; /* 여백을 원하는 크기로 조정 */
+}
+
+#application .warn-form {
+    display: block; /* <b> 요소를 블록 수준 요소로 변경합니다. */
+    margin: 0 auto; /* 가운데 정렬을 수행합니다. */
+    margin-bottom: 20px;
+}
+

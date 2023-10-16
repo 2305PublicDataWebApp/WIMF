@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+#main {
+	margin-bottom: 5%;
+}
+
+#container {
+  padding-top: 8%;
+  margin: 0 auto;
+  min-width: 50%;
+  max-width: 50%;
+  height: 100%;
+}
+
+#board-content {
+  padding: 5%;
+}
+
+#board {
+  border: 5px double gray;
+  border-radius: 20px;
+}
+
+#select {
+  padding-bottom: 5%;
+  width: 70%;
+  float: left;
+}
+
+#search {
+  float: left;
+  margin-left: 10px;
+}
+#search-value {
+  padding-right: 10px;
+}
+
+#search-btn {
+  float: right;
+  width: 60px;
+  height: 35px;
+  border-radius: 4px;
+  border: none;
+  background-color: rgb(232, 69, 69);
+  color: white;
+  margin-left: 3px;
+}
+#search-btn:hover {
+  color: var(--contrast-color);
+  background: rgba(255,99,71, 0.85);
+}
+
+input[type="text"] {
+  border: solid 1px;
+  border-radius: 4px;
+  width: 175px;
+  height: 35px;
+  background-image: url(/img/돋보기.png);
+  background-repeat: no-repeat;
+  background-size: 30px;
+  text-align: right;
+}
+
+#paging {
+  list-style-type: none;
+  text-align: center;
+  font-size: 20px;
+  color: black
+}
+#paging:hover {
+  color: gray;
+}
+
+#create-btn {
+  float: right;
+  width: 70px;
+  height: 35px;
+  border-radius: 4px;
+  border: none;
+  background-color: rgb(232, 69, 69);
+  color: white;
+}
+
+#create-btn:hover {
+  color: var(--contrast-color);
+  background: rgba(255,99,71, 0.85);
+}
+
+#number-value {
+  text-align: center;
+}
