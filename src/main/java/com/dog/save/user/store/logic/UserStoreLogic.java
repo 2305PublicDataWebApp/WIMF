@@ -20,5 +20,11 @@ public class UserStoreLogic implements UserStore{
 		User uOne = session.selectOne("UserMapper.checkLogin", user);
 		return uOne;
 	}
+	// 게시글 상세 조회 (작성자 닉네임)
+	@Override
+	public User selectOneById(SqlSession session, String userId) {
+		User uOne = session.selectOne("UserMapper.checkDuplUserId", userId);
+		return uOne;
+	}
 
 }

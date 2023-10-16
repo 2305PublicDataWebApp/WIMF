@@ -37,14 +37,14 @@
               <div id="select">
               	<form action="/board/search.dog" method="get">
 	                <select name="searchCondition">
-	                  <option value="all">전체</option>
-	                  <option value="writer">작성자</option>
-	                  <option value="title">제목</option>
-	                  <option value="content">내용</option>
+	                  <option value="all" <c:if test="${searchCondition == 'all' }">selected</c:if>>전체</option>
+	                  <option value="writer" <c:if test="${searchCondition == 'writer' }">selected</c:if>>작성자</option>
+	                  <option value="title" <c:if test="${searchCondition == 'title' }">selected</c:if>>제목</option>
+	                  <option value="content" <c:if test="${searchCondition == 'content' }">selected</c:if>>내용</option>
 	                </select>
-		          </div>
+	          </div>
 	              <div id="search">
-	                <input id="search-value" type="text" name="searchKeyword" placeholder="Search">
+	                <input id="search-value" type="text" name="searchKeyword" placeholder="Search" value="${searchKeyword }">
 	              </div>
 	              <div id="search-btn">
 	                <input id="search-btn" type="submit" value="검색">
@@ -105,7 +105,6 @@
 	          </tr>
             </div>
           <div id="create-btn">
-<!--             <input id="create-btn" type="button" value="글 작성" onClick="location.href='/board/write.dog'"> -->
             <input id="create-btn" type="button" value="글 작성" onClick="checkLogin()">
           </div>
         </div>

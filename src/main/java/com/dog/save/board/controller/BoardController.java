@@ -1,6 +1,8 @@
 package com.dog.save.board.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,8 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.dog.save.board.domain.Board;
+import com.dog.save.board.domain.Reply;
 import com.dog.save.board.domain.bPageInfo;
 import com.dog.save.board.service.BoardService;
+import com.dog.save.board.service.ReplyService;
+import com.dog.save.user.domain.User;
+import com.dog.save.user.service.UserService;
 
 @Controller
 @RequestMapping(value="/board")
@@ -23,6 +29,10 @@ public class BoardController {
 
 	@Autowired
 	private BoardService bService;
+	@Autowired
+	private UserService uService;
+	@Autowired
+	private ReplyService rService;
 	
 	// ==================== 게시글 작성 페이지 ====================
 	@GetMapping("/write.dog")
@@ -35,12 +45,16 @@ public class BoardController {
 		// 작성자 session에서 userId 가져오기
 		try {
 			String boardWriter = (String)session.getAttribute("userId");
-			if(boardWriter != null && !boardWriter.equals("")) {
+			if(boardWriter == null || boardWriter.isEmpty()) {
+				model.addAttribute("msg", "로그인 후에 게시글을 작성할 수 있습니다");
+				model.addAttribute("url", "/user/login.dog");
+				return "common/error";
+			}else if(boardWriter != null && !boardWriter.equals("")) {
 				board.setBoardWriter(boardWriter);
 				int result = bService.insertBoard(board);
 				return "redirect:/board/list.dog";
 			}else {
-				model.addAttribute("msg", "게시글 등록이 완료되지 않았습니다");
+				model.addAttribute("msg", "게시글 작성이 완료되지 않았습니다.");
 				model.addAttribute("url", "/board/list.dog");
 				return "common/error";
 			}
@@ -96,6 +110,32 @@ public class BoardController {
 			return "common/error";
 		}
 	}
+	// ==================== 게시글 삭제 ====================
+	@GetMapping("/delete.dog")
+	public String boardDelete(@ModelAttribute Board board, Model model, HttpSession session) {
+		try {
+			String userId = (String)session.getAttribute("userId");
+			String boardWriter = board.getBoardWriter();
+			if(boardWriter != null && boardWriter.equals(userId) || userId.equals("admin")) {
+				int result = bService.deleteBoardByNo(board);
+				if(result > 0) {
+					return "redirect:/board/list.dog";
+				}else {
+					model.addAttribute("msg", "게시글 삭제가 완료되지 않았습니다");
+					model.addAttribute("url", "/board/list.dog");
+					return "common/error";
+				}
+			}else {
+				model.addAttribute("msg", "내가 작성한 글만 삭제가 가능합니다");
+				model.addAttribute("url", "/board/list.dog");
+				return "common/error";
+			}
+		} catch(Exception e) {
+			model.addAttribute("msg", "관리자에게 문의 바랍니다");
+			model.addAttribute("url", "/board/list.dog");
+			return "common/error";
+		}
+	}
 	// ==================== 게시글 리스트 조회 ====================
 	@GetMapping("/list.dog")
 	public String boardListView(Model model
@@ -113,6 +153,14 @@ public class BoardController {
 		try {
 			Board board = bService.showOneByBoard(boardNo);
 			if(board != null) {
+				String userId = board.getBoardWriter();
+				User uOne = uService.selectOneById(userId);
+				String userNickName = uOne.getUserNickname();
+				List<Reply> replyList = rService.selectReplyList(boardNo);
+				if(replyList.size() > 0) {
+					model.addAttribute("rList", replyList);
+				}
+				model.addAttribute("userNickName", userNickName);
 				model.addAttribute("board", board);
 				return "board/communityDetail";
 			}else {
@@ -126,7 +174,6 @@ public class BoardController {
 			return "common/error";
 		}
 	}
-	
 	// ==================== 게시글 페이징 처리 ====================
 	public bPageInfo getPageInfo(Integer currentPage, Integer totalCount) {
 		int recordCountPerPage = 7;
@@ -140,5 +187,33 @@ public class BoardController {
 		bPageInfo bpInfo = new bPageInfo(currentPage, totalCount, naviTotalCount, recordCountPerPage, naviCountPerPage, startNavi, endNavi);
 			
 		return bpInfo;
+	}
+	@GetMapping("/search.dog")
+	public String searchBoardList(Model model
+			, @RequestParam("searchCondition") String searchCondition
+			, @RequestParam("searchKeyword") String searchKeyword
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage) {
+		
+		Map<String, String> paramMap = new HashMap<String, String>();
+		
+		paramMap.put("searchCondition", searchCondition);
+		paramMap.put("searchKeyword", searchKeyword);
+		
+		int totalCount = bService.getListCount(paramMap);
+		bPageInfo bpInfo = this.getPageInfo(currentPage, totalCount);
+		List<Board> searchList = bService.searchBoardByKeyword(bpInfo, paramMap);
+		
+		if(!searchList.isEmpty()) {
+			model.addAttribute("searchCondition", searchCondition);
+			model.addAttribute("searchKeyword", searchKeyword);
+			model.addAttribute("bpInfo", bpInfo);
+			model.addAttribute("bList", searchList);
+			return "board/communitySearch";
+		}else {
+			model.addAttribute("msg", "데이터 조회가 되지 않습니다.");
+			model.addAttribute("error", "공지사항 제목 조회 실패");
+			model.addAttribute("url", "/board/list.dog");
+			return "common/error";
+		}
 	}
 }

@@ -10,4 +10,5 @@
 	<select id="checkLogin" resultType="User">
 		SELECT * FROM USER_TBL WHERE USER_ID = #{userId} AND USER_PW = #{userPw}
 	</select>
+	
 </mapper>
