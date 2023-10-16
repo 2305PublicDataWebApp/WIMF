@@ -125,7 +125,7 @@ textarea {
 }
 .next-btn{
     color: var(--contrast-color);
-    background-color: var(--primary-color); /* var(--primary-color) */
+    background-color: var(--primary-color);
     font-size: 14px;
     padding: 8px 26px;
     margin: 0;
@@ -133,7 +133,7 @@ textarea {
     transition: 0.3s;
     border: none;
 }
-.next-btn:hover{
+.next-btn:hover, #post-btn:hover, #certification-btn:hover{
     color: var(--contrast-color);
     background: rgba(var(--primary-color-rgb), 0.85);
 }
@@ -145,6 +145,53 @@ textarea {
 #register-form{
 	margin-left: 100px;
 }
+#img-div{
+	margin-left: 165px;
+}
+.profile-image-container {
+    display: inline-block;
+    position: relative;
+}
+
+#profile-image-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#profile-image-preview[src="default-profile.png"] {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #ccc;
+}
+.upload-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #ccc;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#profile-image {
+    display: none;
+}
+
+.profile-label{
+	margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+
 .user-info-box{
     width: 80%;
     height : 100px;
@@ -176,6 +223,8 @@ textarea {
     position: relative;
 }
 #post-btn {
+    color: var(--contrast-color);
+    background-color: var(--primary-color);
 	font-size: small;
 	position: absolute;
     width: 70px;
@@ -186,10 +235,21 @@ textarea {
     margin: auto 0;
     border-radius: 3px;
     border: none;
+}
+#certification-btn{
     color: var(--contrast-color);
     background-color: var(--primary-color);
+	font-size: small;
+    position: absolute;
+    width: 95px;
+    height: 25px;
+    top: 0;
+    bottom: 85px;
+    left: 254px;
+    margin: auto 0;
+    border-radius: 3px;
+    border: none;
 }
-
 #user-info-nickname button, #user-info-id button, #user-info-email-check button{
     position: absolute;
     width: 90px;
@@ -203,9 +263,9 @@ textarea {
     color: var(--contrast-color);
     background-color: var(--primary-color);
 }
-#user-info-nickname button:hover, #user-info-id button:hover, #user-info-email-check button:hover{
-    background: rgba(var(--primary-color-rgb), 0.85);
-}
+/* #user-info-nickname button:hover, #user-info-id button:hover, #user-info-email-check button:hover{ */
+/*     background: rgba(var(--primary-color-rgb), 0.85); */
+/* } */
 
 .signup-complete-box{
     width: 70%;

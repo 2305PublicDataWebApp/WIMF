@@ -24,8 +24,38 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	public User checkDuplUserNickname(String userNickname) {
+		User uOne = uStore.checkDuplUserNickname(session, userNickname);
+		return uOne;
+	}
+
+	@Override
+	public User checkDuplUserEmail(String userEmail) {
+		User uOne = uStore.checkDuplUserEmail(session, userEmail);
+		return uOne;
+	}
+
+	@Override
 	public User checkLogin(User user) {
 		User uOne = uStore.checkLogin(session, user);
 		return uOne;
+	}
+
+	@Override
+	public User checkUserByNameEmail(User user) {
+		User uOne = uStore.checkUserByNameEmail(session, user);
+		return uOne;
+	}
+
+	@Override
+	public User checkUserByNameIdEmail(User user) {
+		User uOne = uStore.checkUserByNameIdEmail(session, user);
+		return uOne;
+	}
+
+	@Override
+	public int insertUser(User user) {
+		int result = uStore.insertUser(session, user);
+		return result;
 	}
 }
