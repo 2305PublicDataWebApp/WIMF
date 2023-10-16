@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +24,12 @@ public class AppController {
 	@GetMapping("/insert.dog")
 	public ModelAndView showInsertForm(ModelAndView mv) {
 		mv.setViewName("app/write");
+		return mv;
+	}
+	
+	@PostMapping("/insert.dog")
+	public ModelAndView insertApplication(ModelAndView mv) {
+		
 		return mv;
 	}
 	
@@ -51,6 +58,8 @@ public class AppController {
 		}
 		return mv;
 	}
+	
+	
 	
 	private PageInfo getPageInfo(Integer currentPage, int totalCount) {
 		int recordCountPerPage = 10;

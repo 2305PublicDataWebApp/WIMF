@@ -4,7 +4,11 @@
 <mapper namespace="AppMapper">
 
 	<select id="appAllList" resultType="App">
-		SELECT * FROM APP_TBL
+		SELECT * FROM APP_TBL ORDER BY APP_NO DESC
+	</select>
+	
+	<select id="getTotalCount" resultType="_int">
+		SELECT COUNT(*) FROM APP_TBL
 	</select>
 	
 </mapper>

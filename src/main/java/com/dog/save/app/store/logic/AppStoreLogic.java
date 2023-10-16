@@ -24,7 +24,7 @@ public class AppStoreLogic implements AppStore {
 		int limit = pageInfo.getRecordCountPerPage();
 		int offset = (pageInfo.getCurrentPage() - 1) * limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		List<App> aList = sqlSession.selectList("AppMapper.appAllList", rowBounds);
+		List<App> aList = sqlSession.selectList("AppMapper.appAllList", null, rowBounds);
 		return aList;
 	}
 
