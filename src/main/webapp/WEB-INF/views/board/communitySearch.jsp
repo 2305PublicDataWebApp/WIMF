@@ -34,8 +34,8 @@
         <div id="board-content">
           <table class="table">
             <div id="board-top-content">
-              <div id="select">
               	<form action="/board/search.dog" method="get">
+	              <div id="select">
 	                <select name="searchCondition">
 	                  <option value="all" <c:if test="${searchCondition == 'all' }">selected</c:if>>전체</option>
 	                  <option value="writer" <c:if test="${searchCondition == 'writer' }">selected</c:if>>작성자</option>
@@ -72,7 +72,7 @@
 	              	<c:param name="boardNo" value="${board.boardNo }"></c:param>
 	              </c:url>
 	              <td><a href="${detailUrl }">${board.boardTitle }</a></td>
-	              <td>${board.boardWriter }</td>
+	              <td>${board.userNickName }</td>
 	              <td>
 	              	<fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
 	              </td>

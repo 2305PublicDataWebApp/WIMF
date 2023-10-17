@@ -2,6 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="BoardMapper">
+	<resultMap id="BoardResultMap" type="Board">
+	    <result property="userNickName" column="USER_NICKNAME"/>
+	</resultMap>
 	<!-- 게시글 등록 -->
 	<insert id="insertBoard">
 		INSERT INTO BOARD_TBL VALUES(BOARD_NO_SEQ.NEXTVAL, #{boardTitle}, #{boardContent}, #{boardWriter}, DEFAULT, DEFAULT, DEFAULT)
@@ -15,13 +18,24 @@
 		DELETE FROM BOARD_TBL WHERE BOARD_NO = #{boardNo}
 	</select>
 	<!-- 게시글 리스트 조회 -->
-	<select id="selectBoardList" resultType="Board">
-		SELECT * FROM BOARD_TBL ORDER BY BOARD_NO DESC
+<!-- 	<select id="selectBoardList" resultType="Board"> -->
+<!-- 		SELECT * FROM BOARD_TBL ORDER BY BOARD_NO DESC -->
+<!-- 	</select> -->
+	<!-- 게시글 리스트 조회 -->
+	<select id="selectBoardList" resultType="Board" resultMap="BoardResultMap">
+		SELECT BOARD_TBL.*, USER_TBL.USER_NICKNAME
+	    FROM BOARD_TBL
+	    LEFT JOIN USER_TBL ON BOARD_TBL.BOARD_WRITER = USER_TBL.USER_ID
+	    ORDER BY BOARD_TBL.BOARD_NO DESC
 	</select>
 	<!-- 게시글 상세조회 -->
 	<select id="selectOneByBoard" resultType="Board">
 		SELECT * FROM BOARD_TBL WHERE BOARD_NO = #{boardNo}
 	</select>
+	<!-- 게시글 조회수 증가 -->
+	<update id="increaseViewCount">
+		UPDATE BOARD_TBL SET VIEW_COUNT = VIEW_COUNT + 1 WHERE BOARD_NO = #{boardNo}
+	</update>
 	<!-- 단체 게시글 갯수 -->
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*) FROM BOARD_TBL
@@ -32,18 +46,24 @@
 	</select>
 	<!-- 게시글 키워드 검색 -->
 	<select id="selectBoardByKeyword" resultType="Board">
-		SELECT * FROM BOARD_TBL 
+		SELECT BOARD_TBL.*, USER_TBL.USER_NICKNAME
+	    FROM BOARD_TBL
+	    LEFT JOIN USER_TBL ON BOARD_TBL.BOARD_WRITER = USER_TBL.USER_ID 
 		<if test="searchCondition == 'all'">
-		WHERE BOARD_WRITER LIKE '%'||#{searchKeyword}||'%' OR BOARD_TITLE LIKE '%'||#{searchKeyword}||'%' OR BOARD_CONTENT LIKE '%'||#{searchKeyword}||'%'
+		WHERE USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%' OR BOARD_TBL.BOARD_TITLE LIKE '%'||#{searchKeyword}||'%' OR BOARD_TBL.BOARD_CONTENT LIKE '%'||#{searchKeyword}||'%'
+		ORDER BY BOARD_TBL.BOARD_NO DESC
 		</if>
 		<if test="searchCondition == 'writer'">
-		WHERE BOARD_WRITER LIKE '%'||#{searchKeyword}||'%' 
+		WHERE USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%'
+		ORDER BY BOARD_TBL.BOARD_NO DESC
 		</if>
 		<if test="searchCondition == 'title'">
-		WHERE BOARD_TITLE LIKE '%'||#{searchKeyword}||'%'
+		WHERE BOARD_TBL.BOARD_TITLE LIKE '%'||#{searchKeyword}||'%'
+		ORDER BY BOARD_TBL.BOARD_NO DESC
 		</if>
 		<if test="searchCondition == 'content'">
-		WHERE BOARD_CONTENT LIKE '%'||#{searchKeyword}||'%'
+		WHERE BOARD_TBL.BOARD_CONTENT LIKE '%'||#{searchKeyword}||'%'
+		ORDER BY BOARD_TBL.BOARD_NO DESC
 		</if>
 	</select>
 	<!-- 키워드 제목으로 검색 -->
@@ -51,8 +71,16 @@
 		SELECT * FROM BOARD_TBL WHERE BOARD_TITLE LIKE '%'||#{searchKeyword}||'%'
 	</select>
 	<!-- 키워드 작성자로 검색 -->
-	<select id="searchBoardByWriter" resultType="Board">
-		SELECT * FROM BOARD_TBL WHERE BOARD_WRITER LIKE '%'||#{searchKeyword}||'%'
+<!-- 	<select id="searchBoardByWriter" resultType="Board"> -->
+<!-- 		SELECT * FROM BOARD_TBL WHERE BOARD_WRITER LIKE '%'||#{searchKeyword}||'%' -->
+<!-- 	</select> -->
+	<!-- 키워드 작성자로 검색 -->
+	<select id="searchBoardByWriter" resultType="Board" resultMap="BoardResultMap" parameterType="String">
+		SELECT BOARD_TBL.*, USER_TBL.USER_NICKNAME
+	    FROM BOARD_TBL
+	    LEFT JOIN USER_TBL ON BOARD_TBL.BOARD_WRITER = USER_TBL.USER_ID
+	    WHERE USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%'
+	    ORDER BY BOARD_TBL.BOARD_NO DESC
 	</select>
 	<!-- 키워드 내용으로 검색 -->
 	<select id="searchBoardByContent" resultType="Board">

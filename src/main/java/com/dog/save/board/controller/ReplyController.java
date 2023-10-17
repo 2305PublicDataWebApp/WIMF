@@ -29,7 +29,7 @@ public class ReplyController {
 			String replyWriter = (String)session.getAttribute("userId");
 			if(replyWriter == null || replyWriter.isEmpty()) {
 				model.addAttribute("msg", "로그인 후 댓글을 작성할 수 있습니다");
-	            model.addAttribute("url", "/user/login.do"); // 로그인 페이지로 리다이렉트
+	            model.addAttribute("url", "/user/login.dog"); // 로그인 페이지로 리다이렉트
 	            return "common/error";
 			}
 			reply.setReplyBoardWriter(replyWriter);
@@ -77,15 +77,15 @@ public class ReplyController {
 	public String deleteReply(Model model
 			, @ModelAttribute Reply reply
 			, HttpSession session) {
-		String url = "";
+		String delUrl = "";
 		try {
 			String userId = (String)session.getAttribute("userId");
 			String replyBoardWriter = reply.getReplyBoardWriter();
-			url = "/board/detail.dog?boardNo="+reply.getReplyBoardNo();
-			if(replyBoardWriter != null && replyBoardWriter.equals(userId)) {
+			delUrl = "/board/detail.dog?boardNo="+reply.getReplyBoardNo();
+			if(replyBoardWriter != null && replyBoardWriter.equals(userId) || userId.equals("admin")) {
 				int result = rService.deleteReply(reply);
 				if(result > 0) {
-					return "redirect:" + url;
+					return "redirect:" + delUrl;
 				}else {
 					model.addAttribute("msg", "댓글 삭제가 완료되지 않았습니다");
 					model.addAttribute("url", "/board/detail.dog");

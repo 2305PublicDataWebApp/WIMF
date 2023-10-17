@@ -65,16 +65,16 @@
 	          <input type="hidden" name="boardNo" value="${board.boardNo }">
 	          <input type="hidden" name="boardWriter" value="${board.boardWriter }">
 			      <div>
-			        <input id="reset-btn" type="submit" value="삭제" onClick="checkDelete(event)">
+			        <input id="reset-btn" type="submit" value="삭제">
 			      </div>
 	          </form>
           	</c:when>
-          	<c:when test="${userId == 'admin' }">
+          	<c:when test="${userId eq 'admin' }">
           		<form action="/board/delete.dog" method="get">
 		            <input type="hidden" name="boardNo" value="${board.boardNo }">
 		            <input type="hidden" name="boardWriter" value="${board.boardWriter }">
 		            	<div>
-			          		<input id="reset-btn" type="submit" value="삭제" onClick="checkDelete(event)">
+			          		<input id="reset-btn" type="submit" value="삭제">
 		            	</div>
           		</form>
           	</c:when>
@@ -98,7 +98,7 @@
           	<table id="board-reply-list-table">
           		<colgroup>
 	              <col width="40%" />
-	              <col width="5%" />
+	              <col width="10%" />
 	              <col width="10%" />
 	              <col width="10%" />
 	            </colgroup>
@@ -112,42 +112,46 @@
 		          	<tr>
 		          		<td style="padding-top: 1%; padding-left: 2%; padding-bottom:1%; border-bottom: 1px solid darkgray">${reply.replyBoardContent }</td>
 		          		
-		          		<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray">${reply.replyBoardWriter }</td>
+		          		<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray">${reply.userNickName }</td>
 		          		<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray"><fmt:formatDate pattern="yyyy-MM-dd" value="${reply.replyCreateDate }"/></td>
 		          		<c:choose>
-		          			<c:when test="${reply.replyBoardWriter ne userId}">
-		          				<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray"></td>
-		          			</c:when>
 		          			<c:when test="${reply.replyBoardWriter eq userId}">
 		          				<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray">
 				          			<a id="reply-update" href="javascript:void(0);" onclick="showModifyForm(this, '${reply.replyBoardContent}');">수정</a>
 				          			<c:url var="delUrl" value="/reply/delete.dog">
 										<c:param name="replyNo" value="${reply.replyNo }"></c:param>
 										<!-- 자기 자신이 작성한 댓글만 지우도록 하기 위해 replyWriter를 추가함 -->
-										<c:param name="repBoardWriter" value="${reply.replyBoardWriter }"></c:param>
+										<c:param name="replyBoardWriter" value="${reply.replyBoardWriter }"></c:param>
 										<!-- 성공하면 detail로 가기 위해 필요한 boardNo 세팅 -->
-										<c:param name="repBoardNo" value="${reply.replyBoardNo }"></c:param>
+										<c:param name="replyBoardNo" value="${reply.replyBoardNo }"></c:param>
 									</c:url>
 				          			<a id="reply-delete" href="javascript:void(0);" onclick="replyDeleteForm('${delUrl}');">삭제</a>
 				          		</td>
 		          			</c:when>
 		          			<c:when test="${userId == 'admin' }">
 		          				<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray">
+		          					<a id="reply-update-bean"></a>
 				          			<c:url var="delUrl" value="/reply/delete.dog">
 										<c:param name="replyNo" value="${reply.replyNo }"></c:param>
 										<!-- 자기 자신이 작성한 댓글만 지우도록 하기 위해 replyWriter를 추가함 -->
-										<c:param name="repBoardWriter" value="${reply.replyBoardWriter }"></c:param>
+										<c:param name="replyBoardWriter" value="${reply.replyBoardWriter }"></c:param>
 										<!-- 성공하면 detail로 가기 위해 필요한 boardNo 세팅 -->
-										<c:param name="repBoardNo" value="${reply.replyBoardNo }"></c:param>
+										<c:param name="replyBoardNo" value="${reply.replyBoardNo }"></c:param>
 									</c:url>
 				          			<a id="reply-delete" href="javascript:void(0);" onclick="replyDeleteForm('${delUrl}');">삭제</a>
 				          		</td>
 		          			</c:when>
+		          			<c:when test="${reply.replyBoardWriter ne userId}">
+ 		          				<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray"></td>
+ 		          			</c:when>
 		          		</c:choose>
 		          	</tr>
-		          	<tr	id="replyUpdate" style="display:none;">
+		          	<tr	class="replyUpdate" style="display:none;">
 				        <td colspan="3"><input id="replyBoardContent" type="text" size="50" name="replyBoardContent" value="${reply.replyBoardContent }"></td>
-				        <td><input type="button" onclick="replyModify(this, '${reply.replyNo}','${reply.replyBoardNo }');" value="수정"></td>
+				        <td>
+				        	<input id="reply-update-btn" type="button" onclick="replyModify(this, '${reply.replyNo}','${reply.replyBoardNo }');" value="등록">
+					        <input id="update-close-btn" type="reset" value="취소" onClick="closeReplyUpdate()">
+				        </td>
 			        </tr>
           		</c:forEach>
           	</table>
@@ -156,6 +160,15 @@
     </div>
   </main>
   <script>
+  function replyDeleteForm(delUrl){
+	  	var confirmed = confirm("정말 삭제하시겠습니까?");
+	  	
+	  	if(confirmed){
+			location.href = delUrl;
+	  	}else{
+	  		
+	  	}
+	}
   function validateForm(){
 	  var content = document.getElementById("summernote").value;
 	  
@@ -169,6 +182,45 @@
 //			HTML태그, display:none 사용하는 방법
 //			document.querySelector("#replyModifyForm").style.display="";
 		obj.parentElement.parentElement.nextElementSibling.style.display="";
+	}
+	function closeReplyUpdate(){
+		var updateElements = document.getElementsByClassName('replyUpdate');
+		for (var i = 0; i < updateElements.length; i++){
+			updateElements[i].style.display = 'none';
+		}
+	}
+	function replyModify(obj, replyNo, replyBoardNo){
+		// DOM프로그래밍을 이용하는 방법
+		const form = document.createElement("form");
+		form.action = "/reply/update.dog";
+		form.method = "post";
+		
+		const input = document.createElement("input");
+		input.type = "hidden";
+		input.value = replyNo;
+		input.name = "replyNo";
+		
+		const input2 = document.createElement("input");
+		input2.type = "hidden";
+		input2.value = replyBoardNo;
+		input2.name = "replyBoardNo";
+		
+		const input3 = document.createElement("input");
+		input3.type = "text";
+		// 여기를 this를 이용하여 수정해주세요.
+//			input3.value = document.querySelector("#repBoardContent").value;
+		// this를 이용해서 내가 원하는 노드 찾기(this를 이용한 노드 탐색)
+		// childNodes를 사용하거나 children 둘 중 선택해서 사용하면 된다.
+		input3.value = obj.parentElement.previousElementSibling.childNodes[0].value;
+//			input3.value = obj.parentElement.previousElementSibling.children[0].value;
+		input3.name = "replyBoardContent";
+		
+		form.appendChild(input);
+		form.appendChild(input2);
+		form.appendChild(input3);
+		
+		document.body.appendChild(form);
+		form.submit();
 	}
   </script>
 

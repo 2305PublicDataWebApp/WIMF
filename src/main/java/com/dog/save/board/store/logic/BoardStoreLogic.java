@@ -98,4 +98,10 @@ public class BoardStoreLogic implements BoardStore{
 		return searchList;
 	}
 
+	@Override
+	public int increaseViewCount(SqlSession sqlSession, Integer boardNo) {
+		int result = sqlSession.update("BoardMapper.increaseViewCount", boardNo);
+		return result;
+	}
+
 }

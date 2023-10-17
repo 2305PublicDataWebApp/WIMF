@@ -13,4 +13,6 @@ public class Reply {
 	private String replyBoardWriter;
 	private Timestamp replyCreateDate;
 	private Timestamp replyUpdateDate;
+	
+	private String userNickName;
 }
