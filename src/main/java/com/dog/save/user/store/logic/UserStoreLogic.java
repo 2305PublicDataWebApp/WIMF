@@ -52,8 +52,8 @@ public class UserStoreLogic implements UserStore{
 	}
 
 	@Override
-	public int insertUser(SqlSession session, User user) {
-		int result = session.insert("UserMapper.insertUser", user);
+	public int insertUser(SqlSession session, User userData) {
+		int result = session.insert("UserMapper.insertUser", userData);
 		return result;
 	}
 

@@ -22,6 +22,7 @@ public class User {
 	private String adminCheck;
 	private Date userCreateDate;
 
+	
 	public User() {
 		super();
 	}

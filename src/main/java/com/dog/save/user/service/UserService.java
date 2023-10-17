@@ -9,7 +9,7 @@ public interface UserService {
 	 * @param user
 	 * @return
 	 */
-	int insertUser(User user);
+	int insertUser(User userData);
 
 	/**
 	 * ajax 회원가입 아이디 중복 체크
