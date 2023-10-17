@@ -12,7 +12,7 @@ public interface UserStore {
 	 * @param user
 	 * @return
 	 */
-	int insertUser(SqlSession session, User user);
+	int insertUser(SqlSession session, User userData);
 
 	/**
 	 * ajax 회원가입 아이디 중복 체크

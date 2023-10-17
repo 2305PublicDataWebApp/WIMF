@@ -17,6 +17,19 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
+		
+		<!-- Google 이메일 인증 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-mail</artifactId>
+		        <exclusions>
+			        <exclusion>
+			            <groupId>org.springframework.boot</groupId>
+			            <artifactId>spring-boot-starter-logging</artifactId>
+			        </exclusion>
+		    	</exclusions>
+		</dependency>
 	
 		<!-- GSON : List 데이터를 JSON 데이터로 편리하게 변환해주는 라이브러리 -->
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->

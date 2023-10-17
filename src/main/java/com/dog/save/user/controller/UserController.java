@@ -175,35 +175,27 @@ public class UserController {
 	@PostMapping(value="register.dog")
 	public String insertUser(
 			@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
-			, @RequestParam("userId") String userId
-			, @RequestParam("userPw") String userPw
-			, @RequestParam("userName") String userName
-			, @RequestParam("userNickname") String userNickname
-			, @RequestParam("userSSN") String userSSN
-			, @RequestParam("userAddressVal") String userAddressVal
-			, @RequestParam("userDetailAddress") String userDetailAddress
-			, @RequestParam("userPhone") String userPhone
-			, @RequestParam("userEmail") String userEmail
+			, User userData
+//			, Model model
 			, HttpServletRequest request
 			) {
 		
-		String userAddress = userAddressVal + " " + userDetailAddress;
-		User user = new User(userId, userPw, userName, userNickname, userAddress, userPhone, userSSN, userEmail);
-		
+		String userAddress = userData.getUserAddress() + " " + userData.getUserDetailAddress();
+		userData.setUserAddress(userAddress);
 		try {
 			if(uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
 				Map<String, Object> userMap = this.saveFile(request, uploadFile);
-				user.setUserFileName((String)userMap.get("fileName"));
-				user.setUserFileRename((String)userMap.get("fileRename"));
-				user.setUserFilePath((String)userMap.get("filePath"));
-				user.setUserFileLength((long)userMap.get("fileLength"));
+				userData.setUserFileName((String)userMap.get("fileName"));
+				userData.setUserFileRename((String)userMap.get("fileRename"));
+				userData.setUserFilePath((String)userMap.get("filePath"));
+				userData.setUserFileLength((long)userMap.get("fileLength"));
 			} else {
-				user.setUserFileName(null);
-				user.setUserFileRename(null);
-				user.setUserFilePath(null);
-				user.setUserFileLength(0);
+				userData.setUserFileName("default-profile.png");
+				userData.setUserFileRename("default-profile.png");
+				userData.setUserFilePath("/img/user/default-profile.png");
+				userData.setUserFileLength(0);
 			}
-			int result = uService.insertUser(user);
+			int result = uService.insertUser(userData);
 			if(result > 0) {
 				return "true";
 			} else {

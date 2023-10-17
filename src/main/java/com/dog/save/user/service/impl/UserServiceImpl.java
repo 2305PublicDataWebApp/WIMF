@@ -60,8 +60,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int insertUser(User user) {
-		int result = uStore.insertUser(session, user);
+	public int insertUser(User userData) {
+		int result = uStore.insertUser(session, userData);
 		return result;
 	}
 }

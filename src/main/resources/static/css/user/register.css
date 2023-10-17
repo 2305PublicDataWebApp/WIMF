@@ -118,10 +118,11 @@ textarea {
 
     background-color: #ddd;
 }
-#btn-box{
+.btn-box{
     display: flex;
     justify-content: space-evenly;
     padding-top: 50px;
+
 }
 .next-btn{
     color: var(--contrast-color);
@@ -136,6 +137,10 @@ textarea {
 .next-btn:hover, #post-btn:hover, #certification-btn:hover{
     color: var(--contrast-color);
     background: rgba(var(--primary-color-rgb), 0.85);
+}
+
+#main-con-btn-box{
+    width: 80%;
 }
 
 .register-box{
@@ -249,6 +254,19 @@ textarea {
     margin: auto 0;
     border-radius: 3px;
     border: none;
+}
+#check-certification-num-btn{
+	position: absolute;
+    width: 90px;
+    height: 35px;
+    top: 1px;
+    bottom: 0;
+    left: 255px;
+    margin: auto 0;
+    border-radius: 3px;
+    border: none;
+    color: var(--contrast-color);
+    background-color: var(--primary-color);
 }
 #user-info-nickname button, #user-info-id button, #user-info-email-check button{
     position: absolute;
