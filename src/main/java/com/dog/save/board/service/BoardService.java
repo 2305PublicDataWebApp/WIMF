@@ -84,6 +84,12 @@ public interface BoardService {
 	 * @return
 	 */
 	List<Board> searchBoardByAll(String searchKeyword);
+	/**
+	 * 게시글 조회수 증가 Service
+	 * @param boardNo
+	 * @return
+	 */
+	int increaseViewCount(Integer boardNo);
 	
 
 }

@@ -72,7 +72,7 @@
 	              	<c:param name="boardNo" value="${board.boardNo }"></c:param>
 	              </c:url>
 	              <td><a href="${detailUrl }">${board.boardTitle }</a></td>
-	              <td>${board.boardWriter }</td>
+	              <td>${board.userNickName }</td>
 	              <td>
 	              	<fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
 	              </td>

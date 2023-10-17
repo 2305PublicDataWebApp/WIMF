@@ -157,6 +157,7 @@ public class BoardController {
 				User uOne = uService.selectOneById(userId);
 				String userNickName = uOne.getUserNickname();
 				List<Reply> replyList = rService.selectReplyList(boardNo);
+				bService.increaseViewCount(boardNo);
 				if(replyList.size() > 0) {
 					model.addAttribute("rList", replyList);
 				}
@@ -188,6 +189,7 @@ public class BoardController {
 			
 		return bpInfo;
 	}
+	// ==================== 게시글 검색 처리 ====================
 	@GetMapping("/search.dog")
 	public String searchBoardList(Model model
 			, @RequestParam("searchCondition") String searchCondition

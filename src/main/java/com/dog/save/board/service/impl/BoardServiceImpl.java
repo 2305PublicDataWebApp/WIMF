@@ -98,4 +98,9 @@ public class BoardServiceImpl implements BoardService{
 		return searchList;
 	}
 
+	@Override
+	public int increaseViewCount(Integer boardNo) {
+		int result = bStore.increaseViewCount(sqlSession, boardNo);
+		return result;
+	}
 }

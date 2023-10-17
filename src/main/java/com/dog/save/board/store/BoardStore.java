@@ -96,5 +96,12 @@ public interface BoardStore {
 	 * @return
 	 */
 	List<Board> searchBoardByAll(SqlSession sqlSession, String searchKeyword);
+	/**
+	 * 게시글 조회수 증가 Store
+	 * @param sqlSession
+	 * @param boardNo
+	 * @return
+	 */
+	int increaseViewCount(SqlSession sqlSession, Integer boardNo);
 
 }

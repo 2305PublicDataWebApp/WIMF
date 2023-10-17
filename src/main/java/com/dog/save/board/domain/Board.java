@@ -16,4 +16,6 @@ public class Board {
 	private Timestamp updateDate;
 	private int viewCount;
 	
+	private String userNickName;
+	
 }
