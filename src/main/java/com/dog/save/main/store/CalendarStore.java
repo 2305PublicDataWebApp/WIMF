@@ -20,4 +20,6 @@ public interface CalendarStore {
 
 	int updateEvent(SqlSession session, Map<String, Object> newParams);
 
+	List<Calendar> getEventListByDate(SqlSession session, Map<String, Object> dateRange);
+
 }

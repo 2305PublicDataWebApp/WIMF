@@ -24,19 +24,19 @@
 
 /* 금요일 날짜 검정색 */
 .fc-day-fri a {
-  color: black;
+  color: #2C3E50;
   text-decoration: none;
 }
 
 /* 토요일 날짜 파란색 */
 .fc-day-sat a {
-  color: blue;
+  color: #3788d8;
   text-decoration: none;
 }
 
 /* 일요일 날짜 빨간색 */
 .fc-day-sun a {
-  color: red;
+  color: tomato;
   text-decoration: none;
 }
 
@@ -48,4 +48,10 @@
 }
 .fc-scrollgrid-sync-table {
 	width:100%;
+}
+.calendarList {
+	border: 3px dotted orange;
+	border-radius: 33px;
+	margin: 33px 0;
+	padding: 33px;
 }

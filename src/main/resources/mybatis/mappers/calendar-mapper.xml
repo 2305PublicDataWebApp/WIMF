@@ -18,14 +18,23 @@
         SELECT * FROM SCHEDULE_TBL WHERE USER_ID = 'khuser01' AND SCH_TITLE = #{title} AND SCH_START_DATE = #{startDate} AND SCH_END_DATE = #{endDate}
     </select>
     
+    <!-- 날짜로 일정 가져오기 -->
+    <select id="getEventListByDate" resultType="Calendar">
+    	SELECT * FROM SCHEDULE_TBL WHERE USER_ID = 'khuser01' AND SCH_START_DATE BETWEEN #{startDate} AND #{endDate}
+    </select>
+    
     <!-- 일정 삭제 -->
     <delete id="deleteEvent" parameterType="int">
         DELETE FROM SCHEDULE_TBL WHERE SCH_NO = #{schNo}
     </delete>
     
-    <!-- 일정 수정 -->
-    <update id="">
-    	
-    </update>
+    <update id="updateEvent" parameterType="java.util.Map">
+	    UPDATE SCHEDULE_TBL
+	    SET
+	        SCH_START_DATE = #{startDate},
+	        SCH_END_DATE = #{endDate}
+	    WHERE
+	        SCH_NO = #{schNo} AND SCH_TITLE = #{title} AND USER_ID = 'khuser01'
+	</update>
 	
 </mapper>
