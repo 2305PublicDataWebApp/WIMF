@@ -28,4 +28,16 @@ public class AppStoreLogic implements AppStore {
 		return aList;
 	}
 
+	@Override
+	public int insertApplication(SqlSession sqlSession, App app) {
+		int result = sqlSession.insert("AppMapper.insertApplication", app);
+		return result;
+	}
+
+	@Override
+	public App selectAppByNo(SqlSession sqlSession, int appNo) {
+		App app = sqlSession.selectOne("AppMapper.selectAppByNo", appNo);
+		return app;
+	}
+
 }

@@ -13,4 +13,8 @@ public interface AppStore {
 
 	List<App> appAllList(SqlSession sqlSession, PageInfo pageInfo);
 
+	int insertApplication(SqlSession sqlSession, App app);
+
+	App selectAppByNo(SqlSession sqlSession, int appNo);
+
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -45,7 +46,7 @@
 	                <th>희망종료일</th>
 	            </tr>
 	            <c:forEach items="${aList}" var="item">
-		            <tr onclick="location.href='https://example.com';" style="cursor: pointer;">
+		            <tr onclick="location.href='/app/detail.dog?appNo=${item.appNo}';" style="cursor: pointer;">
 		                <td>${item.appNo }</td>
 		                <td>${item.userId }</td>
 		                <td>멍멍이 이름</td>
@@ -64,12 +65,12 @@
 		                <c:if test='${item.appDogAdopt.toString() eq "N" }'>
 			                <td>돌봄</td>
 		                </c:if>
-		                <td>${item.appStartDate }</td>
+		                <td><fmt:formatDate value="${item.appStartDate}" pattern="yyyy-MM-dd" /></td>
 		                <c:if test='${empty item.appEndDate }'>
 						    <td>무기한</td>
 						</c:if>
 		                <c:if test='${not empty item.appEndDate }'>
-						    <td>${item.appEndDate }</td>
+						    <td><fmt:formatDate value="${item.appEndDate}" pattern="yyyy-MM-dd" /></td>
 						</c:if>
 
 		            </tr>

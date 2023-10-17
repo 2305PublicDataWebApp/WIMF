@@ -33,4 +33,16 @@ public class AppServiceImpl implements AppService {
 		return aList;
 	}
 
+	@Override
+	public int insertApplication(App app) {
+		int result = aStore.insertApplication(sqlSession, app);
+		return result;
+	}
+
+	@Override
+	public App selectAppByNo(int appNo) {
+		App app = aStore.selectAppByNo(sqlSession, appNo);
+		return app;
+	}
+
 }

@@ -11,4 +11,32 @@
 		SELECT COUNT(*) FROM APP_TBL
 	</select>
 	
+	<insert id="insertApplication">
+		INSERT INTO APP_TBL (APP_NO, USER_ID, APP_DOG_HAD, APP_EXP_HAD, APP_QUESTION_ONE, APP_QUESTION_TWO, APP_QUESTION_THREE, APP_CONTENT, APP_START_DATE, APP_END_DATE, APP_DOG_ADOPT, APP_STATUS)
+		VALUES (
+		    SEQ_APP_NO.NEXTVAL, 
+		    '사용자', 
+		    #{appDogHad}, 
+		    #{appExpHad}, 
+		    #{appQuestionOne},  
+		    #{appQuestionTwo}, 
+		    #{appQuestionThree},
+		    #{appContent}, 
+		    #{appStartDate}, 
+		    TO_DATE(#{appEndDate}, 'YYYY-MM-DD'), 
+		    <choose>
+		        <when test="appDogAdopt == 'adopt'"> 'Y' </when>
+		        <otherwise> 'N' </otherwise>
+		    </choose>,
+		    DEFAULT
+		)
+	</insert>
+	
+	
+	<select id="selectAppByNo" resultType="App">
+		SELECT	* 
+		FROM 	APP_TBL 
+		WHERE	APP_NO = #{appNo}
+	</select>
+	
 </mapper>

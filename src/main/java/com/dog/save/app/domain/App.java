@@ -18,6 +18,6 @@ public class App {
     private Timestamp appCreateDate;
     private Date appStartDate;
     private Date appEndDate;
-    private char appDogAdopt;
+    private String appDogAdopt;
     private char appStatus;
 }

@@ -1,10 +1,18 @@
 package com.dog.save.app.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.dog.save.app.domain.App;
 import com.dog.save.app.service.AppService;
 import com.dog.save.common.domain.PageInfo;
+import com.dog.save.user.domain.User;
 
 @Controller
 @RequestMapping(value="/app")
@@ -22,16 +31,38 @@ public class AppController {
 	private AppService aService;
 	
 	@GetMapping("/insert.dog")
-	public ModelAndView showInsertForm(ModelAndView mv) {
+	public ModelAndView showInsertForm(ModelAndView mv, @ModelAttribute User user, HttpSession session) {
+		
 		mv.setViewName("app/write");
 		return mv;
 	}
 	
 	@PostMapping("/insert.dog")
-	public ModelAndView insertApplication(ModelAndView mv) {
-		
+	public ModelAndView insertApplication(ModelAndView mv
+			, @ModelAttribute App app) {
+		int result = aService.insertApplication(app);
+		try {
+			if(result > 0) {
+				mv.addObject("app", app);
+				mv.setViewName("/index");
+			} else {
+				mv.addObject("msg", "[서비스실패] 문의를 조회할 수 없습니다.");
+				mv.setViewName("common/error");
+			}	
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("msg", "[서비스실패] 관리자에 문의바랍니다.");
+			mv.setViewName("common/error");
+		}
 		return mv;
 	}
+	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	}
+
 	
 	@GetMapping("/list.dog")
 	public ModelAndView showAllList(
@@ -48,13 +79,34 @@ public class AppController {
 				mv.setViewName("app/list");
 			} else {
 				mv.addObject("msg", "[서비스실패] 목록을 조회할 수 없습니다.");
-				mv.setViewName("common/errorPage");
+				mv.setViewName("common/error");
 			}	
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("error", e.getMessage());
 			mv.addObject("msg", "[서비스실패] 관리자에 문의바랍니다.");
-			mv.setViewName("common/errorPage");
+			mv.setViewName("common/error");
+		}
+		return mv;
+	}
+	
+	@GetMapping("/detail.dog")
+	public ModelAndView applicationDetail (
+			ModelAndView mv
+			, @RequestParam(value="appNo") int appNo) {
+		try {
+			App app = aService.selectAppByNo(appNo);
+			if(app != null) {
+				mv.addObject("app", app);
+				mv.setViewName("app/detail");
+			} else {
+				mv.addObject("msg", "[서비스실패] 신청서를 조회할 수 없습니다..");
+				mv.setViewName("common/error");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("msg", e.getMessage());
+			mv.setViewName("common/error");
 		}
 		return mv;
 	}

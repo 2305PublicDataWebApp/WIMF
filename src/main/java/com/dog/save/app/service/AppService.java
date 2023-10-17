@@ -11,4 +11,8 @@ public interface AppService {
 
 	List<App> appAllList(PageInfo pageInfo);
 
+	int insertApplication(App app);
+
+	App selectAppByNo(int appNo);
+
 }

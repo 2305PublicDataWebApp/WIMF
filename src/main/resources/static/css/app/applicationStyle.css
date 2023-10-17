@@ -7,6 +7,14 @@
 
 body {
     background-color: #f0f0f0;
+    font-family: 'SUITE-Regular';
+}
+
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
 }
 
 main {
@@ -16,6 +24,7 @@ main {
     background-color: #fff;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     padding-top: 50px;
+    font-family: 'SUITE-Regular';
 }
 
 #application h1 {
@@ -23,6 +32,7 @@ main {
     margin-bottom: 20px;
     color: #333;
     text-align: center;
+    font-family: 'SUITE-Regular';
 }
 
 #application table {
@@ -112,7 +122,7 @@ main {
 }
 
 #application button[type="submit"]:hover {
-    background-color: #C82333; /* 호버 효과의 색상을 변경합니다. */
+    background-color: rgb(228, 103, 116); /* 호버 효과의 색상을 변경합니다. */
 }
 
 

@@ -48,11 +48,33 @@
                     </tr>
                 </table>
                 
+                <table>
+                    <colgroup>
+                        <col style="width: 20%;">
+                        <col style="width: 80%;">
+                    </colgroup>
+                    <tr>
+                        <td rowspan="2">강아지 사진</td>
+                        <td>강아지 이름</td>
+                    </tr>
+                    <tr>
+                        <td>연락처</td>
+                    </tr>
+                    <tr>
+                        <td>주소</td>
+                        <td>서울시 남대문로 120 그레이츠 청계</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">선택한 강아지가 맞는지 확인해주세요!</td>
+                    </tr>
+                </table>
+                
+                
                 <form id="application-form" action="#" method="POST">
 
                     <b>- 돌봄/입양</b>
                     <div class="radio-group">
-                        <input type="radio" id="dog-temp-adopt" name="appDogAdopt" value="temp" required>
+                        <input type="radio" id="dog-temp-adopt" name="appDogAdopt" value="temp" >
                         <label for="dog-temp-adopt">돌봄</label>
                         <input type="radio" id="dog-temp-indefinite-adopt" name="appDogAdopt" value="indefinite">
                         <label for="dog-temp-indefinite-adopt">무기한 돌봄</label>
@@ -62,7 +84,7 @@
                     
                     <label for="app-start-date">- 돌봄/입양 희망 시작일</label>
                     <div>
-                        <input type="date" id="app-start-date" name="appStartDate" required>
+                        <input type="date" id="app-start-date" name="appStartDate" >
                         <b id="start-warning" class="red" style="display: none;">시작일은 다음날부터 입력 가능</b>
                     </div>
 
@@ -77,7 +99,7 @@
                     
                     <b>- 강아지 보유여부</b>
                     <div class="radio-group">
-                        <input type="radio" id="app-dog-had-yes" name="appDogHad" value="Y" required>
+                        <input type="radio" id="app-dog-had-yes" name="appDogHad" value="Y" >
                         <label for="app-dog-had-yes">있음</label>
                         <input type="radio" id="app-dog-had-no" name="appDogHad" value="N">
                         <label for="app-dog-had-no">없음</label>
@@ -85,7 +107,7 @@
 
                     <b>- 임시보호 경험 여부</b>
                     <div class="radio-group">
-                        <input type="radio" id="app-exp-had-yes" name="appExpHad" value="Y" required>
+                        <input type="radio" id="app-exp-had-yes" name="appExpHad" value="Y" >
                         <label for="app-exp-had-yes">있음</label>
                         <input type="radio" id="app-exp-had-no" name="appExpHad" value="N">
                         <label for="app-exp-had-no">없음</label>
@@ -95,13 +117,16 @@
                     </div>
                     <label for="app-question-one">개 짖는 소리, 씹기, 파괴적인 행동, 실내 화장실 사고,
                         제멋대로의 행동과 같은 문제들을<br> 어떻게 다루실 건가요?</label>
-                    <textarea name="appQuestionOne" id="app-question-one" cols="30" rows="10" placeholder="내용을 입력해주세요" required></textarea>
+                    <textarea name="appQuestionOne" id="app-question-one" cols="30" rows="10" placeholder="내용을 입력해주세요" ></textarea>
 
                     <label for="app-question-two">강아지의 일상적인 산책과 운동을 어떻게 관리하실 건가요?</label>
-                    <textarea name="appQuestionTwo" id="app-question-two" cols="30" rows="10" placeholder="내용을 입력해주세요" required></textarea>
+                    <textarea name="appQuestionTwo" id="app-question-two" cols="30" rows="10" placeholder="내용을 입력해주세요" ></textarea>
                 
                     <label for="app-question-three">강아지를 기를 경제적인 여유가 있으신가요? </label>
-                    <textarea name="appQuestionThree" id="app-question-three" cols="30" rows="10" placeholder="내용을 입력해주세요" required></textarea>
+                    <textarea name="appQuestionThree" id="app-question-three" cols="30" rows="10" placeholder="내용을 입력해주세요" ></textarea>
+                    
+                    <label for="app-content">자유롭게 하고 싶은 말이나 각오를 작성해주세요!</label>
+                    <textarea name="appContent" id="app-content" cols="30" rows="10" placeholder="내용을 입력해주세요" ></textarea>
                     
                     <div class="warn-form">
                         <b class="red">모든 항목은 필수로 모두 작성하셔야 합니다.</b><br>
@@ -224,7 +249,27 @@
                 const appStartDate = new Date(appStartDateInput.value);
                 const selectedEndDate = new Date(appEndDateInput.value);
         
-                if (appStartDate < currentDate) {
+                const appQuestionOne = document.getElementById("app-question-one");
+                const appQuestionTwo = document.getElementById("app-question-two");
+                const appQuestionThree = document.getElementById("app-question-three");
+                const appContent = document.getElementById("app-content");
+                const appDogAdopt = document.getElementsByName("appDogAdopt");
+                const appDogHad = document.getElementsByName("appDogHad");
+                const appExpHad = document.getElementsByName("appExpHad");
+
+                if (!appDogAdopt[0].checked && !appDogAdopt[1].checked && !appDogAdopt[2].checked) {
+                    alert("돌봄/입양 유형을 선택해주세요!");
+                    event.preventDefault();
+                } else if (!appDogHad[0].checked && !appDogHad[1].checked) {
+                    alert("강아지 보유 여부를 선택해주세요!");
+                    event.preventDefault();
+                } else if (!appExpHad[0].checked && !appExpHad[1].checked) {
+                    alert("임시보호 경험 여부를 선택해주세요!");
+                    event.preventDefault();
+                }else if (!appStartDateInput.value || !appQuestionOne.value || !appQuestionTwo.value || !appQuestionThree.value || !appContent.value) {
+                    alert("모든 항목을 입력해주세요!");
+                    event.preventDefault();
+                } else if (appStartDate < currentDate) {
                     // 시작날짜를 현재 날짜보다 과거로 입력하면 제출 못 함
                     alert("시작일은 오늘 날짜 및 과거 날짜를 선택할 수 없습니다.");
                     event.preventDefault();
@@ -255,7 +300,7 @@
                     }
                 }
             });
-
+            
 
         </script>  
     </body>
