@@ -42,6 +42,50 @@ public interface DogService {
 	 */
 	List<DogFile> selectFirstDogFile();
 
+	/**
+	 * 돌봄 강아지 정보 가져오기 Service
+	 * @param dogNo
+	 * @return
+	 */
+	Dog selectDogByDogNo(int dogNo);
+
+	/**
+	 * 돌봄 강아지 이미지 가져오기 Service
+	 * @param dogNo
+	 * @return
+	 */
+	List<DogFile> selectDogFileByDogNo(int dogNo);
+
+	/**
+	 * 돌봄 강아지 지역별 조회 Service
+	 * @param region
+	 * @param pInfo
+	 * @return
+	 */
+	List<Dog> selectDogsByRegion(String region, PageInfo pInfo);
+
+	/**
+	 * 돌봄 강아지 지역별 리스트 카운트 Service
+	 * @param region
+	 * @return
+	 */
+	Integer getListCountByRegion(String region);
+
+	/**
+	 * 돌봄 강아지 검색 리스트 카운트 Service
+	 * @param searchInput
+	 * @return
+	 */
+	Integer getListCountBySearch(String searchInput);
+
+	/**
+	 * 돌봄 강아지 검색 결과 조회 Service
+	 * @param searchInput
+	 * @param pInfo
+	 * @return
+	 */
+	List<Dog> selectDogsBySearch(String searchInput, PageInfo pInfo);
+
 
 
 

@@ -68,40 +68,41 @@ h1{
       inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
   }
   
-  .dog_list {
-	display: flex;
-    flex-wrap: wrap; /* 상품이 넘칠 경우 다음 줄로 줄 바꿈되도록 설정 */
-    justify-content: space-between; /* 가로로 균등하게 배치 */
+#detail-container {
+    display: flex;
+    width: 100%;
 }
 
-.dog_item {
-	width: calc(33.33% - 20px); /* 한 줄에 3개의 상품이 오도록 너비 설정 */
-    margin-bottom: 20px; /* 아래 여백 추가 */
+#dog_image_container {
+    flex: 0 0 60%; /* 60% 너비를 고정 */
+    padding: 10px; /* 여백 추가 (선택사항) */
+    box-sizing: border-box; /* 패딩을 포함한 크기로 지정 */
+    border-right: 1px solid black;
 }
 
-.image_thumbnail {
-	/* border: 1px solid black; */
-	width: 100%;
-	height: 65%;
-	padding: 15px;
-	/* margin: 30px; */
-	/* display: inline-block; */
+#dog_info_container {
+    flex: 0 0 40%; /* 40% 너비를 고정 */
+    padding: 10px; /* 여백 추가 (선택사항) */
+    box-sizing: border-box; /* 패딩을 포함한 크기로 지정 */
 }
 
-.dog_info {
-	/* margin: 10px; */
-	padding: 15px;
-	height: 40%;
-    text-align: center;
-	/* border: 1px solid black; */
-}
+    table {
+        font-size: 15px; /* 폰트 크기 조절 */
+        border-collapse: collapse; /* 테이블 셀 경계를 합침 */
+        width: 100%; /* 테이블 너비를 100%로 설정 */
+    }
 
-img {
-	width: 100%;
-	height: 100%;
-}
-  
-  #searchDog{
-  	text-align: center;
-  }
-  
+    table, th, td {
+        border: 1px dotted black; /* 테두리 추가 (선택사항) */
+        
+        padding: 20px; /* 셀 간격 조절 (선택사항) */
+    }
+    
+    img{
+    max-width:100%;
+    }
+    
+    #btn-area{
+    	display:flex;
+    	justify-content:space-between;
+    }

@@ -55,6 +55,56 @@ public interface DogStore {
 	 */
 	List<DogFile> selectFirstDogFile(SqlSession session);
 
+	/**
+	 * 돌봄 강아지 정보 가져오기 Store
+	 * @param session
+	 * @param dogNo
+	 * @return
+	 */
+	Dog selectDogByDogNo(SqlSession session, int dogNo);
+
+	/**
+	 * 돌봄 강아지 이미지 가져오기 Store
+	 * @param session
+	 * @param dogNo
+	 * @return
+	 */
+	List<DogFile> selectDogFileByDogNo(SqlSession session, int dogNo);
+
+	/**
+	 * 돌봄 강아지 지역별 조회 Store
+	 * @param session
+	 * @param region
+	 * @param pInfo
+	 * @return
+	 */
+	List<Dog> selectDogsByRegion(SqlSession session, String region, PageInfo pInfo);
+
+	/**
+	 * 돌봄 강아지 지역별 리스트 카운트 Store
+	 * @param session
+	 * @param region
+	 * @return
+	 */
+	int getListCountByRegion(SqlSession session, String region);
+
+	/**
+	 * 돌봄 강아지 검색 리스트 카운트 Store
+	 * @param session
+	 * @param searchInput
+	 * @return
+	 */
+	int getListCountBySearch(SqlSession session, String searchInput);
+
+	/**
+	 * 돌봄 강아지 검색 조회 Store
+	 * @param session
+	 * @param searchInput
+	 * @param pInfo
+	 * @return
+	 */
+	List<Dog> selectDogsBySearch(SqlSession session, String searchInput, PageInfo pInfo);
+
 
 
 }

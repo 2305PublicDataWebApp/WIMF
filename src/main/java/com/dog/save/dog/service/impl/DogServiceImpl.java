@@ -67,7 +67,7 @@ public class DogServiceImpl implements DogService{
 	public Map<String, Object> saveFile(HttpServletRequest request, MultipartFile uploadFile) throws Exception{
 		Map<String, Object> fileMap = new HashMap<String, Object>();
 		// resources 경로 구하기
-		String root = "C:\\Users\\user1\\git\\WIMF\\src\\main\\resources\\static\\img";
+		String root = request.getSession().getServletContext().getRealPath("/resources");
 		// 파일 저장 경로 구하기
 		String savePath = root + "\\dogUploadFiles";
 		// 파일 이름 구하기
@@ -89,7 +89,7 @@ public class DogServiceImpl implements DogService{
 		// 파일 정보 리턴
 		fileMap.put("dogFileName", fileName);
 		fileMap.put("dogFileRename", fileRename);
-		fileMap.put("dogFilePath", savePath+"\\"+fileRename);
+		fileMap.put("dogFilePath", "../resources/dogUploadFiles/"+fileRename);
 		return fileMap;
 	}	
 	//랜덤키 생성 메소드
@@ -112,5 +112,35 @@ public class DogServiceImpl implements DogService{
 	public List<DogFile> selectFirstDogFile() {
 		List<DogFile> dogFileList = dStore.selectFirstDogFile(session);
 		return dogFileList;
+	}
+	@Override
+	public Dog selectDogByDogNo(int dogNo) {
+		Dog dog = dStore.selectDogByDogNo(session,dogNo);
+		return dog;
+	}
+	@Override
+	public List<DogFile> selectDogFileByDogNo(int dogNo) {
+		List<DogFile> dogFileList = dStore.selectDogFileByDogNo(session,dogNo);
+		return dogFileList;
+	}
+	@Override
+	public List<Dog> selectDogsByRegion(String region, PageInfo pInfo) {
+		List<Dog> dogList = dStore.selectDogsByRegion(session,region,pInfo);
+		return dogList;
+	}
+	@Override
+	public Integer getListCountByRegion(String region) {
+		int result = dStore.getListCountByRegion(session,region);
+		return result;
+	}
+	@Override
+	public Integer getListCountBySearch(String searchInput) {
+		int result = dStore.getListCountBySearch(session,searchInput);
+		return result;
+	}
+	@Override
+	public List<Dog> selectDogsBySearch(String searchInput, PageInfo pInfo) {
+		List<Dog> dogList = dStore.selectDogsBySearch(session,searchInput,pInfo);
+		return dogList;
 	}	
 }

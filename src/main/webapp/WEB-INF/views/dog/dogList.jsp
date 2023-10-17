@@ -23,45 +23,67 @@
 		<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	
 		<!-- My Code -->
-		<main>
-			<br>
-			<br>
-			<br>
-			<c:choose>
+		<main>			
+<%-- 			<c:choose>
 				<c:when test="${empty category}">
 			    전체
 			</c:when>
 				<c:otherwise>
 			    ${foodProductSetList[0].foodProduct.fProductType}
 			    </c:otherwise>
-			</c:choose>
-			<br> <span>전체 돌봄 강아지 수 : ${pInfo.totalCount }</span> <br>
+			</c:choose> --%>
+			<br> <span>돌봄 강아지 수 : ${pInfo.totalCount }</span> <br>
+			<form action="/dog/list.dog" method="get">
+			  <label for="region">지역 선택:</label>
+			  <select name="region" id="region">
+			    <option value="all">전체</option>
+			    <option value="seoul">서울</option>
+			    <option value="gyeonggi">경기</option>
+			    <option value="incheon">인천</option>
+			  </select>
+			
+			  <label for="sort">정렬:</label>
+			  <select name="sort" id="sort">
+			    <option value="latest">최신 등록 순</option>
+			    <option value="euthanasia">안락사 임박 순</option>
+			  </select>
+			
+			  <input type="submit" value="적용">
+			</form>			
+		
 			<br>
-			<h1>상품 리스트</h1>
+			<br>
+			<h1>강아지 리스트</h1>
 			<br>
 			<hr>
 			<br>
-			<c:if test="${userId eq 'admin' }">
-				<button onclick="productRegister();" id="product_register_button" class="custom-btn btn-11">상품등록</button>
-			</c:if>
+			<%-- <c:if test="${userId eq 'admin' }">
+				<button id="product_register_button" class="custom-btn btn-11">상품등록</button>
+			</c:if> --%>
 	
-			<div class="product_list">
+			<div class="dog_list">
 				<!-- 상품 리스트를 반복하여 출력합니다 -->
-				<c:forEach var="productSet" items="${foodProductSetList}">
-					<div class="product_item">
+				<c:forEach var="combinedList" items="${combinedList}">
+					<div class="dog_item">
 						<div class="image_thumbnail">
-							<img src="${productSet.foodProductFile.fProductFilepath}"
-								alt="${productSet.foodProduct.fProductName}"
-								onclick="showProductDetail(${productSet.foodProduct.fProductId}, ${productSet.foodProductFile.refFProductId})">
+							<img src="${combinedList.dogFile.dogFilePath}"
+								alt="${combinedList.dogFile.dogFileName}"
+								onclick="showDogDetail(${combinedList.dog.dogNo})">
 						</div>
-						<div class="product_info">
-							<h2>${productSet.foodProduct.fProductName}</h2>
-							<br> 가격 : ${productSet.foodProduct.fProductPrice}원 <br>
-							간단설명 : ${productSet.foodProduct.fProductSimple}
+						<div class="dog_info">
+							<h2>${combinedList.dog.dogName }</h2>
+							<p><br>${combinedList.dog.dogKind } <br>
+							${combinedList.dog.dogInfo}</p>
 						</div>
 					</div>
 				</c:forEach>
 			</div>
+			<div id="searchDog">
+			    <input type="text" id="searchInput" name="searchInput" placeholder="강아지 이름을 검색해보세요!">
+			    <button id="searchButton">검색</button>
+			</div>
+			
+			
 			<div class="pagination">
 				<c:if test="${ pInfo.startNavi != 1 }">
 					<c:url var="prevUrl" value="/dog/list.dog">
@@ -99,7 +121,16 @@
 		<!-- footer -->
 		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		<script>
-	
+	      function showDogDetail(dogNo) {    	    	    	       	       
+	    	        var url = "/dog/detail.dog?dogNo=" + dogNo;
+	    	        window.location.href = url;	    	    
+	    	}	
+
+	      document.getElementById('searchButton').addEventListener('click', function () {
+	          var searchInput = document.getElementById('searchInput').value;
+	          var url = '/dog/list.dog?searchInput=' + searchInput;
+	          window.location.href = url;
+	      });	      
 		</script>
 	</body>
 </html>

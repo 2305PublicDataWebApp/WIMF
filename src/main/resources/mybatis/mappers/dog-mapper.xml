@@ -25,7 +25,28 @@
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*) FROM DOG_TBL
 	</select>
-	<select id="selectAllDog">
+	<select id="getListCountByRegion" resultType="_int">
+		SELECT COUNT(*) FROM DOG_TBL WHERE DOG_REGION = #{region}
+	</select>
+	<select id="getListCountBySearch" resultType="_int">
+		SELECT COUNT(*) FROM DOG_TBL WHERE DOG_NAME LIKE '%'||#{searchInput}||'%' 
+	</select>
+	<select id="selectAllDog" resultType="Dog">
 		SELECT * FROM DOG_TBL ORDER BY DOG_NO ASC
+	</select>
+	<select id="selectDogsByRegion" resultType="Dog">
+		SELECT * FROM DOG_TBL WHERE DOG_REGION = #{region}
+	</select>
+	<select id="selectDogsBySearch" resultType="Dog">
+		SELECT * FROM DOG_TBL WHERE DOG_NAME LIKE '%'||#{searchInput}||'%'
+	</select>
+	<select id="selectFirstDogFile" resultType="DogFile">
+		SELECT * FROM DOG_FILE_TBL WHERE DOG_FILE_ORDER = 1
+	</select>
+	<select id="selectDogByDogNo" resultType="Dog">
+		SELECT * FROM DOG_TBL WHERE DOG_NO = #{dogNo}	
+	</select>
+	<select id="selectDogFileByDogNo" resultType="DogFile">
+		SELECT * FROM DOG_FILE_TBL WHERE REF_DOG_NO = #{dogNo}
 	</select>
 </mapper>
