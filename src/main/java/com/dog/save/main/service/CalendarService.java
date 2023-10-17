@@ -17,5 +17,7 @@ public interface CalendarService {
 	int deleteEvent(int schNo);
 
 	int updateEvent(Map<String, Object> newParams);
+
+	List<Calendar> getEventListByDate(Map<String, Object> dateRange);
 	
 }

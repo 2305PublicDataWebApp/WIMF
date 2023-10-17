@@ -57,7 +57,7 @@
     <script src='/vendor/fullcalendar-5/lib/main.js'></script>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-          $(function () {
+          $(function getCalendar() {
               var request = $.ajax({
                   url: "/calendar/list.dog",
                   method: "GET"
@@ -84,6 +84,7 @@
                       },
                       editable: true,
                       droppable: true, // this allows things to be dropped onto the calendar
+                      selectable: true,	// 날짜 선택
                       drop: function (arg) {
                           // is the "remove after drop" checkbox checked?
                           if (document.getElementById('drop-remove').checked) {
@@ -121,15 +122,18 @@
                               $.ajax({
                             	  url: "/calendar/update.dog",
                                   method: "POST",
-                                  dataType: "json",
                                   data: JSON.stringify(events),
                                   contentType: 'application/json',
                                   success: function (response) {
-                                      // 성공적으로 등록되면 부모 창의 함수를 호출하여 메인 페이지의 풀캘린더를 업데이트
-                                      updateFullCalendar();
+                                	  
+                                	  if(response == "success"){
+                                		  // 성공적으로 등록되면 부모 창의 함수를 호출하여 메인 페이지의 풀캘린더를 업데이트
+                                          getCalendar();
+                                          
+                                       	  // 등록 성공 알림
+                                          alert('일정 수정 성공');
+                                	  }
                                       
-                                   	  // 등록 성공 알림
-                                      alert('일정 수정 성공');
                                   },
                                   error: function (error) {
                                       console.log(error);
@@ -166,15 +170,16 @@
                               $.ajax({
                                   url: "/calendar/update.dog",
                                   method: "POST",
-                                  dataType: "json",
                                   data: JSON.stringify(events),
                                   contentType: 'application/json',
                                   success: function (response) {
-                                      // 성공적으로 등록되면 부모 창의 함수를 호출하여 메인 페이지의 풀캘린더를 업데이트
-                                      updateFullCalendar();
-                                      
-                                   	  // 등록 성공 알림
-                                      alert('일정 수정 성공');
+                                	  if(response == "success"){
+                                		  // 성공적으로 등록되면 부모 창의 함수를 호출하여 메인 페이지의 풀캘린더를 업데이트
+                                          getCalendar();
+                                          
+                                       	  // 등록 성공 알림
+                                          alert('일정 수정 성공');
+                                  	  }
                                   },
                                   error: function (error) {
                                       console.log(error);
@@ -210,15 +215,17 @@
                               $.ajax({
                             	  url: "/calendar/delete.dog",
                                   method: "POST",
-                                  dataType: "json",
                                   data: JSON.stringify(events),
                                   contentType: 'application/json',
                                   success: function () {
-                                      // 성공적으로 삭제시 메인 페이지의 풀캘린더를 업데이트
-                                      updateFullCalendar();
+                                	  if(response == "success"){
+                                		  // 성공적으로 삭제시 메인 페이지의 풀캘린더를 업데이트
+                                          getCalendar();
+                                          
+                                       	  // 삭제 성공 알림
+                                          alert('일정 삭제 성공');
+                                	  }
                                       
-                                   	  // 삭제 성공 알림
-                                      alert('일정 삭제 성공');
                                   },
                                   error: function () {
                                       console.log(error);
@@ -230,6 +237,38 @@
                               })
                           })
                       },
+                   	  
+                      dateClick: function dateClick(info) {
+                    	    var selectedDate = info.dateStr;
+
+                    	    $.ajax({
+                    	        url: "/calendar/getEventListByUserAndRange.dog",
+                    	        method: "GET",
+                    	        data: {
+                    	            startDate: selectedDate,
+                    	            endDate: selectedDate
+                    	        },
+                    	        success: function (data) {
+                    	            // 여기서 data를 이용하여 li 태그에 이벤트 정보를 추가하는 로직을 작성
+                    	            // 예를 들면, ul 태그의 자식인 li 태그에 이벤트 정보를 동적으로 추가할 수 있습니다.
+                    	            // 아래는 예시 코드입니다.
+                    	            var ulElement = $("#calendar ul");
+                    	            ulElement.empty(); // 기존의 li 태그들을 비워줍니다.
+
+                    	            for (var i = 0; i < data.length; i++) {
+                    	                var event = data[i];
+                    	                var liElement = $("<li>").text(event.title + " - " + event.start);
+                    	                ulElement.append(liElement);
+                    	            }
+                    	        },
+                    	        error: function (error) {
+                    	            console.log(error);
+                    	        }
+                    	    });
+                    	},
+
+                      
+                      
                       locale: 'ko',
                       // eventRemove: function (obj) { // 이벤트가 삭제되면 발생하는 이벤트
                       //
@@ -251,57 +290,258 @@
 
       });
       
-      function updateFullCalendar() {
-    	    var request = $.ajax({
-    	        url: "/calendar/list.dog",
-    	        method: "GET"
-    	    });
-
-    	    request.done(function (data) {
-    	    	console.log(data); // log 로 데이터 찍어주기.
-
-                var calendarEl = document.getElementById('calendar');
-
-                var calendar = new FullCalendar.Calendar(calendarEl, {
-              	  schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',	// 고급 플러그인 무료
-              	  initialView: 'dayGridMonth',		// 처음 캘린더 형식
-              	  titleFormat: function (date) {	// 날짜 표시 형식
-                        year = date.date.year;
-                        month = date.date.month + 1;
-
-                        return year + "년 " + month + "월";
-                    },
-                    headerToolbar: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-                    },
-                    editable: true,
-                    droppable: true, // this allows things to be dropped onto the calendar
-                    drop: function (arg) {
-                        // is the "remove after drop" checkbox checked?
-                        if (document.getElementById('drop-remove').checked) {
-                            // if so, remove the element from the "Draggable Events" list
-                            arg.draggedEl.parentNode.removeChild(arg.draggedEl);
-                        }
-                    },
-                    events: data
-                    , eventClick: function(info) {
-                    	window.location.href(info.event.url);
-                    }
-                });
-
-                calendar.render();
-            });
-
-    	    request.fail(function (jqXHR, textStatus) {
-    	        alert("Request failed: " + textStatus);
-    	    });
-    	}
-      
       window.addEventListener('updateCalendarEvent', function () {
-	   	    updateFullCalendar();
+    	  getCalendar();
 	   	});
+      
+      function updateFullCalendar() {
+  	    var request = $.ajax({
+  	        url: "/calendar/list.dog",
+  	        method: "GET"
+  	    });
+
+  	  request.done(function (data) {
+          console.log(data); // log 로 데이터 찍어주기.
+
+          var calendarEl = document.getElementById('calendar');
+
+          var calendar = new FullCalendar.Calendar(calendarEl, {
+        	  schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',	// 고급 플러그인 무료
+        	  initialView: 'dayGridMonth',		// 처음 캘린더 형식
+        	  titleFormat: function (date) {	// 날짜 표시 형식
+                  year = date.date.year;
+                  month = date.date.month + 1;
+
+                  return year + "년 " + month + "월";
+              },
+              headerToolbar: {
+                  left: 'prev,next today',
+                  center: 'title',
+                  right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+              },
+              editable: true,
+              droppable: true, // this allows things to be dropped onto the calendar
+              selectable: true,	// 날짜 선택
+              drop: function (arg) {
+                  // is the "remove after drop" checkbox checked?
+                  if (document.getElementById('drop-remove').checked) {
+                      // if so, remove the element from the "Draggable Events" list
+                      arg.draggedEl.parentNode.removeChild(arg.draggedEl);
+                  }
+              },
+              events: data,
+              
+              /**
+               * 드래그로 이벤트 수정하기
+               */
+              eventDrop: function (info){
+
+                  if(confirm("'"+ info.event.title +"' 일정을 수정하시겠습니까 ?")){
+
+                  var events = new Array(); // Json 데이터를 받기 위한 배열 선언
+                  var obj = new Object();
+
+                  obj.title = info.event._def.title;
+                  obj.start = info.event._instance.range.start;
+                  obj.end = info.event._instance.range.end;
+
+                  obj.oldTitle = info.oldEvent._def.title;
+                  obj.oldStart = info.oldEvent._instance.range.start;
+                  obj.oldEnd = info.oldEvent._instance.range.end;
+
+                  events.push(obj);
+
+                  console.log(events);
+                  } else {
+                	  updateFullCalendar();
+                  }
+                  $(function modifyData() {
+                      $.ajax({
+                    	  url: "/calendar/update.dog",
+                          method: "POST",
+                          data: JSON.stringify(events),
+                          contentType: 'application/json',
+                          success: function (response) {
+                        	  
+                        	  if(response == "success"){
+                        		  // 성공적으로 등록되면 부모 창의 함수를 호출하여 메인 페이지의 풀캘린더를 업데이트
+                                  getCalendar();
+                                  
+                               	  // 등록 성공 알림
+                                  alert('일정 수정 성공');
+                        	  }
+                              
+                          },
+                          error: function (error) {
+                              console.log(error);
+                              // 실패 시에 대한 처리 추가
+                              
+                           	  // 등록 실패 알림
+                              alert('일정 수정 실패');
+                          }
+                      })
+                  })
+              },
+              eventResize: function (info){
+                  console.log(info);
+                  if(confirm("'"+ info.event.title +"' 일정을 수정하시겠습니까 ?")){
+
+                  var events = new Array(); // Json 데이터를 받기 위한 배열 선언
+                  var obj = new Object();
+
+                  obj.title = info.event._def.title;
+                  obj.start = info.event._instance.range.start;
+                  obj.end = info.event._instance.range.end;
+
+                  obj.oldTitle = info.oldEvent._def.title;
+                  obj.oldStart = info.oldEvent._instance.range.start;
+                  obj.oldEnd = info.oldEvent._instance.range.end;
+
+                  events.push(obj);
+
+                  console.log(events);
+                  } else {
+                	  updateFullCalendar();
+                  }
+                  $(function modifyData() {
+                      $.ajax({
+                          url: "/calendar/update.dog",
+                          method: "POST",
+                          data: JSON.stringify(events),
+                          contentType: 'application/json',
+                          success: function (response) {
+                        	  if(response == "success"){
+                        		  // 성공적으로 등록되면 부모 창의 함수를 호출하여 메인 페이지의 풀캘린더를 업데이트
+                                  getCalendar();
+                                  
+                               	  // 등록 성공 알림
+                                  alert('일정 수정 성공');
+                          	  }
+                          },
+                          error: function (error) {
+                              console.log(error);
+                              // 실패 시에 대한 처리 추가
+                              
+                           	  // 등록 실패 알림
+                              alert('일정 수정 실패');
+                          }
+                      })
+                  })
+              },
+          
+              /**
+               * 이벤트 선택해서 삭제하기
+               */
+              eventClick: function (info){
+                  if(confirm("'"+ info.event.title +"' 일정을 삭제하시겠습니까 ?")){
+                      // 확인 클릭 시
+                      info.event.remove();
+
+                  console.log(info.event);
+                  var events = new Array(); // Json 데이터를 받기 위한 배열 선언
+                  var obj = new Object();
+                      obj.title = info.event._def.title;
+                      obj.start = info.event._instance.range.start;
+                      obj.end = info.event._instance.range.end;
+                      
+                      events.push(obj);
+
+                  console.log(events);
+                  }
+                  $(function deleteData(){
+                      $.ajax({
+                    	  url: "/calendar/delete.dog",
+                          method: "POST",
+                          data: JSON.stringify(events),
+                          contentType: 'application/json',
+                          success: function () {
+                        	  if(response == "success"){
+                        		  // 성공적으로 삭제시 메인 페이지의 풀캘린더를 업데이트
+                                  getCalendar();
+                                  
+                               	  // 삭제 성공 알림
+                                  alert('일정 삭제 성공');
+                        	  }
+                              
+                          },
+                          error: function () {
+                              console.log(error);
+                              // 실패 시에 대한 처리 추가
+                              
+                           	  // 삭제 실패 알림
+                              alert('일정 삭제 실패');
+                          }
+                      })
+                  })
+              },
+              
+              
+              
+              dateClick: function dateClick(info) {
+            	    // 선택된 날짜 정보를 가져옵니다.
+            	    var selectedDate = info.date;
+
+            	    // Ajax 요청을 보낼 데이터를 준비합니다.
+            	    var requestData = {
+            	        date: selectedDate.toISOString() // 선택된 날짜를 ISO 형식의 문자열로 변환
+            	    };
+
+            	    // Ajax 요청을 보냅니다.
+            	    $.ajax({
+            	        url: '/your/controller/endpoint', // 여기에 실제 컨트롤러 엔드포인트 경로를 넣어주세요.
+            	        method: 'POST',
+            	        data: requestData,
+            	        success: function(response) {
+            	            // 서버로부터 받은 데이터를 이용하여 이벤트 목록을 업데이트합니다.
+            	            getEventListByDate(response);
+            	        },
+            	        error: function(error) {
+            	            console.error('Ajax request failed:', error);
+            	        }
+            	    });
+            	},
+
+              locale: 'ko',
+              // eventRemove: function (obj) { // 이벤트가 삭제되면 발생하는 이벤트
+              //
+              // },
+              
+              // url로 이동
+              /* eventClick: function(info) {
+              	window.location.href(info.event.url);
+              } */
+          });
+
+          calendar.render();
+      });
+
+  	    request.fail(function (jqXHR, textStatus) {
+  	        alert("Request failed: " + textStatus);
+  	    });
+  	}
+      
+      function getEventListByDate(events) {
+  	    // id가 'eventList'인 UL 엘리먼트를 가져옵니다.
+  	    var ulElement = $('#eventList');
+
+  	    // 기존 콘텐츠를 지웁니다.
+  	    ulElement.empty();
+
+  	    // 받아온 이벤트 목록을 순회하면서 li 엘리먼트를 생성하고 추가합니다.
+  	    events.forEach(function(event, index) {
+  	        // 각 li 엘리먼트에 고유한 id를 만듭니다.
+  	        var liId = 'eventItem_' + index;
+
+  	        // 해당 li 엘리먼트를 만듭니다.
+  	        var liElement = $('<li>').attr('id', liId);
+
+  	        // 이벤트 정보를 li 엘리먼트에 추가합니다.
+  	        liElement.text(event.title + ': ' + event.start);
+
+  	        // ul에 li 엘리먼트를 추가합니다.
+  	        ulElement.append(liElement);
+  	    });
+  	}
 
     </script>
 	<link href="/css/index/fullCalendar.css" rel="stylesheet">
@@ -485,6 +725,13 @@
           <!-- <div class="col-lg-12"> -->
             <div class="pricing-item"> <!-- class="featured" -->
           	<div id='calendar'></div>
+          	<div class="calendarList">
+          		<ul>
+          			<li></li>
+          		</ul>
+          	</div>
+          	
+          	
               <!-- <h3>Business Plan</h3>
               <div class="icon">
                 <i class="bi bi-rocket"></i>

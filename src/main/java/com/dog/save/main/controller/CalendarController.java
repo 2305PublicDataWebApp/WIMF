@@ -2,6 +2,7 @@ package com.dog.save.main.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -64,6 +67,65 @@ public class CalendarController {
         }
         return jsonArr;
     }
+	
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/getEventListByUserAndRange.dog", method = RequestMethod.GET)
+	public List<Map<String, Object>> getEventListByDate(@RequestParam("startDate") String startDateStr,
+	                                                            @RequestParam("endDate") String endDateStr,
+	                                                            HttpSession session) {
+	    String userId = (String) session.getAttribute("userId");
+//	    if (userId != null && !userId.equals("")) {
+	    	try {
+	    		SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA);
+		        // 시작 날짜와 종료 날짜를 Date 객체로 파싱
+	    		Date startDate = inputDateFormat.parse(startDateStr);
+                Date endDate = inputDateFormat.parse(endDateStr);
+
+             // 시작 날짜, 종료 날짜, 사용자 아이디를 Map에 담아서 서비스로 전달
+                Map<String, Object> dateRange = new HashMap<>();
+                dateRange.put("startDate", startDate);
+                dateRange.put("endDate", endDate);
+                dateRange.put("userId", userId);
+
+                List<Calendar> eventList = cService.getEventListByDate(dateRange);
+
+		        // 이벤트 목록을 Map 형태로 변환하여 반환
+		        return eventList.stream()
+		                .map(event -> {
+		                    Map<String, Object> eventMap = new HashMap<>();
+		                    eventMap.put("title", event.getSchTitle());
+		                    eventMap.put("start", event.getSchStartDate());
+		                    // 종료 날짜는 하루를 더해줘야 합니다.
+		                    Date endDatePlusOne = new Date(event.getSchEndDate().getTime() + TimeUnit.DAYS.toMillis(1));
+		                    eventMap.put("end", endDatePlusOne);
+		                    return eventMap;
+		                })
+		                .collect(Collectors.toList());
+		    } catch (ParseException e) {
+		        e.printStackTrace();
+		        // 예외 발생 시 처리
+		        // 예를 들어, 빈 목록이나 특별한 값을 반환하거나 예외 메시지를 로깅하는 등의 처리를 할 수 있습니다.
+		        return Collections.emptyList();
+		    }
+//	    } else {
+//			mv.addObject("msg", "로그인이 완료되지 않았습니다.");
+//			mv.addObject("url", "/user/login.dog");
+//			mv.setViewName("common/errorPage");
+//		}
+	    
+	}
+
+
+
+
+
+	
+	
+	
+	
 	
 	@RequestMapping(value="/popup.dog", method=RequestMethod.GET)
 	public ModelAndView showPopupForm(ModelAndView mv) {
@@ -156,7 +218,7 @@ public class CalendarController {
     /**
      * calendar-admin-update 페이지 이벤트 생성
      */
-    @PatchMapping("/update.dog")
+    @PostMapping("/update.dog")
     @ResponseBody
     public String modifyEvent(@RequestBody List<Map<String, Object>> param) {
     	String response = "";
@@ -208,6 +270,10 @@ public class CalendarController {
                 calendar.add(java.util.Calendar.DAY_OF_MONTH, -1);
                 oldEndDate = calendar.getTime();
                 
+                calendar.setTime(modifiedEndDate);
+                calendar.add(java.util.Calendar.DAY_OF_MONTH, -1);
+                modifiedEndDate = calendar.getTime();
+                
                 System.out.println("endDate = " + oldEndDate);
                 
                 // 해당 이벤트 정보로 일정 조회
@@ -228,11 +294,14 @@ public class CalendarController {
                 	System.out.println("=================================");
                     System.out.println("eventOne.getSchNo() = " + eventOne.getSchNo());
                     
+                    int schNo = eventOne.getSchNo();
+                    
                     Map<String, Object> newParams = new HashMap<>();
                     newParams.put("userId", "khuser01");
                     newParams.put("title", eventName);
                     newParams.put("startDate", modifiedStartDate);
                     newParams.put("endDate", modifiedEndDate);
+                    newParams.put("schNo", schNo);
                     
                     int result = cService.updateEvent(newParams);
                     response = (result > 0) ? "success" : "error";

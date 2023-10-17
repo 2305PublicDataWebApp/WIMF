@@ -49,5 +49,11 @@ public class CalendarServiceImpl implements CalendarService {
 		int result = cStore.updateEvent(session, newParams);
 		return result;
 	}
+
+	@Override
+	public List<Calendar> getEventListByDate(Map<String, Object> dateRange) {
+		List<Calendar> eventList = cStore.getEventListByDate(session, dateRange);
+		return eventList;
+	}
 	
 }

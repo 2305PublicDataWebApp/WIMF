@@ -42,5 +42,11 @@ public class CalendarStoreLogic implements CalendarStore {
 		int result = session.update("CalendarMapper.updateEvent", newParams);
 		return result;
 	}
+
+	@Override
+	public List<Calendar> getEventListByDate(SqlSession session, Map<String, Object> dateRange) {
+		List<Calendar> eventList = session.selectList("CalendarMapper.getEventListByDate", dateRange);
+		return eventList;
+	}
 	
 }
