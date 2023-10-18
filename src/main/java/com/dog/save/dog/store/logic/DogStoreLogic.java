@@ -95,6 +95,14 @@ public class DogStoreLogic implements DogStore{
 		return dogList;	
 	}
 
+//	기진 코드
+	@Override
+	public List<Dog> selectAllDogList(SqlSession session) {
+		List<Dog> dogList = session.selectList("DogMapper.selectAllDogList");
+		return dogList;
+	}
+//	기진 코드
+
 
 
 }

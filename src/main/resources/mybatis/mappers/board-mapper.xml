@@ -90,4 +90,8 @@
 	<select id="searchBoardByAll" resultType="Board">
 		SELECT * FROM BOARD_TBL WHERE BOARD_TITLE LIKE '%'||#{searchKeyword}||'%' OR BOARD_CONTENT LIKE '%'||#{searchKeyword}||'%' OR BOARD_WRITER LIKE '%'||#{searchKeyword}||'%'
 	</select>
+	
+	<select id="selectAllBoardList" resultType="Board">
+		SELECT * FROM BOARD_TBL ORDER BY BOARD_TBL.BOARD_NO DESC
+	</select>
 </mapper>

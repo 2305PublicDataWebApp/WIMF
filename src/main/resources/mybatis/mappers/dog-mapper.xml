@@ -49,4 +49,12 @@
 	<select id="selectDogFileByDogNo" resultType="DogFile">
 		SELECT * FROM DOG_FILE_TBL WHERE REF_DOG_NO = #{dogNo}
 	</select>
+	
+	<!-- 기진 코드 -->
+	<select id="selectAllDogList" resultType="Dog">
+		SELECT * FROM DOG_TBL ORDER BY DOG_NO DESC
+	</select>
+	<!-- 기진 코드 -->
+	
+	
 </mapper>

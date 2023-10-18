@@ -103,4 +103,10 @@ public class BoardServiceImpl implements BoardService{
 		int result = bStore.increaseViewCount(sqlSession, boardNo);
 		return result;
 	}
+
+	@Override
+	public List<Board> selectAllBoardList() {
+		List<Board> searchList = bStore.selectAllBoardList(sqlSession);
+		return searchList;
+	}
 }

@@ -20,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +28,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dog.save.dog.controller.DogController;
+import com.dog.save.dog.domain.Dog;
+import com.dog.save.dog.service.DogService;
 import com.dog.save.main.domain.Calendar;
 import com.dog.save.main.service.CalendarService;
 import com.dog.save.user.service.UserService;
@@ -39,9 +41,12 @@ public class CalendarController {
 	
 	@Autowired
 	private CalendarService cService;
-	
 	@Autowired
 	private UserService uService;
+	@Autowired
+	private DogController dController;
+	@Autowired
+	private DogService dService;
 	
 	@ResponseBody
 	@RequestMapping(value="/list.dog", method=RequestMethod.GET)
@@ -141,6 +146,8 @@ public class CalendarController {
 	
 	@RequestMapping(value="/popup.dog", method=RequestMethod.GET)
 	public ModelAndView showPopupForm(ModelAndView mv) {
+		
+//		List<Dog> dogList = dService.selectAllDog();
 		
 		mv.setViewName("main/calendarInsertPopUp");
 		

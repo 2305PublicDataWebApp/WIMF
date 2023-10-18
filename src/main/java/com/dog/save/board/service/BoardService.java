@@ -91,5 +91,7 @@ public interface BoardService {
 	 */
 	int increaseViewCount(Integer boardNo);
 	
+	List<Board> selectAllBoardList();
+	
 
 }
