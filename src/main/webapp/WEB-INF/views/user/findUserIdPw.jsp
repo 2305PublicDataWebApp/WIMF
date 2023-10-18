@@ -60,7 +60,7 @@
                     		</div>
                     		
                     		<div class="radio-pw-box">
-	                    		<input type="radio" id="radio-findPw" name="findIdPw" value="find-id">
+	                    		<input type="radio" id="radio-findPw" name="findIdPw" value="find-pw">
 								<label for="radio-findPw">비밀번호 찾기</label>
                     		</div>
                     	</div>
@@ -111,9 +111,9 @@
 	                        </div>
                         </form>
                         
-                        <div id="btn-box">
-                            <a id="next-btn1" class="next-btn" style="color:#ffffff;" onclick="showStep(2)">다음</a>
-                        </div>
+<!--                         <div id="btn-box"> -->
+<!--                             <a id="next-btn1" class="next-btn" style="color:#ffffff;" onclick="showStep(2)">다음</a> -->
+<!--                         </div> -->
                         
                     </div>
 
@@ -127,13 +127,16 @@
                             		<label for="certification-number">인증 번호</label>
                             		<div class="certification-box2">
 	                            		<input type="text" id="certification-number" placeholder="인증번호 6자리를 입력해주세요.">
+	                            		<input type="text" id="send-certification-number" style="display:none;">
+	                            		<input type="text" id="isChecked" style="display:none;">
+	                            		<input type="button" id="check-certification-num-btn" onclick="confirmNumber();" value="확인">
 	                            		<button type="button" id="certification-btn">인증번호 전송</button>
                             		</div>
                             	</div>
                             </div>
                             <div id="btn-box">
                                 <a id="prev-btn1" class="next-btn" style="color:#ffffff;" onclick="showStep(1)">이전</a>
-                                <a id="next-btn2" class="next-btn" style="color:#ffffff;" onclick="showStep(3)">다음</a>
+                                <a id="next-btn2" class="next-btn" style="color:#ffffff;" onclick="nextStep()">다음</a>
                             </div>
                         </div>
                     </div>
@@ -196,6 +199,62 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
         <script>
+        
+   			// 이메일 인증 ajax
+	     	$(document).ready(function() {
+				$("#certification-btn").on("click",function(){
+					var emailVal = $("#user-email").val();
+					var emailPwVal = $("#user-pw-email").val();
+					if(emailVal == null || emailVal == ""){
+						if(emailPwVal == null || emailPwVal =="") {
+							alert("이메일을 먼저 입력해주세요.");
+						} else {
+							alert("인증번호가 발송되었습니다. 이메일을 확인해주세요.");
+							$.ajax({
+								url : "/user/sendMail.dog",
+								type : "POST",
+								data : { mail : emailPwVal },
+								success : function(data) {
+									$("#send-certification-number").attr("value", data);
+								},
+								error : function() {
+									alert:("ajax 오류, 관리자에게 문의 바랍니다.");
+								}
+							});
+						}
+					} else {
+						alert("인증번호가 발송되었습니다. 이메일을 확인해주세요.");
+						$.ajax({
+							url : "/user/sendMail.dog",
+							type : "POST",
+							data : { mail : emailVal },
+							success : function(data) {
+								$("#send-certification-number").attr("value", data);
+							},
+							error : function() {
+								alert:("ajax 오류, 관리자에게 문의 바랍니다.");
+							}
+						});
+					}
+				});
+			});
+	     	
+	     	function confirmNumber(){
+	     		var num1 = $("#certification-number");
+	     		var num2 = $("#send-certification-number");
+	     		if(num1.val() != ""){
+		     		if(num1.val() === num2.val()) {
+		     			alert("인증이 완료되었습니다.");
+		     			$("#isChecked").attr("value", "true");
+		     		} else {
+		     			alert("작성한 인증번호가 다릅니다.");
+		     			$("#isChecked").attr("value", "false");
+		     		}
+	     		} else {
+	     			alert("인증번호를 입력해주세요.");
+	     		}
+	     	}
+        	
 	        $(document).ready(function() {
 	        	// 비밀번호 찾기에 작성한 유저 정보 유효성 체크
 	        	$("#find-user-pw-btn").on("click", function() {
@@ -219,7 +278,7 @@
 	        					$("#step1, #step2, #step3").removeClass("active");
 	        	                $("#step2").addClass("active");
 	        	                
-	        					$(".main-container1").hide();
+	        	                $(".main-container1, .main-container2, .main-container3, .main-container4").hide();
 	        	                $(".main-container2").show();
 	        					
 	        	                $("#request-email").text(userEmail);
@@ -229,7 +288,7 @@
 	        				}
 	        			},
 	        			error : function() {
-	        				
+	        				alert("ajax 오류 관리자에게 문의해주세요.")
 	        			}
 	        		});
 	        	});
@@ -295,26 +354,42 @@
                 
                 // 클릭된 단계 활성화
                 $("#step" + stepNumber).addClass("active");
-                $(".main-container1").hide();
+                $(".main-container1, .main-container2, .main-container3, .main-container4").hide();
                 $(".main-container2").show();
             }
+            
+            // 다음 버튼
+            function nextStep() {
+            	var isChecked = $("#isChecked");
+            	if(isChecked.val() === "true") {
+	                $("#step1, #step2, #step3").removeClass("active");
+	                var rFindIdBtn = $("#radio-findId");
+	                console.log("아이디 찾기 체크 여부 : " + rFindIdBtn.prop("checked"));
+	                console.log("비밀번호 찾기 체크 여부 : " + $("#radio-findPw").prop("checked"));
+	            	if(rFindIdBtn.prop("checked")){
+		                $("#step3").addClass("active");
+		                $(".main-container1, .main-container2, .main-container3, .main-container4").hide();
+		                $(".main-container3").show();
+	            	} else {
+	            		$("#step3").addClass("active");
+	            		$(".main-container1, .main-container2, .main-container3, .main-container4").hide();
+		                $(".main-container4").show();
+	            	}
+            	} else {
+            		alert("확인 버튼을 눌러서 인증 확인을 받아야 합니다.");
+            	}
+            }
 
-            // 다음 단계로 이동 (Step 2 -> Step 3)
-            $("#next-btn2").click(function() {
-
-                $(".main-container2").hide();
-                $(".main-container4").show();
-            });
 
             // 이전 단계로 이동 (Step 1 <- Step 2)
             $("#prev-btn1").click(function() {
-                $(".main-container2").hide();
+            	$(".main-container1, .main-container2, .main-container3, .main-container4").hide();
                 $(".main-container1").show();
             });
 
             // 이전 단계로 이동 (Step 2 <- Step 3)
             $("#prev-btn2").click(function() {
-                $(".main-container3").hide();
+            	$(".main-container1, .main-container2, .main-container3, .main-container4").hide();
                 $(".main-container2").show();
             });
 

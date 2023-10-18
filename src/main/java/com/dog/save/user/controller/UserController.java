@@ -56,6 +56,17 @@ public class UserController {
 		return "user/findUserIdPw";
 	}
 	
+	// 마이페이지 url
+	@GetMapping(value="myPage.dog")
+	public String showMypage(
+			Model model
+			, @RequestParam("userId") String userId
+			) {
+		User uOne = uService.selectOneById(userId);
+		model.addAttribute("user", uOne);
+		return "user/myPage";
+	}
+	
 	// ajax 회원가입 아이디 중복체크 및 유효성 체크
 	@ResponseBody
 	@PostMapping(value="checkDuplUserId.dog")
@@ -108,7 +119,10 @@ public class UserController {
 		user.setUserEmail(userEmail);
 		User uOne = uService.checkUserByNameEmail(user);
 	    if (uOne != null) {
-	        return "true," + uOne.getUserId();
+	    	String userId = uOne.getUserId();
+	    	String subUserId = uOne.getUserId().substring(0, userId.length()-3);
+	    	String resultUserId = subUserId + "***";
+	        return "true," + resultUserId;
 	    } else {
 	        return "false";
 	    }

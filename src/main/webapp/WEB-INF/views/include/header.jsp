@@ -55,13 +55,13 @@
 						<a class="btn-getstarted" href="/user/login.dog">Login</a>				
 					</c:if>
 					<c:if test="${sessionScope.userId ne null}">
-						<div id="session-id">${sessionScope.userNickname } 님</div>
+						<div id="session-id"><a href="javascript:void(0)" class="logo">${sessionScope.userNickname } 님</a></div>
 						<div class="register-btn space">
 							<c:if test="${sessionScope.userId ne 'admin' }">
 								<button class="mypage-btn" onclick="location.href='/user/myPage.dog?userId=${sessionScope.userId}'">My page</button>
 							</c:if>
 							<c:if test="${sessionScope.userId eq 'admin' }">
-								<button class="mypage-btn" onclick="location.href='/admin/main.do'">관리자페이지</button>
+								<button class="mypage-btn" onclick="location.href='/admin/main.dog'">관리자페이지</button>
 							</c:if>
 						</div>
 						<a class="btn-getstarted" href="/user/logout.dog">Logout</a>
