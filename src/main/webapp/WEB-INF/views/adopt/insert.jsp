@@ -95,7 +95,7 @@
 						
 						reader.onloadend = function() {
 							var image = $('<img>').attr('src',  reader.result);
-							image.attr('width','100%');
+								image.attr('width','100%');
 							$('#summernote').summernote("insertNode", image[0]);
 						}
 						reader.readAsDataURL(file);

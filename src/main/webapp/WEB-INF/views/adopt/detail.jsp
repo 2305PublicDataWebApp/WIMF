@@ -88,69 +88,71 @@
 					</div>
 				
 				<!-- 댓글 목록 -->
-				<div id="board-reply-list">
-					<h6 style="font-weight:bold; color: tomato;">댓글목록</h6>
-						<table id="board-reply-list-table">
-							<colgroup>
-							<col width="40%" />
-							<col width="10%" />
-							<col width="10%" />
-							<col width="10%" />
-							</colgroup>
-							<tr>
-								<th style="color: tomato; padding-top: 1%; padding-left: 2%; padding-bottom:1%; border-bottom: 1px solid">내용</th>
-								<th style="color: tomato; padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid">작성자</th>
-								<th style="color: tomato; padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid">작성일</th>
-								<th style="color: tomato; padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid"></th>
-							</tr>
-							<c:forEach var="reply" items="${rList }">
+				<c:if test="${not empty rList}">
+					<div id="board-reply-list">
+						<h6 style="font-weight:bold; color: tomato;">댓글목록</h6>
+							<table id="board-reply-list-table">
+								<colgroup>
+								<col width="40%" />
+								<col width="10%" />
+								<col width="10%" />
+								<col width="10%" />
+								</colgroup>
 								<tr>
-									<td style="padding-top: 1%; padding-left: 2%; padding-bottom:1%; border-bottom: 1px solid darkgray">${reply.adoptReplyContent }</td>
-									
-									<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray">${reply.userNickName }</td>
-									<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray"><fmt:formatDate pattern="yyyy-MM-dd" value="${reply.adoptReplyCreateDate }"/></td>
-									<c:choose>
-										<c:when test="${reply.userId eq userId}">
-											<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray">
-												<a id="reply-update" href="javascript:void(0);" onclick="showModifyForm(this, '${reply.adoptReplyContent}');">수정</a>
-												<c:url var="delUrl" value="/adoptreply/delete.dog">
-													<c:param name="adoptReplyNo" value="${reply.adoptReplyNo }"></c:param>
-													<!-- 자기 자신이 작성한 댓글만 지우도록 하기 위해 replyWriter를 추가함 -->
-													<c:param name="userId" value="${reply.userId }"></c:param>
-													<!-- 성공하면 detail로 가기 위해 필요한 adoptNo 세팅 -->
-													<c:param name="adoptNo" value="${reply.adoptNo }"></c:param>
-												</c:url>
-												<a id="reply-delete" href="javascript:void(0);" onclick="replyDeleteForm('${delUrl}');">삭제</a>
-											</td>
-										</c:when>
-											<c:when test="${userId == 'admin' }">
+									<th style="color: tomato; padding-top: 1%; padding-left: 2%; padding-bottom:1%; border-bottom: 1px solid">내용</th>
+									<th style="color: tomato; padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid">작성자</th>
+									<th style="color: tomato; padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid">작성일</th>
+									<th style="color: tomato; padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid"></th>
+								</tr>
+								<c:forEach var="reply" items="${rList }">
+									<tr>
+										<td style="padding-top: 1%; padding-left: 2%; padding-bottom:1%; border-bottom: 1px solid darkgray">${reply.adoptReplyContent }</td>
+										
+										<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray">${reply.userNickName }</td>
+										<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray"><fmt:formatDate pattern="yyyy-MM-dd" value="${reply.adoptReplyCreateDate }"/></td>
+										<c:choose>
+											<c:when test="${reply.userId eq userId}">
 												<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray">
-													<a id="reply-update-bean"></a>
+													<a id="reply-update" href="javascript:void(0);" onclick="showModifyForm(this, '${reply.adoptReplyContent}');">수정</a>
 													<c:url var="delUrl" value="/adoptreply/delete.dog">
 														<c:param name="adoptReplyNo" value="${reply.adoptReplyNo }"></c:param>
 														<!-- 자기 자신이 작성한 댓글만 지우도록 하기 위해 replyWriter를 추가함 -->
 														<c:param name="userId" value="${reply.userId }"></c:param>
 														<!-- 성공하면 detail로 가기 위해 필요한 adoptNo 세팅 -->
-														<c:param name="adoptReplyNo" value="${reply.adoptReplyNo }"></c:param>
+														<c:param name="adoptNo" value="${reply.adoptNo }"></c:param>
 													</c:url>
 													<a id="reply-delete" href="javascript:void(0);" onclick="replyDeleteForm('${delUrl}');">삭제</a>
 												</td>
 											</c:when>
-										<c:when test="${reply.userId ne userId}">
-											<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray"></td>
-										</c:when>
-									</c:choose>
-								</tr>
-								<tr	class="replyUpdate" style="display:none;">
-									<td colspan="3"><input id="adoptReplyContent" type="text" size="50" name="adoptReplyContent" value="${reply.adoptReplyContent }"></td>
-									<td>
-										<input id="reply-update-btn" type="button" onclick="replyModify(this, '${reply.adoptReplyNo}','${reply.adoptNo }');" value="수정">
-										<input id="update-close-btn" type="reset" value="취소" onClick="closeReplyUpdate()">
-									</td>
-								</tr>
-							</c:forEach>
-						</table>
-					</div>
+												<c:when test="${userId == 'admin' }">
+													<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray">
+														<a id="reply-update-bean"></a>
+														<c:url var="delUrl" value="/adoptreply/delete.dog">
+															<c:param name="adoptReplyNo" value="${reply.adoptReplyNo }"></c:param>
+															<!-- 자기 자신이 작성한 댓글만 지우도록 하기 위해 replyWriter를 추가함 -->
+															<c:param name="userId" value="${reply.userId }"></c:param>
+															<!-- 성공하면 detail로 가기 위해 필요한 adoptNo 세팅 -->
+															<c:param name="adoptReplyNo" value="${reply.adoptReplyNo }"></c:param>
+														</c:url>
+														<a id="reply-delete" href="javascript:void(0);" onclick="replyDeleteForm('${delUrl}');">삭제</a>
+													</td>
+												</c:when>
+											<c:when test="${reply.userId ne userId}">
+												<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray"></td>
+											</c:when>
+										</c:choose>
+									</tr>
+									<tr	class="replyUpdate" style="display:none;">
+										<td colspan="3"><input id="adoptReplyContent" type="text" size="50" name="adoptReplyContent" value="${reply.adoptReplyContent }"></td>
+										<td>
+											<input id="reply-update-btn" type="button" onclick="replyModify(this, '${reply.adoptReplyNo}','${reply.adoptNo }');" value="수정">
+											<input id="update-close-btn" type="reset" value="취소" onClick="closeReplyUpdate()">
+										</td>
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
+					</c:if>
 					
 				</div>
 			</div>

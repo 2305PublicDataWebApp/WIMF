@@ -110,8 +110,6 @@ public class AdoptController {
 		try {
 			String adoptWriter = adopt.getUserId();
 			String userId = (String)session.getAttribute("userId");
-			System.out.println(adoptWriter + " = adoptWriter");
-			System.out.println(userId + " = userId");
 			if(adoptWriter != null && adoptWriter.equals(userId)) {
 				int result = aService.updateAdoptByNo(adopt);
 				if(result > 0) {
@@ -223,11 +221,8 @@ public class AdoptController {
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage) {
 		
 		Map<String, String> paramMap = new HashMap<String, String>();
-		
 		paramMap.put("searchCondition", searchCondition);
-		System.out.println("searchCondition = " + searchCondition);
 		paramMap.put("searchKeyword", searchKeyword);
-		System.out.println("searchKeyword = " + searchKeyword);
 		int totalCount = aService.getSelectAdoptByKeywordCount(paramMap);
 		bPageInfo bpInfo = this.getPageInfo(currentPage, totalCount);
 		List<Adopt> searchList = aService.searchAdoptByKeyword(bpInfo, paramMap);

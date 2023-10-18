@@ -64,7 +64,7 @@
 	</select>
 	
 	<!-- 게시글 키워드 검색 개수 -->
-	<select id="getSelectAdoptByKeywordCount" resultType="Adopt">
+	<select id="getSelectAdoptByKeywordCount" resultType="_int">
 		SELECT COUNT(*) FROM ADOPT_TBL
 	    LEFT JOIN USER_TBL ON ADOPT_TBL.USER_ID = USER_TBL.USER_ID 
 		<if test="searchCondition == 'all'">
