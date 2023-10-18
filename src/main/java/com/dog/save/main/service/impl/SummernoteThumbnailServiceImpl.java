@@ -7,10 +7,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dog.save.main.service.SummernoteThumbnailService;
 
+@Service
 public class SummernoteThumbnailServiceImpl implements SummernoteThumbnailService {
 
 	@Override
