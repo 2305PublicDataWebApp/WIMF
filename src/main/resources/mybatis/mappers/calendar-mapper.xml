@@ -19,9 +19,16 @@
     </select>
     
     <!-- 날짜로 일정 가져오기 -->
-    <select id="getEventListByDate" resultType="Calendar">
-    	SELECT * FROM SCHEDULE_TBL WHERE USER_ID = 'khuser01' AND SCH_START_DATE BETWEEN #{startDate} AND #{endDate}
-    </select>
+    <select id="getEventListByDate" resultType="Calendar" parameterType="java.util.Map">
+	    <![CDATA[
+		    SELECT * FROM SCHEDULE_TBL
+		    WHERE USER_ID = 'khuser01'
+		      AND ((SCH_START_DATE <= #{date} AND SCH_END_DATE >= #{date})
+           OR (SCH_START_DATE <= #{date} AND SCH_END_DATE >= #{date})
+           OR (SCH_START_DATE >= #{date} AND SCH_END_DATE <= #{date}))
+	    ]]>
+	</select>
+
     
     <!-- 일정 삭제 -->
     <delete id="deleteEvent" parameterType="int">
@@ -36,5 +43,7 @@
 	    WHERE
 	        SCH_NO = #{schNo} AND SCH_TITLE = #{title} AND USER_ID = 'khuser01'
 	</update>
+	
+
 	
 </mapper>

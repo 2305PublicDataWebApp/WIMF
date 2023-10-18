@@ -40,7 +40,8 @@
     <div id="container">
       <h3 style="padding-bottom: 2%;">글 작성</h3>
       <div id="board">
-      	<form action="/board/write.dog" method="post" onsubmit="return validateForm()">
+      	<form action="/board/write.dog" method="post" onsubmit="return validateForm()" enctype="multipart/form-data"> <!-- 기진 코드 추가 -->
+      		<input type="hidden" name="boardThumbnail">	<!-- 기진 코드 추가 -->
 	        <div id="board-content">
 	          <div id="board-subject">
 	            <input id="board-subject-value" type="text" name="boardTitle" placeholder="제목">
@@ -85,6 +86,8 @@
 		
 		callbacks: {
             onImageUpload: function(image) {
+            	
+            	  uploadSummernoteImageFile(image[0],this); /* 기진 코드 */
                
                    var file = image[0];
                    var reader = new FileReader();
@@ -98,6 +101,26 @@
             }
         }
       });
+    
+    /* 기진 코드 */
+    function uploadSummernoteImageFile(file,editor){ 
+        data = new FormData();
+        data.append("file",file);
+        $.ajax({ 
+		     data:data, 
+		     type:"POST", 
+		     url:"/board/getSummernoteImageFile.dog",
+		     dataType:"JSON", 
+		     contentType:false, 
+		     processData:false, 
+		     success:function(data){ 
+		         $(editor).summernote("insertImage",data.url); 
+		         $("#thumbnailPath").append("<option value="+data.url+">"+data.originName+"</option>"); 
+		     } 
+		 }); 
+    }
+    /* 기진 코드 */
+    
     </script>
 </body>
 

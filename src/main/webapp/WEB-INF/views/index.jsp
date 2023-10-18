@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -92,7 +93,16 @@
                               arg.draggedEl.parentNode.removeChild(arg.draggedEl);
                           }
                       },
-                      events: data,
+                      events: data.map(function(event) {
+                    	  return {
+                    		  title: event.title,
+                    		  start: event.start,
+                    		  end: event.end,
+                    		  backgroundColor: getColorByOption(event.option),	// 옵션값에 따라 배경색 동적 할당
+                    		  borderColor: getColorByOption(event.option)
+                    	  }
+                    	  
+                      }),
                       
                       /**
                        * 드래그로 이벤트 수정하기
@@ -239,33 +249,32 @@
                       },
                    	  
                       dateClick: function dateClick(info) {
-                    	    var selectedDate = info.dateStr;
+                    	    // 선택된 날짜 정보를 가져옵니다.
+                    	    var selectedDate = info.date;
 
+                    	    // 날짜를 "YYYY-MM-DD" 형식의 문자열로 변환합니다.
+                    	    var formattedDate = selectedDate.toISOString().split('T')[0];
+
+                    	    // Ajax 요청을 보낼 데이터를 준비합니다.
+                    	    var requestData = {
+                    	        date: formattedDate
+                    	    };
+
+                    	    // Ajax 요청을 보냅니다.
                     	    $.ajax({
-                    	        url: "/calendar/getEventListByUserAndRange.dog",
-                    	        method: "GET",
-                    	        data: {
-                    	            startDate: selectedDate,
-                    	            endDate: selectedDate
+                    	        url: '/calendar/getEventListByDate.dog',
+                    	        method: 'GET',
+                    	        data: requestData,
+                    	        success: function(response) {
+                    	            // 서버로부터 받은 데이터를 이용하여 이벤트 목록을 업데이트합니다.
+                    	            getEventListByDate(response);
                     	        },
-                    	        success: function (data) {
-                    	            // 여기서 data를 이용하여 li 태그에 이벤트 정보를 추가하는 로직을 작성
-                    	            // 예를 들면, ul 태그의 자식인 li 태그에 이벤트 정보를 동적으로 추가할 수 있습니다.
-                    	            // 아래는 예시 코드입니다.
-                    	            var ulElement = $("#calendar ul");
-                    	            ulElement.empty(); // 기존의 li 태그들을 비워줍니다.
-
-                    	            for (var i = 0; i < data.length; i++) {
-                    	                var event = data[i];
-                    	                var liElement = $("<li>").text(event.title + " - " + event.start);
-                    	                ulElement.append(liElement);
-                    	            }
-                    	        },
-                    	        error: function (error) {
-                    	            console.log(error);
+                    	        error: function(error) {
+                    	            console.error('Ajax request failed:', error);
                     	        }
                     	    });
                     	},
+
 
                       
                       
@@ -289,10 +298,6 @@
           });
 
       });
-      
-      window.addEventListener('updateCalendarEvent', function () {
-    	  getCalendar();
-	   	});
       
       function updateFullCalendar() {
   	    var request = $.ajax({
@@ -329,7 +334,16 @@
                       arg.draggedEl.parentNode.removeChild(arg.draggedEl);
                   }
               },
-              events: data,
+              events: data.map(function(event) {
+            	  return {
+            		  title: event.title,
+            		  start: event.start,
+            		  end: event.end,
+            		  backgroundColor: getColorByOption(event.option),	// 옵션값에 따라 배경색 동적 할당
+            		  borderColor: getColorByOption(event.option)
+            	  }
+            	  
+              }),
               
               /**
                * 드래그로 이벤트 수정하기
@@ -478,28 +492,31 @@
               
               
               dateClick: function dateClick(info) {
-            	    // 선택된 날짜 정보를 가져옵니다.
-            	    var selectedDate = info.date;
+          	    // 선택된 날짜 정보를 가져옵니다.
+          	    var selectedDate = info.date;
 
-            	    // Ajax 요청을 보낼 데이터를 준비합니다.
-            	    var requestData = {
-            	        date: selectedDate.toISOString() // 선택된 날짜를 ISO 형식의 문자열로 변환
-            	    };
+          	    // 날짜를 "YYYY-MM-DD" 형식의 문자열로 변환합니다.
+          	    var formattedDate = selectedDate.toISOString().split('T')[0];
 
-            	    // Ajax 요청을 보냅니다.
-            	    $.ajax({
-            	        url: '/your/controller/endpoint', // 여기에 실제 컨트롤러 엔드포인트 경로를 넣어주세요.
-            	        method: 'POST',
-            	        data: requestData,
-            	        success: function(response) {
-            	            // 서버로부터 받은 데이터를 이용하여 이벤트 목록을 업데이트합니다.
-            	            getEventListByDate(response);
-            	        },
-            	        error: function(error) {
-            	            console.error('Ajax request failed:', error);
-            	        }
-            	    });
-            	},
+          	    // Ajax 요청을 보낼 데이터를 준비합니다.
+          	    var requestData = {
+          	        date: formattedDate
+          	    };
+
+          	    // Ajax 요청을 보냅니다.
+          	    $.ajax({
+          	        url: '/calendar/getEventListByDate.dog',
+          	        method: 'GET',
+          	        data: requestData,
+          	        success: function(response) {
+          	            // 서버로부터 받은 데이터를 이용하여 이벤트 목록을 업데이트합니다.
+          	            getEventListByDate(response);
+          	        },
+          	        error: function(error) {
+          	            console.error('Ajax request failed:', error);
+          	        }
+          	    });
+          	},
 
               locale: 'ko',
               // eventRemove: function (obj) { // 이벤트가 삭제되면 발생하는 이벤트
@@ -521,8 +538,11 @@
   	}
       
       function getEventListByDate(events) {
+    	  console.log("Function called"); // 확인용 출력
+    	  console.log(events); // 확인용 출력
   	    // id가 'eventList'인 UL 엘리먼트를 가져옵니다.
   	    var ulElement = $('#eventList');
+  	  console.log(ulElement); // 확인용 출력
 
   	    // 기존 콘텐츠를 지웁니다.
   	    ulElement.empty();
@@ -536,12 +556,27 @@
   	        var liElement = $('<li>').attr('id', liId);
 
   	        // 이벤트 정보를 li 엘리먼트에 추가합니다.
-  	        liElement.text(event.title + ': ' + event.start);
+  	        liElement.html('• 제목 : ' + event.title + '&emsp;&emsp;&emsp; • 내용 : ' + event.content + '&emsp;&emsp;&emsp; • 기간 : ' + event.start + ' ~ ' + event.end);
 
   	        // ul에 li 엘리먼트를 추가합니다.
   	        ulElement.append(liElement);
   	    });
   	}
+      window.addEventListener('updateCalendarEvent', function () {
+    	  getCalendar();
+	   	});
+      
+      function getColorByOption(option) {
+    	    // 옵션값에 따른 배경색을 동적으로 할당
+    	    switch (option) {
+    	        case '후원':
+    	            return '#e84545';
+    	        case '임시보호':
+    	            return '#3788d8';
+    	        default:
+    	            return '#3788d8'; // 기본 값
+    	    }
+    	}
 
     </script>
 	<link href="/css/index/fullCalendar.css" rel="stylesheet">
@@ -726,7 +761,7 @@
             <div class="pricing-item"> <!-- class="featured" -->
           	<div id='calendar'></div>
           	<div class="calendarList">
-          		<ul>
+          		<ul id="eventList">
           			<li></li>
           		</ul>
           	</div>
@@ -1091,7 +1126,9 @@
 
         <div class="row gy-4">
 
-          <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+
+			<!-- Start post list item -->
+          <!-- <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
             <article>
 
               <div class="post-img">
@@ -1115,35 +1152,49 @@
               </div>
 
             </article>
-          </div><!-- End post list item -->
+          </div> -->
+          <!-- End post list item -->
+          
+          
+			<c:forEach var="board" items="${bList}" varStatus="loop">
+    			<c:if test="${loop.index < 6}">
+				<div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+	            <article>
+	            
+	
+	              <div class="post-img">
+	                <img src="/img/blog/blog-2.jpg" alt="" class="img-fluid">
+	              </div>
+	
+	              <p class="post-category">${board.boardNo }</p>
+	              
+	              <c:url var="detailUrl" value="/board/detail.dog">
+	              	<c:param name="boardNo" value="${board.boardNo }"></c:param>
+	              </c:url>
+	              <h2 class="title">
+	                <a href="${detailUrl }">${board.boardTitle }</a>
+	              </h2>
+	
+	              <div class="d-flex align-items-center">
+	                <img src="/img/blog/blog-author-2.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
+	                <div class="post-meta">
+	                  <p class="post-author">${board.userNickName }</p>
+	                  <p class="post-date">
+	                    <fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
+	                  </p>
+	                </div>
+	              </div>
+	
+				
+	            </article>
+	          </div><!-- End post list item -->
+			    </c:if>
+			</c:forEach>
+			
+          
 
-          <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <article>
-
-              <div class="post-img">
-                <img src="/img/blog/blog-2.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Sports</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
-              </h2>
-
-              <div class="d-flex align-items-center">
-                <img src="/img/blog/blog-author-2.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                <div class="post-meta">
-                  <p class="post-author">Allisa Mayer</p>
-                  <p class="post-date">
-                    <time datetime="2022-01-01">Jun 5, 2022</time>
-                  </p>
-                </div>
-              </div>
-
-            </article>
-          </div><!-- End post list item -->
-
-          <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+			<!-- Start post list item -->
+          <!-- <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
             <article>
 
               <div class="post-img">
@@ -1167,7 +1218,8 @@
               </div>
 
             </article>
-          </div><!-- End post list item -->
+          </div> -->
+          <!-- End post list item -->
 
         </div><!-- End recent posts list -->
 
