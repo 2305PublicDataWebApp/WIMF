@@ -23,28 +23,32 @@
 				<!-- Nav Menu -->
 				<nav id="navmenu" class="navmenu">
 					<ul>
-						<li><a href="/" class="active">Home</a></li>
-						<li><a href="/dog/list.dog">돌봄 리스트</a></li>
-						<li class="dropdown has-dropdown"><a href="blog.html"><span>입양</span>
-								<i class="bi bi-chevron-down"></i></a>
+						<li><a href="/" id="nav-home" class="active">Home</a></li>
+						<li><a href="/dog/list.dog" id="nav-dolbom-list">돌봄 리스트</a></li>
+						<li class="dropdown has-dropdown">
+							<a href="blog.html" id="nav-adopt">
+								<span>입양</span>
+								<i class="bi bi-chevron-down"></i>
+							</a>
 							<ul class="dd-box-shadow">
-								<li><a href="/care/list.dog">돌봄 후기</a></li>
-								<li><a href="/adopt/list.dog">입양 후기</a></li>
-								<li><a href="/app/insert.dog">입양지원서</a></li>
-								<!-- <li class="dropdown has-dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down"></i></a>
-	                <ul class="dd-box-shadow">
-	                  <li><a href="#">Deep Dropdown 1</a></li>
-	                  <li><a href="#">Deep Dropdown 2</a></li>
-	                  <li><a href="#">Deep Dropdown 3</a></li>
-	                  <li><a href="#">Deep Dropdown 4</a></li>
-	                  <li><a href="#">Deep Dropdown 5</a></li>
-	                </ul>
-	              </li> -->
-							</ul></li>
-						<li><a href="/board/list.dog">소통 게시판</a></li>
-						<li><a href="index.html#services">임시보호란?</a></li>
-						<li><a href="index.html#about">WIMF 팀 소개</a></li>
-						<li><a href="index.html#contact">Contact</a></li>
+								<li><a href="/care/list.dog" id="nav-dolbom-list-review">돌봄 후기</a></li>
+								<li><a href="/adopt/list.dog" id="nav-adopt-review">입양 후기</a></li>
+								<li><a href="/app/insert.dog" id="nav-adopt-request">입양지원서</a></li>
+							</ul>
+						</li>
+<!-- 						<li class="dropdown has-dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down"></i></a> -->
+<!-- 							<ul class="dd-box-shadow"> -->
+<!-- 								<li><a href="#">Deep Dropdown 1</a></li> -->
+<!-- 								<li><a href="#">Deep Dropdown 2</a></li> -->
+<!-- 								<li><a href="#">Deep Dropdown 3</a></li> -->
+<!-- 								<li><a href="#">Deep Dropdown 4</a></li> -->
+<!-- 								<li><a href="#">Deep Dropdown 5</a></li> -->
+<!-- 							</ul> -->
+<!-- 						</li> -->
+						<li><a href="/board/list.dog" id="nav-board-list">소통 게시판</a></li>
+						<li><a href="index.html#services" id="nav-sevice">임시보호란?</a></li>
+						<li><a href="index.html#about" id="nav-about">WIMF 팀 소개</a></li>
+						<li><a href="index.html#contact" id="nav-Contact">Contact</a></li>
 					</ul>
 	
 					<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -55,13 +59,13 @@
 						<a class="btn-getstarted" href="/user/login.dog">Login</a>				
 					</c:if>
 					<c:if test="${sessionScope.userId ne null}">
-						<div id="session-id"><a href="javascript:void(0)" class="logo">${sessionScope.userNickname } 님</a></div>
+						<div id="session-id">${sessionScope.userNickname } 님</div>
 						<div class="register-btn space">
 							<c:if test="${sessionScope.userId ne 'admin' }">
 								<button class="mypage-btn" onclick="location.href='/user/myPage.dog?userId=${sessionScope.userId}'">My page</button>
 							</c:if>
 							<c:if test="${sessionScope.userId eq 'admin' }">
-								<button class="mypage-btn" onclick="location.href='/admin/main.dog'">관리자페이지</button>
+								<button class="mypage-btn" onclick="location.href='/admin/main.dog'">Admin page</button>
 							</c:if>
 						</div>
 						<a class="btn-getstarted" href="/user/logout.dog">Logout</a>
