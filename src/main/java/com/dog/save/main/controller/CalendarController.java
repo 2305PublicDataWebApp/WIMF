@@ -60,6 +60,7 @@ public class CalendarController {
             Date endDate = AllEventList.get(i).getSchEndDate();
             endDate.setTime(endDate.getTime() + TimeUnit.DAYS.toMillis(1));
             hash.put("end", endDate);
+            hash.put("option", AllEventList.get(i).getSchOption());
 //            hash.put("time", AllEventList.get(i).getScheduleTime());
  
             jsonObj = new JSONObject(hash);
@@ -72,35 +73,46 @@ public class CalendarController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value = "/getEventListByUserAndRange.dog", method = RequestMethod.GET)
-	public List<Map<String, Object>> getEventListByDate(@RequestParam("startDate") String startDateStr,
-	                                                            @RequestParam("endDate") String endDateStr,
-	                                                            HttpSession session) {
+	@GetMapping("/getEventListByDate.dog")
+	public List<Map<String, Object>> getEventListByDate(@RequestParam("date") String date, HttpSession session) {
 	    String userId = (String) session.getAttribute("userId");
 //	    if (userId != null && !userId.equals("")) {
 	    	try {
-	    		SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.KOREA);
-		        // 시작 날짜와 종료 날짜를 Date 객체로 파싱
-	    		Date startDate = inputDateFormat.parse(startDateStr);
-                Date endDate = inputDateFormat.parse(endDateStr);
+	    		SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+	            Date selectedDate = inputDateFormat.parse(date);
+	            
+	            System.out.println("=================================");
+                System.out.println("date = " + date);
+                
+                java.util.Calendar calendar = java.util.Calendar.getInstance();
+                calendar.setTime(selectedDate);
+                calendar.add(java.util.Calendar.DAY_OF_MONTH, 1);
+                Date datePlusOne = calendar.getTime();
+                
+                System.out.println("=================================");
+                System.out.println("datePlusOne = " + datePlusOne);
 
-             // 시작 날짜, 종료 날짜, 사용자 아이디를 Map에 담아서 서비스로 전달
+	            // 사용자 아이디와 날짜를 Map에 담아 서비스로 전달
                 Map<String, Object> dateRange = new HashMap<>();
-                dateRange.put("startDate", startDate);
-                dateRange.put("endDate", endDate);
+                dateRange.put("date", datePlusOne);
                 dateRange.put("userId", userId);
 
                 List<Calendar> eventList = cService.getEventListByDate(dateRange);
+
 
 		        // 이벤트 목록을 Map 형태로 변환하여 반환
 		        return eventList.stream()
 		                .map(event -> {
 		                    Map<String, Object> eventMap = new HashMap<>();
 		                    eventMap.put("title", event.getSchTitle());
-		                    eventMap.put("start", event.getSchStartDate());
+		                    eventMap.put("content", event.getSchContent());
+		                 // 시작 날짜 포맷 변경
+		                    SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+		                    eventMap.put("start", outputDateFormat.format(event.getSchStartDate()));
+
 		                    // 종료 날짜는 하루를 더해줘야 합니다.
-		                    Date endDatePlusOne = new Date(event.getSchEndDate().getTime() + TimeUnit.DAYS.toMillis(1));
-		                    eventMap.put("end", endDatePlusOne);
+//		                    Date endDatePlusOne = new Date(event.getSchEndDate().getTime() + TimeUnit.DAYS.toMillis(1));
+		                    eventMap.put("end", outputDateFormat.format(event.getSchEndDate()));
 		                    return eventMap;
 		                })
 		                .collect(Collectors.toList());
@@ -132,24 +144,6 @@ public class CalendarController {
 		
 		mv.setViewName("main/calendarInsertPopUp");
 		
-//		try {
-//			String encodedCategory = URLEncoder.encode(refCategoryName, "UTF-8");
-//			String url = "hobby/board/detail.do?category=" + encodedCategory + "&hBoardNo=" + hBoardNo;
-//			
-//			Board boardOne = bService.selectBoardByNo(hBoardNo);
-//			if(boardOne != null) {
-//				mv.addObject("board", boardOne);
-//				mv.setViewName("hobby/groupPopupForm");
-//			} else {
-//				mv.addObject("msg", "소모임 일정 조회가 완료되지 않았습니다.");
-//				mv.addObject("url", url);
-//				mv.setViewName("common/errorPage");
-//			}
-//		} catch (Exception e) {
-//			mv.addObject("msg", "소모임 일정 조회가 완료되지 않았습니다.");
-//			mv.addObject("url", "/hobby/board/list.do?category="+refCategoryName);
-//			mv.setViewName("common/errorPage");
-//		}
 		return mv;
 	}
 	

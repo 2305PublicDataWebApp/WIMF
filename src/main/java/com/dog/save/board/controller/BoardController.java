@@ -1,9 +1,14 @@
 package com.dog.save.board.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +18,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.dog.save.board.domain.Board;
 import com.dog.save.board.domain.Reply;
 import com.dog.save.board.domain.bPageInfo;
 import com.dog.save.board.service.BoardService;
 import com.dog.save.board.service.ReplyService;
+import com.dog.save.main.service.SummernoteThumbnailService;
 import com.dog.save.user.domain.User;
 import com.dog.save.user.service.UserService;
+import com.google.gson.JsonObject;
 
 @Controller
 @RequestMapping(value="/board")
@@ -33,6 +43,8 @@ public class BoardController {
 	private UserService uService;
 	@Autowired
 	private ReplyService rService;
+	@Autowired
+	private SummernoteThumbnailService stService;
 	
 	// ==================== 게시글 작성 페이지 ====================
 	@GetMapping("/write.dog")
@@ -41,7 +53,7 @@ public class BoardController {
 	}
 	// ==================== 게시글 작성 ====================
 	@PostMapping("/write.dog")
-	public String boardWrite(@ModelAttribute Board board, Model model, HttpSession session) {
+	public String boardWrite(@ModelAttribute Board board, Model model, HttpSession session, @RequestParam(value="boardThumbnail", required=false) MultipartFile multipartFile, HttpServletRequest request) {	// 기진 코드 추가
 		// 작성자 session에서 userId 가져오기
 		try {
 			String boardWriter = (String)session.getAttribute("userId");
@@ -51,6 +63,14 @@ public class BoardController {
 				return "common/error";
 			}else if(boardWriter != null && !boardWriter.equals("")) {
 				board.setBoardWriter(boardWriter);
+				
+//				기진 코드 추가
+				Map<String, Object> infoMap = stService.uploadImage(multipartFile, request);
+//				board에 file 정보 넣기
+				
+				
+//				기진 코드 추가
+				
 				int result = bService.insertBoard(board);
 				return "redirect:/board/list.dog";
 			}else {
@@ -64,6 +84,29 @@ public class BoardController {
 			return "common/error";
 		}
 	}
+	// ==================== 기진코드 board 썸머노트 이미지 가져오기 ====================
+    @ResponseBody 
+    @RequestMapping(value="/getSummernoteImageFile.dog",method=RequestMethod.POST) 
+    public JsonObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile 
+            , HttpServletRequest request
+            , Model model) {
+    	
+        JsonObject jsonObject = new JsonObject();
+        
+        try {
+        	Map<String, Object> infoMap = stService.uploadImage(multipartFile, request);
+        	
+        	String imageUrl = "/summerImageFiles/" + infoMap.get("boardFileRename");
+            String originalFileName = (String) infoMap.get("originalFileName");
+
+            jsonObject.addProperty("url",imageUrl); 
+            jsonObject.addProperty("originName",originalFileName); 
+            jsonObject.addProperty("reponseCode","success"); 
+		} catch (Exception e) {
+			e.printStackTrace(); 
+		}
+        return jsonObject;
+    } 
 	// ==================== 게시글 수정 페이지 ====================
 	@GetMapping("/update.dog")
 	public String boardUpdateView(Model model
