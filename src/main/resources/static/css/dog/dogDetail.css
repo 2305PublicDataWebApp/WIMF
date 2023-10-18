@@ -94,7 +94,7 @@ h1{
 
     table, th, td {
         border: 1px dotted black; /* 테두리 추가 (선택사항) */
-        
+        text-align:center;
         padding: 20px; /* 셀 간격 조절 (선택사항) */
     }
     
@@ -106,3 +106,18 @@ h1{
     	display:flex;
     	justify-content:space-between;
     }
+    
+    .input_box{
+    display: inline-flex;
+    width: 100%;
+    padding: 10px 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+
+.input_title{
+    width: 139px;
+    padding-top: 12px;
+}
+

@@ -162,6 +162,12 @@ public class DogController {
 		}
 		return mv;
 	}
+
+	
+	
+	
+	
+	
 	
 	//페이징처리 메소드
 	public PageInfo getPageInfo(Integer currentPage, Integer totalCount,int recordCountPerPage) {

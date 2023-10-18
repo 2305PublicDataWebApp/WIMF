@@ -99,14 +99,85 @@
 			    </div>
 			</div>
 		</div>
-
-	
+		<br><hr>
+        <div class="review-input">
+                 <div class="input_box">
+                      <div class="input_title">
+                          <label>작성란</label>	                          
+                      </div>
+                 	<input type="text" name="dogReplyContent" placeholder="댓글을 작성해주세요!" style="width: 500px;">&nbsp&nbsp
+				    <button id="rSubmit" class="custom-btn btn-11">제출</button>		
+				</div>
+		</div>	
+		<table align="center" width="500" border="1" id="replyTable">
+			<tbody></tbody>
+		</table>					
 		</main>
 	
 		<!-- footer -->
 		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
+		
 		<script>
-	
+		$("#rSubmit").on("click", function() {
+			const dogReplyContent = $("#dogReplyContent").val();
+			const refDogNo = ${dog.dogNo };
+			$.ajax({
+				url : "/reply/add.dog",
+				data : { dogReplyContent : dogReplyContent, refDogNo : refDogNo},
+				type : "POST",
+				success : function (result) {
+					if(result == "success"){
+						alert("댓글 등록 성공!!");
+						getReplyList();
+						$("#dogReplyContent").val("");
+					}else{
+						alert("댓글 등록 실패!!");
+					}
+				},
+				error : function() {
+					alert("관리자에게 문의 바랍니다.");
+				}
+			});
+		});	
+		
+		const getReplyList = () => {
+			const refDogNo = ${dog.dogNo };
+			$.ajax({
+				url : "/dog/detail.dog",
+				data : { refDogNo : refDogNo },
+				type : "GET",
+				success : function(data) {
+					console.log(data);
+					const tableBody = $("#replyTable tbody");
+					let tr;
+					let dogReplyWriter;
+					let dogReplyContent;
+					let dogReplyCreateDate;
+					let btnArea;
+					
+					if(data.length > 0) {
+						for(let i in data) {
+							tr = $("<tr>");				// <tr></tr>
+							replyWriter = $("<td>").text(data[i].replyWriter);	// <td>khuser01</td>
+							replyContent = $("<td>").text(data[i].replyContent);	// <td>댓글내용</td>
+							replyCreateDate = $("<td width='100'>").text(data[i].rCreateDate);	// <td>2023/09/26</td>
+							btnArea = $("<td width='150'>")
+											.append("<a href='javascript:void(0)' onclick='modifyView(this," + data[i].replyNo + ", \""+data[i].replyContent+"\");'>수정하기</a>&nbsp;&nbsp;")
+											.append("<a href='javascript:void(0)' onclick='removeReply("+data[i].replyNo+");'>삭제하기</a>");
+							tr.append(replyWriter);
+							tr.append(replyContent);
+							tr.append(replyCreateDate);	// <tr><td></td></td>...?</tr>
+							tr.append(btnArea);
+							tableBody.append(tr);		// <tbody><tr><td></td>...</tr></tbody>
+							
+						}
+					}
+				},
+				error : function() {
+					alert("Ajax 오류! 관리자에게 문의바랍니다.");
+				}
+			});
+		}		
 		</script>
 	</body>
 </html>
