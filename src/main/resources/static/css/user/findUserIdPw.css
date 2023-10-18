@@ -159,16 +159,29 @@
     border-radius: 4px;
     transition: 0.3s;
 }
-#certification-btn:hover{
+#certification-btn:hover, #check-certification-num-btn:hover{
     color: var(--contrast-color);
     background: rgba(var(--primary-color-rgb), 0.85);
 }
-
+#check-certification-num-btn{
+	position: absolute;
+    width: 90px;
+    height: 35px;
+    top: 1px;
+    bottom: 0;
+    left: 255px;
+    margin: auto 0;
+    border-radius: 3px;
+    border: none;
+    color: var(--contrast-color);
+    background-color: var(--primary-color);
+}
 .certification-box2{
 	display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 
 .success-dog-img-box{

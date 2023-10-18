@@ -29,7 +29,7 @@
 		<jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 		
 		<main id="container">
-            <div class="login-div">
+            <div class="regi-div">
                 <div id="top-section">
                     <div class="main-logo-div">
                         <a href="index.html#hero" class="main-logo">
@@ -134,7 +134,7 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 	                                    <span id="id-msg" class="dupl-msg" style="display: none;"></span>
                                     </label>
                                     <input type="text" id="user-id" name="userId" class="input-user-info" placeholder="아이디 입력(6~14자)" required>
-                                    <input type="text" id="user-ck-id" style="display: none;">
+                                    <input type="hidden" id="user-ck-id">
                                 </div>
                                 
                                 <div id="user-info-pw" class="user-info-box">
@@ -143,7 +143,7 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
                                     	<span id="pw-msg" class="dupl-msg" style="display: none;"></span>
                                     </label>
                                     <input type="password" id="user-pw" name="userPw" class="input-user-info" placeholder="소문자,숫자,특수문자 포함 10~20자" required>
-                                    <input type="text" id="user-ck-pw" style="display: none;">
+                                    <input type="hidden" id="user-ck-pw">
                                 </div>
 
                                 <div id="user-info-pwck" class="user-info-box">
@@ -152,7 +152,7 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
                                     	<span id="pw-ck-msg" class="dupl-msg" style="display: none;"></span>
                                     </label>
                                     <input type="password" id="user-pw-check" name="userPwCheck" class="input-user-info" placeholder="비밀번호를 한 번 더 입력해주세요." required>
-                                    <input type="text" id="check-pw" style="display: none;">
+                                    <input type="hidden" id="check-pw">
                                 </div>
 
                                 <div id="user-info-name" class="user-info-box">
@@ -167,7 +167,7 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
                                     	<span id="nick-msg" class="dupl-msg" style="display: none;"></span>
                                     </label>
                                     <input type="text" id="user-nickname" name="userNickname" class="input-user-info" placeholder="사용할 닉네임을 입력해주세요." required>
-                                	<input type="text" id="user-ck-nickname" style="display: none;">
+                                	<input type="hidden" id="user-ck-nickname">
                                 </div>
 
                                 <div id="user-info-ssn" class="user-info-box">
@@ -200,7 +200,7 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
                                     	<span id="email-msg" class="dupl-msg" style="display: none;"></span>
                                     </label>
                                     <input type="text" id="user-email" name="userEmail" class="input-user-info" placeholder="이메일을 입력해주세요." required>
-                                    <input type="text" id="user-ck-email" style="display: none;">
+                                    <input type="hidden" id="user-ck-email">
                                     
                                 </div>
 
@@ -210,7 +210,7 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
                                     	<span id="email-ck-msg" class="dupl-msg" style="display: none;"></span>
                                     </label>
                                     <input type="text" id="user-email-check" maxlength="6" name="userEmailCheck" class="input-user-info" placeholder="인증번호 6자리를 입력해주세요." required>
-                                    <input type="text" id="check-certification-num" style="display: none;">
+                                    <input type="hidden" id="check-certification-num">
                                 	<input type="text" id="send-certification-num" style="display:none;">
                                 	<input type="button" id="certification-btn" value="인증번호 전송">
                                 	<input type="button" id="check-certification-num-btn" onclick="confirmNumber();" value="확인">
@@ -218,7 +218,7 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 
 	                            <div id="main-con-btn-box" class="btn-box">
 	                                <input type="button" id="prev-btn1" class="next-btn" value="이전">
-	                                <input type="submit" id="next-btn2" class="next-btn" id="register-btn" value="확인">
+	                                <input type="button" id="next-btn2" class="next-btn" value="확인">
 	                            </div>
 
                             </form>
@@ -318,20 +318,20 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 	     	function confirmNumber(){
 	     		var num1 = $("#user-email-check").val();
 	     		var num2 = $("#send-certification-num").val();
-	     		
 	     		if(num1 == num2) {
 	     			alert("인증이 완료되었습니다.");
-	     			$("#check-certification-num").text("true");
+	     			$("#check-certification-num").attr("value", "true");
 	     			$("#email-ck-msg").text("인증 완료").removeClass("error").addClass("success").show();
-	     		}else {
+	     		} else {
 	     			alert("작성한 인증번호가 다릅니다.");
+	     			$("#check-certification-num").attr("value", "false");
 	     			$("#email-ck-msg").text("인증 실패").removeClass("success").addClass("error").show();
 	     		}
 	     	}
 	     	
 	        // 회원가입 ajax
 	        $(document).ready(function() {
-	        	$("#register-btn").on("click", function(event) {
+	        	$("#next-btn2").on("click", function(event) {
 	        		
 	        		event.preventDefault();
 	        		
@@ -345,11 +345,7 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 	            	var userPhoneVal = $("#user-phone").val();
 	            	var userEmailVal = $("#user-email").val();
 	            	
-	            	var ckIdVal = $("#user-ck-id").val();
-	            	var ckPwVal = $("#user-ck-pw").val();
-	            	var ckPwConVal = $("#check-pw").val();
-	            	var ckNicknameVal = $("#user-ck-nickname").val();
-	            	var ckEmailVal = $("#user-ck-email").val();
+	            	
 					
 					var formData = new FormData();
 					var fileInput = document.getElementById("profile-image");
@@ -365,7 +361,6 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 	                formData.append("userPhone", userPhoneVal);
 	                formData.append("userEmail", userEmailVal);
 
-	            	
 	        		// 전부 작성 했는지 확인
 	        		if(
 	       				userIdVal != null
@@ -379,11 +374,11 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 	       				&& userEmailVal != null
 	       			) {
 	        			if(
-        					ckIdVal === "true"
-        					&& ckPwVal === "true"
-        					&& ckPwConVal === "true"
-        					&& ckNicknameVal === "true"
-        					&& ckEmailVal === "true"
+	        				$("#user-ck-id").val() === "true"
+        					&& $("#user-ck-pw").val() === "true"
+        					&& $("#check-pw").val() === "true"
+        					&& $("#user-ck-nickname").val() === "true"
+        					&& $("#user-ck-email").val() === "true"
 	        			) {
 	        				$.ajax({
 		        				url : "/user/register.dog",
@@ -430,17 +425,17 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 	        				var idMsg = $("#id-msg");
 	        				if(data == "true") {
 	        					idMsg.removeClass("success").addClass("error");
-	        					$("#user-ck-id").text("false");
+	        					$("#user-ck-id").attr("value","false");
 	        					msg = "이미 사용중인 아이디 입니다.";
 	        					
 	        				} else if(data == "false1") {
 	        					idMsg.removeClass("success").addClass("error");
-	        					$("#user-ck-id").text("false");
+	        					$("#user-ck-id").attr("value","false");
 	        					msg = "소문자와 숫자를 포함한 6 ~ 14자리만 가능합니다.";
 	        					
 	        				} else if(data == "false2") {
 	        					idMsg.removeClass("error").addClass("success");
-	        					$("#user-ck-id").text("true");
+	        					$("#user-ck-id").attr("value","true");
 		        				msg = "사용 가능한 아이디 입니다.";
 		        				
 	        				} else {
@@ -472,17 +467,17 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 	        				
 	        				if(data == "true") {
 	        					nickMsg.removeClass("success").addClass("error");
-	        					$("#user-nickname-pw").text("false");
+	        					$("#user-ck-nickname").attr("value","false");
 	        					msg = "이미 사용중인 닉네임 입니다.";
 	        					
 	        				} else if(data == "false1") {
 	        					nickMsg.removeClass("success").addClass("error");
-	        					$("#user-nickname-pw").text("false");
+	        					$("#user-ck-nickname").attr("value","false");
 	        					msg = "한글이나 영어, 2자 ~ 15자만 가능합니다.";
 	        					
 	        				} else if(data == "false2") {
 	        					nickMsg.removeClass("error").addClass("success");
-	        					$("#user-nickname-pw").text("true");
+	        					$("#user-ck-nickname").attr("value","true");
 		        				msg = "사용 가능한 닉네임 입니다.";
 		        				
 	        				} else {
@@ -514,17 +509,17 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 	        				
 	        				if(data == "true") {
 	        					emailMsg.removeClass("success").addClass("error");
-	        					$("#user-ck-email").text("false");
+	        					$("#user-ck-email").attr("value","false");
 	        					msg = "이미 사용중인 이메일 입니다.";
 	        					
 	        				} else if(data == "false1") {
 	        					emailMsg.removeClass("success").addClass("error");
-	        					$("#user-ck-email").text("false");
+	        					$("#user-ck-email").attr("value","false");
 	        					msg = "이메일 형식만 가능합니다.";
 	        					
 	        				} else if(data == "false2") {
 	        					emailMsg.removeClass("error").addClass("success");
-	        					$("#user-ck-email").text("true");
+	        					$("#user-ck-email").attr("value","true");
 		        				msg = "사용 가능한 이메일 입니다.";
 		        				
 	        				} else {
@@ -574,11 +569,11 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 			
 			        if (msg) {
 			            // 사용 불가
-       					$("#user-ck-pw").text("false");
+       					$("#user-ck-pw").attr("value","false");
 			            pwMsg.text(msg).removeClass("success").addClass("error").show();
 			        } else {
 			            // 사용 가능
-       					$("#user-ck-pw").text("true");
+       					$("#user-ck-pw").attr("value","true");
 			            pwMsg.text("사용 가능한 비밀번호 입니다.").removeClass("error").addClass("success").show();
 			        }
 			    });
@@ -594,11 +589,11 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
         			var msg = "";
         			
         			if(pwTagVal != pwCkTagVal) {
-       					$("#check-pw").text("false");
+       					$("#check-pw").attr("value","false");
         				msg = "입력한 비밀번호와 다릅니다.";
         				pwCkMsg.removeClass("success").addClass("error");
         			} else {
-       					$("#check-pw").text("true");
+       					$("#check-pw").attr("value","true");
         				msg = "입력한 비밀번호와 일치합니다.";
         				pwCkMsg.removeClass("error").addClass("success");
         			}
