@@ -32,8 +32,16 @@ public class AppController {
 	
 	@GetMapping("/insert.dog")
 	public ModelAndView showInsertForm(ModelAndView mv, @ModelAttribute User user, HttpSession session) {
-		
-		mv.setViewName("app/write");
+		String userId = (String)session.getAttribute("userId");
+		if(userId == null || userId.isEmpty()) {
+			mv.addObject("msg", "로그인 후에 신청서를 작성할 수 있습니다");
+			mv.addObject("url", "/user/login.dog");
+			mv.setViewName("common/error");
+		}else {
+			mv.addObject("user", user);
+			System.out.println(user);
+			mv.setViewName("app/write");
+		}
 		return mv;
 	}
 	
@@ -57,6 +65,7 @@ public class AppController {
 		return mv;
 	}
 	
+	// Fix String null to Date
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

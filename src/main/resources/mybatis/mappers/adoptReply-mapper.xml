@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdoptReplyMapper">
+	<resultMap id="AdoptReplyResultMap" type="AdoptReply">
+	    <result property="userNickName" column="USER_NICKNAME"/>
+	</resultMap>
+	
+	<!-- 댓글 작성 -->
+	<insert id="insertAdoptReply">
+	    INSERT INTO ADOPT_REPLY_TBL VALUES(#{adoptNo}, SEQ_ADOPT_REPLY_NO.NEXTVAL, #{userId}, #{adoptReplyContent}, DEFAULT, DEFAULT)
+	</insert>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateAdoptReply">
+		UPDATE ADOPT_REPLY_TBL SET ADOPT_REPLY_CONTENT = #{adoptReplyContent}, ADOPT_REPLY_UPDATE_DATE = DEFAULT WHERE ADOPT_REPLY_NO = #{adoptReplyNo}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteAdoptReply">
+		DELETE FROM ADOPT_REPLY_TBL WHERE ADOPT_REPLY_NO = #{adoptReplyNo}
+	</delete>
+
+	<!-- 댓글 리스트 -->
+	<select id="selectAdoptReplyList" resultType="AdoptReply" resultMap="AdoptReplyResultMap">
+		SELECT ADOPT_REPLY_TBL.*, USER_TBL.USER_NICKNAME
+	    FROM ADOPT_REPLY_TBL
+	    LEFT JOIN USER_TBL ON ADOPT_REPLY_TBL.USER_ID = USER_TBL.USER_ID
+	    WHERE ADOPT_REPLY_TBL.ADOPT_NO = #{adoptNo}
+	</select>
+</mapper>

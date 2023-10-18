@@ -24,12 +24,12 @@
 				<nav id="navmenu" class="navmenu">
 					<ul>
 						<li><a href="/" class="active">Home</a></li>
-						<li><a href="index.html#team">돌봄 리스트</a></li>
+						<li><a href="/dog/list.dog">돌봄 리스트</a></li>
 						<li class="dropdown has-dropdown"><a href="blog.html"><span>입양</span>
 								<i class="bi bi-chevron-down"></i></a>
 							<ul class="dd-box-shadow">
-								<li><a href="#">돌봄 후기</a></li>
-								<li><a href="#">입양 후기</a></li>
+								<li><a href="/care/list.dog">돌봄 후기</a></li>
+								<li><a href="/adopt/list.dog">입양 후기</a></li>
 								<li><a href="/app/insert.dog">입양지원서</a></li>
 								<!-- <li class="dropdown has-dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down"></i></a>
 	                <ul class="dd-box-shadow">
