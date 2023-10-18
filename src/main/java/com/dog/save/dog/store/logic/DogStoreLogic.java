@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.dog.save.common.domain.PageInfo;
 import com.dog.save.dog.domain.Dog;
 import com.dog.save.dog.domain.DogFile;
+import com.dog.save.dog.domain.DogReply;
 import com.dog.save.dog.store.DogStore;
 
 @Repository
@@ -94,6 +95,31 @@ public class DogStoreLogic implements DogStore{
 		List<Dog> dogList = session.selectList("DogMapper.selectDogsBySearch", searchInput, rowBounds);
 		return dogList;	
 	}
+
+	@Override
+	public int insertReply(SqlSession session, DogReply dogReply) {
+		int result = session.insert("DogMapper.insertReply", dogReply);
+		return result;
+	}
+
+	@Override
+	public List<DogReply> selectReplyList(SqlSession session, Integer dogNo) {
+		List<DogReply> dogRList = session.selectList("DogMapper.selectReplyList", dogNo);
+		return dogRList;
+	}
+
+	@Override
+	public int updateReply(SqlSession session, DogReply dogReply) {
+		int result = session.update("DogMapper.updateReply", dogReply);
+		return result;
+	}
+
+	@Override
+	public int deleteReply(SqlSession session, Integer dogReplyNo) {
+		int result = session.delete("DogMapper.deleteReply", dogReplyNo);
+		return result;
+	}
+
 
 
 

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.dog.save.common.domain.PageInfo;
 import com.dog.save.dog.domain.Dog;
 import com.dog.save.dog.domain.DogFile;
+import com.dog.save.dog.domain.DogReply;
 
 public interface DogStore {
 
@@ -104,6 +105,39 @@ public interface DogStore {
 	 * @return
 	 */
 	List<Dog> selectDogsBySearch(SqlSession session, String searchInput, PageInfo pInfo);
+
+	/**
+	 * 돌봄 강아지 상세 댓글 입력 Store
+	 * @param session
+	 * @param dogReply
+	 * @return
+	 */
+	int insertReply(SqlSession session, DogReply dogReply);
+
+	/**
+	 * 돌봄 강아지 댓글 조회 Store
+	 * @param session
+	 * @param refDogNo
+	 * @return
+	 */
+	List<DogReply> selectReplyList(SqlSession session, Integer dogNo);
+
+	/**
+	 * 돌봄 강아지 댓글 수정 Store
+	 * @param session
+	 * @param dogReply
+	 * @return
+	 */
+	int updateReply(SqlSession session, DogReply dogReply);
+
+	/**
+	 * 돌봄 강아지 댓글 삭제 Store
+	 * @param session
+	 * @param dogReplyNo
+	 * @return
+	 */
+	int deleteReply(SqlSession session, Integer dogReplyNo);
+
 
 
 
