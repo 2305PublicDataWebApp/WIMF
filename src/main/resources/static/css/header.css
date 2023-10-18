@@ -247,13 +247,19 @@ section {
 
 /* Home Page Custom Header on page scroll
 ------------------------------*/
-.index-page.scrolled .header {
+.index-page.scrolled .header{
   --background-color: #ffffff;
   --secondary-color: #444444;
   --nav-color: #444444;
   --nav-hover-color: #d83535;
 }
-
+.scrolled .header #session-id {
+	color: #444444 !important;
+	font-weight: bold;
+}
+#session-id{
+	color: #ffffff;
+}
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/
@@ -752,9 +758,9 @@ section {
   }
 }
 
-#session-id {
-	color: var(--contrast-color);
-}
+/* #session-id { */
+/* 	color: var(--contrast-color); */
+/* } */
 
 #user-info-div {
 	display: flex;
