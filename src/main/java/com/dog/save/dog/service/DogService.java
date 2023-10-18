@@ -86,6 +86,13 @@ public interface DogService {
 	 */
 	List<Dog> selectDogsBySearch(String searchInput, PageInfo pInfo);
 
+//	기진 코드
+	/**
+	 * 모든 강아지 리스트 가져오기 Service
+	 * @return
+	 */
+	List<Dog> selectAllDogList();
+//	기진 코드
 
 
 

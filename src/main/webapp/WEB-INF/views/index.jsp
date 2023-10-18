@@ -828,7 +828,7 @@
     
 
     <!-- Team Section - Home Page -->
-    <section id="team" class="team">
+    <section id="team dogSection" class="team">
 
       <!--  Section Title -->
       <div class="container section-title" data-aos="fade-up">
@@ -840,24 +840,31 @@
 
         <div class="row gy-5">
 
-          <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="100">
-            <div class="member-img">
-              <img src="/img/clients/싱글벙글 댕댕이의 세계_.JPG" class="img-fluid" alt="">
-              <div class="social">
-                <a href="#"><i class="bi bi-twitter"></i></a>
-                <a href="#"><i class="bi bi-facebook"></i></a>
-                <a href="#"><i class="bi bi-instagram"></i></a>
-                <a href="#"><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-            <div class="member-info text-center">
-              <h4>뽀삐</h4>
-              <span>5kg, 2살</span>
-              <p>주인님 도와주세요</p>
-            </div>
-          </div><!-- End Team Member -->
+			<c:forEach var="combinedList" items="${combinedList}" varStatus="loop">
+    			<c:if test="${loop.index < 6}">
+    			<!-- Start Team Member -->
+		          <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="100">
+		            <div class="member-img">
+		              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
+		              <div class="social" onclick="showDogDetail(${combinedList.dog.dogNo})">
+		                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }">보러가기</a>
+		                <!-- <a href="#"><i class="bi bi-twitter"></i></a>
+		                <a href="#"><i class="bi bi-facebook"></i></a>
+		                <a href="#"><i class="bi bi-instagram"></i></a>
+		                <a href="#"><i class="bi bi-linkedin"></i></a> -->
+		              </div>
+		            </div>
+		            <div class="member-info text-center">
+		              <h4>${combinedList.dog.dogName }</h4>
+		              <span>${combinedList.dog.dogWeight }kg, ${combinedList.dog.dogAge }살</span>
+		              <p>${combinedList.dog.dogInfo }</p>
+		            </div>
+		          </div>
+          <!-- End Team Member -->
+          	</c:if>
+          </c:forEach>
 
-          <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="200">
+          <!-- <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="200">
             <div class="member-img">
               <img src="/img/team/team-2.jpg" class="img-fluid" alt="">
               <div class="social">
@@ -872,7 +879,7 @@
               <span>Product Manager</span>
               <p>Labore ipsam sit consequatur exercitationem rerum laboriosam laudantium aut quod dolores exercitationem ut</p>
             </div>
-          </div><!-- End Team Member -->
+          </div>End Team Member
 
           <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="300">
             <div class="member-img">
@@ -889,7 +896,7 @@
               <span>CTO</span>
               <p>Illum minima ea autem doloremque ipsum quidem quas aspernatur modi ut praesentium vel tque sed facilis at qui</p>
             </div>
-          </div><!-- End Team Member -->
+          </div>End Team Member
 
           <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="400">
             <div class="member-img">
@@ -906,7 +913,7 @@
               <span>Accountant</span>
               <p>Magni voluptatem accusamus assumenda cum nisi aut qui dolorem voluptate sed et veniam quasi quam consectetur</p>
             </div>
-          </div><!-- End Team Member -->
+          </div>End Team Member
 
           <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="500">
             <div class="member-img">
@@ -923,7 +930,7 @@
               <span>Marketing</span>
               <p>Qui consequuntur quos accusamus magnam quo est molestiae eius laboriosam sunt doloribus quia impedit laborum velit</p>
             </div>
-          </div><!-- End Team Member -->
+          </div>End Team Member
 
           <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="600">
             <div class="member-img">
@@ -940,13 +947,13 @@
               <span>Operation</span>
               <p>Sint sint eveniet explicabo amet consequatur nesciunt error enim rerum earum et omnis fugit eligendi cupiditate vel</p>
             </div>
-          </div><!-- End Team Member -->
+          </div>End Team Member
 
         </div>
 
       </div>
 
-    </section><!-- End Team Section -->
+    </section>End Team Section -->
 
     <!-- Call-to-action Section - Home Page -->
     <section id="call-to-action" class="call-to-action">
@@ -975,7 +982,7 @@
         <div class="row align-items-center">
 
           <div class="col-lg-5 info" data-aos="fade-up" data-aos-delay="100">
-            <h3>후기</h3>
+            <h3>돌봄 후기</h3>
             <p>
               돌봄으로 나눈 마음을 공유해주세요!
             </p>
@@ -989,7 +996,7 @@
                 "loop": true,
                 "speed" : 600,
                 "autoplay": {
-                "delay": 5000
+                "delay": 3000
                 },
                 "slidesPerView": "auto",
                 "pagination": {
@@ -1114,7 +1121,7 @@
     </section><!-- End Testimonials Section -->
 
     <!-- Recent-posts Section - Home Page -->
-    <section id="recent-posts" class="recent-posts">
+    <section id="recent-posts boardSection" class="recent-posts">
 
       <!--  Section Title -->
       <div class="container section-title" data-aos="fade-up">
@@ -1807,6 +1814,7 @@
   <script src="/vendor/php-email-form/validate.js"></script>
   
   <script>
+  	// 팝업창 열기
 	  function openPopup1() {
 	      var width = 800;
 	      var height = 800;
@@ -1817,6 +1825,13 @@
 	         alert("팝업이 차단되었습니다. 팝업차단을 해제해주세요.");
 	      }
 	   }
+  	
+	  function showDogDetail(dogNo) {    	    	    	       	       
+	        var url = "/dog/detail.dog?dogNo=" + dogNo;
+	        window.location.href = url;	    	    
+	}	
+	  
+  	
   </script>
 
 </body>

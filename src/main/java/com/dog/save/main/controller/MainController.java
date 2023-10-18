@@ -1,28 +1,21 @@
 package com.dog.save.main.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.dog.save.board.domain.Board;
-import com.dog.save.board.domain.bPageInfo;
 import com.dog.save.board.service.BoardService;
-import com.google.gson.JsonObject;
+import com.dog.save.dog.domain.Dog;
+import com.dog.save.dog.domain.DogFile;
+import com.dog.save.dog.domain.DogSet;
+import com.dog.save.dog.service.DogService;
 
 @Controller
 @RequestMapping("/")
@@ -30,31 +23,37 @@ public class MainController {
 	
 	@Autowired
 	private BoardService bService;
-
-	//==================== 게시글 리스트 조회 ====================
-	@GetMapping("")
-	public String boardListView(Model model
-			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage) {
-		Integer totalCount = bService.getListCount();
-		bPageInfo bpInfo = this.getPageInfo(currentPage, totalCount);
-		List<Board> bList = bService.selectBoardList(bpInfo);
-		model.addAttribute("bList", bList).addAttribute("bpInfo", bpInfo);
-		return "index";
-	}
+	@Autowired
+	private DogService dService;
 	
-	// ==================== 게시글 페이징 처리 ====================
-	public bPageInfo getPageInfo(Integer currentPage, Integer totalCount) {
-		int recordCountPerPage = 7;
-		int naviCountPerPage = 5;
-		int naviTotalCount = (int)Math.ceil((double)totalCount/recordCountPerPage);
-		int startNavi = ((int)((double)currentPage/naviCountPerPage+0.9)-1)*naviCountPerPage+1;
-		int endNavi = startNavi + naviCountPerPage - 1;
-		if(endNavi > naviTotalCount) {
-			endNavi = naviTotalCount;
-		}
-		bPageInfo bpInfo = new bPageInfo(currentPage, totalCount, naviTotalCount, recordCountPerPage, naviCountPerPage, startNavi, endNavi);
-			
-		return bpInfo;
+	//==================== main 리스트 조회 ====================
+	@GetMapping("")
+	public String boardAllListView(Model model) {
+			// board List 가져오기
+		List<Board> bList = bService.selectAllBoardList();
+		model.addAttribute("bList", bList);
+		
+			// dog List 가져오기
+		List<Dog> dList = dService.selectAllDogList();
+		
+		List<DogFile> dogFileList;
+		dogFileList = dService.selectFirstDogFile();
+		List<DogSet> combinedList = new ArrayList<>();
+		for (Dog dog : dList) {
+		    DogSet dogSet = new DogSet();
+		    dogSet.setDog(dog);
+		    // 각 Dog와 매칭되는 DogFile 찾기
+		    for (DogFile dogFile : dogFileList) {
+		        if (dog.getDogNo() == dogFile.getRefDogNo()) {
+		            dogSet.setDogFile(dogFile);
+		            break;
+		        }
+		    }
+		    combinedList.add(dogSet);
+		}		
+		model.addAttribute("combinedList", combinedList);
+		
+		return "index";
 	}
 	
 }

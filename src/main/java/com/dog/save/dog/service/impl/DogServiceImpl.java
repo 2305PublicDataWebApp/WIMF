@@ -142,5 +142,12 @@ public class DogServiceImpl implements DogService{
 	public List<Dog> selectDogsBySearch(String searchInput, PageInfo pInfo) {
 		List<Dog> dogList = dStore.selectDogsBySearch(session,searchInput,pInfo);
 		return dogList;
+	}
+//	기진 코드
+	@Override
+	public List<Dog> selectAllDogList() {
+		List<Dog> dogList = dStore.selectAllDogList(session);
+		return dogList;
 	}	
+//	기진 코드
 }

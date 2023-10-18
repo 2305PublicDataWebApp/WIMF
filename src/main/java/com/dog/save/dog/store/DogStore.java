@@ -105,6 +105,14 @@ public interface DogStore {
 	 */
 	List<Dog> selectDogsBySearch(SqlSession session, String searchInput, PageInfo pInfo);
 
+//	기진 코드
+	/**
+	 * 모든 강아지 리스트 가져오기 Store
+	 * @param session
+	 * @return
+	 */
+	List<Dog> selectAllDogList(SqlSession session);
+//	기진 코드
 
 
 }

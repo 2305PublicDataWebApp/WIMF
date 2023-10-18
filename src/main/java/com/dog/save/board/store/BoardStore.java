@@ -103,5 +103,7 @@ public interface BoardStore {
 	 * @return
 	 */
 	int increaseViewCount(SqlSession sqlSession, Integer boardNo);
+	
+	List<Board> selectAllBoardList(SqlSession sqlSession);
 
 }
