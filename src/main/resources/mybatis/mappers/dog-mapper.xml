@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="DogMapper">
+
 	<insert id="insertDog">
 		INSERT INTO DOG_TBL 
 		VALUES	(SEQ_DOG_NO.NEXTVAL, #{dogName}, #{dogKind}, #{dogAgency}, #{dogAge}, #{dogGender}, 
 		#{dogRLocation}, #{dogWeight}, #{dogPersonality}, #{dogHealth}, #{dogRDate}, #{dogDeathDate}, 
 		DEFAULT, DEFAULT, #{dogInfo}, #{dogRegion}, DEFAULT, DEFAULT, DEFAULT )	
-	</insert>
-	
+	</insert>	
 	<insert id="insertDogFiles">
 	    INSERT INTO DOG_FILE_TBL (REF_DOG_NO, DOG_FILE_ORDER, DOG_FILE_NAME, DOG_FILE_RENAME, DOG_FILE_PATH)
 	    VALUES (
@@ -18,10 +18,35 @@
 	        #{dogFileRename},
 	        #{dogFilePath}
 	    )
-	</insert>
-	
+	</insert>	
 	<select id="selectDogNoSeq" resultType="_int">
 		SELECT SEQ_DOG_NO.CURRVAL FROM DUAL
 	</select>	
-	
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*) FROM DOG_TBL
+	</select>
+	<select id="getListCountByRegion" resultType="_int">
+		SELECT COUNT(*) FROM DOG_TBL WHERE DOG_REGION = #{region}
+	</select>
+	<select id="getListCountBySearch" resultType="_int">
+		SELECT COUNT(*) FROM DOG_TBL WHERE DOG_NAME LIKE '%'||#{searchInput}||'%' 
+	</select>
+	<select id="selectAllDog" resultType="Dog">
+		SELECT * FROM DOG_TBL ORDER BY DOG_NO ASC
+	</select>
+	<select id="selectDogsByRegion" resultType="Dog">
+		SELECT * FROM DOG_TBL WHERE DOG_REGION = #{region}
+	</select>
+	<select id="selectDogsBySearch" resultType="Dog">
+		SELECT * FROM DOG_TBL WHERE DOG_NAME LIKE '%'||#{searchInput}||'%'
+	</select>
+	<select id="selectFirstDogFile" resultType="DogFile">
+		SELECT * FROM DOG_FILE_TBL WHERE DOG_FILE_ORDER = 1
+	</select>
+	<select id="selectDogByDogNo" resultType="Dog">
+		SELECT * FROM DOG_TBL WHERE DOG_NO = #{dogNo}	
+	</select>
+	<select id="selectDogFileByDogNo" resultType="DogFile">
+		SELECT * FROM DOG_FILE_TBL WHERE REF_DOG_NO = #{dogNo}
+	</select>
 </mapper>

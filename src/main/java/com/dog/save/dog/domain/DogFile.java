@@ -9,10 +9,15 @@ public class DogFile {
 	private String dogFileName;
 	private String dogFileRename;
 	private String dogFilePath;
-	
-	
-	
-	public DogFile(int refDogNo2, String dogFileName2, String dogFileRename2, String dogFilePath2) {
-		// TODO Auto-generated constructor stub
+	public DogFile(int refDogNo, String dogFileName, String dogFileRename, String dogFilePath) {
+		super();
+		this.refDogNo = refDogNo;
+		this.dogFileName = dogFileName;
+		this.dogFileRename = dogFileRename;
+		this.dogFilePath = dogFilePath;
 	}
+	
+	
+	
+
 }
