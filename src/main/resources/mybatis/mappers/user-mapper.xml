@@ -40,4 +40,5 @@
 	<select id="checkUserByNameIdEmail" resultType="User">
 		SELECT * FROM USER_TBL WHERE USER_NAME = #{userName} AND USER_ID = #{userId} AND USER_EMAIL = #{userEmail}
 	</select>
+	
 </mapper>
