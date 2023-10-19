@@ -1,19 +1,27 @@
 package com.dog.save.adopt.controller;
 
+import java.io.File;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.dog.save.adopt.domain.Adopt;
 import com.dog.save.adopt.domain.AdoptReply;
@@ -50,9 +58,19 @@ public class AdoptController {
 	}
 	// ==================== 게시글 작성 ====================
 	@PostMapping("/write.dog")
-	public String adoptWrite(@ModelAttribute Adopt adopt, Model model, HttpSession session) {
+	public String adoptWrite(@ModelAttribute Adopt adopt, Model model, HttpSession session
+			, @RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile
+			, HttpServletRequest request) {
 		// 작성자 session에서 userId 가져오기
 		try {
+			if (uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
+	        	// 파일 정보(이름, 리네임, 경로, 크기) 및 파일 저장
+	            Map<String, Object> eMap = this.saveFile(request, uploadFile);
+	            adopt.setAdoptFileName((String) eMap.get("fileName"));
+	            adopt.setAdoptFileRename((String) eMap.get("fileRename"));
+	            adopt.setAdoptFilePath((String) eMap.get("filePath"));
+	        }
+			
 			String adoptWriter = (String)session.getAttribute("userId");
 			if(adoptWriter == null || adoptWriter.isEmpty()) {
 				model.addAttribute("msg", "로그인 후에 게시글을 작성할 수 있습니다");
@@ -106,8 +124,31 @@ public class AdoptController {
 	}
 	// ==================== 게시글 수정 ====================
 	@PostMapping("/update.dog")
-	public String adoptUpdate(@ModelAttribute Adopt adopt, Model model, HttpSession session) {
+	public String adoptUpdate(@ModelAttribute Adopt adopt, Model model, HttpSession session
+			, @RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile
+			, HttpServletRequest request) {
 		try {
+			
+			if(uploadFile != null && !uploadFile.isEmpty()) {
+				// 수정
+				// 1. 대체, 삭제 후 등록
+				// 기존 업로드 된 파일 존재 여부 체크 후 있으면 기존 파일 삭제
+				String fileName = adopt.getAdoptFileRename();
+				if(adopt.getAdoptFileName() != null) {
+					// 있으면 기존 파일 삭제
+					this.deleteFile(request, fileName);
+				}
+				// 없으면 새로 업로드 하려는 파일 저장
+				Map<String, Object> infoMap = this.saveFile(request, uploadFile);
+				
+				// DB에 저장하기 위해 adopt에 데이터를 Set하는 부분임.
+				String adoptfileName = (String)infoMap.get("fileName");
+				adopt.setAdoptFileName(adoptfileName);
+				String adoptfileRename = (String)infoMap.get("fileRename");
+				adopt.setAdoptFileRename(adoptfileRename);
+				adopt.setAdoptFilePath((String)infoMap.get("filePath"));
+			}
+			
 			String adoptWriter = adopt.getUserId();
 			String userId = (String)session.getAttribute("userId");
 			if(adoptWriter != null && adoptWriter.equals(userId)) {
@@ -120,6 +161,8 @@ public class AdoptController {
 					return "common/error";
 				}
 			}else {
+				System.out.println("adoptWriter : " + adoptWriter);
+				System.out.println("userId : " + userId);
 				model.addAttribute("msg", "내가 작성한 글만 수정이 가능합니다");
 				model.addAttribute("url", "/adopt/list.dog");
 				return "common/error";
@@ -141,6 +184,8 @@ public class AdoptController {
 			if(adoptWriter != null && adoptWriter.equals(userId) || uOne.getAdminCheck().equals("Y")) {
 				int result = aService.deleteAdoptByNo(adopt);
 				if(result > 0) {
+					System.out.println("adoptWriter : " + adoptWriter);
+					System.out.println("userId : " + userId);
 					return "redirect:/adopt/list.dog";
 				}else {
 					model.addAttribute("msg", "게시글 삭제가 완료되지 않았습니다");
@@ -239,5 +284,51 @@ public class AdoptController {
 			model.addAttribute("url", "/adopt/list.dog");
 			return "common/error";
 		}
+	}
+	
+	private Map<String, Object> saveFile(HttpServletRequest request, MultipartFile uploadFile) throws Exception {
+		HashMap<String, Object> fileMap = new HashMap<String, Object>();
+		// resources 경로 구하기
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		// 파일 저장 경로
+		String savePath = root + "\\adoptUploadFiles";
+		// 파일 이름 구하기
+		String fileName = uploadFile.getOriginalFilename();
+		// 파일 확장자 구하기
+		String extension = fileName.substring(fileName.lastIndexOf(".")+1);
+		// 시간으로 파일 리네임하기
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMDDHHmmss");
+		String fileRename = sdf.format(new Date(System.currentTimeMillis())) + "." + extension;
+		// 파일 저장 전 폴더 만들기
+		File saveFolder = new File(savePath);
+		if(!saveFolder.exists()) {
+			saveFolder.mkdir();
+		}
+		// ********************** 파일 저장 **********************
+		File saveFile = new File(savePath + "\\" + fileRename);
+		uploadFile.transferTo(saveFile);
+		// 파일 이름, 경로, 크기를 넘겨주기위해 Map에 정보를 저장한 후 return 함
+				// 왜 return 하는 가? DB에 저장하기 위해서 필요한 정보니까
+		fileMap.put("fileName", fileName);
+		fileMap.put("fileRename", fileRename);
+		fileMap.put("filePath", "../resources/adoptUploadFiles/" + fileRename);
+		
+		return fileMap;
+	}
+
+	private void deleteFile(HttpServletRequest request, String fileName) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String delfilepath = root + "\\adoptUploadFiles\\" + fileName;
+		File file = new File(delfilepath);
+		if(file.exists()) {
+			file.delete();
+		}
+	}
+	
+	// Fix String null to Date
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	}
 }

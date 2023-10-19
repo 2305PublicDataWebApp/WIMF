@@ -15,6 +15,11 @@ public class Adopt {
     private Timestamp adoptUpdateDate;
     private Date adoptDate;
     private int viewCount;
+    private Date giveUpDate;
+    private String adoptType;
+    private String adoptFileName;
+    private String adoptFileRename;
+    private String adoptFilePath;
     
     private String userNickName;
 }

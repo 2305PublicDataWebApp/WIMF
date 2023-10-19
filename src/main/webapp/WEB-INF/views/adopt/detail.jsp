@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 	
@@ -35,20 +37,28 @@
 							<a style="font-weight:bold">${adopt.adoptTitle }</a>
 						</div>
 						<div id="borad-writer">
-							<a style="font-weight:bold; color: tomato">작성자 : </a>
+							<p style="font-weight:bold; color: tomato">작성자 : </p>
 							${userNickName }
 						</div>
 						<div id="borad-create-date">
-							<a style="font-weight:bold; color: tomato">작성일 : </a>
+							<p style="font-weight:bold; color: tomato">작성일 : </p>
 							<fmt:formatDate pattern="yyyy-MM-dd a HH:mm:ss" value="${adopt.adoptCreateDate }"/>
 						</div>
 						<div>
-							<a style="font-weight:bold; color: tomato">입양일 : </a>
-							<fmt:formatDate pattern="yyyy-MM-dd" value="${adopt.adoptDate }"/>
+							<a style="font-weight:bold; color: tomato">데려온 날 : </a>
+							<fmt:formatDate pattern="yyyy-MM-dd" value="${adopt.adoptDate }"/><br>
+							<c:if test="${not empty adopt.giveUpDate}">
+								<a style="font-weight:bold; color: tomato">돌봄 종료일 : </a>
+								<fmt:formatDate pattern="yyyy-MM-dd" value="${adopt.giveUpDate }"/>
+							</c:if>
 						</div>
 						<div id="borad-deep-content">
+						<c:if test="${!empty adopt.adoptFileName }">
+							<img alt="첨부파일" src="../resources/adoptUploadFiles/${adopt.adoptFileRename }"  style="width: 100%; height: auto;">
+						</c:if>
 							${adopt.adoptContent }
 						</div>
+						
 						<c:choose>
 							<c:when test="${adopt.userId eq userId}">
 								<div>
@@ -87,10 +97,10 @@
 						</form>
 					</div>
 				
-				<!-- 댓글 목록 -->
-				<c:if test="${not empty rList}">
-					<div id="board-reply-list">
-						<h6 style="font-weight:bold; color: tomato;">댓글목록</h6>
+					<!-- 댓글 목록 -->
+					<c:if test="${not empty rList}">
+						<div id="board-reply-list">
+							<h6 style="font-weight:bold; color: tomato;">댓글목록</h6>
 							<table id="board-reply-list-table">
 								<colgroup>
 								<col width="40%" />
@@ -124,19 +134,19 @@
 													<a id="reply-delete" href="javascript:void(0);" onclick="replyDeleteForm('${delUrl}');">삭제</a>
 												</td>
 											</c:when>
-												<c:when test="${userId == 'admin' }">
-													<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray">
-														<a id="reply-update-bean"></a>
-														<c:url var="delUrl" value="/adoptreply/delete.dog">
-															<c:param name="adoptReplyNo" value="${reply.adoptReplyNo }"></c:param>
-															<!-- 자기 자신이 작성한 댓글만 지우도록 하기 위해 replyWriter를 추가함 -->
-															<c:param name="userId" value="${reply.userId }"></c:param>
-															<!-- 성공하면 detail로 가기 위해 필요한 adoptNo 세팅 -->
-															<c:param name="adoptReplyNo" value="${reply.adoptReplyNo }"></c:param>
-														</c:url>
-														<a id="reply-delete" href="javascript:void(0);" onclick="replyDeleteForm('${delUrl}');">삭제</a>
-													</td>
-												</c:when>
+											<c:when test="${userId == 'admin' }">
+												<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray">
+													<a id="reply-update-bean"></a>
+													<c:url var="delUrl" value="/adoptreply/delete.dog">
+														<c:param name="adoptReplyNo" value="${reply.adoptReplyNo }"></c:param>
+														<!-- 자기 자신이 작성한 댓글만 지우도록 하기 위해 replyWriter를 추가함 -->
+														<c:param name="userId" value="${reply.userId }"></c:param>
+														<!-- 성공하면 detail로 가기 위해 필요한 adoptNo 세팅 -->
+														<c:param name="adoptReplyNo" value="${reply.adoptReplyNo }"></c:param>
+													</c:url>
+													<a id="reply-delete" href="javascript:void(0);" onclick="replyDeleteForm('${delUrl}');">삭제</a>
+												</td>
+											</c:when>
 											<c:when test="${reply.userId ne userId}">
 												<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray"></td>
 											</c:when>

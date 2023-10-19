@@ -8,12 +8,27 @@
 	
 	<!-- 게시글 등록 -->
 	<insert id="insertAdopt">
-		INSERT INTO ADOPT_TBL VALUES(SEQ_ADOPT_NO.NEXTVAL, #{userId}, #{adoptTitle}, #{adoptContent}, DEFAULT, DEFAULT, #{adoptDate}, DEFAULT)
+	    INSERT INTO ADOPT_TBL 
+	    (ADOPT_NO, USER_ID, ADOPT_TITLE, ADOPT_CONTENT, ADOPT_CREATE_DATE, ADOPT_UPDATE_DATE, ADOPT_DATE, VIEW_COUNT, GIVEUP_DATE, ADOPT_TYPE, ADOPT_FILE_NAME, ADOPT_FILE_RENAME, ADOPT_FILE_PATH)
+	    VALUES 
+	    (SEQ_ADOPT_NO.NEXTVAL, #{userId}, #{adoptTitle}, #{adoptContent}, DEFAULT, DEFAULT, #{adoptDate}, DEFAULT, #{giveUpDate}, #{adoptType}, #{adoptFileName}, #{adoptFileRename}, #{adoptFilePath})
 	</insert>
+
 	
 	<!-- 게시글 수정 -->
 	<update id="updateAdopt">
-		UPDATE ADOPT_TBL SET ADOPT_TITLE = #{adoptTitle}, ADOPT_CONTENT = #{adoptContent}, ADOPT_UPDATE_DATE = DEFAULT, ADOPT_DATE = #{adoptDate} WHERE ADOPT_NO = #{adoptNo}
+		UPDATE ADOPT_TBL
+	    SET USER_ID = #{userId},
+	        ADOPT_TITLE = #{adoptTitle},
+	        ADOPT_CONTENT = #{adoptContent},
+	        ADOPT_UPDATE_DATE = DEFAULT,
+	        ADOPT_DATE = #{adoptDate},
+	        GIVEUP_DATE = #{giveUpDate},
+	        ADOPT_TYPE = #{adoptType},
+	        ADOPT_FILE_NAME = #{adoptFileName},
+	        ADOPT_FILE_RENAME = #{adoptFileRename},
+	        ADOPT_FILE_PATH = #{adoptFilePath}
+	    WHERE ADOPT_NO = #{adoptNo}
 	</update>
 	
 	<!-- 게시글 삭제 -->

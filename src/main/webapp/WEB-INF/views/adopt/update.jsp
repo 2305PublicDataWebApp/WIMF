@@ -9,7 +9,7 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>입양 후기 수정</title>
+		<title>돌봄, 입양 후기 수정</title>
 		<link href="/css/board/communityInsert.css" rel="stylesheet">
 		
 		<!-- css -->
@@ -36,18 +36,43 @@
 		
 		<main id="main">
 			<div id="container">
-				<h3 style="padding-bottom: 2%;">입양 후기 수정</h3>
+				<h3 style="padding-bottom: 2%;">돌봄, 입양 후기 수정</h3>
 				<div id="board">
-					<form action="/adopt/update.dog" method="post" onsubmit="return validateForm()">
+					<form action="/adopt/update.dog" method="post" onsubmit="return validateForm()" enctype="multipart/form-data">
+						<input type="hidden" name="adoptNo" value="${adopt.adoptNo }">
+						<input type="hidden" name="userId" value="${adopt.userId }">
+						<!-- 기존 업로드 파일 체크할 때 사용 -->
+						<input type="hidden" name="adoptFileName" 		value="${adopt.adoptFileName }">
+						<input type="hidden" name="adoptFileRename" 	value="${adopt.adoptFileRename }">
+						<input type="hidden" name="adoptFilePath" 		value="${adopt.adoptFilePath }">
 						<div id="board-content">
 							<div id="board-subject">
-								<input type="hidden" name="adoptNo" value="${adopt.adoptNo }">
-								<input type="hidden" name="userId" value="${adopt.userId }">
-								<input id="board-subject-value" type="text" name="adoptTitle" value="${adopt.adoptTitle }" placeholder="제목">
-							</div>
-							<div>
-								<p>입양일 : </p><input id="adopt-date" type="date" name="adoptDate">
-							</div>
+								<input id="board-subject-value" type="text" name="adoptTitle" placeholder="제목" value="${adopt.adoptTitle }">
+							</div><br>
+		                    <div class="radio-group">
+							    <b style="display:inline; width: 100%"> 돌봄/입양 : </b>
+							    <input type="radio" id="dog-care" name="adoptType" value="care" <c:if test="${adopt.adoptType eq 'care'}">checked</c:if>>
+							    <label for="dog-care">돌봄</label>
+							    <input type="radio" id="dog-adopt" name="adoptType" value="adopt" <c:if test="${adopt.adoptType eq 'adopt'}">checked</c:if>>
+							    <label for="dog-adopt">입양</label>
+							</div><br>
+							<div id="adopt-date-section" style="display:inline; width: 100%">
+						        <label for="adopt-date" style="display:inline">데려온 날 : </label><input id="adopt-date" type="date" name="adoptDate"  value="${adopt.adoptDate }">
+							    <div id="care-date-section"style="display:inline; width: 100%">
+							        <label for="giveup-date" style="display:inline"> ~ 돌봄 종료일 : </label>
+									<input id="giveup-date" type="date" name="giveUpDate" value="${adopt.giveUpDate }">
+							    </div>
+						    </div>
+						    <br><br>
+						    <div style="width: 100%">
+	    						<b style="display:inline">첨부파일 : </b>
+	    						<c:if test="${!empty adopt.adoptFileName }">
+									<img alt="첨부파일" src="../resources/adoptUploadFiles/${adopt.adoptFileRename }"  style="width: 50%; height: auto;">
+									<a href="../resources/adoptUploadFiles/${adopt.adoptFileRename }" download>${adopt.adoptFileName }</a>
+								</c:if>
+								<!-- String으로 받을 수 없고 변환 작업이 필요 -->
+								<input type="file" name="uploadFile" style="display:inline">
+						    </div><br>
 							<textarea id="summernote" name="adoptContent">${adopt.adoptContent }</textarea>
 							<div>
 								<input id="submit-btn" type="submit" value="수정">
@@ -65,27 +90,81 @@
 		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		
 		<script>
-			const prevAdoptDate = new Date("${adopt.adoptDate}");
-			document.getElementById("adopt-date").value = prevAdoptDate.toISOString().split("T")[0];
-		
-			function validateForm(){
-				const title = document.getElementById("board-subject-value").value;
-				const adoptDate = document.getElementById("adopt-date").value;
-				const content = document.getElementById("summernote").value;
-				const currentDate = new Date();
-				 
-				if(currentDate < new Date(adoptDate)){
-					alert("입양일은 미래 날짜를 입력할 수 없습니다.");
-					return false;
-				}else if(title.trim() == "" || !adoptDate || content.trim() == ""){
-					alert("제목과 내용, 입양일을 모두 입력해주세요");
-					return false;
-				}else{
-					return true;
-				}
-			}
+			const careDateSection = document.getElementById("care-date-section");
+			const careRadio = document.getElementById("dog-care");
+			const adoptRadio = document.getElementById("dog-adopt");
+			
+			document.addEventListener('DOMContentLoaded', function() {
+			    if (careRadio.checked) {
+			        careDateSection.style.display = "inline";
+			    } else if (adoptRadio.checked) {
+			        careDateSection.style.display = "none";
+			    }
+			});
+					
+			// 돌봄 선택시
+            careRadio.addEventListener("change", function() {
+            	careDateSection.style.display = "inline";
+            });
+			
+         	// 입양 선택시
+            adoptRadio.addEventListener("change", function() {
+            	careDateSection.style.display = "none";
+            	 document.getElementById("giveup-date").value = "";
+            });
+			
+			
+            function validateForm() {
+                const title = document.getElementById("board-subject-value").value;
+                const adoptDate = document.getElementById("adopt-date").value;
+                const content = document.getElementById("summernote").value;
+                const adoptType = document.getElementsByName("adoptType");
+                const giveupDate = document.getElementById("giveup-date").value;
+                const currentDate = new Date();
+
+                if (!adoptType[0].checked && !adoptType[1].checked) {
+                    alert("돌봄/입양 유형을 선택해주세요!");
+                    return false;
+                } else if (title.trim() === "" || content.trim() === "") {
+                    alert("제목과 내용을 모두 입력해주세요");
+                    return false;
+                } else if (adoptType[0].checked) {
+                    if (!adoptDate || !giveupDate) {
+                        alert("돌봄 시작일과 돌봄 종료일을 모두 입력해주세요");
+                        return false;
+                    } else if (currentDate <= new Date(adoptDate) || currentDate <= new Date(giveupDate)) {
+                        alert("돌봄 시작일과 돌봄 종료일은 과거 날짜만 입력할 수 있습니다.");
+                        return false;
+                    } else if (new Date(giveupDate) <= new Date(adoptDate)) {
+                        alert("돌봄 시작일이 돌봄 종료일 보다 과거날짜여야 합니다.");
+                        return false;
+                    } else {
+    	                return true;
+                    }
+                } else if (adoptType[1].checked) {
+                    if (!adoptDate) {
+                        alert("입양일을 입력해주세요");
+                        return false;
+                    } else if (currentDate <= new Date(adoptDate)) {
+                        alert("입양일은 과거날짜만 입력할 수 있습니다.");
+                        return false;
+                    } else {
+    	                return true;
+                    }
+                }
+            }
+
 			
 			$('#summernote').summernote({
+				toolbar: [
+				    // [groupName, [list of button]]
+				    ['style', ['bold', 'italic', 'underline', 'clear']],
+				    ['font', ['strikethrough', 'superscript', 'subscript']],
+				    ['fontsize', ['fontsize']],
+				    ['color', ['color']],
+				    ['para', ['ul', 'ol', 'paragraph']],
+				    ['height', ['height']]
+				  ],
 				height: 400,                 // 에디터 높이
 				minHeight: null,             // 최소 높이
 				maxHeight: null,             // 최대 높이
@@ -93,19 +172,6 @@
 		    	placeholder: "내용을 입력하세요",
 				lang: "ko-KR",				 // 한글 설정
 				
-				callbacks: {
-					onImageUpload: function(image) {
-						var file = image[0];
-						var reader = new FileReader();
-						
-						reader.onloadend = function() {
-							var image = $('<img>').attr('src',  reader.result);
-							image.attr('width','100%');
-							$('#summernote').summernote("insertNode", image[0]);
-						}
-						reader.readAsDataURL(file);
-					}
-				}
 			});
 		</script>
 	</body>
