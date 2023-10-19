@@ -19,6 +19,17 @@
 	        #{dogFilePath}
 	    )
 	</insert>	
+	<insert id="insertReply">
+		INSERT INTO DOG_REPLY_TBL VALUES(SEQ_DOG_REPLY_NO.NEXTVAL,#{refDogNo},#{dogReplyWriter},#{dogReplyContent},DEFAULT,DEFAULT,DEFAULT)
+	</insert>
+	<update id="updateReply">
+		UPDATE DOG_REPLY_TBL SET DOG_REPLY_CONTENT = #{dogReplyContent},DOG_REPLY_UPDATE_DATE = DEFAULT WHERE DOG_REPLY_NO = #{dogReplyNo} 
+	</update>
+	<delete id="deleteReply">
+		DELETE FROM DOG_REPLY_TBL WHERE DOG_REPLY_NO = #{dogReplyNo}
+	</delete>
+	
+	
 	<select id="selectDogNoSeq" resultType="_int">
 		SELECT SEQ_DOG_NO.CURRVAL FROM DUAL
 	</select>	
@@ -57,4 +68,7 @@
 	<!-- 기진 코드 -->
 	
 	
+	<select id="selectReplyList" resultType="DogReply">
+		SELECT * FROM DOG_REPLY_TBL WHERE REF_DOG_NO = #{dogNo} ORDER BY DOG_REPLY_NO ASC
+	</select>
 </mapper>

@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dog.save.common.domain.PageInfo;
 import com.dog.save.dog.domain.Dog;
 import com.dog.save.dog.domain.DogFile;
+import com.dog.save.dog.domain.DogReply;
 import com.dog.save.dog.service.DogService;
 import com.dog.save.dog.store.DogStore;
 
@@ -150,4 +151,24 @@ public class DogServiceImpl implements DogService{
 		return dogList;
 	}	
 //	기진 코드
+	@Override
+	public int insertReply(DogReply dogReply) {
+		int result = dStore.insertReply(session,dogReply);
+		return result;
+	}
+	@Override
+	public List<DogReply> selectReplyList(Integer dogNo) {
+		List<DogReply> dogRList = dStore.selectReplyList(session,dogNo);
+		return dogRList;
+	}
+	@Override
+	public int updateReply(DogReply dogReply) {
+		int result = dStore.updateReply(session,dogReply);
+		return result;
+	}
+	@Override
+	public int deleteReply(Integer dogReplyNo) {
+		int result = dStore.deleteReply(session,dogReplyNo);
+		return result;
+	}
 }

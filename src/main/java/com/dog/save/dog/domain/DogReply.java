@@ -11,5 +11,5 @@ public class DogReply {
 	private String dogReplyContent;
 	private int dogReplyRecommend;
 	private Timestamp dogReplyCreateDate;
-	private Timestamp dogReplyUdateDate;
+	private Timestamp dogReplyUpdateDate;
 }

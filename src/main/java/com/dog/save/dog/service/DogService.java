@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dog.save.common.domain.PageInfo;
 import com.dog.save.dog.domain.Dog;
 import com.dog.save.dog.domain.DogFile;
+import com.dog.save.dog.domain.DogReply;
 
 
 public interface DogService {
@@ -93,6 +94,35 @@ public interface DogService {
 	 */
 	List<Dog> selectAllDogList();
 //	기진 코드
+	/**
+	 * 돌봄 강아지 상세페이지 댓글 입력 Service
+	 * @param dogReply
+	 * @return
+	 */
+	int insertReply(DogReply dogReply);
+
+	/**
+	 * 돌봄 강아지 댓글 리스트 조회 Service
+	 * @param refDogNo
+	 * @return
+	 */
+	List<DogReply> selectReplyList(Integer dogNo);
+
+	/**
+	 * 돌봄 강아지 댓글 수정 Service
+	 * @param dogReply
+	 * @return
+	 */
+	int updateReply(DogReply dogReply);
+
+	/**
+	 * 돌봄 강아지 댓글 삭제 Service
+	 * @param dogReplyNo
+	 * @return
+	 */
+	int deleteReply(Integer dogReplyNo);
+
+
 
 
 

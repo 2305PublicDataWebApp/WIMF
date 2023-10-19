@@ -20,16 +20,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dog.save.common.domain.PageInfo;
 import com.dog.save.dog.domain.Dog;
 import com.dog.save.dog.domain.DogFile;
+import com.dog.save.dog.domain.DogReply;
 import com.dog.save.dog.domain.DogSet;
 import com.dog.save.dog.service.DogService;
+import com.google.gson.Gson;
 
 
 
@@ -118,14 +123,17 @@ public class DogController {
 
 	@GetMapping("/detail.dog")
 	public ModelAndView showDogDetail(ModelAndView mv
-			,@RequestParam(value="dogNo") int dogNo
-			,@ModelAttribute Dog dog) {
+			,@RequestParam(value="dogNo") int dogNo			
+			,@ModelAttribute Dog dog
+			,@ModelAttribute DogReply dogReply) {
 		try {
 			dog = dService.selectDogByDogNo(dogNo);
 			List<DogFile> dogFileList = dService.selectDogFileByDogNo(dogNo);
+			List<DogReply> dogReplyList = dService.selectReplyList(dogNo);
 			if(dog != null && dogFileList.size()!=0) {
 				mv.addObject("dog", dog);
 				mv.addObject("dogFileList", dogFileList);
+				mv.addObject("dogReplyList", dogReplyList);
 				mv.setViewName("dog/dogDetail");
 			}else {
 				mv.addObject("msg", "돌봄 강아지 조회가 완료되지 않았습니다");
@@ -163,11 +171,57 @@ public class DogController {
 		return mv;
 	}
 
+	@ResponseBody
+	@PostMapping("/addReply.dog")
+	public String insertReply(@ModelAttribute DogReply dogReply
+			,HttpSession session) {
+		String dogReplyWriter = (String)session.getAttribute("userId");
+		int result = 0;
+		if(dogReplyWriter != null && !dogReplyWriter.equals("")) {
+			dogReply.setDogReplyWriter(dogReplyWriter);
+			result = dService.insertReply(dogReply);
+		}
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+
+	//리스트
 	
+	@ResponseBody
+	@RequestMapping(value="/replyList.dog", produces="application/json;charset=utf-8",method=RequestMethod.GET)
+	public String showReplyList(@RequestParam("dogNo") int dogNo) {
+		List<DogReply> dogRList = dService.selectReplyList(dogNo);
+		Gson gson = new Gson();
+		return gson.toJson(dogRList);
+	}
 	
+	@ResponseBody
+	@PostMapping("/replyUpdate.dog")
+	public String updateReply(
+			@ModelAttribute DogReply dogReply
+			) {
+		int result = dService.updateReply(dogReply);
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
 	
-	
-	
+	@ResponseBody
+	@PostMapping("/replyDelete.dog")
+	public String deleteReply(Integer dogReplyNo) {
+		int result = dService.deleteReply(dogReplyNo);
+		if(result>0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 	
 	//페이징처리 메소드
 	public PageInfo getPageInfo(Integer currentPage, Integer totalCount,int recordCountPerPage) {
