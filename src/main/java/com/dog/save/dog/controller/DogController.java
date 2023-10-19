@@ -52,6 +52,48 @@ public class DogController {
 		return mv;
 	}
 
+	@GetMapping("/modify.dog")
+	public ModelAndView showModifyForm(ModelAndView mv
+			,@RequestParam(value="dogNo") int dogNo) {
+		try {
+			Dog dog = dService.selectDogByDogNo(dogNo);
+			List<DogFile> dogFileList = dService.selectDogFileByDogNo(dog.getDogNo());
+			mv.addObject("dog", dog);
+			mv.addObject("dogFileList", dogFileList);
+			mv.setViewName("dog/dogModify");
+		} catch (Exception e) {
+			mv.addObject("msg", "돌봄 강아지 조회 에러");
+			mv.addObject("error", e.getMessage());
+			mv.setViewName("common/error");				 
+		}		
+		return mv;
+	}
+	
+	@PostMapping("/modify.dog")
+	public ModelAndView modifyDog(ModelAndView mv
+			,@ModelAttribute Dog dog
+			,@RequestParam(value="uploadFiles", required=false) MultipartFile[] uploadFiles
+			,@RequestParam(value="originalName") String[] originalName
+			,HttpServletRequest request) {
+		try {
+			int result = dService.modifyDog(dog,uploadFiles,originalName,request);
+			int dogNo = dog.getDogNo();
+			if(result>0) {
+				mv.setViewName("dog/detail.dog?=" + dogNo);
+			}else {
+				mv.addObject("msg", "돌봄 강아지 수정이 완료되지 않았습니다");
+				mv.addObject("error", "돌봄 강아지 수정 실패");
+				mv.setViewName("common/error");	
+			}
+		} catch (Exception e) {
+			mv.addObject("msg", "돌봄 강아지 수정 에러");
+			mv.addObject("error", e.getMessage());
+			mv.setViewName("common/error");				
+		}
+		
+		return mv;
+	}
+	
 	@GetMapping("/list.dog")
 	public ModelAndView showDogList(ModelAndView mv			
 			,@RequestParam(value = "page", required = false, defaultValue = "1") Integer currentPage
@@ -222,6 +264,11 @@ public class DogController {
 			return "fail";
 		}
 	}
+	
+	
+	
+	
+	
 	
 	//페이징처리 메소드
 	public PageInfo getPageInfo(Integer currentPage, Integer totalCount,int recordCountPerPage) {

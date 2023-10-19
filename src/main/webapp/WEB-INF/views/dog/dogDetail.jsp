@@ -30,7 +30,8 @@
 			<br>
 			<hr>
 			<br>	
-				<div>
+				<div>					
+					<button onclick="location.href='/dog/modify.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;">수정하기</button>
 					<p>${dog.dogRegion }</p>
 					<p>${dog.dogKind }</p>
 					<h3>${dog.dogName }</h3>

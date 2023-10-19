@@ -13,7 +13,7 @@
 	    INSERT INTO DOG_FILE_TBL (REF_DOG_NO, DOG_FILE_ORDER, DOG_FILE_NAME, DOG_FILE_RENAME, DOG_FILE_PATH)
 	    VALUES (
 	        #{refDogNo},
-	        (SELECT NVL(MAX(DOG_FILE_ORDER)+1, 1) FROM DOG_FILE_TBL WHERE REF_DOG_NO = #{refDogNo}),
+	        #{dogFileOrder},
 	        #{dogFileName},
 	        #{dogFileRename},
 	        #{dogFilePath}
@@ -25,11 +25,20 @@
 	<update id="updateReply">
 		UPDATE DOG_REPLY_TBL SET DOG_REPLY_CONTENT = #{dogReplyContent},DOG_REPLY_UPDATE_DATE = DEFAULT WHERE DOG_REPLY_NO = #{dogReplyNo} 
 	</update>
+	<update id="modifyDog">
+		UPDATE DOG_TBL SET DOG_NAME = #{dogName}, DOG_KIND = #{dogKind}, DOG_AGENCY = #{dogAgency}, DOG_AGE = #{dogAge}, DOG_GENDER = #{dogGender}
+		, DOG_RLOCATION = #{dogRLocation}, DOG_WEIGHT = #{dogWeight}, DOG_PERSONALITY = #{dogPersonality}, DOG_HEALTH = #{dogHealth}
+		, DOG_RDATE = #{dogRDate}, DOG_DEATHDATE = #{dogDeathDate}, DOG_INFO = #{dogInfo}, DOG_REGION = #{dogRegion}, DOG_UPDATE = DEFAULT WHERE DOG_NO = #{dogNo} 
+	</update>	
 	<delete id="deleteReply">
 		DELETE FROM DOG_REPLY_TBL WHERE DOG_REPLY_NO = #{dogReplyNo}
 	</delete>
-	
-	
+	<delete id="deleteDogFileByDogNoAndOrder">
+		DELETE FROM DOG_FILE_TBL WHERE REF_DOG_NO = #{dogFile.refDogNo} AND DOG_FILE_ORDER = #{dogFile.dogFileOrder}
+	</delete>
+	<delete id="deleteDogFileByFilePath">
+		DELETE FROM DOG_FILE_TBL WHERE DOG_FILE_PATH = #{toDeleteFilePath}
+	</delete>
 	<select id="selectDogNoSeq" resultType="_int">
 		SELECT SEQ_DOG_NO.CURRVAL FROM DUAL
 	</select>	

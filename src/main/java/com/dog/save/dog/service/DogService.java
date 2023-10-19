@@ -122,6 +122,15 @@ public interface DogService {
 	 */
 	int deleteReply(Integer dogReplyNo);
 
+	/**
+	 * 돌봄 강아지 수정 Service
+	 * @param dog
+	 * @param uploadFiles
+	 * @param request
+	 * @return
+	 */
+	int modifyDog(Dog dog, MultipartFile[] uploadFiles, String[] originalName,HttpServletRequest request);
+
 
 
 

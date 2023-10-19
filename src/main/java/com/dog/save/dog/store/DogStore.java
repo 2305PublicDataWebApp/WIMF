@@ -146,6 +146,31 @@ public interface DogStore {
 	 */
 	int deleteReply(SqlSession session, Integer dogReplyNo);
 
+	/**
+	 * 돌봄 강아지 수정 Store
+	 * @param session
+	 * @param dog
+	 * @return
+	 */
+	int modifyDog(SqlSession session, Dog dog);
+
+	/**
+	 * 돌봄 강아지 이미지 수정 시 원 이미지 삭제 Store
+	 * @param session
+	 * @param refDogNo
+	 * @param dogFileOrder
+	 * @return
+	 */
+	int deleteDogFileByDogNoAndOrder(SqlSession session, int refDogNo, int dogFileOrder);
+
+	/**
+	 * 돌봄 강아지 수정 시 변경된 이미지 원래 파일 삭제 Store
+	 * @param session
+	 * @param toDeleteFilePath
+	 * @return
+	 */
+	int deleteDogFileByFilePath(SqlSession session, String toDeleteFilePath);
+
 
 
 
