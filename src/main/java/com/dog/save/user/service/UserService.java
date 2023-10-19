@@ -1,5 +1,7 @@
 package com.dog.save.user.service;
 
+import java.util.List;
+
 import com.dog.save.user.domain.User;
 
 public interface UserService {

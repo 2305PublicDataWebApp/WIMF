@@ -18,15 +18,170 @@
 }
 
 #board-content {
-  padding: 5%;
-  height: 610px;
+  padding-top: 5%;
+  padding-bottom: 5%;
   width: 100%;
   display: inline-flex;
 }
 #left-content {
   width: 50%;
+  border-right: 1px solid darkgrey;
 }
 #right-content {
   width: 50%;
   margin: auto;
 }
+#price1 {
+  border-radius: 4px;
+  border: none;
+  background-color: rgb(232, 69, 69);
+  color: white;
+  height: 35px;
+}
+#price1:hover {
+  color: var(--contrast-color);
+  background: rgba(255,99,71, 0.85);
+}
+#price2 {
+  border-radius: 4px;
+  border: none;
+  background-color: mediumpurple;
+  color: white;
+  height: 35px;
+}
+#price2:hover {
+  color: var(--contrast-color);
+  background: purple;
+}
+#price3 {
+  border-radius: 4px;
+  border: none;
+  background-color: cornflowerblue;
+  color: white;
+  height: 35px;
+}
+#price3:hover {
+  color: var(--contrast-color);
+  background: deepskyblue;
+}
+#reset {
+  border-radius: 4px;
+  border: none;
+  background-color: lightseagreen;
+  color: white;
+  height: 35px;
+}
+#reset:hover {
+  color: var(--contrast-color);
+  background: darkseagreen;
+}
+.donation-info-box {
+	width: 50%;
+	height: 75px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+.donation-dog-box {
+	width: 65%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+}
+.donation-info-box label{
+	width: 50%;
+	display: flex;
+	justify-content: space-between;
+}
+.donation-info-box-money {
+	margin: 0 auto;
+	margin-left: 102px;
+	margin-bottom: 5%;
+}
+.donation-info-box-option {
+	width: 50%;
+	height: 100px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+#donation-btn {
+  border-radius: 4px;
+  border: none;
+  background-color: rgb(232, 69, 69);
+  color: white;
+  height: 45px;
+}
+#donation-btn:hover {
+  color: var(--contrast-color);
+  background: rgba(255,99,71, 0.85);
+}
+.leftContent{
+  border: solid 1px;
+  border-radius: 4px;
+  height: 35px;
+  background-repeat: no-repeat;
+  background-size: 30px;
+  text-align: center;
+  padding: 5%;
+}
+.rightContent {
+  border: solid 1px;
+  border-radius: 4px;
+  width: 236px;
+  height: 35px;
+  background-repeat: no-repeat;
+  background-size: 30px;
+  padding: 5%;
+}
+.rightContent .total{
+  border: solid 1px;
+  border-radius: 4px;
+  width: 207px;
+  height: 35px;
+  background-repeat: no-repeat;
+  background-size: 30px;
+  text-align: right;
+  padding: 5%;
+}
+.image_thumbnail{
+	width: 100%;
+	height: 65%;
+	padding: 15px;
+}
+.form_radio_btn {
+			width: 47%;
+			height : 45px;
+    		border: 1px solid #EAE7E7;
+    		border-radius: 10px;
+		}
+		.form_radio_btn input[type=radio] {
+			display: none;
+		}
+		.form_radio_btn label {
+			display: block;
+    		border-radius: 10px;
+   			margin: 0 auto;
+    		text-align: center;
+    		height: -webkit-fill-available;
+    		line-height: 45px;
+		}
+		 
+		/* Checked */
+		.form_radio_btn input[type=radio]:checked + label {
+			background: gold;
+			color: black;
+			font-weight: bold;
+		}
+		 
+		/* Hover */
+		.form_radio_btn label:hover {
+			color: #666;
+		}
+		 
+		/* Disabled */
+		.form_radio_btn input[type=radio] + label {
+			background: #F9FAFC;
+			color: #666;
+		}

@@ -95,7 +95,7 @@
 			    <br><br><br><br><br><br><br><br>
 			    <div id="btn-area">
 				    <button onclick="location.href='/app/insert.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;">돌봄(입양)신청서로 이동</button>		    
-				    <button>후원하기</button>				    
+				    <button onclick="location.href='/donation/money.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;">${dog.dogName } 후원하러 가기</button>				    
 			    </div>
 			</div>
 		</div>

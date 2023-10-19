@@ -1,5 +1,7 @@
 package com.dog.save.user.store;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.dog.save.user.domain.User;

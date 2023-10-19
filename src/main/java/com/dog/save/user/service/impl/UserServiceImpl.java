@@ -1,5 +1,7 @@
 package com.dog.save.user.service.impl;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,6 +72,5 @@ public class UserServiceImpl implements UserService{
 		User uOne = uStore.checkUserByNameIdEmail(session, user);
 		return uOne;
 	}
-
 	
 }
