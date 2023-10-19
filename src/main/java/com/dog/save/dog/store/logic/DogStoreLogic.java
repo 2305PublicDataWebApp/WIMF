@@ -127,6 +127,25 @@ public class DogStoreLogic implements DogStore{
 		return result;
 	}
 
+	@Override
+	public int modifyDog(SqlSession session, Dog dog) {
+		int result = session.update("DogMapper.modifyDog", dog);
+		return result;
+	}
+
+	@Override
+	public int deleteDogFileByDogNoAndOrder(SqlSession session, int refDogNo, int dogFileOrder) {
+		DogFile dogFile = new DogFile(refDogNo,dogFileOrder);
+		int result = session.delete("DogMapper.deleteDogFileByDogNoAndOrder", dogFile);
+		return result;
+	}
+
+	@Override
+	public int deleteDogFileByFilePath(SqlSession session, String toDeleteFilePath) {
+		int result = session.delete("DogMapper.deleteDogFileByFilePath", toDeleteFilePath);
+		return result;
+	}
+
 
 
 
