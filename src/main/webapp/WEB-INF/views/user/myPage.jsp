@@ -88,6 +88,7 @@
 								d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>
 					</button>
 				</div>
+				
 				<div class="app-content">
 					<div class="app-sidebar">
 						<a href="" class="app-sidebar-link active"> <svg
@@ -137,22 +138,104 @@
 					      <line x1="15" y1="9" x2="9" y2="15" />
 					      <line x1="9" y1="9" x2="15" y2="15" /></svg>
 						</button>
-						<div class="projects-section-header">
-							<div id="user-profile-div">
-							<c:if test="${user.userFileRename ne null}">
-								<img class="profile-img" alt="프로필사진" src="/resources/profileUploadFiles/${user.userFileRename }">
-							</c:if>
-							<c:if test="${user.userFileRename eq null}">
-								<img class="profile-img" alt="프로필사진" src="/img/user/default-profile.png">
-							</c:if>
+						<form id="update-form" enctype="multipart/form-data" >
+							<div class="projects-section-header">
+								<div id="user-profile-div">
+									<div id="img-div">
+						                <div class="profile-image-container">
+											<c:if test="${user.userFileRename ne null}">
+												<img class="profile-img" alt="프로필사진" src="/resources/profileUploadFiles/${user.userFileRename }">
+											</c:if>
+											<c:if test="${user.userFileRename eq null}">
+												<img class="profile-img" alt="프로필사진" src="/img/user/default-profile.png">
+											</c:if>
+	<!-- 					                    <img src="/img/user/default-profile.png" id="profile-image-preview" alt="프로필 이미지"> -->
+						                    <input type="file" id="profile-image" name="uploadFile" accept="image/*">
+						                    <label for="profile-image" class="upload-icon"><img src="/img/user/camera.png" id="camera" class="upload-icon" alt=""></label>
+						                </div>
+						                <div class="profile-label"><h4>개인정보 수정</h4></div>
+						            </div>
+								</div>
 							</div>
-							<p>${user.userNickname }</p>
-						</div>
-	
-						<div class="user-persnal-info">
 							
-						</div>
-	
+							<div id="user-persnal-info-box">
+							
+								<div id="user-persnal-nickname-box" class="user-info-box">
+									<label for="user-id">
+	                                    아이디
+	                                    <span id="id-msg" class="dupl-msg" style="display: none;"></span>
+                                    </label>
+									<input type="text" id="user-id" name="userId" class="input-user-info" value="${user.userId }" readonly required="required">
+                                    <input type="hidden" id="user-ck-id">
+								</div>
+								
+								<div id="user-info-pw" class="user-info-box">
+                                    <label for="user-pw">
+                                    	변경할 비밀번호
+                                    	<span id="pw-msg" class="dupl-msg" style="display: none;"></span>
+                                    </label>
+                                    <input type="password" id="user-pw" name="userPw" class="input-user-info" placeholder="소문자,숫자,특수문자 포함 10~20자" required="required">
+                                    <input type="hidden" id="user-ck-pw">
+                                </div>
+
+                                <div id="user-info-pwck" class="user-info-box">
+                                    <label for="user-pw-check">
+                                    	비밀번호 확인
+                                    	<span id="pw-ck-msg" class="dupl-msg" style="display: none;"></span>
+                                    </label>
+                                    <input type="password" id="user-pw-check" name="userPwCheck" class="input-user-info" placeholder="비밀번호를 한 번 더 입력해주세요." required>
+                                    <input type="hidden" id="check-pw">
+                                </div>
+								
+								<div id="user-info-name" class="user-info-box">
+                                    <label for="user-name">이름</label>
+                                    <input type="text" id="user-name" name="userName" class="input-user-info" value="${user.userName }" readonly required="required">
+                                </div>
+								
+								<div id="user-info-nickname" class="user-info-box">
+                                    <label for="user-nickname">
+                                    	닉네임
+                                    	<span id="nick-msg" class="dupl-msg" style="display: none;"></span>
+                                    </label>
+                                    <input type="text" id="user-nickname" name="userNickname" class="input-user-info" value="${user.userNickname }" required="required">
+                                	<input type="hidden" id="user-ck-nickname">
+                                </div>
+
+                                <div id="user-info-address" class="user-info-box">
+                                    <label for="user-address">주소</label>
+                                    <input type="text" id="user-address" name="userAddress" class="input-user-info" value="${user.userAddress }" readonly required="required">
+                                    <input type="button" id="post-btn" onclick="sample4_execDaumPostcode();" value="주소 찾기">
+                                </div>
+                                
+                                <div id="user-info-deatil-address" class="user-info-box">
+                                    <label for="user-detail-address">상세주소 입력</label>
+                                    <input type="text" id="user-detail-address" name="userDetailAddress" class="input-user-info" required="required">
+                                </div>
+
+                                <div id="user-info-phone" class="user-info-box">
+                                    <label for="user-phone">전화번호</label>
+                                    <input type="text" id="user-phone" name="userPhone" class="input-user-info" value="${user.userPhone }" required="required">
+                                </div>
+
+                                <div id="user-info-email" class="user-info-box">
+                                    <label for="user-email">
+                                    	이메일
+                                    	<span id="email-msg" class="dupl-msg success">인증완료</span>
+                                    </label>
+                                    <input type="text" id="user-email" name="userEmail" class="input-user-info" value="${user.userEmail }" readonly required="required">
+                                    <input type="hidden" id="user-ck-email">
+                                    
+                                </div>
+
+	                            <div id="main-con-btn-box" class="btn-box">
+	                                <input type="reset" id="prev-btn1" class="next-btn" value="취소">
+	                                <input type="button" id="next-btn2" class="next-btn" value="수정">
+	                            </div>
+								
+							</div>
+						
+						</form>
+						
 					</div>
 					<div class="projects-section">
 						<div class="projects-section-header">
@@ -531,8 +614,80 @@
 			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 		<script>
+			
+			// 개인정보 수정
+			$(document).ready(function(){
+				$("#next-btn2").on("click", function(event){
+					
+					event.preventDefault();
+	        		
+	            	var userIdVal = $("#user-id").val();
+	            	var userPwVal = $("#user-pw").val();
+	            	var userNicknameVal = $("#user-nickname").val();
+	            	var userAddressVal = $("#user-address").val();
+	            	var userDetailAddressVal = $("#user-detail-address").val();
+	            	var userPhoneVal = $("#user-phone").val();
+	            	var userFileRename = ${user.userFileRename };
+					
+	            	var formData = new FormData();
+					var fileInput = document.getElementById("profile-image");
+					var file = fileInput.files[0];
+	                formData.append("uploadFile", file);
+	                formData.append("userId", userIdVal);
+	                formData.append("userPw", userPwVal);
+	                formData.append("userNickname", userNicknameVal);
+	                formData.append("userAddress", userAddressVal);
+	                formData.append("userDetailAddress", userDetailAddressVal);
+	                formData.append("userPhone", userPhoneVal);
+	                formData.append("userFileRename", userFileRename);
+	            	
+					$.ajax({
+						url : "/user/update.dog",
+						type : "POST",
+						data : formData,
+						success : function(data){
+							if(data === "success"){
+								alert("수정 완료");
+							} else if(data ==="false") {
+								alert("수정 실패");
+							} else {
+								alert("오류, 관리자에게 문의해주세요.");
+							}
+						},
+						error : function(){
+							alert("ajax 오류, 관리자에게 문의해주세요.");
+						}
+					});
+				});
+			});
+			
+			// 주소 api
+			function sample4_execDaumPostcode() {
+		        new daum.Postcode({
+		            oncomplete: function (data) {
+		                const fullAddress = data.address; // 선택한 주소
+		                document.querySelector("#user-address").value = fullAddress; // 주소 입력란에 주소 설정
+		            },
+		        }).open();
+		    }
+	        
+	        $(".user-menu-box > ul > li > a").click(function(e) {
+	           e.preventDefault();
+	  
+	           // 현재 클릭한 버튼에 대한 하위 메뉴만 열기
+	           var subMenu = $(this).next('.subMenu').not(':animated');
+	           subMenu.slideToggle();
+	  
+	           // 다른 모든 하위 메뉴 닫기
+	           $(".subMenu").not(subMenu).slideUp();
+	        });
+			function closeSubMenu() {
+				$(".subMenu").slideUp();
+			}
+			
 			$(document).ready(function() {
 				removeNavClass();
+				$(".subMenu").slideUp();
 			});
 			function removeNavClass() {
 				$("#nav-home").removeClass("active");

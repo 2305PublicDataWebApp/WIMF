@@ -15,6 +15,14 @@ public interface UserStore {
 	int insertUser(SqlSession session, User userData);
 
 	/**
+	 * ajax 유저 개인정보 수정
+	 * @param session
+	 * @param userData
+	 * @return
+	 */
+	int updateUser(SqlSession session, User userData);
+
+	/**
 	 * ajax 회원가입 아이디 중복 체크
 	 * @param session
 	 * @param userId

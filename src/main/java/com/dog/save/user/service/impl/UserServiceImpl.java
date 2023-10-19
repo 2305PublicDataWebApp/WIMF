@@ -18,6 +18,18 @@ public class UserServiceImpl implements UserService{
 	private UserStore uStore;
 
 	@Override
+	public int insertUser(User userData) {
+		int result = uStore.insertUser(session, userData);
+		return result;
+	}
+
+	@Override
+	public int updateUser(User userData) {
+		int result = uStore.updateUser(session, userData);
+		return result;
+	}
+	
+	@Override
 	public User checkDuplUserId(String userId) {
 		User uOne = uStore.checkDuplUserId(session, userId);
 		return uOne;
@@ -59,9 +71,5 @@ public class UserServiceImpl implements UserService{
 		return uOne;
 	}
 
-	@Override
-	public int insertUser(User userData) {
-		int result = uStore.insertUser(session, userData);
-		return result;
-	}
+	
 }

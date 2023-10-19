@@ -12,6 +12,13 @@ public interface UserService {
 	int insertUser(User userData);
 
 	/**
+	 * ajax 유저 개인정보 수정
+	 * @param userData
+	 * @return
+	 */
+	int updateUser(User userData);
+
+	/**
 	 * ajax 회원가입 아이디 중복 체크
 	 * @param userId
 	 * @return User
@@ -54,4 +61,5 @@ public interface UserService {
 	 * @return User
 	 */
 	User checkUserByNameIdEmail(User user);
+	
 }
