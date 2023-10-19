@@ -28,12 +28,6 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	@Override
-	public List<Calendar> getAllEventList() {
-		List<Calendar> AllEventList = cStore.getAllEventList(session);
-		return AllEventList;
-	}
-
-	@Override
 	public Optional<Calendar> findEventByUserIdAndTitleAndStartDateAndEndDate(Map<String, Object> params) {
 		return cStore.findEventByUserIdAndTitleAndStartDateAndEndDate(session, params);
 	}
@@ -54,6 +48,12 @@ public class CalendarServiceImpl implements CalendarService {
 	public List<Calendar> getEventListByDate(Map<String, Object> dateRange) {
 		List<Calendar> eventList = cStore.getEventListByDate(session, dateRange);
 		return eventList;
+	}
+
+	@Override
+	public List<Calendar> getAllEventList(String userId) {
+		List<Calendar> AllEventList = cStore.getAllEventList(session, userId);
+		return AllEventList;
 	}
 	
 }

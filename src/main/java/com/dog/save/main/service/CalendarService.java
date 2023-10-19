@@ -10,8 +10,6 @@ public interface CalendarService {
 
 	int insertEvent(Calendar calendar);
 
-	List<Calendar> getAllEventList();
-
 	Optional<Calendar> findEventByUserIdAndTitleAndStartDateAndEndDate(Map<String, Object> params);
 
 	int deleteEvent(int schNo);
@@ -19,5 +17,7 @@ public interface CalendarService {
 	int updateEvent(Map<String, Object> newParams);
 
 	List<Calendar> getEventListByDate(Map<String, Object> dateRange);
+
+	List<Calendar> getAllEventList(String userId);
 	
 }
