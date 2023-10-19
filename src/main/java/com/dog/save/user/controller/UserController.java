@@ -59,9 +59,22 @@ public class UserController {
 			Model model
 			, @RequestParam("userId") String userId
 			) {
-		User uOne = uService.selectOneById(userId);
-		model.addAttribute("user", uOne);
-		return "user/myPage";
+		try {
+			if(userId != null) {
+				User uOne = uService.selectOneById(userId);
+				model.addAttribute("user", uOne);
+				return "user/myPage";
+			} else {
+				model.addAttribute("msg", "로그인이 필요한 기능입니다.");
+				model.addAttribute("url", "/user/login.dog");
+				return "common/error";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("msg", "관리자에게 문의해주세요.");
+			model.addAttribute("url", "/user/login.dog");
+			return "common/error";
+		}
 	}
 	
 	// ajax 회원가입 아이디 중복체크 및 유효성 체크
@@ -187,7 +200,6 @@ public class UserController {
 	public String insertUser(
 			@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
 			, User userData
-//			, Model model
 			, HttpServletRequest request
 			) {
 		
@@ -218,68 +230,119 @@ public class UserController {
 		}
 	}
 	
-	// 아이디 유효성 체크 정규식
-		private boolean idIsValid(String userId) {
-			String pattern = "^[a-z0-9]{6,14}$";
-			Pattern compiledPattern = Pattern.compile(pattern);
-	        Matcher matcher = compiledPattern.matcher(userId);
-	        boolean isValid = matcher.matches();
-			return isValid;
-		}
-		
-		// 닉네임 유효성 체크 정규식
-		private boolean nicknameIsValid(String userNickname) {
-			String pattern = "^[가-힣a-zA-Z0-9]{2,15}$";
-			Pattern compiledPattern = Pattern.compile(pattern);
-	        Matcher matcher = compiledPattern.matcher(userNickname);
-	        boolean isValid = matcher.matches();
-			return isValid;
-		}
-		
-		// 이메일 유효성 체크 정규식
-		private boolean emailIsValid(String userEmail) {
-			String pattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
-			Pattern compiledPattern = Pattern.compile(pattern);
-	        Matcher matcher = compiledPattern.matcher(userEmail);
-	        boolean isValid = matcher.matches();
-			return isValid;
-		}
-		
-		// 파일 업로드 관련 컨트롤러
-		public Map<String, Object> saveFile(HttpServletRequest request, MultipartFile uploadFile) throws IllegalStateException, IOException{
-			Map<String, Object> fileMap = new HashMap<String, Object>();
-			// resources 경로 구하기
-			String root = request.getSession().getServletContext().getRealPath("resources");
+	// 개인정보 수정
+	@ResponseBody
+	@PostMapping(value="update.dog")
+	public String updateUser(
+			@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
+			, User userData
+			, HttpServletRequest request
+			) {
+		try {
+			String userFileRename = userData.getUserFileRename();
+			String userAddress = userData.getUserAddress() + " " + userData.getUserDetailAddress();
+			userData.setUserAddress(userAddress);
 			
-			// 파일 저장 경로 구하기
-			String savePath = root + "\\profileUploadFiles";
-			
-			// 파일 이름 구하기
-			String fileName = uploadFile.getOriginalFilename();
-			
-			// 파일 확장자 구하기
-			String extension = fileName.substring(uploadFile.getOriginalFilename().lastIndexOf(".")+1);
-			
-			// 시간으로 파일 리네임 하기
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-			String fileRename = sdf.format(new Date(System.currentTimeMillis()))+"."+extension;
-			// 파일 저장 전 폴더 만들기
-			File saveFolder = new File(savePath);
-			if(!saveFolder.exists()) {
-				saveFolder.mkdir();
+			if(uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
+				if(userFileRename != null) {
+					this.deleteUserProfile(request, userFileRename);
+				}
+				Map<String, Object> userMap = this.saveFile(request, uploadFile);
+				userData.setUserFileName((String)userMap.get("fileName"));
+				userData.setUserFileRename((String)userMap.get("fileRename"));
+				userData.setUserFilePath((String)userMap.get("filePath"));
+				userData.setUserFileLength((long)userMap.get("fileLength"));
+			} else {
+				userData.setUserFileName("default-profile.png");
+				userData.setUserFileRename("default-profile.png");
+				userData.setUserFilePath("/img/user/default-profile.png");
+				userData.setUserFileLength(0);
 			}
-			
-			// 파일 저장
-			File saveFile = new File(savePath+"\\"+fileRename);
-			uploadFile.transferTo(saveFile);
-			long fileLength = uploadFile.getSize();
-			
-			// 파일 정보 리턴
-			fileMap.put("fileName", fileName);
-			fileMap.put("fileRename", fileRename);
-			fileMap.put("filePath", "../resources/profileUploadFiles/" + fileRename);
-			fileMap.put("fileLength", fileLength);
-			return fileMap;
-			
+			int result = uService.updateUser(userData);
+			if(result > 0) {
+				return "true";
+			} else {
+				return "false";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "false";
 		}
+	}
+	
+	// 아이디 유효성 체크 정규식
+	private boolean idIsValid(String userId) {
+		String pattern = "^[a-z0-9]{6,14}$";
+		Pattern compiledPattern = Pattern.compile(pattern);
+        Matcher matcher = compiledPattern.matcher(userId);
+        boolean isValid = matcher.matches();
+		return isValid;
+	}
+	
+	// 닉네임 유효성 체크 정규식
+	private boolean nicknameIsValid(String userNickname) {
+		String pattern = "^[가-힣a-zA-Z0-9]{2,15}$";
+		Pattern compiledPattern = Pattern.compile(pattern);
+        Matcher matcher = compiledPattern.matcher(userNickname);
+        boolean isValid = matcher.matches();
+		return isValid;
+	}
+	
+	// 이메일 유효성 체크 정규식
+	private boolean emailIsValid(String userEmail) {
+		String pattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
+		Pattern compiledPattern = Pattern.compile(pattern);
+        Matcher matcher = compiledPattern.matcher(userEmail);
+        boolean isValid = matcher.matches();
+		return isValid;
+	}
+		
+	// 파일 업로드 관련 컨트롤러
+	public Map<String, Object> saveFile(HttpServletRequest request, MultipartFile uploadFile) throws IllegalStateException, IOException{
+		Map<String, Object> fileMap = new HashMap<String, Object>();
+		// resources 경로 구하기
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		
+		// 파일 저장 경로 구하기
+		String savePath = root + "\\profileUploadFiles";
+		
+		// 파일 이름 구하기
+		String fileName = uploadFile.getOriginalFilename();
+		
+		// 파일 확장자 구하기
+		String extension = fileName.substring(uploadFile.getOriginalFilename().lastIndexOf(".")+1);
+		
+		// 시간으로 파일 리네임 하기
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String fileRename = sdf.format(new Date(System.currentTimeMillis()))+"."+extension;
+		// 파일 저장 전 폴더 만들기
+		File saveFolder = new File(savePath);
+		if(!saveFolder.exists()) {
+			saveFolder.mkdir();
+		}
+		
+		// 파일 저장
+		File saveFile = new File(savePath+"\\"+fileRename);
+		uploadFile.transferTo(saveFile);
+		long fileLength = uploadFile.getSize();
+		
+		// 파일 정보 리턴
+		fileMap.put("fileName", fileName);
+		fileMap.put("fileRename", fileRename);
+		fileMap.put("filePath", "../resources/profileUploadFiles/" + fileRename);
+		fileMap.put("fileLength", fileLength);
+		return fileMap;
+		
+	}
+		
+	// 게시물 수정 시 파일 삭제 관련 컨트롤러
+	private void deleteUserProfile(HttpServletRequest request, String fileName) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String delFilepath = root + "\\profileUploadFiles\\" + fileName;
+		File file = new File(delFilepath);
+
+		if (file.exists() && (!fileName.equals("default-profile.png"))) {
+	        file.delete();
+	    }
+	}
 }

@@ -8,6 +8,19 @@ import com.dog.save.user.store.UserStore;
 
 @Repository
 public class UserStoreLogic implements UserStore{
+	
+
+	@Override
+	public int insertUser(SqlSession session, User userData) {
+		int result = session.insert("UserMapper.insertUser", userData);
+		return result;
+	}
+
+	@Override
+	public int updateUser(SqlSession session, User userData) {
+		int result = session.update("UserMapper.updateUser", userData);
+		return result;
+	}
 
 	@Override
 	public User checkDuplUserId(SqlSession session, String userId) {
@@ -51,10 +64,5 @@ public class UserStoreLogic implements UserStore{
 		return UOne;
 	}
 
-	@Override
-	public int insertUser(SqlSession session, User userData) {
-		int result = session.insert("UserMapper.insertUser", userData);
-		return result;
-	}
 
 }

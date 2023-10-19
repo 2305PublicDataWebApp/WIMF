@@ -67,7 +67,7 @@
                                 <div class="c-box">
                                     <input type="checkbox" id="check1" class="check-button" required>
                                     <label for="check1">
-                                        <p>이용약관 동의(필수)</p>
+                                        <p>이용약관 동의<b class="check-button-b"> (필수)</b></p>
                                     </label>
                                 </div>
                                 <textarea readonly>여러분을 환영합니다.
@@ -80,7 +80,7 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
                                 <div class="c-box">
                                     <input type="checkbox" id="check2" class="check-button">
                                     <label for="check2">
-                                        <p>개인정보 수집 및 이용 동의(필수)</p>
+                                        <p>개인정보 수집 및 이용 동의<b class="check-button-b"> (필수)</b></p>
                                     </label>
                                 </div>
                                 <textarea readonly>여러분을 환영합니다.
@@ -91,7 +91,7 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
                                 <div class="c-box">
                                     <input type="checkbox" id="check3" class="check-button" required>
                                     <label for="check3">
-                                        <p>위치 기반 서비스 이용 약관 동의(필수)</p>
+                                        <p>위치 기반 서비스 이용 약관 동의<b class="check-button-b"> (필수)</b></p>
                                     </label>
                                 </div>
                                 <textarea readonly>여러분을 환영합니다.
@@ -158,7 +158,6 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
                                 <div id="user-info-name" class="user-info-box">
                                     <label for="user-name">이름</label>
                                     <input type="text" id="user-name" name="userName" class="input-user-info" placeholder="이름을 입력해주세요." required>
-                                    
                                 </div>
 
                                 <div id="user-info-nickname" class="user-info-box">
@@ -296,7 +295,9 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 					var emailVal = $("#user-email").val();
 					if(emailVal == null || emailVal == ""){
 						alert("이메일을 먼저 입력해주세요.");
-						
+					}
+					if($("#user-ck-email").val() === "false"){
+						alert("사용할 수 없는 이메일입니다.")
 					} else {
 						alert("인증번호가 발송되었습니다. 이메일을 확인해주세요.");
 						
@@ -551,7 +552,7 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 				
 			    // 비교
 			    if (!lowercase.test(pw) || !number.test(pw) || !special.test(pw)) {
-			        return "소문자, 숫자, 특수문자가 각각 하나 이상 포함해야 합니다.";
+			        return "소문자/숫자/특수문자를 1개이상 포함 해야 합니다.";
 			    }
 			    
 			    // 유효한 비밀번호
