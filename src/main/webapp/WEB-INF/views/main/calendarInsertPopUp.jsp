@@ -43,30 +43,34 @@
    <body>
       <div class="box">
          <h1>일정 등록</h1>
-         <form id="insertForm" action="/calendar/insert.dog" method="post">
-	     	<input type="hidden" name="userId" value="userId">	<!-- 아이디 값 넣기 -->
-	         <ul>
-	            <li>시작일 : <input type="date" name="schStartDate" id="" required></li>
-	            <li>종료일 : <input type="date" name="schEndDate" id=""></li>
-	            <li>강아지 : 
-	            	<select name="dogNo" id="dogNo">
-		               <option value="1">이름</option>	<!-- forEach로 개 번호 이름으로 전환해서 넣기 -->
-		            </select>
-	            </li>
-	            <li>옵션 : 
-	            	<select name="schOption" id="schOption">
-		               <option value="임시보호">임시보호</option>
-		               <option value="후원">후원</option>
-		            </select>
-	            </li>
-	            <li>제목 : <input type="text" name="schTitle" id="" placeholder="제목을 입력해주세요." required></li>
-	            <li>내용 : <textarea name="schContent" id="" placeholder="내용을 입력해주세요." required></textarea></li>
-	         </ul>
-	         <div class="buttons">
-	         	<button type="button" onclick="submitFormAndClose();">등록</button>
-	         	<button onclick="popupClose();">닫기</button>
-	         </div>
-         </form>
+         
+	         <form id="insertForm" action="/calendar/insert.dog" method="post">
+		     	<input type="hidden" name="userId" value="userId">	<!-- 아이디 값 넣기 -->
+		         <ul>
+		            <li>시작일 : <input type="date" name="schStartDate" id="" required></li>
+		            <li>종료일 : <input type="date" name="schEndDate" id=""></li>
+		            <li>강아지 : 
+		            	<select name="dogNo" id="dogNo">
+			            	<c:forEach var="combinedList" items="${combinedList}">
+				               <option value="${combinedList.dog.dogNo }">${combinedList.dog.dogName }</option>	<!-- forEach로 개 번호 이름으로 전환해서 넣기 -->
+				            </c:forEach>
+			            </select>
+		            </li>
+		            <li>옵션 : 
+		            	<select name="schOption" id="schOption">
+			               <option value="임시보호">임시보호</option>
+			               <option value="후원">후원</option>
+			            </select>
+		            </li>
+		            <li>제목 : <input type="text" name="schTitle" id="" placeholder="제목을 입력해주세요." required></li>
+		            <li>내용 : <textarea name="schContent" id="" placeholder="내용을 입력해주세요." required></textarea></li>
+		         </ul>
+		         <div class="buttons">
+		         	<button type="button" onclick="submitFormAndClose();">등록</button>
+		         	<button onclick="popupClose();">닫기</button>
+		         </div>
+	         </form>
+         
       </div>
       <!-- 팝업창 스크립트 -->
 <script>

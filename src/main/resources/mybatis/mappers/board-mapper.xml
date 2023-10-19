@@ -7,7 +7,8 @@
 	</resultMap>
 	<!-- 게시글 등록 -->
 	<insert id="insertBoard">
-		INSERT INTO BOARD_TBL VALUES(BOARD_NO_SEQ.NEXTVAL, #{boardTitle}, #{boardContent}, #{boardWriter}, DEFAULT, DEFAULT, DEFAULT)
+		INSERT INTO BOARD_TBL VALUES(BOARD_NO_SEQ.NEXTVAL, #{boardTitle}, #{boardContent}, #{boardWriter}, DEFAULT, DEFAULT, DEFAULT
+		, #{boardFileName}, #{boardFileRename}, #{boardFilePath}, #{boardFileLength})
 	</insert>
 	<!-- 게시글 수정 -->
 	<update id="updateBoard">

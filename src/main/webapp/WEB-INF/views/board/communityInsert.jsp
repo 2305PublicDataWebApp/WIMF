@@ -41,7 +41,6 @@
       <h3 style="padding-bottom: 2%;">글 작성</h3>
       <div id="board">
       	<form action="/board/write.dog" method="post" onsubmit="return validateForm()" enctype="multipart/form-data"> <!-- 기진 코드 추가 -->
-      		<input type="hidden" name="boardThumbnail">	<!-- 기진 코드 추가 -->
 	        <div id="board-content">
 	          <div id="board-subject">
 	            <input id="board-subject-value" type="text" name="boardTitle" placeholder="제목">
@@ -86,9 +85,13 @@
 		
 		callbacks: {
             onImageUpload: function(image) {
+            	/* 기진 코드 */
+            	// 이미지 파일을 폼 데이터에 추가
+                var data = new FormData();/* 
+                data.append("image", image[0]); */
+                /* 기진 코드 */
             	
-            	  uploadSummernoteImageFile(image[0],this); /* 기진 코드 */
-               
+             	// 이미지를 에디터에 추가
                    var file = image[0];
                    var reader = new FileReader();
                   reader.onloadend = function() {
@@ -98,27 +101,34 @@
                   }
                  reader.readAsDataURL(file);
               
+             	 // 이미지를 폼 데이터에 추가하고 서버로 전송은 submit 버튼을 누를 때 이루어짐
+                 /* $("#summernoteFormData").data("image", data); */
             }
         }
       });
     
     /* 기진 코드 */
-    function uploadSummernoteImageFile(file,editor){ 
-        data = new FormData();
-        data.append("file",file);
-        $.ajax({ 
-		     data:data, 
-		     type:"POST", 
-		     url:"/board/getSummernoteImageFile.dog",
-		     dataType:"JSON", 
-		     contentType:false, 
-		     processData:false, 
-		     success:function(data){ 
-		         $(editor).summernote("insertImage",data.url); 
-		         $("#thumbnailPath").append("<option value="+data.url+">"+data.originName+"</option>"); 
-		     } 
-		 }); 
-    }
+    // 이미지를 업로드하고 서버로 전송
+	/* $("#submit-btn").on("click", function() {
+	    var formData = $("#summernoteFormData").data("image");
+	
+	    // 실제로 서버로 전송하는 코드를 여기에 추가
+	    $.ajax({
+	        data: formData,
+	        type: "POST",
+	        url: "/board/write.dog",
+	        dataType: "JSON",
+	        contentType: false,
+	        processData: false,
+	        success: function(data) {
+	            // 성공 처리
+	        },
+	        error: function(error) {
+	            // 에러 처리
+	        }
+	    });
+	}); */
+
     /* 기진 코드 */
     
     </script>
