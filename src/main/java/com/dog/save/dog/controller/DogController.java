@@ -73,13 +73,13 @@ public class DogController {
 	public ModelAndView modifyDog(ModelAndView mv
 			,@ModelAttribute Dog dog
 			,@RequestParam(value="uploadFiles", required=false) MultipartFile[] uploadFiles
-			,@RequestParam(value="originalName") String[] originalName
+			,@RequestParam(value="noChangeFileOrder", required=false) List<Integer> noChangeFileOrder
 			,HttpServletRequest request) {
-		try {
-			int result = dService.modifyDog(dog,uploadFiles,originalName,request);
+		try {			
+			int result = dService.modifyDog(dog,uploadFiles,noChangeFileOrder,request);
 			int dogNo = dog.getDogNo();
 			if(result>0) {
-				mv.setViewName("dog/detail.dog?=" + dogNo);
+				mv.setViewName("redirect:/dog/detail.dog?dogNo=" + dogNo);
 			}else {
 				mv.addObject("msg", "돌봄 강아지 수정이 완료되지 않았습니다");
 				mv.addObject("error", "돌봄 강아지 수정 실패");
