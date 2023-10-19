@@ -21,7 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.dog.save.app.domain.App;
 import com.dog.save.app.service.AppService;
 import com.dog.save.common.domain.PageInfo;
+import com.dog.save.dog.domain.Dog;
+import com.dog.save.dog.domain.DogFile;
+import com.dog.save.dog.service.DogService;
 import com.dog.save.user.domain.User;
+import com.dog.save.user.service.UserService;
 
 @Controller
 @RequestMapping(value="/app")
@@ -30,17 +34,34 @@ public class AppController {
 	@Autowired
 	private AppService aService;
 	
+	@Autowired
+	private UserService uService;
+	
+	@Autowired
+	private DogService dService;
+	
 	@GetMapping("/insert.dog")
-	public ModelAndView showInsertForm(ModelAndView mv, @ModelAttribute User user, HttpSession session) {
+	public ModelAndView showInsertForm(ModelAndView mv, HttpSession session
+			, @RequestParam(value="dogNo") int dogNo) {
 		String userId = (String)session.getAttribute("userId");
 		if(userId == null || userId.isEmpty()) {
 			mv.addObject("msg", "로그인 후에 신청서를 작성할 수 있습니다");
 			mv.addObject("url", "/user/login.dog");
 			mv.setViewName("common/error");
 		}else {
-			mv.addObject("user", user);
-			System.out.println(user);
-			mv.setViewName("app/write");
+			Dog dog = dService.selectDogByDogNo(dogNo);
+			List<DogFile> dogFileList = dService.selectDogFileByDogNo(dogNo);
+			User user = uService.selectOneById(userId);
+			if(dog != null && dogFileList.size()!=0) {
+				mv.addObject("user", user);
+				mv.addObject("dog", dog);
+				mv.addObject("dogFileList", dogFileList);
+				mv.setViewName("app/write");
+			}else {
+				mv.addObject("msg", "돌봄 강아지 조회가 완료되지 않았습니다");
+				mv.addObject("url", "/");
+				mv.setViewName("common/error");						
+			}
 		}
 		return mv;
 	}

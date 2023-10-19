@@ -47,7 +47,8 @@ main {
     border: 1px solid #ddd;
 }
 
-#application td[colspan="2"] {
+#application td[colspan="2"],
+#application td[colspan="3"] {
     color: red;
     text-align: center;
 }
@@ -135,5 +136,9 @@ main {
     display: block; /* <b> 요소를 블록 수준 요소로 변경합니다. */
     margin: 0 auto; /* 가운데 정렬을 수행합니다. */
     margin-bottom: 20px;
+}
+
+#application .profile-img {
+	width : 150px;
 }
 

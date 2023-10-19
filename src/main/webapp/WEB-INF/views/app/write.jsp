@@ -29,22 +29,33 @@
                 <table>
                     <colgroup>
                         <col style="width: 20%;">
-                        <col style="width: 80%;">
+                        <col style="width: 30%;">
+                        <col style="width: 50%;">
                     </colgroup>
                     <tr>
+                    	<td rowspan="4">
+                    		<c:if test="${user.userFileRename ne null}">
+								<img class="profile-img" alt="프로필사진" src="/resources/profileUploadFiles/${user.userFileRename }">
+							</c:if>
+							<c:if test="${user.userFileRename eq null}">
+								<img class="profile-img" alt="프로필사진" src="/img/user/default-profile.png">
+							</c:if>
+                    	</td>
+                    </tr>
+                    <tr>
                         <td>이름</td>
-                        <td>이용자</td>
+                        <td>${user.userName }</td>
                     </tr>
                     <tr>
                         <td>연락처</td>
-                        <td>010-1234-5678</td>
+                        <td>${user.userPhone }</td>
                     </tr>
                     <tr>
                         <td>주소</td>
-                        <td>서울시 남대문로 120 그레이츠 청계</td>
+                        <td>${user.userAddress }</td>
                     </tr>
                     <tr>
-                        <td colspan="2">위 내용은 마이페이지에서 변경해주세요!</td>
+                        <td colspan="3">위 내용은 마이페이지에서 변경해주세요!</td>
                     </tr>
                 </table>
                 
@@ -54,11 +65,11 @@
                         <col style="width: 80%;">
                     </colgroup>
                     <tr>
-                        <td rowspan="2">강아지 사진</td>
-                        <td>강아지 이름</td>
+                        <td rowspan="2"><img style="width: 100px;" src=${dogFileList[0].dogFilePath } alt=${dogFileList[0].dogFileName }></td>
+                        <td>${dog.dogName }</td>
                     </tr>
                     <tr>
-                        <td>연락처</td>
+                        <td>${dog.dogAge } 세</td>
                     </tr>
                     <tr>
                         <td>주소</td>

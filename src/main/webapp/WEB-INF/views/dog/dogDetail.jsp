@@ -94,7 +94,7 @@
 			    </table>
 			    <br><br><br><br><br><br><br><br>
 			    <div id="btn-area">
-				    <button>돌봄(입양)신청서로 이동</button>		    
+				    <button onclick="location.href='/app/insert.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;">돌봄(입양)신청서로 이동</button>		    
 				    <button>후원하기</button>				    
 			    </div>
 			</div>

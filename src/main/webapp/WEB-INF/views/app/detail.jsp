@@ -34,15 +34,15 @@
                     </colgroup>
                     <tr>
                         <td>이름</td>
-                        <td>이용자</td>
+                        <td>${user.userName }</td>
                     </tr>
                     <tr>
                         <td>연락처</td>
-                        <td>010-1234-5678</td>
+                        <td>${user.userPhone }</td>
                     </tr>
                     <tr>
                         <td>주소</td>
-                        <td>서울시 남대문로 120 그레이츠 청계</td>
+                        <td>${user.userAddress }</td>
                     </tr>
                     <tr>
                         <td colspan="2">위 내용은 마이페이지에서 변경해주세요!</td>
