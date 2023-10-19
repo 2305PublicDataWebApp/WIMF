@@ -11,8 +11,8 @@
 	</insert>
 	
 	<update id="updateUser">
-		UPDATE USER_TBL SET USER_PW = #{userPw }, USER_NICKNAME = #{userNickname }, USER_PHONE = #{userPhone }
-		, USER_ADDRESS = #{userAddress }, USER_EMAIL = #{userEmail }, USER_FILE_NAME = #{userFileName }
+		UPDATE USER_TBL SET USER_NICKNAME = #{userNickname }, USER_PHONE = #{userPhone }
+		, USER_ADDRESS = #{userAddress }, USER_FILE_NAME = #{userFileName }
 		, USER_FILE_RENAME = #{userFileRename }, USER_FILE_PATH = #{userFilePath }, USER_FILE_LENGTH = #{userFileLength }
 		WHERE USER_ID = #{userId } 
 	</update>

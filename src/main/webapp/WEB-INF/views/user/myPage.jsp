@@ -84,50 +84,65 @@
 							viewBox="0 0 24 24" fill="none" stroke="currentColor"
 							stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
 							class="feather feather-message-circle">
-				        <path
-								d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>
+				        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 
+				        4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" /></svg>
 					</button>
 				</div>
 				
 				<div class="app-content">
 					<div class="app-sidebar">
-						<a href="" class="app-sidebar-link active"> <svg
+						<a href="javascript:void(0)" onclick="switchMainByIcon(1);" id="switchIcon1" class="app-sidebar-link active">
+							<svg
 								xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 								viewBox="0 0 24 24" fill="none" stroke="currentColor"
 								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
 								class="feather feather-home">
-				          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-				          <polyline points="9 22 9 12 15 12 15 22" /></svg>
-						</a> <a href="" class="app-sidebar-link"> <svg class="link-icon"
+								<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+								<polyline points="9 22 9 12 15 12 15 22" />
+							</svg>
+						</a>
+						
+						<a href="javascript:void(0)" onclick="switchMainByIcon(2);" id="switchIcon2" class="app-sidebar-link">
+							<svg class="link-icon"
 								xmlns="http://www.w3.org/2000/svg" width="24" height="24"
 								fill="none" stroke="currentColor" stroke-linecap="round"
 								stroke-linejoin="round" stroke-width="2"
 								class="feather feather-pie-chart" viewBox="0 0 24 24">
-				          <defs />
-				          <path
-									d="M21.21 15.89A10 10 0 118 2.83M22 12A10 10 0 0012 2v10z" />
-				        </svg>
-						</a> <a href="" class="app-sidebar-link"> <svg
-								xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-								viewBox="0 0 24 24" fill="none" stroke="currentColor"
-								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-								class="feather feather-calendar">
-				          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-				          <line x1="16" y1="2" x2="16" y2="6" />
-				          <line x1="8" y1="2" x2="8" y2="6" />
-				          <line x1="3" y1="10" x2="21" y2="10" /></svg>
-						</a> <a href="" class="app-sidebar-link"> <svg class="link-icon"
-								xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-								fill="none" stroke="currentColor" stroke-linecap="round"
-								stroke-linejoin="round" stroke-width="2"
-								class="feather feather-settings" viewBox="0 0 24 24">
-				          <defs />
-				          <circle cx="12" cy="12" r="3" />
-				          <path
-									d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
-				        </svg>
+								<defs />
+								<path d="M21.21 15.89A10 10 0 118 2.83M22 12A10 10 0 0012 2v10z" />
+					        </svg>
+						</a>
+						
+						<a href="javascript:void(0)" onclick="switchMainByIcon(3);" id="switchIcon3" class="app-sidebar-link">
+							<svg
+										xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+										viewBox="0 0 24 24" fill="none" stroke="currentColor"
+										stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+										class="feather feather-calendar">
+						          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+						          <line x1="16" y1="2" x2="16" y2="6" />
+						          <line x1="8" y1="2" x2="8" y2="6" />
+						          <line x1="3" y1="10" x2="21" y2="10" />
+							</svg>
+						</a>
+						<a href="javascript:void(0)" onclick="switchMainByIcon(4);" id="switchIcon4" class="app-sidebar-link"> 
+							<svg class="link-icon"
+									xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+									fill="none" stroke="currentColor" stroke-linecap="round"
+									stroke-linejoin="round" stroke-width="2"
+									class="feather feather-settings" viewBox="0 0 24 24">
+					          <defs />
+					          <circle cx="12" cy="12" r="3" />
+					          <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 
+					          1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 
+					          1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 
+					          010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 
+					          0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 
+					          2h-.09a1.65 1.65 0 00-1.51 1z" />
+					        </svg>
 						</a>
 					</div>
+					
 					<div class="messages-section">
 						<button class="messages-close">
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -143,12 +158,7 @@
 								<div id="user-profile-div">
 									<div id="img-div">
 						                <div class="profile-image-container">
-											<c:if test="${user.userFileRename ne null}">
-												<img class="profile-img" alt="프로필사진" src="/resources/profileUploadFiles/${user.userFileRename }">
-											</c:if>
-											<c:if test="${user.userFileRename eq null}">
-												<img class="profile-img" alt="프로필사진" src="/img/user/default-profile.png">
-											</c:if>
+											<img id="profile-image-preview" class="profile-img" alt="프로필사진" src="">
 	<!-- 					                    <img src="/img/user/default-profile.png" id="profile-image-preview" alt="프로필 이미지"> -->
 						                    <input type="file" id="profile-image" name="uploadFile" accept="image/*">
 						                    <label for="profile-image" class="upload-icon"><img src="/img/user/camera.png" id="camera" class="upload-icon" alt=""></label>
@@ -165,31 +175,31 @@
 	                                    아이디
 	                                    <span id="id-msg" class="dupl-msg" style="display: none;"></span>
                                     </label>
-									<input type="text" id="user-id" name="userId" class="input-user-info" value="${user.userId }" readonly required="required">
+									<input type="text" id="user-id" name="userId" class="input-user-info" readonly required="required">
                                     <input type="hidden" id="user-ck-id">
 								</div>
 								
-								<div id="user-info-pw" class="user-info-box">
-                                    <label for="user-pw">
-                                    	변경할 비밀번호
-                                    	<span id="pw-msg" class="dupl-msg" style="display: none;"></span>
-                                    </label>
-                                    <input type="password" id="user-pw" name="userPw" class="input-user-info" placeholder="소문자,숫자,특수문자 포함 10~20자" required="required">
-                                    <input type="hidden" id="user-ck-pw">
-                                </div>
+<!-- 								<div id="user-info-pw" class="user-info-box"> -->
+<!--                                     <label for="user-pw"> -->
+<!--                                     	변경할 비밀번호 -->
+<!--                                     	<span id="pw-msg" class="dupl-msg" style="display: none;"></span> -->
+<!--                                     </label> -->
+<!--                                     <input type="password" id="user-pw" name="userPw" class="input-user-info" placeholder="소문자,숫자,특수문자 포함 10~20자" required="required"> -->
+<!--                                     <input type="hidden" id="user-ck-pw"> -->
+<!--                                 </div> -->
 
-                                <div id="user-info-pwck" class="user-info-box">
-                                    <label for="user-pw-check">
-                                    	비밀번호 확인
-                                    	<span id="pw-ck-msg" class="dupl-msg" style="display: none;"></span>
-                                    </label>
-                                    <input type="password" id="user-pw-check" name="userPwCheck" class="input-user-info" placeholder="비밀번호를 한 번 더 입력해주세요." required>
-                                    <input type="hidden" id="check-pw">
-                                </div>
+<!--                                 <div id="user-info-pwck" class="user-info-box"> -->
+<!--                                     <label for="user-pw-check"> -->
+<!--                                     	비밀번호 확인 -->
+<!--                                     	<span id="pw-ck-msg" class="dupl-msg" style="display: none;"></span> -->
+<!--                                     </label> -->
+<!--                                     <input type="password" id="user-pw-check" name="userPwCheck" class="input-user-info" placeholder="비밀번호를 한 번 더 입력해주세요." required> -->
+<!--                                     <input type="hidden" id="check-pw"> -->
+<!--                                 </div> -->
 								
 								<div id="user-info-name" class="user-info-box">
                                     <label for="user-name">이름</label>
-                                    <input type="text" id="user-name" name="userName" class="input-user-info" value="${user.userName }" readonly required="required">
+                                    <input type="text" id="user-name" name="userName" class="input-user-info" readonly required="required">
                                 </div>
 								
 								<div id="user-info-nickname" class="user-info-box">
@@ -197,13 +207,13 @@
                                     	닉네임
                                     	<span id="nick-msg" class="dupl-msg" style="display: none;"></span>
                                     </label>
-                                    <input type="text" id="user-nickname" name="userNickname" class="input-user-info" value="${user.userNickname }" required="required">
+                                    <input type="text" id="user-nickname" name="userNickname" class="input-user-info" required="required">
                                 	<input type="hidden" id="user-ck-nickname">
                                 </div>
 
                                 <div id="user-info-address" class="user-info-box">
                                     <label for="user-address">주소</label>
-                                    <input type="text" id="user-address" name="userAddress" class="input-user-info" value="${user.userAddress }" readonly required="required">
+                                    <input type="text" id="user-address" name="userAddress" class="input-user-info" readonly required="required">
                                     <input type="button" id="post-btn" onclick="sample4_execDaumPostcode();" value="주소 찾기">
                                 </div>
                                 
@@ -214,7 +224,7 @@
 
                                 <div id="user-info-phone" class="user-info-box">
                                     <label for="user-phone">전화번호</label>
-                                    <input type="text" id="user-phone" name="userPhone" class="input-user-info" value="${user.userPhone }" required="required">
+                                    <input type="text" id="user-phone" name="userPhone" class="input-user-info" required="required">
                                 </div>
 
                                 <div id="user-info-email" class="user-info-box">
@@ -222,7 +232,7 @@
                                     	이메일
                                     	<span id="email-msg" class="dupl-msg success">인증완료</span>
                                     </label>
-                                    <input type="text" id="user-email" name="userEmail" class="input-user-info" value="${user.userEmail }" readonly required="required">
+                                    <input type="text" id="user-email" name="userEmail" class="input-user-info" readonly required="required">
                                     <input type="hidden" id="user-ck-email">
                                     
                                 </div>
@@ -237,7 +247,8 @@
 						</form>
 						
 					</div>
-					<div class="projects-section">
+					
+					<div id="main-section1" class="projects-section main-active">
 						<div class="projects-section-header">
 							<p>후원중인 유기견</p>
 <!-- 							<p class="time">December, 12</p> -->
@@ -590,7 +601,19 @@
 							</div>
 						</div>
 					</div>
-	
+					
+					<div id="main-section2" class="projects-section">
+						2번
+					</div>
+					
+					<div id="main-section3" class="projects-section main-active">
+						3번
+					</div>
+					
+					<div id="main-section4" class="projects-section main-active">
+						4번
+					</div>
+					
 				</div>
 			</div>
 		</main>
@@ -614,6 +637,81 @@
 			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 		<script>
+		
+			// 사이드바 아이콘 스크립트
+			function switchMainByIcon(mainNum){
+				$("#main-container1, #main-container2, #main-container3, #main-container4").attr("class", "main-active");
+				$("#main-container" + mainNum).attr("class", "main-active");
+				$("#switchIcon1, #switchIcon2, #switchIcon3, #switchIcon4").removeClass("active");
+				$("#switchIcon" + mainNum).addClass("active");
+			}
+			
+			// 이미지 업로드 및 미리보기 관련 JavaScript
+	        const profileImageInput = document.getElementById('profile-image');
+	        const profileImagePreview = document.getElementById('profile-image-preview');
+	        const defaultProfileImage = 'default-profile.png';
+	
+	        profileImageInput.addEventListener('change', (e) => {
+	            const file = e.target.files[0];
+	
+	            if (file) {
+	                const reader = new FileReader();
+	                reader.onload = (e) => {
+	                    profileImagePreview.src = e.target.result;
+	                };
+	
+	                reader.readAsDataURL(file);
+	            } else {
+	                // 이미지가 선택되지 않았을 때 디폴트 이미지로 변경
+	                profileImagePreview.src = defaultProfileImage;
+	            }
+	        });
+			
+	        // 회원 개인정보 불러오기
+			function showUserPersnalInfo() {
+				var sessionId = "${sessionScope.userId}";
+				const userId = $("#user-id");
+				const userName = $("#user-name");
+				const userNickname = $("#user-nickname");
+				const userAddress = $("#user-address");
+				const userDetailAddress = $("#user-detail-address");
+				const userPhone = $("#user-phone");
+				const userEmail = $("#user-email");
+				const userProfileImg = $("#profile-image-preview");
+				
+				$.ajax({
+					url : "/user/showPerInf.dog",
+					type : "POST",
+					data : {
+						"userId" : sessionId
+					},
+					success : function(data) {
+						if(data != null && data !== ""){
+							userId.attr("value", data.userIdVal);
+							userName.attr("value", data.userNameVal);
+							userNickname.attr("value", data.userNicknameVal);
+							userAddress.attr("value", data.userAddressVal);
+							userPhone.attr("value", data.userPhoneVal);
+							userEmail.attr("value", data.userEmailVal);
+							if(data.userFileRenameVal == "noneProfile"){
+								userProfileImg.attr("src", "/img/user/default-profile.png");
+							} else {
+								userProfileImg.attr("src", "/resources/profileUploadFiles/" + data.userFileRenameVal);
+							}
+							
+						} else {
+							alert("유저 정보를 불러오는데 실패하였습니다. 관리자에게 문의해주세요.");
+						}
+					},
+					error : function() {
+						alert("ajax 오류, 관리자에게 문의해주세요.")
+					}
+				});
+			}
+			$(document).ready(function(){
+				showUserPersnalInfo();
+				removeNavClass();
+			});
 			
 			// 개인정보 수정
 			$(document).ready(function(){
@@ -622,32 +720,39 @@
 					event.preventDefault();
 	        		
 	            	var userIdVal = $("#user-id").val();
-	            	var userPwVal = $("#user-pw").val();
+// 	            	var userPwVal = $("#user-pw").val();
 	            	var userNicknameVal = $("#user-nickname").val();
 	            	var userAddressVal = $("#user-address").val();
 	            	var userDetailAddressVal = $("#user-detail-address").val();
 	            	var userPhoneVal = $("#user-phone").val();
-	            	var userFileRename = ${user.userFileRename };
+	            	var userFileRename = $("#profile-image-preview").attr("src");
+					var subUserFileRename = userFileRename.substring("/resources/profileUploadFiles/".length);
 					
 	            	var formData = new FormData();
 					var fileInput = document.getElementById("profile-image");
 					var file = fileInput.files[0];
-	                formData.append("uploadFile", file);
+					
+					if (file) {
+					    formData.append("uploadFile", file);
+					}
 	                formData.append("userId", userIdVal);
-	                formData.append("userPw", userPwVal);
+// 	                formData.append("userPw", userPwVal);
 	                formData.append("userNickname", userNicknameVal);
 	                formData.append("userAddress", userAddressVal);
 	                formData.append("userDetailAddress", userDetailAddressVal);
 	                formData.append("userPhone", userPhoneVal);
-	                formData.append("userFileRename", userFileRename);
+	                formData.append("userFileRename", subUserFileRename);
 	            	
 					$.ajax({
 						url : "/user/update.dog",
 						type : "POST",
 						data : formData,
+						processData: false,
+        	            contentType: false,
 						success : function(data){
-							if(data === "success"){
+							if(data === "true"){
 								alert("수정 완료");
+								showUserPersnalInfo();
 							} else if(data ==="false") {
 								alert("수정 실패");
 							} else {
@@ -671,24 +776,25 @@
 		        }).open();
 		    }
 	        
-	        $(".user-menu-box > ul > li > a").click(function(e) {
-	           e.preventDefault();
+// 	        $(".user-menu-box > ul > li > a").click(function(e) {
+// 	           e.preventDefault();
 	  
-	           // 현재 클릭한 버튼에 대한 하위 메뉴만 열기
-	           var subMenu = $(this).next('.subMenu').not(':animated');
-	           subMenu.slideToggle();
+// 	           // 현재 클릭한 버튼에 대한 하위 메뉴만 열기
+// 	           var subMenu = $(this).next('.subMenu').not(':animated');
+// 	           subMenu.slideToggle();
 	  
-	           // 다른 모든 하위 메뉴 닫기
-	           $(".subMenu").not(subMenu).slideUp();
-	        });
-			function closeSubMenu() {
-				$(".subMenu").slideUp();
-			}
+// 	           // 다른 모든 하위 메뉴 닫기
+// 	           $(".subMenu").not(subMenu).slideUp();
+// 	        });
+// 			function closeSubMenu() {
+// 				$(".subMenu").slideUp();
+// 			}
 			
-			$(document).ready(function() {
-				removeNavClass();
-				$(".subMenu").slideUp();
-			});
+// 			$(document).ready(function() {
+// 				removeNavClass();
+// 				$(".subMenu").slideUp();
+// 			});
+
 			function removeNavClass() {
 				$("#nav-home").removeClass("active");
 				$("#nav-dolbom-list").removeClass("active");

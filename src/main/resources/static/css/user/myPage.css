@@ -923,3 +923,7 @@
     border-radius: 3px;
     border: none;
 }
+
+.main-active{
+	display:none !important;
+}
