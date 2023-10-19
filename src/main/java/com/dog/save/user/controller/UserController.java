@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,12 +58,11 @@ public class UserController {
 	@GetMapping(value="myPage.dog")
 	public String showMypage(
 			Model model
-			, @RequestParam("userId") String userId
+			, HttpSession session
 			) {
 		try {
-			if(userId != null) {
-				User uOne = uService.selectOneById(userId);
-				model.addAttribute("user", uOne);
+			String sessionId = (String)session.getAttribute("userId");
+			if(sessionId != null) {
 				return "user/myPage";
 			} else {
 				model.addAttribute("msg", "로그인이 필요한 기능입니다.");
@@ -74,6 +74,41 @@ public class UserController {
 			model.addAttribute("msg", "관리자에게 문의해주세요.");
 			model.addAttribute("url", "/user/login.dog");
 			return "common/error";
+		}
+	}
+	
+	// ajax 마이페이지 회원 개인정보 출력 
+	@ResponseBody
+	@PostMapping(value="showPerInf.dog", produces="application/json;charset=utf-8")
+	public String showUserPersnalInfo(
+			@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
+			, @RequestParam("userId") String userId
+			, HttpServletRequest request
+			) {
+		try {
+			User user = uService.selectOneById(userId);
+			if(user != null) {
+				JSONObject userJson = new JSONObject();
+				userJson.put("userIdVal", user.getUserId());
+				userJson.put("userNameVal", user.getUserName());
+				userJson.put("userNicknameVal", user.getUserNickname());
+				userJson.put("userAddressVal", user.getUserAddress());
+				userJson.put("userPhoneVal", user.getUserPhone());
+				userJson.put("userEmailVal", user.getUserEmail());
+				
+				if(user.getUserFileRename() != null) {
+					userJson.put("userFileRenameVal", user.getUserFileRename());
+				} else {
+//					String setDefaultProfile = user.setUserFileRename("noneProfile");
+					userJson.put("userFileRenameVal", "noneProfile");
+				}
+				return userJson.toString();
+			}else {
+				return "null";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "null";
 		}
 	}
 	
