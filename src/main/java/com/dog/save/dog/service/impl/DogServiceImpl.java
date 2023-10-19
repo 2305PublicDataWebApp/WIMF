@@ -188,7 +188,15 @@ public class DogServiceImpl implements DogService{
 	            int dogNo = dog.getDogNo();
 	            List<DogFile> existingFiles = dStore.selectDogFileByDogNo(session, dogNo);
 	            Set<String> usedFileRenameSet = new HashSet<>();
-	            Set<String> toDeleteFilePathSet = new HashSet<>();	            	            
+	            Set<String> toDeleteFilePathSet = new HashSet<>();	  
+	            if (originalName.length < uploadFiles.length) {
+	                String[] updatedOriginalNames = new String[uploadFiles.length];
+	                for (int i = 0; i < originalName.length; i++) {
+	                    updatedOriginalNames[i] = originalName[i];
+	                }
+	                originalName = updatedOriginalNames;
+	            }	            
+	            
 	            for (int i = 0; i < uploadFiles.length; i++) {
 	                MultipartFile uploadFile = uploadFiles[i];
 	                String checkDogFile = originalName[i];
@@ -216,6 +224,12 @@ public class DogServiceImpl implements DogService{
 	                    if (dogFileOrder == -1) {
 	                        // 수정된 파일이므로 순서를 찾음
 	                        dogFileOrder = findEmptyDogFileOrder(existingFiles, usedFileRenameSet);
+	                        System.out.println(dogFileOrder);
+	                        System.out.println(dogFileOrder);
+	                        System.out.println(dogFileOrder);
+	                        System.out.println(dogFileOrder);
+	                        System.out.println(dogFileOrder);
+	                        
 	                    }
 	                    DogFile dogFile = new DogFile(dogNo, dogFileOrder, dogFileName, dogFileRename, dogFilePath);
 	                    // 데이터베이스에 파일 추가
@@ -250,10 +264,10 @@ public class DogServiceImpl implements DogService{
 
 	private int findEmptyDogFileOrder(List<DogFile> existingFiles, Set<String> usedFileRenameSet) {
 	    // 사용 중인 dogFileOrder 값을 저장하는 집합 생성
-	    Set<Integer> usedOrderSet = new HashSet<>();
-	    
+	    Set<Integer> usedOrderSet = new HashSet<>();	    
 	    // 기존 dogFileOrder 값을 집합에 추가
 	    for (DogFile existingFile : existingFiles) {
+	    	// existingFiles 잘 가져오는지 확인요망 
 	        if (usedFileRenameSet.contains(existingFile.getDogFileRename())) {
 	            usedOrderSet.add(existingFile.getDogFileOrder());
 	        }
@@ -262,6 +276,7 @@ public class DogServiceImpl implements DogService{
 	    // 사용 중이지 않은 순서를 찾아 반환
 	    for (int i = 1; i <= 3; i++) {
 	        if (!usedOrderSet.contains(i)) {
+	        	usedOrderSet.add(i);
 	            return i;
 	        }
 	    }
