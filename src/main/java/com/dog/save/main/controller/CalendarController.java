@@ -2,6 +2,7 @@ package com.dog.save.main.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -30,6 +31,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.dog.save.dog.controller.DogController;
 import com.dog.save.dog.domain.Dog;
+import com.dog.save.dog.domain.DogFile;
+import com.dog.save.dog.domain.DogSet;
 import com.dog.save.dog.service.DogService;
 import com.dog.save.main.domain.Calendar;
 import com.dog.save.main.service.CalendarService;
@@ -74,9 +77,6 @@ public class CalendarController {
         return jsonArr;
     }
 	
-	
-	
-	
 	@ResponseBody
 	@GetMapping("/getEventListByDate.dog")
 	public List<Map<String, Object>> getEventListByDate(@RequestParam("date") String date, HttpSession session) {
@@ -111,16 +111,25 @@ public class CalendarController {
 		                    Map<String, Object> eventMap = new HashMap<>();
 		                    eventMap.put("title", event.getSchTitle());
 		                    eventMap.put("content", event.getSchContent());
-		                 // 시작 날짜 포맷 변경
+		                    // 시작 날짜 포맷 변경
 		                    SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
 		                    eventMap.put("start", outputDateFormat.format(event.getSchStartDate()));
 
 		                    // 종료 날짜는 하루를 더해줘야 합니다.
 //		                    Date endDatePlusOne = new Date(event.getSchEndDate().getTime() + TimeUnit.DAYS.toMillis(1));
 		                    eventMap.put("end", outputDateFormat.format(event.getSchEndDate()));
+		                    
+		                    Dog dogOne = dService.selectDogByDogNo(event.getDogNo());
+		                    eventMap.put("dogNo", event.getDogNo());
+		                    eventMap.put("dogName", dogOne.getDogName());
 		                    return eventMap;
 		                })
 		                .collect(Collectors.toList());
+		        
+		        // 개 이름 가져오기
+//		        Dog dog = dService.selectDogByDogNo(dogNo);
+		        
+		        
 		    } catch (ParseException e) {
 		        e.printStackTrace();
 		        // 예외 발생 시 처리
@@ -135,20 +144,27 @@ public class CalendarController {
 	    
 	}
 
-
-
-
-
-	
-	
-	
-	
-	
 	@RequestMapping(value="/popup.dog", method=RequestMethod.GET)
 	public ModelAndView showPopupForm(ModelAndView mv) {
 		
-//		List<Dog> dogList = dService.selectAllDog();
+		List<Dog> dList = dService.selectAllDogList();
 		
+		List<DogFile> dogFileList;
+		dogFileList = dService.selectFirstDogFile();
+		List<DogSet> combinedList = new ArrayList<>();
+		for (Dog dog : dList) {
+		    DogSet dogSet = new DogSet();
+		    dogSet.setDog(dog);
+		    // 각 Dog와 매칭되는 DogFile 찾기
+		    for (DogFile dogFile : dogFileList) {
+		        if (dog.getDogNo() == dogFile.getRefDogNo()) {
+		            dogSet.setDogFile(dogFile);
+		            break;
+		        }
+		    }
+		    combinedList.add(dogSet);
+		}		
+		mv.addObject("combinedList", combinedList);
 		mv.setViewName("main/calendarInsertPopUp");
 		
 		return mv;

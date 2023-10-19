@@ -556,7 +556,11 @@
   	        var liElement = $('<li>').attr('id', liId);
 
   	        // 이벤트 정보를 li 엘리먼트에 추가합니다.
-  	        liElement.html('• 제목 : ' + event.title + '&emsp;&emsp;&emsp; • 내용 : ' + event.content + '&emsp;&emsp;&emsp; • 기간 : ' + event.start + ' ~ ' + event.end);
+  	        liElement.html('• 제목 : ' + event.title
+  	        		+ '&emsp;&emsp;&emsp; • 강아지 번호 : ' + event.dogNo
+  	        		+ '&emsp;&emsp;&emsp; • 강아지 : ' + event.dogName
+  	        		+ '&emsp;&emsp;&emsp; • 기간 : ' + event.start + ' ~ ' + event.end);
+  	        		+ '&emsp;&emsp;&emsp; • 내용 : ' + event.content
 
   	        // ul에 li 엘리먼트를 추가합니다.
   	        ulElement.append(liElement);
@@ -780,7 +784,9 @@
                 <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
                 <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
               </ul> -->
-              <button type="button" onclick="openPopup1();" class="buy-btn text-center">등록</button>
+              <div class="text-center">              
+              	<button type="button" onclick="openPopup1();" class="buy-btn text-center">등록</button>
+              </div>
             </div>
           <!-- </div> -->
           <!-- End Pricing Item -->
@@ -1008,6 +1014,7 @@
               </template>
               <div class="swiper-wrapper">
 
+				<!-- Start testimonial item -->
                 <div class="swiper-slide">
                   <div class="testimonial-item">
                     <div class="d-flex">
@@ -1106,7 +1113,8 @@
                       <i class="bi bi-quote quote-icon-right"></i>
                     </p>
                   </div>
-                </div><!-- End testimonial item -->
+                </div>
+                <!-- End testimonial item -->
 
               </div>
               <div class="swiper-pagination"></div>

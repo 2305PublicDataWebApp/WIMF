@@ -15,6 +15,10 @@ public class Board {
 	private Timestamp createDate;
 	private Timestamp updateDate;
 	private int viewCount;
+	private String boardFileName;
+	private String boardFileRename;
+	private String boardFilePath;
+	private long boardFileLength;
 	
 	private String userNickName;
 	
