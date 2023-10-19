@@ -1,0 +1,32 @@
+@charset "UTF-8";
+
+#main {
+	margin-bottom: 5%;
+}
+
+#container {
+  padding-top: 8%;
+  margin: 0 auto;
+  min-width: 50%;
+  max-width: 50%;
+  height: 100%;
+}
+
+#board {
+  border: 5px double gray;
+  border-radius: 20px;
+}
+
+#board-content {
+  padding: 5%;
+  height: 610px;
+  width: 100%;
+  display: inline-flex;
+}
+#left-content {
+  width: 50%;
+}
+#right-content {
+  width: 50%;
+  margin: auto;
+}
