@@ -12,8 +12,6 @@ public interface CalendarStore {
 
 	int insertEvent(SqlSession session, Calendar calendar);
 
-	List<Calendar> getAllEventList(SqlSession session);
-
 	Optional<Calendar> findEventByUserIdAndTitleAndStartDateAndEndDate(SqlSession session, Map<String, Object> params);
 
 	int deleteEvent(SqlSession session, int schNo);
@@ -21,5 +19,7 @@ public interface CalendarStore {
 	int updateEvent(SqlSession session, Map<String, Object> newParams);
 
 	List<Calendar> getEventListByDate(SqlSession session, Map<String, Object> dateRange);
+
+	List<Calendar> getAllEventList(SqlSession session, String userId);
 
 }

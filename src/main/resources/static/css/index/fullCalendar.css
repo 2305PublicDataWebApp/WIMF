@@ -52,11 +52,15 @@
 .calendarList {
 	border: 3px dotted orange;
 	border-radius: 33px;
-	margin: 30px 0;
+	margin-top: 30px;
 	padding: 30px 30px 20px 30px;
 	display: flex;
 	align-items: center;
 	text-align: center;
+	display: none;
+}
+.calendarPopupBtn {
+	margin-top: 30px;
 }
 .team .member .member-img {
 	margin: 0 50px;

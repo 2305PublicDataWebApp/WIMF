@@ -14,6 +14,7 @@ public class Calendar {
 	private Date schEndDate;
 	private String schOption;
 	private String schTitle;
+	private int schTitleCount;
 	private String schContent;
 	private Date schCreateDate;
 	

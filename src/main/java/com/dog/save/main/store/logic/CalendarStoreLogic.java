@@ -20,12 +20,6 @@ public class CalendarStoreLogic implements CalendarStore {
 	}
 
 	@Override
-	public List<Calendar> getAllEventList(SqlSession session) {
-		List<Calendar> AllEventList = session.selectList("CalendarMapper.getAllEventList");
-		return AllEventList;
-	}
-
-	@Override
 	public Optional<Calendar> findEventByUserIdAndTitleAndStartDateAndEndDate(SqlSession session,
 			Map<String, Object> params) {
 		return Optional.ofNullable(session.selectOne("CalendarMapper.findEventByUserIdAndTitleAndStartDateAndEndDate", params));
@@ -47,6 +41,12 @@ public class CalendarStoreLogic implements CalendarStore {
 	public List<Calendar> getEventListByDate(SqlSession session, Map<String, Object> dateRange) {
 		List<Calendar> eventList = session.selectList("CalendarMapper.getEventListByDate", dateRange);
 		return eventList;
+	}
+
+	@Override
+	public List<Calendar> getAllEventList(SqlSession session, String userId) {
+		List<Calendar> AllEventList = session.selectList("CalendarMapper.getAllEventList", userId);
+		return AllEventList;
 	}
 	
 }
