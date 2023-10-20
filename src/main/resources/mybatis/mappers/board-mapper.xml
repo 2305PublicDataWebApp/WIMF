@@ -67,6 +67,28 @@
 		ORDER BY BOARD_TBL.BOARD_NO DESC
 		</if>
 	</select>
+		<!-- 게시글 키워드 검색 개수 -->
+	<select id="getListSearchCount" resultType="_int">
+		SELECT COUNT(*)
+	    FROM BOARD_TBL
+	    LEFT JOIN USER_TBL ON BOARD_TBL.BOARD_WRITER = USER_TBL.USER_ID 
+		<if test="searchCondition == 'all'">
+		WHERE USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%' OR BOARD_TBL.BOARD_TITLE LIKE '%'||#{searchKeyword}||'%' OR BOARD_TBL.BOARD_CONTENT LIKE '%'||#{searchKeyword}||'%'
+		ORDER BY BOARD_TBL.BOARD_NO DESC
+		</if>
+		<if test="searchCondition == 'writer'">
+		WHERE USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%'
+		ORDER BY BOARD_TBL.BOARD_NO DESC
+		</if>
+		<if test="searchCondition == 'title'">
+		WHERE BOARD_TBL.BOARD_TITLE LIKE '%'||#{searchKeyword}||'%'
+		ORDER BY BOARD_TBL.BOARD_NO DESC
+		</if>
+		<if test="searchCondition == 'content'">
+		WHERE BOARD_TBL.BOARD_CONTENT LIKE '%'||#{searchKeyword}||'%'
+		ORDER BY BOARD_TBL.BOARD_NO DESC
+		</if>
+	</select>
 	<!-- 키워드 제목으로 검색 -->
 	<select id="selectBoardByTitle" resultType="Board">
 		SELECT * FROM BOARD_TBL WHERE BOARD_TITLE LIKE '%'||#{searchKeyword}||'%'

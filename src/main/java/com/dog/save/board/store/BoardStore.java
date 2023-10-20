@@ -63,7 +63,7 @@ public interface BoardStore {
 	 * @param paramMap
 	 * @return
 	 */
-	int selectListCount(SqlSession sqlSession, Map<String, String> paramMap);
+	int getListSearchCount(SqlSession sqlSession, Map<String, String> paramMap);
 	/**
 	 * 조건에 따라 키워드 검색 Store
 	 */

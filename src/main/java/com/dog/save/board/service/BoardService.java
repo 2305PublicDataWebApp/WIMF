@@ -52,7 +52,7 @@ public interface BoardService {
 	 * @param paramMap
 	 * @return
 	 */
-	int getListCount(Map<String, String> paramMap);
+	int getListSearchCount(Map<String, String> paramMap);
 	/**
 	 * 조건에 따라 키워드 검색 Service
 	 * @param bpInfo
