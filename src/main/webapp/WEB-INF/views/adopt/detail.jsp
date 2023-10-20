@@ -79,7 +79,7 @@
 									</div>
 								</form>	
 							</c:when>
-							<c:when test="${userId eq 'admin' }">
+							<c:when test="${adminCheck eq 'Y' }">
 								<form action="/adopt/delete.dog" method="get" onsubmit="return confirmDelete()">
 									<input type="hidden" name="adoptNo" value="${adopt.adoptNo }">
 									<input type="hidden" name="userId" value="${adopt.userId }">
@@ -138,15 +138,13 @@
 													<a id="reply-delete" href="javascript:void(0);" onclick="replyDeleteForm('${delUrl}');">삭제</a>
 												</td>
 											</c:when>
-											<c:when test="${userId == 'admin' }">
+											<c:when test="${adminCheck eq 'Y' }">
 												<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray">
 													<a id="reply-update-bean"></a>
 													<c:url var="delUrl" value="/adoptreply/delete.dog">
 														<c:param name="adoptReplyNo" value="${reply.adoptReplyNo }"></c:param>
-														<!-- 자기 자신이 작성한 댓글만 지우도록 하기 위해 replyWriter를 추가함 -->
-														<c:param name="userId" value="${reply.userId }"></c:param>
 														<!-- 성공하면 detail로 가기 위해 필요한 adoptNo 세팅 -->
-														<c:param name="adoptReplyNo" value="${reply.adoptReplyNo }"></c:param>
+														<c:param name="adoptNo" value="${reply.adoptNo }"></c:param>
 													</c:url>
 													<a id="reply-delete" href="javascript:void(0);" onclick="replyDeleteForm('${delUrl}');">삭제</a>
 												</td>

@@ -128,7 +128,15 @@ public class AppController {
 		try {
 			App app = aService.selectAppByNo(appNo);
 			if(app != null) {
+				int dogNo = app.getDogNo();
+				Dog dog = dService.selectDogByDogNo(dogNo);
+				List<DogFile> dogFileList = dService.selectDogFileByDogNo(dogNo);
+				String userId = app.getUserId();
+				User user = uService.selectOneById(userId);
 				mv.addObject("app", app);
+				mv.addObject("user", user);
+				mv.addObject("dog", dog);
+				mv.addObject("dogFileList", dogFileList);
 				mv.setViewName("app/detail");
 			} else {
 				mv.addObject("msg", "[서비스실패] 신청서를 조회할 수 없습니다..");
@@ -138,6 +146,7 @@ public class AppController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("msg", e.getMessage());
+			mv.addObject("url", "/app/list.dog");
 			mv.setViewName("common/error");
 		}
 		return mv;

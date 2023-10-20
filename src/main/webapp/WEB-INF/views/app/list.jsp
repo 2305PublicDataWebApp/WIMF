@@ -39,7 +39,7 @@
 	            <tr>
 	                <th>번호</th>
 	                <th>아이디</th>
-	                <th>입양동물이름</th>
+	                <th>동물번호</th>
 	                <th>돌봄/입양여부</th>
 	                <th>돌봄/입양</th>
 	                <th>희망시작일</th>
@@ -49,7 +49,7 @@
 		            <tr onclick="location.href='/app/detail.dog?appNo=${item.appNo}';" style="cursor: pointer;">
 		                <td>${item.appNo }</td>
 		                <td>${item.userId }</td>
-		                <td>멍멍이 이름</td>
+		                <td>${item.dogNo }</td>
 		                <c:if test='${item.appStatus.toString() eq "N" }'>
 			                <td>반려</td>
 		                </c:if>

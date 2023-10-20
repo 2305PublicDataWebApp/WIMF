@@ -33,18 +33,18 @@
                         <col style="width: 50%;">
                     </colgroup>
                     <tr>
-                    	<td rowspan="4">
+                    	<td rowspan="5">
                     		<c:if test="${user.userFileRename ne null}">
-								<img class="profile-img" alt="프로필사진" src="/resources/profileUploadFiles/${user.userFileRename }">
+								<img img class="profile-img" alt="프로필사진" src="/resources/profileUploadFiles/${user.userFileRename }">
 							</c:if>
 							<c:if test="${user.userFileRename eq null}">
-								<img class="profile-img" alt="프로필사진" src="/img/user/default-profile.png">
+								<img img class="profile-img" alt="프로필사진" src="/img/user/default-profile.png">
 							</c:if>
                     	</td>
                     </tr>
                     <tr>
                         <td>이름</td>
-                        <td>${user.userName }</td>
+                        <td>${user.userName }${userId }${user.userId }</td>
                     </tr>
                     <tr>
                         <td>연락처</td>
@@ -54,6 +54,10 @@
                         <td>주소</td>
                         <td>${user.userAddress }</td>
                     </tr>
+                     <tr>
+                        <td>이메일</td>
+                        <td>${user.userEmail }</td>
+                    </tr>
                     <tr>
                         <td colspan="3">위 내용은 마이페이지에서 변경해주세요!</td>
                     </tr>
@@ -61,28 +65,36 @@
                 
                 <table>
                     <colgroup>
-                        <col style="width: 20%;">
-                        <col style="width: 80%;">
+                       <col style="width: 20%;">
+                        <col style="width: 30%;">
+                        <col style="width: 50%;">
                     </colgroup>
                     <tr>
-                        <td rowspan="2"><img style="width: 100px;" src=${dogFileList[0].dogFilePath } alt=${dogFileList[0].dogFileName }></td>
+                        <td rowspan="4"><img class="profile-img" src=${dogFileList[0].dogFilePath } alt=${dogFileList[0].dogFileName }></td>
+                        <td>선택한 강아지 이름</td>
                         <td>${dog.dogName }</td>
                     </tr>
                     <tr>
+                    	<td>강아지 나이</td>
                         <td>${dog.dogAge } 세</td>
                     </tr>
                     <tr>
-                        <td>주소</td>
-                        <td>서울시 남대문로 120 그레이츠 청계</td>
+                        <td>품종</td>
+                        <td>${dog.dogKind }</td>
                     </tr>
                     <tr>
-                        <td colspan="2">선택한 강아지가 맞는지 확인해주세요!</td>
+			            <td>안락사 예정일</td>
+			            <td>${dog.dogDeathDate }</td>
+			        </tr>
+                    <tr>
+                        <td colspan="3">선택한 강아지가 맞는지 확인해주세요!</td>
                     </tr>
                 </table>
                 
                 
-                <form id="application-form" action="#" method="POST">
-
+                <form id="application-form" action="/app/insert.dog" method="POST">
+					<input type="hidden" name="userId" value="${userId }">
+					<input type="hidden" name="dogNo" value="${dog.dogNo }">
                     <b>- 돌봄/입양</b>
                     <div class="radio-group">
                         <input type="radio" id="dog-temp-adopt" name="appDogAdopt" value="temp" >

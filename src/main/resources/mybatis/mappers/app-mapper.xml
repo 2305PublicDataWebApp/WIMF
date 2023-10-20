@@ -12,10 +12,10 @@
 	</select>
 	
 	<insert id="insertApplication">
-		INSERT INTO APP_TBL (APP_NO, USER_ID, APP_DOG_HAD, APP_EXP_HAD, APP_QUESTION_ONE, APP_QUESTION_TWO, APP_QUESTION_THREE, APP_CONTENT, APP_START_DATE, APP_END_DATE, APP_DOG_ADOPT, APP_STATUS)
+		INSERT INTO APP_TBL (APP_NO, USER_ID, APP_DOG_HAD, APP_EXP_HAD, APP_QUESTION_ONE, APP_QUESTION_TWO, APP_QUESTION_THREE, APP_CONTENT, APP_START_DATE, APP_END_DATE, APP_DOG_ADOPT, APP_STATUS, DOG_NO)
 		VALUES (
 		    SEQ_APP_NO.NEXTVAL, 
-		    '사용자', 
+		    #{userId}, 
 		    #{appDogHad}, 
 		    #{appExpHad}, 
 		    #{appQuestionOne},  
@@ -28,7 +28,8 @@
 		        <when test="appDogAdopt == 'adopt'"> 'Y' </when>
 		        <otherwise> 'N' </otherwise>
 		    </choose>,
-		    DEFAULT
+		    DEFAULT,
+		    #{dogNo}
 		)
 	</insert>
 	

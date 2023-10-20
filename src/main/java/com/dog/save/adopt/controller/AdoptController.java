@@ -48,6 +48,7 @@ public class AdoptController {
 	@GetMapping("/write.dog")
 	public String adoptWriteView(Model model, HttpSession session) {
 		String adoptWriter = (String)session.getAttribute("userId");
+		// 로그인 여부 확인
 		if(adoptWriter == null || adoptWriter.isEmpty()) {
 			model.addAttribute("msg", "로그인 후에 게시글을 작성할 수 있습니다");
 			model.addAttribute("url", "/user/login.dog");
@@ -62,24 +63,27 @@ public class AdoptController {
 	public String adoptWrite(@ModelAttribute Adopt adopt, Model model, HttpSession session
 			, @RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile
 			, HttpServletRequest request) {
-		// 작성자 session에서 userId 가져오기
 		try {
-			if (uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
-	        	// 파일 정보(이름, 리네임, 경로, 크기) 및 파일 저장
-	            Map<String, Object> eMap = this.saveFile(request, uploadFile);
-	            adopt.setAdoptFileName((String) eMap.get("fileName"));
-	            adopt.setAdoptFileRename((String) eMap.get("fileRename"));
-	            adopt.setAdoptFilePath((String) eMap.get("filePath"));
-	        }
-			
+			// 로그인 한 아이디
 			String adoptWriter = (String)session.getAttribute("userId");
+			// 로그인 여부 확인
 			if(adoptWriter == null || adoptWriter.isEmpty()) {
 				model.addAttribute("msg", "로그인 후에 게시글을 작성할 수 있습니다");
 				model.addAttribute("url", "/user/login.dog");
 				return "common/error";
 			}else{
+				// 파일 유무 확인
+				if (uploadFile != null && !uploadFile.getOriginalFilename().equals("")) {
+					// 파일 정보(이름, 리네임, 경로, 크기) 및 파일 저장
+					Map<String, Object> aMap = this.saveFile(request, uploadFile);
+					adopt.setAdoptFileName((String) aMap.get("fileName"));
+					adopt.setAdoptFileRename((String) aMap.get("fileRename"));
+					adopt.setAdoptFilePath((String) aMap.get("filePath"));
+				}
+				// 작성자는 로그인 한 아이디로 넣기
 				adopt.setUserId(adoptWriter);
 				int result = aService.insertAdopt(adopt);
+				// insert 확인
 				if(result > 0) {
 					return "redirect:/adopt/list.dog";					
 				}else {
@@ -103,19 +107,28 @@ public class AdoptController {
 			, HttpSession session) {
 		try {
 			Adopt adopt = aService.showOneByAdopt(adoptNo);
-			String adoptWriter = (String)session.getAttribute("userId");
-			String userId = adopt.getUserId();
-			if(adoptWriter == null || adoptWriter.isEmpty()) {
-				model.addAttribute("msg", "로그인 후에 게시글을 수정 할 수 있습니다");
-				model.addAttribute("url", "/user/login.dog");
-				return "common/error";
-			}else if(!adoptWriter.equals(userId)){
-				model.addAttribute("msg", "내가 작성한 글만 수정이 가능합니다");
+			// 데이터를 못 불러오면
+			if(adopt == null) {
+				model.addAttribute("msg", "수정할 데이터를 불러오기 실패했습니다.");
 				model.addAttribute("url", "/adopt/list.dog");
 				return "common/error";
 			}else {
-				model.addAttribute("adopt", adopt);
-				return "adopt/update";
+				String adoptWriter = (String)session.getAttribute("userId");
+				String userId = adopt.getUserId();
+				if(adoptWriter == null || adoptWriter.isEmpty()) {
+					// 로그인을 안했으면
+					model.addAttribute("msg", "로그인 후에 게시글을 수정 할 수 있습니다");
+					model.addAttribute("url", "/user/login.dog");
+					return "common/error";
+				}else if(!adoptWriter.equals(userId)){
+					// 내가 쓴 글이 아니면
+					model.addAttribute("msg", "내가 작성한 글만 수정이 가능합니다");
+					model.addAttribute("url", "/adopt/list.dog");
+					return "common/error";
+				}else {
+					model.addAttribute("adopt", adopt);
+					return "adopt/update";
+				}
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -131,31 +144,30 @@ public class AdoptController {
 			, @RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile
 			, HttpServletRequest request) {
 		try {
-			
-			if(uploadFile != null && !uploadFile.isEmpty()) {
-				// 수정
-				// 1. 대체, 삭제 후 등록
-				// 기존 업로드 된 파일 존재 여부 체크 후 있으면 기존 파일 삭제
-				String fileName = adopt.getAdoptFileRename();
-				if(adopt.getAdoptFileName() != null) {
-					// 있으면 기존 파일 삭제
-					this.deleteFile(request, fileName);
-				}
-				// 없으면 새로 업로드 하려는 파일 저장
-				Map<String, Object> infoMap = this.saveFile(request, uploadFile);
-				
-				// DB에 저장하기 위해 adopt에 데이터를 Set하는 부분임.
-				String adoptfileName = (String)infoMap.get("fileName");
-				adopt.setAdoptFileName(adoptfileName);
-				String adoptfileRename = (String)infoMap.get("fileRename");
-				adopt.setAdoptFileRename(adoptfileRename);
-				adopt.setAdoptFilePath((String)infoMap.get("filePath"));
-			}
-			
 			String adoptWriter = adopt.getUserId();
 			String userId = (String)session.getAttribute("userId");
 			if(adoptWriter != null && adoptWriter.equals(userId)) {
+				if(uploadFile != null && !uploadFile.isEmpty()) {
+					// 수정
+					// 1. 대체, 삭제 후 등록
+					// 기존 업로드 된 파일 존재 여부 체크 후 있으면 기존 파일 삭제
+					String fileName = adopt.getAdoptFileRename();
+					if(adopt.getAdoptFileName() != null) {
+						// 있으면 기존 파일 삭제
+						this.deleteFile(request, fileName);
+					}
+					// 없으면 새로 업로드 하려는 파일 저장
+					Map<String, Object> infoMap = this.saveFile(request, uploadFile);
+					
+					// DB에 저장하기 위해 adopt에 데이터를 Set하는 부분임.
+					String adoptfileName = (String)infoMap.get("fileName");
+					adopt.setAdoptFileName(adoptfileName);
+					String adoptfileRename = (String)infoMap.get("fileRename");
+					adopt.setAdoptFileRename(adoptfileRename);
+					adopt.setAdoptFilePath((String)infoMap.get("filePath"));
+				}
 				int result = aService.updateAdoptByNo(adopt);
+				// 수정이 여부 확인
 				if(result > 0) {
 					return "redirect:/adopt/detail.dog?adoptNo="+adopt.getAdoptNo();
 				}else {
@@ -185,10 +197,12 @@ public class AdoptController {
 			Adopt adopt = aService.showOneByAdopt(adoptNo);
 			String adoptWriter = adopt.getUserId();
 			String userId = (String)session.getAttribute("userId");
-			User uOne = uService.selectOneById(userId);
+			String adminCheck = (String)session.getAttribute("adminCheck");
 			String fileName = adopt.getAdoptFileRename();
-			if(adoptWriter != null && adoptWriter.equals(userId) || uOne.getAdminCheck().equals("Y")) {
+			// 로그인 된 사람이 글의 작성자거나, 관리자면
+			if(adoptWriter != null && adoptWriter.equals(userId) || adminCheck.equals("Y")) {
 				int result = aService.deleteAdoptByNo(adopt);
+				// 삭제가 성공했으면
 				if(result > 0) {
 					// 기존 업로드 된 파일 존재 여부 체크 후 있으면 기존 파일 삭제
 					if(adopt.getAdoptFileName() != null) {
@@ -304,7 +318,7 @@ public class AdoptController {
 	}
 	
 	private Map<String, Object> saveFile(HttpServletRequest request, MultipartFile uploadFile) throws Exception {
-		HashMap<String, Object> fileMap = new HashMap<String, Object>();
+		HashMap<String, Object> filaMap = new HashMap<String, Object>();
 		// resources 경로 구하기
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		// 파일 저장 경로
@@ -326,11 +340,11 @@ public class AdoptController {
 		uploadFile.transferTo(saveFile);
 		// 파일 이름, 경로, 크기를 넘겨주기위해 Map에 정보를 저장한 후 return 함
 				// 왜 return 하는 가? DB에 저장하기 위해서 필요한 정보니까
-		fileMap.put("fileName", fileName);
-		fileMap.put("fileRename", fileRename);
-		fileMap.put("filePath", "../resources/adoptUploadFiles/" + fileRename);
+		filaMap.put("fileName", fileName);
+		filaMap.put("fileRename", fileRename);
+		filaMap.put("filePath", "../resources/adoptUploadFiles/" + fileRename);
 		
-		return fileMap;
+		return filaMap;
 	}
 
 	private void deleteFile(HttpServletRequest request, String fileName) {
