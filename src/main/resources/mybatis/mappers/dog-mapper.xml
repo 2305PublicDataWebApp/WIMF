@@ -20,7 +20,10 @@
 	    )
 	</insert>	
 	<insert id="insertReply">
-		INSERT INTO DOG_REPLY_TBL VALUES(SEQ_DOG_REPLY_NO.NEXTVAL,#{refDogNo},#{dogReplyWriter},#{dogReplyContent},DEFAULT,DEFAULT,DEFAULT)
+		INSERT INTO DOG_REPLY_TBL VALUES(SEQ_DOG_REPLY_NO.NEXTVAL,#{refDogNo},#{dogReplyWriter},#{dogReplyContent},DEFAULT,DEFAULT)
+	</insert>
+	<insert id="insertLikeStatus">
+		INSERT INTO DOG_LIKE_TBL VALUES(#{refUserId}, #{refDogNo},#{dogLike})		
 	</insert>
 	<update id="updateReply">
 		UPDATE DOG_REPLY_TBL SET DOG_REPLY_CONTENT = #{dogReplyContent},DOG_REPLY_UPDATE_DATE = DEFAULT WHERE DOG_REPLY_NO = #{dogReplyNo} 
@@ -30,6 +33,9 @@
 		, DOG_RLOCATION = #{dogRLocation}, DOG_WEIGHT = #{dogWeight}, DOG_PERSONALITY = #{dogPersonality}, DOG_HEALTH = #{dogHealth}
 		, DOG_RDATE = #{dogRDate}, DOG_DEATHDATE = #{dogDeathDate}, DOG_INFO = #{dogInfo}, DOG_REGION = #{dogRegion}, DOG_UPDATE = DEFAULT WHERE DOG_NO = #{dogNo} 
 	</update>	
+	<update id="updateLikeStatus">
+		UPDATE DOG_LIKE_TBL SET DOG_LIKE=#{dogLike} WHERE REF_DOG_NO = #{refDogNo} AND REF_USER_ID = #{refUserId}
+	</update>
 	<delete id="deleteReply">
 		DELETE FROM DOG_REPLY_TBL WHERE DOG_REPLY_NO = #{dogReplyNo}
 	</delete>
@@ -71,6 +77,9 @@
 	</select>
 	<select id="selectDogFileByDogNo" resultType="DogFile">
 		SELECT * FROM DOG_FILE_TBL WHERE REF_DOG_NO = #{dogNo} ORDER BY REF_DOG_NO ASC, DOG_FILE_ORDER ASC
+	</select>
+	<select id="getLikeStatus" resultType="String">
+		SELECT DOG_LIKE FROM DOG_LIKE_TBL WHERE REF_USER_ID = #{refUserId} AND REF_DOG_NO = #{refDogNo}
 	</select>
 	
 	<!-- 기진 코드 -->

@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.dog.save.common.domain.PageInfo;
 import com.dog.save.dog.domain.Dog;
 import com.dog.save.dog.domain.DogFile;
+import com.dog.save.dog.domain.DogLike;
 import com.dog.save.dog.domain.DogReply;
 
 public interface DogStore {
@@ -178,6 +179,30 @@ public interface DogStore {
 	 * @return
 	 */
 	int deleteDog(SqlSession session, int dogNo);
+
+	/**
+	 * 돌봄 강아지 좋아요 업데이트 Store
+	 * @param session
+	 * @param dogLike
+	 * @return
+	 */
+	int insertLikeStatus(SqlSession session, DogLike dogLike);
+
+	/**
+	 * 돌봄 강아지 좋아요 상태 체크 Store
+	 * @param session
+	 * @param dogLike
+	 * @return
+	 */
+	String getLikeStatus(SqlSession session, DogLike dogLike);
+
+	/**
+	 * 돌봄 강아지 좋아요 상태수정 Store
+	 * @param session
+	 * @param dogLike
+	 * @return
+	 */
+	int updateLikeStatus(SqlSession session, DogLike dogLike);
 
 
 
