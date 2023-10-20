@@ -81,15 +81,19 @@
 	<select id="getLikeStatus" resultType="String">
 		SELECT DOG_LIKE FROM DOG_LIKE_TBL WHERE REF_USER_ID = #{refUserId} AND REF_DOG_NO = #{refDogNo}
 	</select>
+	<select id="selectReplyList" resultType="DogReply">
+		SELECT * FROM DOG_REPLY_TBL WHERE REF_DOG_NO = #{dogNo} ORDER BY DOG_REPLY_NO ASC
+	</select>
 	
 	<!-- 기진 코드 -->
 	<select id="selectAllDogList" resultType="Dog">
 		SELECT * FROM DOG_TBL ORDER BY DOG_NO DESC
 	</select>
-	<!-- 기진 코드 -->
-	
-	
-	<select id="selectReplyList" resultType="DogReply">
-		SELECT * FROM DOG_REPLY_TBL WHERE REF_DOG_NO = #{dogNo} ORDER BY DOG_REPLY_NO ASC
+	<select id="getListCountByPStartDate" resultType="_int">
+		SELECT COUNT(*) FROM DOG_TBL WHERE DOG_P_STARTDATE IS NOT NULL
 	</select>
+	<select id="getListCountByAdoptedCheck" resultType="_int">
+		SELECT COUNT(*) FROM DOG_TBL WHERE DOG_ADOPT='Y'
+	</select>
+	<!-- 기진 코드 -->
 </mapper>

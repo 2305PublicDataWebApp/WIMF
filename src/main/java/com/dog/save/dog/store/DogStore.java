@@ -107,14 +107,6 @@ public interface DogStore {
 	 */
 	List<Dog> selectDogsBySearch(SqlSession session, String searchInput, PageInfo pInfo);
 
-//	기진 코드
-	/**
-	 * 모든 강아지 리스트 가져오기 Store
-	 * @param session
-	 * @return
-	 */
-	List<Dog> selectAllDogList(SqlSession session);
-//	기진 코드
 	/**
 	 * 돌봄 강아지 상세 댓글 입력 Store
 	 * @param session
@@ -203,8 +195,30 @@ public interface DogStore {
 	 * @return
 	 */
 	int updateLikeStatus(SqlSession session, DogLike dogLike);
+//	기진 코드
+	/**
+	 * 모든 강아지 리스트 가져오기 Store
+	 * @param session
+	 * @return
+	 */
+	List<Dog> selectAllDogList(SqlSession session);
+	
+	/**
+	 * pStartDate로 전체 갯수 가져오기 Store
+	 * @param session
+	 * @return
+	 */
+	int getListCountByPStartDate(SqlSession session);
+	
+	/**
+	 * 입양간 수 전체 갯수 가져오기 Store
+	 * @param session
+	 * @return
+	 */
+	int getListCountByAdoptedCheck(SqlSession session);
+//	기진 코드
 
-
+	
 
 
 }

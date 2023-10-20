@@ -85,8 +85,4 @@ public class UserStoreLogic implements UserStore{
 		return uList;
 	}
 	// 기진 코드
-
-	
-
-
 }

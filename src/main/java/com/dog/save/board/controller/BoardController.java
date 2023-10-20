@@ -53,89 +53,31 @@ public class BoardController {
 	public String boardWriteView() {
 		return "board/communityInsert";
 	}
-	// ==================== 게시글 작성 ====================
-//	@PostMapping("/write.dog")
-//	public String boardWrite(@ModelAttribute Board board, Model model, HttpSession session, @RequestParam(value="file", required=false) MultipartFile multipartFile, HttpServletRequest request) {	// 기진 코드 추가
-//		// 작성자 session에서 userId 가져오기
-//		try {
-//			String boardWriter = (String)session.getAttribute("userId");
-//			if(boardWriter == null || boardWriter.isEmpty()) {
-//				model.addAttribute("msg", "로그인 후에 게시글을 작성할 수 있습니다");
-//				model.addAttribute("url", "/user/login.dog");
-//				return "common/error";
-//			}else if(boardWriter != null && !boardWriter.equals("")) {
-//				board.setBoardWriter(boardWriter);
-//				
-////				기진 코드 추가
-//				Map<String, Object> infoMap = stService.uploadImage(multipartFile, request);
-//				
-//				board.setBoardFileName((String)infoMap.get("fileName"));
-//				board.setBoardFileRename((String)infoMap.get("fileRename"));
-//				board.setBoardFilePath((String)infoMap.get("filePath"));
-//				board.setBoardFileLength((long)infoMap.get("fileLength"));
-////				기진 코드 추가
-//				
-//				int result = bService.insertBoard(board);
-//				return "redirect:/board/list.dog";
-//			}else {
-//				model.addAttribute("msg", "게시글 작성이 완료되지 않았습니다.");
-//				model.addAttribute("url", "/board/list.dog");
-//				return "common/error";
-//			}
-//		} catch (Exception e) {
-//			model.addAttribute("msg", "관리자에게 문의 바랍니다");
-//			model.addAttribute("url", "/board/list.dog");
-//			return "common/error";
-//		}
-//	}
 	// ==================== 게시글 작성(정대 코드) ====================
-		@PostMapping("/write.dog")
-		public String boardWrite(@ModelAttribute Board board, Model model, HttpSession session) {
-			// 작성자 session에서 userId 가져오기
-			try {
-				String boardWriter = (String)session.getAttribute("userId");
-				if(boardWriter == null || boardWriter.isEmpty()) {
-					model.addAttribute("msg", "로그인 후에 게시글을 작성할 수 있습니다");
-					model.addAttribute("url", "/user/login.dog");
-					return "common/error";
-				}else if(boardWriter != null && !boardWriter.equals("")) {
-					board.setBoardWriter(boardWriter);
-					int result = bService.insertBoard(board);
-					return "redirect:/board/list.dog";
-				}else {
-					model.addAttribute("msg", "게시글 작성이 완료되지 않았습니다.");
-					model.addAttribute("url", "/board/list.dog");
-					return "common/error";
-				}
-			} catch (Exception e) {
-				model.addAttribute("msg", "관리자에게 문의 바랍니다");
+	@PostMapping("/write.dog")
+	public String boardWrite(@ModelAttribute Board board, Model model, HttpSession session) {
+		// 작성자 session에서 userId 가져오기
+		try {
+			String boardWriter = (String)session.getAttribute("userId");
+			if(boardWriter == null || boardWriter.isEmpty()) {
+				model.addAttribute("msg", "로그인 후에 게시글을 작성할 수 있습니다");
+				model.addAttribute("url", "/user/login.dog");
+				return "common/error";
+			}else if(boardWriter != null && !boardWriter.equals("")) {
+				board.setBoardWriter(boardWriter);
+				int result = bService.insertBoard(board);
+				return "redirect:/board/list.dog";
+			}else {
+				model.addAttribute("msg", "게시글 작성이 완료되지 않았습니다.");
 				model.addAttribute("url", "/board/list.dog");
 				return "common/error";
 			}
+		} catch (Exception e) {
+			model.addAttribute("msg", "관리자에게 문의 바랍니다");
+			model.addAttribute("url", "/board/list.dog");
+			return "common/error";
 		}
-	// ==================== 기진 코드 board 썸머노트 이미지 가져오기 ====================
-//    @ResponseBody 
-//    @RequestMapping(value="/getSummernoteImageFile.dog",method=RequestMethod.POST) 
-//    public JsonObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile 
-//            , HttpServletRequest request
-//            , Model model) {
-//    	
-//        JsonObject jsonObject = new JsonObject();
-//        
-//        try {
-//        	Map<String, Object> infoMap = stService.uploadImage(multipartFile, request);
-//        	
-//        	String imageUrl = "/summerImageFiles/" + infoMap.get("boardFileRename");
-//            String originalFileName = (String) infoMap.get("originalFileName");
-//
-//            jsonObject.addProperty("url",imageUrl); 
-//            jsonObject.addProperty("originName",originalFileName); 
-//            jsonObject.addProperty("reponseCode","success"); 
-//		} catch (Exception e) {
-//			e.printStackTrace(); 
-//		}
-//        return jsonObject;
-//    } 
+	}
 	// ==================== 게시글 수정 페이지 ====================
 	@GetMapping("/update.dog")
 	public String boardUpdateView(Model model

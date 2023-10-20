@@ -88,13 +88,6 @@ public interface DogService {
 	 */
 	List<Dog> selectDogsBySearch(String searchInput, PageInfo pInfo);
 
-//	기진 코드
-	/**
-	 * 모든 강아지 리스트 가져오기 Service
-	 * @return
-	 */
-	List<Dog> selectAllDogList();
-//	기진 코드
 	/**
 	 * 돌봄 강아지 상세페이지 댓글 입력 Service
 	 * @param dogReply
@@ -138,6 +131,29 @@ public interface DogService {
 	 * @return
 	 */
 	int deleteDog(int dogNo);
+	
+//	기진 코드
+	/**
+	 * 모든 강아지 리스트 가져오기 Service
+	 * @return
+	 */
+	List<Dog> selectAllDogList();
+	
+	/**
+	 * pStartDate로 전체 갯수 가져오기 Service
+	 * @return
+	 */
+	int getListCountByPStartDate();
+
+	/**
+	 * 입양간 수 전체 갯수 가져오기 Service
+	 * @return
+	 */
+	int getListCountByAdoptedCheck();
+	
+//	기진 코드
+
+	
 
 	/**
 	 * 돌봄 강아지 좋아요 등록 Service

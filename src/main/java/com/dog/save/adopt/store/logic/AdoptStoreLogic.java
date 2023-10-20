@@ -74,4 +74,10 @@ public class AdoptStoreLogic implements AdoptStore {
 		return result;
 	}
 
+	@Override
+	public List<Adopt> selectAllAdobtList(SqlSession sqlSession) {
+		List<Adopt> aList = sqlSession.selectList("AdoptMapper.selectAllAdobtList");
+		return aList;
+	}
+
 }

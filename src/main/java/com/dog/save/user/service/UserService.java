@@ -87,6 +87,4 @@ public interface UserService {
 	// 기진코드
 
 	
-
-	
 }

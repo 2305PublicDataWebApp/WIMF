@@ -521,7 +521,7 @@
       }
       
     </script>
-	<link href="/css/index/fullCalendar.css" rel="stylesheet">
+	<link href="/css/index/index.css" rel="stylesheet">
 </head>
 
 <body class="index-page" data-bs-spy="scroll" data-bs-target="#navmenu">
@@ -619,33 +619,34 @@
 
         <div class="row gy-4">
 
-          <div class="col-lg-3 col-md-6">
+          <div class="col-lg-4 col-md-4">
             <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="${careCount }" data-purecounter-duration="1" class="purecounter"></span>
               <p>돌봄 진행 수</p>
             </div>
           </div><!-- End Stats Item -->
 
-          <div class="col-lg-3 col-md-6">
+          <div class="col-lg-4 col-md-4">
             <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="${adoptCount }" data-purecounter-duration="1" class="purecounter"></span>
               <p>입양 진행 수</p>
             </div>
           </div><!-- End Stats Item -->
 
-          <div class="col-lg-3 col-md-6">
+          <div class="col-lg-4 col-md-4">
             <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" class="purecounter"></span>
+              <span data-purecounter-start="0" data-purecounter-end="${allDogCount }" data-purecounter-duration="1" class="purecounter"></span>
               <p>보호 강아지 수</p>
             </div>
           </div><!-- End Stats Item -->
 
-          <div class="col-lg-3 col-md-6">
+          <!-- <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
               <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
               <p>안락사 수</p>
             </div>
-          </div><!-- End Stats Item -->
+          </div> -->
+          <!-- End Stats Item -->
 
         </div>
 
@@ -930,14 +931,14 @@
 
         <div class="row align-items-center">
 
-          <div class="col-lg-5 info" data-aos="fade-up" data-aos-delay="100">
-            <h3>돌봄 후기</h3>
+          <div class="col-lg-3 info" data-aos="fade-up" data-aos-delay="100">
+            <h3>소통 게시판</h3>
             <p>
               돌봄으로 나눈 마음을 공유해주세요!
             </p>
           </div>
 
-          <div class="col-lg-7" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-lg-9" data-aos="fade-up" data-aos-delay="200">
 
             <div class="swiper">
               <template class="swiper-config">
@@ -957,29 +958,35 @@
               </template>
               <div class="swiper-wrapper">
 
-                <!-- Start testimonial item -->
-                <div class="swiper-slide">
-                  <div class="testimonial-item">
-                    <div class="d-flex">
-                      <img src="/img/testimonials/testimonials-1.jpg" class="testimonial-img flex-shrink-0" alt="">
-                      <div>
-                        <h3>Saul Goodman</h3>
-                        <h4>Ceo & Founder</h4>
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <p>
-                      <i class="bi bi-quote quote-icon-left"></i>
-                      <span>정말 행복한 경험이었어요.</span>
-                      <i class="bi bi-quote quote-icon-right"></i>
-                    </p>
-                  </div>
-                </div>
-                <!-- End testimonial item -->
+				  <c:forEach var="bList" items="${bList}" varStatus="loop">
+		           	  <c:if test="${loop.index < 10}">
+		                <!-- Start testimonial item -->
+		                <div class="swiper-slide">
+		                  <div class="testimonial-item">
+		                    <div class="d-flex">
+		                      <img src="${bList.userProfile }" class="testimonial-img flex-shrink-0" alt="">
+		                      <div>
+		                        <h3>${bList.boardTitle }</h3>
+		                        <h4>${bList.userNickName }</h4>
+		                        <!-- <div class="stars">
+		                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+		                        </div> -->
+		                      </div>
+		                    </div>
+		                    <div style="overflow-y: scroll; height: 400px;">
+			                    <p>
+			                      <i class="bi bi-quote quote-icon-left"></i>
+			                      <span>${bList.boardContent }</span>
+			                      <i class="bi bi-quote quote-icon-right"></i>
+			                    </p>
+		                    </div>
+		                  </div>
+		                </div>
+		                <!-- End testimonial item -->
+		              </c:if>
+	              </c:forEach>
 
-                <div class="swiper-slide">
+                <!-- <div class="swiper-slide">
                   <div class="testimonial-item">
                     <div class="d-flex">
                       <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img flex-shrink-0" alt="">
@@ -997,7 +1004,7 @@
                       <i class="bi bi-quote quote-icon-right"></i>
                     </p>
                   </div>
-                </div><!-- End testimonial item -->
+                </div>End testimonial item
 
                 <div class="swiper-slide">
                   <div class="testimonial-item">
@@ -1017,7 +1024,7 @@
                       <i class="bi bi-quote quote-icon-right"></i>
                     </p>
                   </div>
-                </div><!-- End testimonial item -->
+                </div>End testimonial item
 
                 <div class="swiper-slide">
                   <div class="testimonial-item">
@@ -1037,7 +1044,7 @@
                       <i class="bi bi-quote quote-icon-right"></i>
                     </p>
                   </div>
-                </div><!-- End testimonial item -->
+                </div>End testimonial item
 
                 <div class="swiper-slide">
                   <div class="testimonial-item">
@@ -1057,7 +1064,7 @@
                       <i class="bi bi-quote quote-icon-right"></i>
                     </p>
                   </div>
-                </div>
+                </div> -->
                 <!-- End testimonial item -->
 
               </div>
@@ -1077,7 +1084,7 @@
 
       <!--  Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>소통 게시판</h2>
+        <h2>후기 게시판</h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
 
@@ -1115,29 +1122,44 @@
           <!-- End post list item -->
           
           
-          <c:forEach var="board" items="${bList}" varStatus="loop">
-            <c:if test="${loop.index < 9}">
+          <c:forEach var="aList" items="${aList}" varStatus="loop">
+            <c:if test="${loop.index < 6}">
               <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                 <article>
     
-                  <!-- <div class="post-img">
-                    <img src="/img/blog/blog-2.jpg" alt="" class="img-fluid">
-                  </div> -->
+                  <div class="post-img">
+                  	<c:if test="${aList.adoptFilePath == null}">
+                  		<a href="/adopt/detail.dog?adoptNo=${aList.adoptNo}">
+                  			<img src="/img/user/default-profile.png" alt="후기게시판사진" class="img-fluid">
+                  		</a>
+                  	</c:if>
+                  	<c:if test="${aList.adoptFilePath != null}">
+	                  	<a href="/adopt/detail.dog?adoptNo=${aList.adoptNo}">
+	               			<img src="${aList.adoptFilePath }" alt="후기게시판사진" class="img-fluid">
+	               		</a>
+                  	</c:if>
+                  </div>
     
-                  <p class="post-category">조회수 : ${board.viewCount }</p>
-                  <c:url var="detailUrl" value="/board/detail.dog">
-                    <c:param name="boardNo" value="${board.boardNo }"></c:param>
+    			  <c:if test="${aList.adoptType == 'care'}">
+    			  	<p class="post-category">돌봄 후기</p>
+    			  </c:if>
+    			  <c:if test="${aList.adoptType == 'adopt'}">
+    			  	<p class="post-category">입양 후기</p>
+    			  </c:if>
+                  <c:url var="detailUrl" value="/adopt/detail.dog">
+                    <c:param name="adoptNo" value="${aList.adoptNo }"></c:param>
                   </c:url>
                   <h2 class="title">
-                    <a href="${detailUrl }">${board.boardTitle }</a>
+                    <a href="${detailUrl }">${aList.adoptTitle }</a>
                   </h2>
     
                   <div class="d-flex align-items-center">
-                    <img src = "${board.userProfile }"alt="프로필사진" class="img-fluid post-author-img flex-shrink-0">
+                    <img src = "${aList.userProfile }"alt="프로필사진" class="img-fluid post-author-img flex-shrink-0">
                     <div class="post-meta">
-                      <p class="post-author">${board.userNickName }</p>
+                      <p class="post-author">${aList.userNickName }</p>
                       <p class="post-date">
-                        <fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
+                      	<fmt:formatDate value="${aList.adoptDate }" pattern="yyyy-MM-dd"/>~
+                        <fmt:formatDate value="${aList.giveUpDate }" pattern="yyyy-MM-dd"/>
                       </p>
                     </div>
                   </div>
@@ -1331,13 +1353,13 @@
     
 
     <!-- Features Section - Home Page -->
-    <section id="features" class="features">
+    <!-- <section id="features" class="features">
 
-      <!--  Section Title -->
+       Section Title
       <div class="container section-title" data-aos="fade-up">
         <h2>Features</h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div><!-- End Section Title -->
+      </div>End Section Title
 
       <div class="container">
 
@@ -1356,7 +1378,7 @@
               <img src="/img/features-light-2.jpg" alt="" class="stack-back">
             </div>
           </div>
-        </div><!-- Features Item -->
+        </div>Features Item
 
         <div class="row gy-4 align-items-stretch justify-content-between features-item ">
           <div class="col-lg-6 d-flex align-items-center features-img-bg" data-aos="zoom-out">
@@ -1372,11 +1394,12 @@
             </ul>
             <a href="#" class="btn btn-get-started align-self-start">Get Started</a>
           </div>
-        </div><!-- Features Item -->
+        </div>Features Item
 
       </div>
 
-    </section><!-- End Features Section -->
+    </section> -->
+    <!-- End Features Section -->
 
 
 
@@ -1814,9 +1837,8 @@
     function showDogDetail(dogNo) {    	    	    	       	       
       var url = "/dog/detail.dog?dogNo=" + dogNo;
       window.location.href = url;	    	    
-    }	
+    }
  	
-    
   </script>
 
 </body>

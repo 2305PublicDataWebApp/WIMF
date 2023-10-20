@@ -168,5 +168,11 @@
 	    ORDER BY ADOPT_TBL.ADOPT_NO DESC
 	</select>
 
+	<!-- 기진 코드 -->
+	<!-- 게시글 전체 조회 -->
+	<select id="selectAllAdobtList" resultType="Adopt">
+		SELECT * FROM ADOPT_TBL ORDER BY ADOPT_TBL.ADOPT_NO DESC
+	</select>
+	<!-- 기진 코드 -->
 	
 </mapper>
