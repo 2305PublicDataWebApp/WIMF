@@ -46,7 +46,9 @@
 					<img src=${dogFileList[0].dogFilePath } alt=${dogFileList[0].dogFileName }>
 				</div>
 				<div>
-					<button>좋아요</button>
+					<c:if test ="${userId ne null }">
+						<button id="likeSubmit">좋아요</button>
+					</c:if>
 				</div>
 			</div>
 			<div id="dog_info_container">
@@ -109,8 +111,17 @@
                       <div class="input_title">
                           <label>작성란</label>	                          
                       </div>
-                 	<input type="text" name="dogReplyContent" id="dogReplyContent" placeholder="댓글을 작성해주세요!" style="width: 500px;">&nbsp&nbsp
-				    <button id="rSubmit" class="custom-btn btn-11">제출</button>		
+					<c:choose>
+					    <c:when test="${not empty userId}">
+					        <!-- 사용자가 로그인한 경우 -->
+					        <input type="text" name="dogReplyContent" id="dogReplyContent" placeholder="댓글을 작성해주세요!" style="width: 500px;">&nbsp&nbsp
+					        <button id="rSubmit" class="custom-btn btn-11">제출</button>
+					    </c:when>
+					    <c:otherwise>
+					        <!-- 사용자가 로그인하지 않은 경우 -->
+					        <input type="text" name="dogReplyContent" id="dogReplyContent" placeholder="댓글 작성은 로그인 후 가능합니다" style="width: 500px;" disabled>&nbsp&nbsp
+					    </c:otherwise>
+					</c:choose>				    
 				</div>
 		</div>	
 		<table align="center" width="500" border="1" id="replyTable">
@@ -123,6 +134,73 @@
 		
 		<script>
 		
+		
+		 // 좋아요 버튼 클릭 이벤트 처리
+		$(document).ready(function() {
+		  // 페이지 로딩 시 "좋아요" 상태 가져오기
+		  checkLikeStatus();
+		  
+		  // 좋아요 버튼 클릭 이벤트 처리
+		  $("#likeSubmit").on("click", function() {
+		    toggleLikeStatus();
+		  });
+		});
+		
+		let isLiked = false; // "좋아요" 상태를 전역 변수로 선언
+		
+		function checkLikeStatus() {
+		  // 동물 번호를 이용하여 서버로부터 "좋아요" 상태를 가져오는 AJAX 요청
+		  const refDogNo = ${dog.dogNo};
+		  $.ajax({
+		    url: "/dog/checkLikeStatus.dog", // "좋아요" 상태를 확인하는 URL
+		    type: "GET",
+		    data: { "refDogNo": refDogNo },
+		    success: function (result) {
+		      if (result == "liked") {
+		        isLiked = true; // 이미 "좋아요"한 상태임을 설정
+		        // 버튼을 빨간색으로 변경
+		        $("#likeSubmit").css("background-color", "red");
+		      }
+		    },
+		    error: function() {
+		      alert("좋아요 상태 가져오기 실패");
+		    }
+		  });
+		}
+		
+		function toggleLikeStatus() {
+			  // 동물 번호와 현재 "좋아요" 상태를 서버로 전송하는 AJAX 요청
+			  const refDogNo = ${dog.dogNo};
+			  let dogLike = isLiked ? 'N' : 'Y'; // isLiked가 true일 때 'N', false일 때 'Y' 초기값 false 'Y'
+			  $.ajax({
+			    url: "/dog/updateLikeStatus.dog", // "좋아요" 상태를 토글하는 URL
+			    type: "POST",
+			    data: { "refDogNo": refDogNo, "dogLike": dogLike },
+			    success: function (result) {
+			      if (result == "success") {
+			        if (dogLike == 'Y') {
+			          isLiked = true; // "좋아요" 상태로 변경
+			          // 버튼을 빨간색으로 변경
+			          $("#likeSubmit").css("background-color", "red");
+			          alert("좋아요 성공!!");
+			        } else {
+			          isLiked = false; // "좋아요" 취소 상태로 변경
+			          // 버튼 색상 제거
+			          $("#likeSubmit").css("background-color", "");
+			          alert("좋아요 취소 성공!!");
+			        }
+			      } else {
+			        alert("좋아요 업데이트 실패!!");
+			      }
+			    },
+			    error: function() {
+			      alert("관리자에게 문의 바랍니다.");
+			    }
+			  });
+			}
+
+
+
 
 		// "제출" 버튼 클릭 시 호출되는 부분
 		$("#rSubmit").on("click", function() {
@@ -155,15 +233,15 @@
 		    const headerRow = $("<tr>");
 		    headerRow.append("<th width='10%'>작성자</th>");
 		    headerRow.append("<th width='40%'>댓글 내용</th>");
-		    headerRow.append("<th width='30%'>작성일(수정일)</th>");
-		    headerRow.append("<th width='5%'>추천수</th>");
+		    headerRow.append("<th width='15%'>추천수</th>");
+		    headerRow.append("<th width='20%'>작성일(수정일)</th>");
 		    headerRow.append("<th width='15%'>수정/삭제</th>");
 		    tableBody.append(headerRow);
 		    if (data.length > 0) {
 		        for (let i in data) {
 		            const tr = $("<tr>");
-		            const dogReplyWriter = $("<td width= 10%;>").text(data[i].dogReplyWriter);
-		            const dogReplyContent = $("<td  width= 40%;>").text(data[i].dogReplyContent);
+		            const dogReplyWriter = $("<td>").text(data[i].dogReplyWriter);
+		            const dogReplyContent = $("<td>").text(data[i].dogReplyContent);
 		            const dogReplyCreateDate = new Date(data[i].dogReplyCreateDate);
 		            const formattedDate = dogReplyCreateDate.toLocaleString('ko-KR', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
 		            const dogReplyUpdateDate = new Date(data[i].dogReplyUpdateDate);
@@ -171,14 +249,16 @@
 		            if (formattedDate !== formattedDate2) {
 		                formattedDate2 += " (수정됨)";
 		            }
-		            const dogReplyRecommend = $("<td  width= 5%;>").text(data[i].dogReplyRecommend);
-		            const btnArea = $("<td width= 15%;>")
-		                .append("<a href='javascript:void(0)' onclick='modifyView(this, " + data[i].dogReplyNo + ", \"" + data[i].dogReplyContent + "\");'>수정하기</a>&nbsp;&nbsp;")
-		                .append("<a href='javascript:void(0)' onclick='removeReply(" + data[i].dogReplyNo + ");'>삭제하기</a");
+		            
+		            const dogReplyRecommend = $("<td>").text(data[i].dogReplyRecommend);
+		            const btnArea = $("<td>")		            	
+		                .append("<a href='javascript:void(0)' onclick='modifyView(this, " + data[i].dogReplyNo + ", \"" + data[i].dogReplyContent + "\");'>수정</a>&nbsp;&nbsp;")
+		                .append("<a href='javascript:void(0)' onclick='removeReply(" + data[i].dogReplyNo + ");'>삭제</a>");
+		            const dateCell = $("<td>").text(formattedDate2).attr("id", "date-cell");		            
 		            tr.append(dogReplyWriter);
-		            tr.append(dogReplyContent);		            
-		            tr.append($("<td width= 30%;>").text(formattedDate2));
+		            tr.append(dogReplyContent);		        		            
 		            tr.append(dogReplyRecommend);
+		            tr.append(dateCell);
 		            tr.append(btnArea);
 		            tableBody.append(tr);
 		            
@@ -239,7 +319,7 @@
 				}
 			});
 		}
-		
+	
 		const removeReply = (dogReplyNo) => {
 			$.ajax({
 				url:"/dog/replyDelete.dog",

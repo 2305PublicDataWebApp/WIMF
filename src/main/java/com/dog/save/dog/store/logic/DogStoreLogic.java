@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.dog.save.common.domain.PageInfo;
 import com.dog.save.dog.domain.Dog;
 import com.dog.save.dog.domain.DogFile;
+import com.dog.save.dog.domain.DogLike;
 import com.dog.save.dog.domain.DogReply;
 import com.dog.save.dog.store.DogStore;
 
@@ -149,6 +150,24 @@ public class DogStoreLogic implements DogStore{
 	@Override
 	public int deleteDog(SqlSession session, int dogNo) {
 		int result = session.delete("DogMapper.deleteDog", dogNo);
+		return result;
+	}
+
+	@Override
+	public int insertLikeStatus(SqlSession session, DogLike dogLike) {
+		int result = session.insert("DogMapper.insertLikeStatus", dogLike);
+		return result;
+	}
+
+	@Override
+	public String getLikeStatus(SqlSession session, DogLike dogLike) {
+		String result = session.selectOne("DogMapper.getLikeStatus", dogLike);
+		return result;
+	}
+
+	@Override
+	public int updateLikeStatus(SqlSession session, DogLike dogLike) {
+		int result = session.update("DogMapper.updateLikeStatus", dogLike);
 		return result;
 	}
 

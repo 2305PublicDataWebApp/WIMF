@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dog.save.common.domain.PageInfo;
 import com.dog.save.dog.domain.Dog;
 import com.dog.save.dog.domain.DogFile;
+import com.dog.save.dog.domain.DogLike;
 import com.dog.save.dog.domain.DogReply;
 import com.dog.save.dog.service.DogService;
 import com.dog.save.dog.store.DogStore;
@@ -269,6 +270,21 @@ public class DogServiceImpl implements DogService{
 	@Override
 	public int deleteDog(int dogNo) {
 		int result = dStore.deleteDog(session,dogNo);
+		return result;
+	}
+	@Override
+	public int insertLikeStatus(DogLike dogLike) {
+		int result = dStore.insertLikeStatus(session,dogLike);
+		return result;
+	}
+	@Override
+	public String getLikeStatus(DogLike dogLike) {
+		String result = dStore.getLikeStatus(session,dogLike);
+		return result;
+	}
+	@Override
+	public int updateLikeStatus(DogLike dogLike) {
+		int result = dStore.updateLikeStatus(session,dogLike);
 		return result;
 	}
 

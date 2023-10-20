@@ -1,123 +1,149 @@
 @charset "UTF-8";
+
 @font-face {
-    font-family: 'SUITE-Regular';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-}
-
-
-main{
 	font-family: 'SUITE-Regular';
-    max-width: 1100px;
-    margin: 100px auto 10px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2')
+		format('woff2');
+	font-weight: 400;
+	font-style: normal;
 }
-h1{
+
+main {
+	font-family: 'SUITE-Regular';
+	max-width: 1100px;
+	margin: 100px auto 10px;
+	padding: 20px;
+	background-color: #fff;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
 	text-align: center;
 	font-family: 'SUITE-Regular';
 }
+
 .custom-btn {
-    width: 130px;
-    height: 40px;
-    color: #fff;
-    border-radius: 5px;
-    padding: 10px 25px;
-    font-family: 'SUITE-Regular';
-    font-weight: 500;
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
-    7px 7px 20px 0px rgba(0,0,0,.1),
-    4px 4px 5px 0px rgba(0,0,0,.1);
-    outline: none;
-}  
-.btn-11 {
-    border: none;
-    background: rgb(200, 76, 76);
-    color: #fff;
-    overflow: hidden;
+	width: 130px;
+	height: 40px;
+	color: #fff;
+	border-radius: 5px;
+	padding: 10px 25px;
+	font-family: 'SUITE-Regular';
+	font-weight: 500;
+	background: transparent;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	position: relative;
+	display: inline-block;
+	box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5), 7px 7px 20px
+		0px rgba(0, 0, 0, .1), 4px 4px 5px 0px rgba(0, 0, 0, .1);
+	outline: none;
 }
- .btn-11:hover {
-      text-decoration: none;
-      color: #fff;
-  }
-  .btn-11:before {
-      position: absolute;
-      content: '';
-      display: inline-block;
-      top: -180px;
-      left: 0;
-      width: 30px;
-      height: 100%;
-      background-color: #fff;
-      animation: shiny-btn1 3s ease-in-out infinite;
-  }
-  .btn-11:hover{
-    opacity: .7;
-  }
-  .btn-11:active{
-    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.3),
-                -4px -4px 6px 0 rgba(116, 125, 136, .2), 
-      inset -4px -4px 6px 0 rgba(255,255,255,.2),
-      inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
-  }
-  
+
+.btn-11 {
+	border: none;
+	background: rgb(200, 76, 76);
+	color: #fff;
+	overflow: hidden;
+}
+
+.btn-11:hover {
+	text-decoration: none;
+	color: #fff;
+}
+
+.btn-11:before {
+	position: absolute;
+	content: '';
+	display: inline-block;
+	top: -180px;
+	left: 0;
+	width: 30px;
+	height: 100%;
+	background-color: #fff;
+	animation: shiny-btn1 3s ease-in-out infinite;
+}
+
+.btn-11:hover {
+	opacity: .7;
+}
+
+.btn-11:active {
+	box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .3), -4px -4px 6px 0
+		rgba(116, 125, 136, .2), inset -4px -4px 6px 0 rgba(255, 255, 255, .2),
+		inset 4px 4px 6px 0 rgba(0, 0, 0, .2);
+}
+
 #detail-container {
-    display: flex;
-    width: 100%;
+	display: flex;
+	width: 100%;
 }
 
 #dog_image_container {
-    flex: 0 0 60%; /* 60% 너비를 고정 */
-    padding: 10px; /* 여백 추가 (선택사항) */
-    box-sizing: border-box; /* 패딩을 포함한 크기로 지정 */
-    border-right: 1px solid black;
+	flex: 0 0 60%; /* 60% 너비를 고정 */
+	padding: 10px; /* 여백 추가 (선택사항) */
+	box-sizing: border-box; /* 패딩을 포함한 크기로 지정 */
+	border-right: 1px solid black;
 }
 
 #dog_info_container {
-    flex: 0 0 40%; /* 40% 너비를 고정 */
-    padding: 10px; /* 여백 추가 (선택사항) */
-    box-sizing: border-box; /* 패딩을 포함한 크기로 지정 */
+	flex: 0 0 40%; /* 40% 너비를 고정 */
+	padding: 10px; /* 여백 추가 (선택사항) */
+	box-sizing: border-box; /* 패딩을 포함한 크기로 지정 */
 }
 
-    table {
-        font-size: 15px; /* 폰트 크기 조절 */
-        border-collapse: collapse; /* 테이블 셀 경계를 합침 */
-        width: 100%; /* 테이블 너비를 100%로 설정 */
-    }
-
-    table, th, td {
-        border: 1px dotted black; /* 테두리 추가 (선택사항) */
-        text-align:center;
-        padding: 20px; /* 셀 간격 조절 (선택사항) */
-    }
-    
-    img{
-    max-width:100%;
-    }
-    
-    #btn-area{
-    	display:flex;
-    	justify-content:space-between;
-    }
-    
-    .input_box{
-    display: inline-flex;
-    width: 100%;
-    padding: 10px 20px;
-    justify-content: center;
-    margin-bottom: 20px;
+#dog_info_container table {
+	font-size: 15px; /* 폰트 크기 조절 */
+	border-collapse: collapse; /* 테이블 셀 경계를 합침 */
+	width: 100%; /* 테이블 너비를 100%로 설정 */
 }
 
-
-.input_title{
-    width: 139px;
-    padding-top: 12px;
+#dog_info_container table, #dog_info_container th, #dog_info_container td
+	{
+	border: 1px dotted black; /* 테두리 추가 (선택사항) */
+	text-align: center;
+	padding: 20px; /* 셀 간격 조절 (선택사항) */
 }
 
+#replyTable {
+	width: 100%;
+}
+
+td.date-cell {
+	font-size: 10px; /* 폰트 크기를 12픽셀로 설정 */
+}
+
+.small-text {
+	font-size: 12px; /* Adjust the font size to your preference */
+}
+
+#replyTable th, #replyTable, td {
+	font-size: 15px;
+	border: 1px dotted black;
+	padding: 10px;
+}
+#date-cell{
+	font-size : 10px;
+}
+img {
+	max-width: 100%;
+}
+
+#btn-area {
+	display: flex;
+	justify-content: space-between;
+}
+
+.input_box {
+	display: inline-flex;
+	width: 100%;
+	padding: 10px 20px;
+	justify-content: center;
+	margin-bottom: 20px;
+}
+
+.input_title {
+	width: 139px;
+	padding-top: 12px;
+}

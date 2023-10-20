@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.dog.save.common.domain.PageInfo;
 import com.dog.save.dog.domain.Dog;
 import com.dog.save.dog.domain.DogFile;
+import com.dog.save.dog.domain.DogLike;
 import com.dog.save.dog.domain.DogReply;
 
 
@@ -137,6 +138,27 @@ public interface DogService {
 	 * @return
 	 */
 	int deleteDog(int dogNo);
+
+	/**
+	 * 돌봄 강아지 좋아요 등록 Service
+	 * @param dogLike
+	 * @return
+	 */
+	int insertLikeStatus(DogLike dogLike);
+
+	/**
+	 * 돌봄 강아지 좋아요 상태 체크 Service
+	 * @param dogLike
+	 * @return
+	 */
+	String getLikeStatus(DogLike dogLike);
+
+	/**
+	 * 돌봄 강아지 좋아요 상태변경 Service
+	 * @param dogLike
+	 * @return
+	 */
+	int updateLikeStatus(DogLike dogLike);
 
 
 

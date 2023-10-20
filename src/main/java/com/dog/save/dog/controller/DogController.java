@@ -31,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.dog.save.common.domain.PageInfo;
 import com.dog.save.dog.domain.Dog;
 import com.dog.save.dog.domain.DogFile;
+import com.dog.save.dog.domain.DogLike;
 import com.dog.save.dog.domain.DogReply;
 import com.dog.save.dog.domain.DogSet;
 import com.dog.save.dog.service.DogService;
@@ -248,6 +249,46 @@ public class DogController {
 		}else {
 			return "fail";
 		}
+	}
+	@ResponseBody
+	@GetMapping("/checkLikeStatus.dog")
+	public String checkLikeStatus(@ModelAttribute DogLike dogLike, HttpSession session) {
+	    String userId = (String) session.getAttribute("userId");
+	    
+	    if (userId != null && !userId.equals("")) {
+	        // refDogNo와 userId를 기반으로 데이터베이스에서 "좋아요" 상태를 가져옴	        	     
+	        dogLike.setRefUserId(userId);
+	        String existingLikeStatus = dService.getLikeStatus(dogLike);
+	        
+	        if ("Y".equals(existingLikeStatus)) {
+	            return "liked"; // "좋아요" 상태
+	        } else {
+	            return "notliked"; // "좋아요"하지 않은 상태
+	        }
+	    } else {
+	        return "unauthorized"; // 로그인하지 않은 사용자
+	    }
+	}
+
+	@ResponseBody
+	@PostMapping("/updateLikeStatus.dog")
+	public String updateLikeStatus(@ModelAttribute DogLike dogLike, HttpSession session) {
+	    String userId = (String) session.getAttribute("userId");
+	    int result = 0;
+	    String existingLikeStatus = null; // 변수를 밖으로 이동
+
+	    if (userId != null && !userId.equals("")) {
+	        dogLike.setRefUserId(userId);
+	        existingLikeStatus = dService.getLikeStatus(dogLike);
+	        if (existingLikeStatus == null) {
+	            // 데이터베이스에서 값을 가져오지 못한 경우 (최초 좋아요)
+	            result = dService.insertLikeStatus(dogLike);
+	        } else {
+	            result = dService.updateLikeStatus(dogLike);
+	        }
+	    }
+	    return (result > 0) ? "success" : "fail";
+
 	}
 
 	//리스트
