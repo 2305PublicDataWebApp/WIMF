@@ -248,7 +248,7 @@
 						
 					</div>
 					
-					<div id="main-section1" class="projects-section main-active">
+					<div id="main-section1" class="projects-section" style="display: none;">
 						<div class="projects-section-header">
 							<p>후원중인 유기견</p>
 <!-- 							<p class="time">December, 12</p> -->
@@ -602,16 +602,69 @@
 						</div>
 					</div>
 					
-					<div id="main-section2" class="projects-section">
+					<div id="main-section2" class="projects-section" style="display: none;">
 						2번
 					</div>
 					
-					<div id="main-section3" class="projects-section main-active">
+					<div id="main-section3" class="projects-section" style="display: none;">
 						3번
 					</div>
 					
-					<div id="main-section4" class="projects-section main-active">
-						4번
+					<div id="main-section4" class="projects-section">
+						
+					
+						<div id="main-sub-section1">
+                    		<div id="update-pw-title-box" class="user-info-box">
+                    			<h1 class="update-pw-title">비밀번호 재설정</h1>
+                    			<hr>
+                    		</div>
+						
+							<div id="check-pw-box">
+								<div id="user-info-pwck" class="pw-sub-box">
+								    <label for="user-pw-now">현재 비밀번호 입력</label>
+								    <input type="password" id="user-pw-now" name="userPw" class="find-user-idpw-input" placeholder="현재 비밀번호를 입력해주세요.">
+								</div>
+								
+								<div id="update-pw-btn-box" class="user-info-box">
+									<input type="button" id="check-pw-btn" value="확인">
+								</div>
+							</div>
+							
+							<div id="update-pw-box" style="display:none">
+								<div id="user-info-pw" class="pw-sub-box">
+								    <label for="user-pw">재설정할 비밀번호</label>
+								    <input type="password" id="user-pw" name="userPw" class="find-user-idpw-input" placeholder="소문자,숫자,특수문자 포함 10~20자" required>
+								</div>
+								
+								<div id="user-info-pwck" class="pw-sub-box">
+								    <label for="user-pw-check">재설정할 비밀번호 확인</label>
+								    <input type="password" id="user-pw-check" name="userPwCheck" class="find-user-idpw-input" placeholder="비밀번호를 한 번 더 입력해주세요." required>
+								</div>
+								
+								<div id="update-pw-btn-box" class="pw-sub-box">
+									<input type="button" id="update-pw-btn" value="확인">
+								</div>
+                    		</div>
+						</div>
+						
+						
+						
+						<div id="main-sub-section2" style="display: none;">
+							회원 탈퇴
+						</div>
+						
+						<div id="main-choice-section">
+							<div class="choice-btn-box">
+								<input type="radio" id="update-pw-radio-btn" name="choiceSection" onclick="changeSubSection(1)" value="updatePw" checked>
+								<label for="update-pw-radio-btn">비밀번호 변경</label>
+							</div>
+							
+							<div class="choice-btn-box">
+								<input type="radio" id="delete-user-btn" name="choiceSection" onclick="changeSubSection(2)" value="deleteUser">
+								<label for="delete-user-btn">회원 탈퇴</label>
+							</div>
+						</div>
+						
 					</div>
 					
 				</div>
@@ -637,11 +690,77 @@
 			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 		<script>
+			
+			// 비밀번호 변경 ajax
+			$(document).ready(function(){
+				$("#update-pw-btn").on("click", function() {
+					var userPw = $("#user-pw").val();
+					var userPwCk = $("#user-pw-check").val();
+					if(userPw != "" && userPwCk != ""){
+						if(userPw === userPwCk){
+							$.ajax({
+								url : "/user/updatePw.dog",
+								type : "POST",
+								data : {
+									userPw : userPw
+								},
+								success : function(data){
+									
+								},
+								error : function(){
+									
+								}
+							});
+						} else {
+							alert("비밀번호가 다릅니다. 다시 시도해주세요.");
+						}
+					} else {
+						alert("빈 칸 없이 작성해주세요.");
+					}
+					
+				});
+			});
+			
+			// 비밀번호 변경 시 확인 후 다음 스텝 이동
+			$(document).ready(function(){
+				$("#check-pw-btn").on("click", function() {
+					var checkPwValue = $("#user-pw-now").val();
+					if(checkPwValue == "" || checkPwValue == null){
+						alert("비밀번호를 다시 확인해주세요.");
+					} else {
+						$.ajax({
+							url : "/user/updateCkPw.dog",
+							type : "POST",
+							data : {
+								userPw : checkPwValue
+							},
+							success : function(data) {
+								if(data === "true"){
+									alert("확인되었습니다.");
+									$("#check-pw-box").hide();
+									$("#update-pw-box").show();
+								} else {
+									alert("비밀번호가 다릅니다. 다시 확인해주세요.");
+								}
+							},
+							error : function(){
+								alert("ajax 오류, 관리자에게 문의 부탁드립니다.");
+							}
+						});
+					}
+				});
+			});
+		
+			// 비밀번호 변경, 회원탈퇴 div 변경
+			function changeSubSection(selectNum){
+				$("#main-sub-section1, #main-sub-section2").hide();
+				$("#main-sub-section" + selectNum).show();
+			}
 		
 			// 사이드바 아이콘 스크립트
 			function switchMainByIcon(mainNum){
-				$("#main-container1, #main-container2, #main-container3, #main-container4").attr("class", "main-active");
-				$("#main-container" + mainNum).attr("class", "main-active");
+				$("#main-section1, #main-section2, #main-section3, #main-section4").hide();
+				$("#main-section" + mainNum).show();
 				$("#switchIcon1, #switchIcon2, #switchIcon3, #switchIcon4").removeClass("active");
 				$("#switchIcon" + mainNum).addClass("active");
 			}

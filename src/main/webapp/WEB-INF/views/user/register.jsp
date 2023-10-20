@@ -322,6 +322,7 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 	     		if(num1 == num2) {
 	     			alert("인증이 완료되었습니다.");
 	     			$("#check-certification-num").attr("value", "true");
+	     			$("#user-email-check").attr("readonly", "true");
 	     			$("#email-ck-msg").text("인증 완료").removeClass("error").addClass("success").show();
 	     		} else {
 	     			alert("작성한 인증번호가 다릅니다.");

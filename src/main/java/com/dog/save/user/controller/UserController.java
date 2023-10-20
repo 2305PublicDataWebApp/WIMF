@@ -200,6 +200,7 @@ public class UserController {
 			if(uOne != null) {
 				session.setAttribute("userId", uOne.getUserId());
 				session.setAttribute("userNickname", uOne.getUserNickname());
+				session.setAttribute("adminCheck", uOne.getAdminCheck());
 				return "redirect:/";
 			} else {
 				model.addAttribute("msg", "아이디 또는 비밀번호가 다릅니다.");
@@ -297,6 +298,32 @@ public class UserController {
 			if(result > 0) {
 				return "true";
 			} else {
+				return "false";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "false";
+		}
+	}
+	
+	// 비밀번호 변경 시 본인확인
+	@ResponseBody
+	@PostMapping(value="updateCkPw.dog")
+	public String checkUserByIdPW(
+			HttpSession session,
+			@RequestParam("userPw") String userPw
+			) {
+		try {
+			String userId = (String)session.getAttribute("userId");
+			
+			User user = new User();
+			user.setUserId(userId);
+			user.setUserPw(userPw);
+			
+			User uOne = uService.checkLogin(user);
+			if(uOne != null) {
+				return "true";
+			}else {
 				return "false";
 			}
 		} catch (Exception e) {
