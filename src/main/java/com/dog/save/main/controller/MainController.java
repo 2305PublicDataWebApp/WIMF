@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dog.save.board.domain.Board;
 import com.dog.save.board.service.BoardService;
@@ -42,6 +45,7 @@ public class MainController {
 	        String userId = board.getBoardWriter();
 	        User user = uService.selectOneById(userId);
 	        board.setUserNickName(user.getUserNickname());
+	        board.setUserProfile(user.getUserFilePath());
 	    }
 		model.addAttribute("bList", bList);
 		
@@ -67,6 +71,46 @@ public class MainController {
 		model.addAttribute("combinedList", combinedList);
 		
 		return "index";
+	}
+	
+	// ajax 마이페이지 회원 개인정보 출력 
+	@ResponseBody
+	@GetMapping(value="getUserImage.dog", produces="application/json;charset=utf-8")
+	public String getUserImage(
+//			@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
+//			, @RequestParam("userId") String userId
+//			, HttpServletRequest request
+			) {
+		try {
+//			User user = uService.selectOneById(userId);
+			List<User> uList = uService.selectAllUser();
+			
+			JSONArray usersArray = new JSONArray();
+			
+			for (User user : uList) {
+				JSONObject userJson = new JSONObject();
+//				userJson.put("userIdVal", user.getUserId());
+//				userJson.put("userNameVal", user.getUserName());
+//				userJson.put("userNicknameVal", user.getUserNickname());
+//				userJson.put("userAddressVal", user.getUserAddress());
+//				userJson.put("userPhoneVal", user.getUserPhone());
+//				userJson.put("userEmailVal", user.getUserEmail());
+				
+				if(user.getUserFileRename() != null) {
+					userJson.put("userFileRenameVal", user.getUserFileRename());
+				} else {
+//						String setDefaultProfile = user.setUserFileRename("noneProfile");
+					userJson.put("userFileRenameVal", "noneProfile");
+				}
+				
+				// 사용자 JSON 객체를 배열에 추가
+	            usersArray.add(userJson);
+			}
+			return usersArray.toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "null";
+		}
 	}
 	
 }

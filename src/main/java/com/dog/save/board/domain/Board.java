@@ -21,5 +21,6 @@ public class Board {
 	private long boardFileLength;
 	
 	private String userNickName;
+	private String userProfile;	// 기진 코드
 	
 }

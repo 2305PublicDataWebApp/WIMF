@@ -1133,7 +1133,7 @@
                   </h2>
     
                   <div class="d-flex align-items-center">
-                    <img src="/img/blog/blog-author-2.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
+                    <img src = "${board.userProfile }"alt="프로필사진" class="img-fluid post-author-img flex-shrink-0">
                     <div class="post-meta">
                       <p class="post-author">${board.userNickName }</p>
                       <p class="post-date">
@@ -1815,6 +1815,7 @@
       var url = "/dog/detail.dog?dogNo=" + dogNo;
       window.location.href = url;	    	    
     }	
+ 	
     
   </script>
 

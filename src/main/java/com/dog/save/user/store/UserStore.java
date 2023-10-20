@@ -74,4 +74,13 @@ public interface UserStore {
 	 */
 	User checkUserByNameIdEmail(SqlSession session, User user);
 
+	// 기진 코드
+	/**
+	 * 모든 유저 정보 가져오기
+	 * @param session
+	 * @return
+	 */
+	List<User> selectAllUser(SqlSession session);
+	// 기진 코드
+
 }
