@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -227,12 +229,14 @@ public class BoardController {
 				User uOne = uService.selectOneById(userId);
 				String userNickName = uOne.getUserNickname();
 				List<Reply> replyList = rService.selectReplyList(boardNo);
-				bService.increaseViewCount(boardNo);
+				bService.increaseViewCount(boardNo); // 조회수 증가
 				if(replyList.size() > 0) {
 					model.addAttribute("rList", replyList);
 				}
 				model.addAttribute("userNickName", userNickName);
 				model.addAttribute("board", board);
+				int likeCount = board.getLikeCount();
+				model.addAttribute("likeCount", likeCount);
 				return "board/communityDetail";
 			}else {
 				model.addAttribute("msg", "게시글 조회에 실패하였습니다.");
@@ -245,6 +249,30 @@ public class BoardController {
 			return "common/error";
 		}
 	}
+	// ===================== 게시글 좋아요 ======================
+	@PostMapping("/like.dog")
+    @ResponseBody
+    public String likeBoard(Model model
+    		, @RequestParam("boardNo") Integer boardNo) {
+        try {
+            Board board = bService.showOneByBoard(boardNo);
+            if (board != null) {
+            	bService.increaseLikeCount(boardNo); // 좋아요 수 증가 처리
+            	int likeCount = board.getLikeCount();
+            	model.addAttribute("likeCount", likeCount);
+                return "true";
+            } else {
+            	model.addAttribute("msg", "게시글 조회에 실패하였습니다.");
+				model.addAttribute("url", "/board/list.dog");
+				return "false";
+            }
+        } catch (Exception e) {
+        	model.addAttribute("msg", "관리자에게 문의 바랍니다");
+			model.addAttribute("url", "/board/list.dog");
+			return "false";
+        }
+    }
+	
 	// ==================== 게시글 페이징 처리 ====================
 	public bPageInfo getPageInfo(Integer currentPage, Integer totalCount) {
 		int recordCountPerPage = 7;
