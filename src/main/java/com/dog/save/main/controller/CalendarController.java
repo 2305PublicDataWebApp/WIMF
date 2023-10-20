@@ -191,16 +191,17 @@ public class CalendarController {
 	            // 같은 이름이 이미 존재하면 새로운 title 찾기
 	            String newTitle = calendar.getSchTitle();
 	            int maxTitleCount = findMaxTitleCount(allEventList, newTitle);
+	            
 
 	            // 현재 존재하는 숫자 중에서 가장 큰 숫자에 1을 더함
 	            int titleCount = maxTitleCount + 1;
 
 	            // titleCount가 1이상인 경우에만 "(titleCount)"를 추가
-	            String titleSuffix = (titleCount > 1) ? "(" + titleCount + ")" : "";
-
+//	            String titleSuffix = (titleCount > 0) ? "(" + titleCount + ")" : "";
+	            String titleSuffix = "";
 	            while (isTitleExists(allEventList, newTitle + titleSuffix)) {
+	            	titleSuffix = "(" + titleCount + ")";
 	                titleCount++;
-	                titleSuffix = "(" + titleCount + ")";
 	            }
 
 	            // 최종적인 title 설정
@@ -210,7 +211,6 @@ public class CalendarController {
 	            
 	            
 				
-	            List<Calendar> AllEventList = cService.getAllEventList(userId);
 				int result = cService.insertEvent(calendar);
 				if(result > 0) {
 					mv.setViewName("redirect:/");
