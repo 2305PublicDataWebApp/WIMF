@@ -17,15 +17,18 @@
   border: 5px double gray;
   border-radius: 20px;
 }
-#container #borad-subject {
+
+#container #board-subject {
   margin-bottom: 5px;
 }
-#container #borad-subject-value {
+
+#container #board-subject-value {
   border-radius: 4px;
   padding-left: 10px;
   width: 100%;
   height: 35px;
 }
+
 #container #submit-btn {
   float: left;
   width: 8%;
@@ -36,6 +39,7 @@
   color: white;
   margin-left: 82%;
 }
+
 #container #reset-btn {
   float: left;
   width: 8%;
@@ -46,10 +50,12 @@
   color: white;
   margin-left: 2%;
 }
+
 #container #submit-btn:hover {
   color: var(--contrast-color);
   background: rgba(255,99,71, 0.85);
 }
+
 #container #reset-btn:hover {
   color: var(--contrast-color);
   background: rgba(255,99,71, 0.85);

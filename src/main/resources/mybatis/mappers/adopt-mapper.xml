@@ -41,6 +41,13 @@
 		SELECT ADOPT_TBL.*, USER_TBL.USER_NICKNAME
 	    FROM ADOPT_TBL
 	    LEFT JOIN USER_TBL ON ADOPT_TBL.USER_ID = USER_TBL.USER_ID
+	    <if test="adoptType == 'all'" />
+	    <if test="adoptType == 'adopt'">
+			WHERE ADOPT_TYPE = 'adopt'
+		</if>
+		<if test="adoptType == 'care'">
+			WHERE ADOPT_TYPE = 'care'
+		</if>
 	    ORDER BY ADOPT_TBL.ADOPT_NO DESC
 	</select>
 	
@@ -54,46 +61,112 @@
 		UPDATE ADOPT_TBL SET VIEW_COUNT = VIEW_COUNT + 1 WHERE ADOPT_NO = #{adoptNo}
 	</update>
 	
-	<!-- 단체 게시글 갯수 -->
+	<!-- 전체 게시글 갯수 -->
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*) FROM ADOPT_TBL
+		<if test="adoptType == 'all'" />
+	    <if test="adoptType == 'adopt'">
+			WHERE ADOPT_TYPE = 'adopt'
+		</if>
+		<if test="adoptType == 'care'">
+			WHERE ADOPT_TYPE = 'care'
+		</if>
 	</select>
 	
 	<!-- 게시글 키워드 검색 -->
 	<select id="selectAdoptByKeyword" resultType="Adopt">
-		SELECT ADOPT_TBL.*, USER_TBL.USER_NICKNAME
+	    SELECT ADOPT_TBL.*, USER_TBL.USER_NICKNAME
 	    FROM ADOPT_TBL
 	    LEFT JOIN USER_TBL ON ADOPT_TBL.USER_ID = USER_TBL.USER_ID 
-		<if test="searchCondition == 'all'">
-		WHERE USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%' OR ADOPT_TBL.ADOPT_TITLE LIKE '%'||#{searchKeyword}||'%'
-		ORDER BY ADOPT_TBL.ADOPT_NO DESC
-		</if>
-		<if test="searchCondition == 'writer'">
-		WHERE USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%'
-		ORDER BY ADOPT_TBL.ADOPT_NO DESC
-		</if>
-		<if test="searchCondition == 'title'">
-		WHERE ADOPT_TBL.ADOPT_TITLE LIKE '%'||#{searchKeyword}||'%'
-		ORDER BY ADOPT_TBL.ADOPT_NO DESC
-		</if>
+	    <if test="searchCondition == 'all'">
+	        <where>
+	            <if test="adoptType == 'all' or adoptType == ''">
+	                AND (USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%' OR ADOPT_TBL.ADOPT_TITLE LIKE '%'||#{searchKeyword}||'%')
+	            </if>
+	            <if test="adoptType == 'adopt'">
+	                AND (USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%' OR ADOPT_TBL.ADOPT_TITLE LIKE '%'||#{searchKeyword}||'%') AND ADOPT_TYPE = 'adopt'
+	            </if>
+	            <if test="adoptType == 'care'">
+	                AND (USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%' OR ADOPT_TBL.ADOPT_TITLE LIKE '%'||#{searchKeyword}||'%') AND ADOPT_TYPE = 'care'
+	            </if>
+	        </where>
+	    </if>
+	    <if test="searchCondition == 'writer'">
+	        <where>
+	            <if test="adoptType == 'all' or adoptType == ''">
+	                AND USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%'
+	            </if>
+	            <if test="adoptType == 'adopt'">
+	                AND USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%' AND ADOPT_TYPE = 'adopt'
+	            </if>
+	            <if test="adoptType == 'care'">
+	                AND USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%' AND ADOPT_TYPE = 'care'
+	            </if>
+	        </where>
+	    </if>
+	    <if test="searchCondition == 'title'">
+	        <where>
+	            <if test="adoptType == 'all' or adoptType == ''">
+	                AND ADOPT_TBL.ADOPT_TITLE LIKE '%'||#{searchKeyword}||'%'
+	            </if>
+	            <if test="adoptType == 'adopt'">
+	                AND ADOPT_TBL.ADOPT_TITLE LIKE '%'||#{searchKeyword}||'%' AND ADOPT_TYPE = 'adopt'
+	            </if>
+	            <if test="adoptType == 'care'">
+	                AND ADOPT_TBL.ADOPT_TITLE LIKE '%'||#{searchKeyword}||'%' AND ADOPT_TYPE = 'care'
+	            </if>
+	        </where>
+	    </if>
+	    ORDER BY ADOPT_TBL.ADOPT_NO DESC
 	</select>
+
+
 	
 	<!-- 게시글 키워드 검색 개수 -->
 	<select id="getSelectAdoptByKeywordCount" resultType="_int">
-		SELECT COUNT(*) FROM ADOPT_TBL
+	    SELECT COUNT(*) FROM ADOPT_TBL
 	    LEFT JOIN USER_TBL ON ADOPT_TBL.USER_ID = USER_TBL.USER_ID 
-		<if test="searchCondition == 'all'">
-		WHERE USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%' OR ADOPT_TBL.ADOPT_TITLE LIKE '%'||#{searchKeyword}||'%'
-		ORDER BY ADOPT_TBL.ADOPT_NO DESC
-		</if>
-		<if test="searchCondition == 'writer'">
-		WHERE USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%'
-		ORDER BY ADOPT_TBL.ADOPT_NO DESC
-		</if>
-		<if test="searchCondition == 'title'">
-		WHERE ADOPT_TBL.ADOPT_TITLE LIKE '%'||#{searchKeyword}||'%'
-		ORDER BY ADOPT_TBL.ADOPT_NO DESC
-		</if>
+	    <if test="searchCondition == 'all'">
+	        <where>
+	            <if test="adoptType == 'all' or adoptType == ''">
+	                AND (USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%' OR ADOPT_TBL.ADOPT_TITLE LIKE '%'||#{searchKeyword}||'%')
+	            </if>
+	            <if test="adoptType == 'adopt'">
+	                AND (USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%' OR ADOPT_TBL.ADOPT_TITLE LIKE '%'||#{searchKeyword}||'%') AND ADOPT_TYPE = 'adopt'
+	            </if>
+	            <if test="adoptType == 'care'">
+	                AND (USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%' OR ADOPT_TBL.ADOPT_TITLE LIKE '%'||#{searchKeyword}||'%') AND ADOPT_TYPE = 'care'
+	            </if>
+	        </where>
+	    </if>
+	    <if test="searchCondition == 'writer'">
+	        <where>
+	            <if test="adoptType == 'all' or adoptType == ''">
+	                AND USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%'
+	            </if>
+	            <if test="adoptType == 'adopt'">
+	                AND USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%' AND ADOPT_TYPE = 'adopt'
+	            </if>
+	            <if test="adoptType == 'care'">
+	                AND USER_TBL.USER_NICKNAME LIKE '%'||#{searchKeyword}||'%' AND ADOPT_TYPE = 'care'
+	            </if>
+	        </where>
+	    </if>
+	    <if test="searchCondition == 'title'">
+	        <where>
+	            <if test="adoptType == 'all' or adoptType == ''">
+	                AND ADOPT_TBL.ADOPT_TITLE LIKE '%'||#{searchKeyword}||'%'
+	            </if>
+	            <if test="adoptType == 'adopt'">
+	                AND ADOPT_TBL.ADOPT_TITLE LIKE '%'||#{searchKeyword}||'%' AND ADOPT_TYPE = 'adopt'
+	            </if>
+	            <if test="adoptType == 'care'">
+	                AND ADOPT_TBL.ADOPT_TITLE LIKE '%'||#{searchKeyword}||'%' AND ADOPT_TYPE = 'care'
+	            </if>
+	        </where>
+	    </if>
+	    ORDER BY ADOPT_TBL.ADOPT_NO DESC
 	</select>
+
 	
 </mapper>

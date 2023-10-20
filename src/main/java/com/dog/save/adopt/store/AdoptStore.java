@@ -45,16 +45,18 @@ public interface AdoptStore {
 	/**
 	 * 게시판 리스트 Store
 	 * @param sqlSession
+	 * @param adoptType 
 	 * @return
 	 */
-	List<Adopt> selectAdoptList(SqlSession sqlSession, bPageInfo bpInfo);
+	List<Adopt> selectAdoptList(SqlSession sqlSession, bPageInfo bpInfo, String adoptType);
 	
 	/**
 	 * 전체 게시글 개수 Store
 	 * @param sqlSession
+	 * @param adoptType 
 	 * @return
 	 */
-	int selectListCount(SqlSession sqlSession);
+	int selectListCount(SqlSession sqlSession, String adoptType);
 	
 	/**
 	 * 조건에 따라 키워드 검색 Store

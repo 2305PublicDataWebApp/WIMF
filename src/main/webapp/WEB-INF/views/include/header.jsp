@@ -27,12 +27,12 @@
 						<li><a href="/dog/list.dog" id="nav-dolbom-list">돌봄 리스트</a></li>
 						<li class="dropdown has-dropdown">
 							<a href="/adopt/list.dog" id="nav-adopt">
-								<span>입양</span>
+								<span>후기</span>
 								<i class="bi bi-chevron-down"></i>
 							</a>
 							<ul class="dd-box-shadow">
-								<li><a href="/adopt/list.dog" id="nav-dolbom-list-review">돌봄 후기</a></li>
-								<li><a href="/adopt/list.dog" id="nav-adopt-review">입양 후기</a></li>
+								<li><a href="/adopt/list.dog?adoptType=care" id="nav-dolbom-list-review">돌봄 후기</a></li>
+								<li><a href="/adopt/list.dog?adoptType=adopt" id="nav-adopt-review">입양 후기</a></li>
 							</ul>
 						</li>
 <!-- 						<li class="dropdown has-dropdown"><a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down"></i></a> -->

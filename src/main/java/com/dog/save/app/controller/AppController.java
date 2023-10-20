@@ -109,12 +109,13 @@ public class AppController {
 				mv.setViewName("app/list");
 			} else {
 				mv.addObject("msg", "[서비스실패] 목록을 조회할 수 없습니다.");
+				mv.addObject("url", "/");
 				mv.setViewName("common/error");
 			}	
 		} catch (Exception e) {
 			e.printStackTrace();
-			mv.addObject("error", e.getMessage());
 			mv.addObject("msg", "[서비스실패] 관리자에 문의바랍니다.");
+			mv.addObject("url", "/");
 			mv.setViewName("common/error");
 		}
 		return mv;
@@ -131,6 +132,7 @@ public class AppController {
 				mv.setViewName("app/detail");
 			} else {
 				mv.addObject("msg", "[서비스실패] 신청서를 조회할 수 없습니다..");
+				mv.addObject("url", "/app/list.dog");
 				mv.setViewName("common/error");
 			}
 		} catch (Exception e) {

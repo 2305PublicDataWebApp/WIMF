@@ -46,14 +46,14 @@ public class AdoptServiceImpl implements AdoptService {
 	}
 
 	@Override
-	public List<Adopt> selectAdoptList(bPageInfo bpInfo) {
-		List<Adopt> bList = aStore.selectAdoptList(sqlSession, bpInfo);
-		return bList;
+	public List<Adopt> selectAdoptList(bPageInfo bpInfo, String adoptType) {
+		List<Adopt> aList = aStore.selectAdoptList(sqlSession, bpInfo, adoptType);
+		return aList;
 	}
 
 	@Override
-	public int getListCount() {
-		int result = aStore.selectListCount(sqlSession);
+	public int getListCount(String adoptType) {
+		int result = aStore.selectListCount(sqlSession, adoptType);
 		return result;
 	}
 

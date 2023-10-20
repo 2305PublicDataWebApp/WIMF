@@ -10,7 +10,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>입양 후기 게시판</title>
-		<link href="/css/board/communityList.css" rel="stylesheet">
+		<link href="/css/adopt/communityList.css" rel="stylesheet">
 		
 		<!-- css -->
 		<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,11 +27,16 @@
 		<!-- ====== Main ====== -->
 		<main id="main">
 			<div id="container">
-				<h3 style="padding-bottom: 2%;">입양 후기 게시판</h3>
+				<h3 style="padding-bottom: 2%;">
+					<c:if test="${adoptType == 'adopt'}">입양</c:if>
+			    	<c:if test="${adoptType == 'care'}">돌봄</c:if>
+					후기 게시판
+				</h3>
 				<div id="board">
 					<div id="board-content">
 						<div id="board-top-content">
 							<form action="/adopt/search.dog" method="get">
+								<input type="hidden" name="adoptType" 	value="${adoptType }">
 								<div id="select">
 									<select name="searchCondition">
 										<option value="all" <c:if test="${searchCondition == 'all' }">selected</c:if>>전체</option>
@@ -82,19 +87,19 @@
 						<div id="paging">
 							<div align="center">
 								<c:if test="${bpInfo.startNavi != 1}">
-									<c:url var="prevUrl" value="/adopt/list.dog">
+									<c:url var="prevUrl" value="/adopt/search.dog?adoptType=${adoptType }&searchCondition=${searchCondition }&searchKeyword=${searchKeyword }">
 										<c:param name="page" value="${bpInfo.startNavi - 1 }"></c:param>
 									</c:url>
 									<a href="${prevUrl }">◀</a>
 								</c:if>
 								<c:forEach begin="${bpInfo.startNavi }" end="${bpInfo.endNavi }" var="p">
-									<c:url var="pageUrl" value="/adopt/list.dog">
+									<c:url var="pageUrl" value="/adopt/search.dog?adoptType=${adoptType }&searchCondition=${searchCondition }&searchKeyword=${searchKeyword }">
 										<c:param name="page" value="${p }"></c:param>
 									</c:url>
 									<a href="${pageUrl }">${p }</a>&nbsp;
 								</c:forEach>
 								<c:if test="${bpInfo.endNavi != bpInfo.naviTotalCount}">
-									<c:url var="nextUrl" value="/adopt/list.dog">
+									<c:url var="nextUrl" value="/adopt/search.dog?adoptType=${adoptType }&searchCondition=${searchCondition }&searchKeyword=${searchKeyword }">
 										<c:param name="page" value="${bpInfo.endNavi + 1 }"></c:param>
 									</c:url>          		
 									<a href="${nextUrl }">▶</a>

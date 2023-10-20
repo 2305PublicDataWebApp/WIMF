@@ -38,15 +38,17 @@ public interface AdoptService {
 	
 	/**
 	 * 게시판 리스트 Service
+	 * @param adoptType 
 	 * @return
 	 */
-	List<Adopt> selectAdoptList(bPageInfo bpInfo);
+	List<Adopt> selectAdoptList(bPageInfo bpInfo, String adoptType);
 	
 	/**
 	 * 전체 게시글 개수 Service
+	 * @param adoptType 
 	 * @return
 	 */
-	int getListCount();
+	int getListCount(String adoptType);
 	
 	/**
 	 * 조건에 따라 키워드 검색 Service

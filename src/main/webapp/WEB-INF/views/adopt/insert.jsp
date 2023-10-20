@@ -10,7 +10,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>돌봄, 입양 후기 작성</title>
-		<link href="/css/board/communityInsert.css" rel="stylesheet">
+		<link href="/css/adopt/communityInsert.css" rel="stylesheet">
 		
 		<!-- css -->
 		<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

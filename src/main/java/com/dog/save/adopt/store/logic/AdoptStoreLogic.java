@@ -39,17 +39,17 @@ public class AdoptStoreLogic implements AdoptStore {
 	}
 
 	@Override
-	public List<Adopt> selectAdoptList(SqlSession sqlSession, bPageInfo bpInfo) {
+	public List<Adopt> selectAdoptList(SqlSession sqlSession, bPageInfo bpInfo, String adoptType) {
 		int limit = bpInfo.getRecordCountPerPage();
 		int offset = (bpInfo.getCurrentPage()-1)*limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		List<Adopt> aList = sqlSession.selectList("AdoptMapper.selectAdoptList", null, rowBounds);
+		List<Adopt> aList = sqlSession.selectList("AdoptMapper.selectAdoptList", adoptType, rowBounds);
 		return aList;
 	}
 
 	@Override
-	public int selectListCount(SqlSession sqlSession) {
-		int result = sqlSession.selectOne("AdoptMapper.selectListCount");
+	public int selectListCount(SqlSession sqlSession, String adoptType) {
+		int result = sqlSession.selectOne("AdoptMapper.selectListCount", adoptType);
 		return result;
 	}
 

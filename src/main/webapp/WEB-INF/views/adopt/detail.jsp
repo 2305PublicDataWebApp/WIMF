@@ -11,8 +11,8 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>입양 후기 상세 페이지</title>
-		<link href="/css/board/communityDetail.css" rel="stylesheet">
+		<title>돌봄, 입양 후기 상세 페이지</title>
+		<link href="/css/adopt/communityDetail.css" rel="stylesheet">
 		
 		<!-- css -->
 		<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -30,15 +30,18 @@
 		<!-- ====== Main ====== -->
 		<main id="main">
 			<div id="container">
-			    <h3 style="padding-bottom: 2%;">입양 후기 상세</h3>
+			    <h3 style="padding-bottom: 2%;">
+			    	<c:if test="${adopt.adoptType == 'adopt'}">입양</c:if>
+			    	<c:if test="${adopt.adoptType == 'care'}">돌봄</c:if>
+					후기 상세
+		    	</h3>
 				<div id="board">
 					<div id="board-content">
 						<div id="borad-subject">
 							<a style="font-weight:bold">${adopt.adoptTitle }</a>
 						</div>
 						<div id="borad-writer">
-							<p style="font-weight:bold; color: tomato">작성자 : </p>
-							${userNickName }
+							<p style="font-weight:bold; color: tomato">작성자 : </p> ${userNickName }
 						</div>
 						<div id="borad-create-date">
 							<p style="font-weight:bold; color: tomato">작성일 : </p>
@@ -57,6 +60,10 @@
 							<img alt="첨부파일" src="../resources/adoptUploadFiles/${adopt.adoptFileRename }"  style="width: 100%; height: auto;">
 						</c:if>
 							${adopt.adoptContent }
+						</div>
+						
+						<div>
+							<input id="list-btn" type="submit" value="목록" onClick="location.href='/adopt/list.dog'">
 						</div>
 						
 						<c:choose>
@@ -82,9 +89,6 @@
 								</form>
 							</c:when>
 						</c:choose>
-						<div>
-							<input id="list-btn" type="submit" value="목록" onClick="location.href='/adopt/list.dog'">
-						</div>
 					</div>
 				
 					<!-- 댓글 등록 -->
@@ -155,7 +159,7 @@
 									<tr	class="replyUpdate" style="display:none;">
 										<td colspan="3"><input id="adoptReplyContent" type="text" size="50" name="adoptReplyContent" value="${reply.adoptReplyContent }"></td>
 										<td>
-											<input id="reply-update-btn" type="button" onclick="replyModify(this, '${reply.adoptReplyNo}','${reply.adoptNo }');" value="수정">
+											<input id="reply-update-btn" type="button" onclick="replyModify(this, '${reply.adoptReplyNo}','${reply.adoptNo }');" value="확인">
 											<input id="update-close-btn" type="reset" value="취소" onClick="closeReplyUpdate()">
 										</td>
 									</tr>
