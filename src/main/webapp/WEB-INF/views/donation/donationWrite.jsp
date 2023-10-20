@@ -80,10 +80,10 @@
 							<label for="donationOption" style="margin-bottom: 2%">후원방식</label>
 							<div class="form_toggle row-vh d-flex flex-row justify-content-between">
 								<div class="form_radio_btn radio_kakaopay">
-									<input id="check1" type="radio" name="payType" value="kakaopay">
+									<input id="check1" type="radio" name="payType" value="kakaopay" >
 									<label for="check1">카카오페이</label>
 								</div>
-								<div class="form_radio_btn">
+								<div class="form_radio_btn radio_uplus">
 									<input id="check2" type="radio" name="payType" value="uplus">
 									<label for="check2">신용카드</label>
 								</div>
@@ -117,37 +117,49 @@
 	});
 	// +1만 버튼 클릭
     document.getElementById("price1").addEventListener("click", function() {
-    	var totalInput = document.getElementById("total");
+        // 버튼을 클릭했을 때 실행되는 코드
+        var totalInput = document.getElementById("total");
+        // 현재 입력된 값이 있는 경우에만 수행
         if (totalInput.value !== "") {
-            var currentValue = parseInt(totalInput.value.replace("원", "").replace(/,/g, ""));
-            currentValue += 10000;
-            totalInput.value = currentValue.toLocaleString() + "원";
+            // 현재 입력된 값에서 1만을 더한 값을 totalInput의 새로운 값으로 설정
+            totalInput.value = parseInt(totalInput.value) + 10000  + "원";
         } else {
-            totalInput.value = (10000).toLocaleString() + "원";
+            // 현재 입력된 값이 없는 경우에는 1만으로 설정
+            totalInput.value = 10000  + "원";
         }
     });
  	// +3만 버튼 클릭
     document.getElementById("price2").addEventListener("click", function() {
-    	var totalInput = document.getElementById("total");
+        var totalInput = document.getElementById("total");
         if (totalInput.value !== "") {
-            var currentValue = parseInt(totalInput.value.replace("원", "").replace(/,/g, ""));
-            currentValue += 30000;
-            totalInput.value = currentValue.toLocaleString() + "원";
+            totalInput.value = parseInt(totalInput.value) + 30000  + "원";
         } else {
-            totalInput.value = (30000).toLocaleString() + "원";
+            totalInput.value = 30000 + "원";
         }
     });
  	// +5만 버튼 클릭
     document.getElementById("price3").addEventListener("click", function() {
-    	var totalInput = document.getElementById("total");
+        var totalInput = document.getElementById("total");
         if (totalInput.value !== "") {
-            var currentValue = parseInt(totalInput.value.replace("원", "").replace(/,/g, ""));
-            currentValue += 50000;
-            totalInput.value = currentValue.toLocaleString() + "원";
+            totalInput.value = parseInt(totalInput.value) + 50000  + "원";
         } else {
-            totalInput.value = (50000).toLocaleString() + "원";
+            totalInput.value = 50000 + "원";
         }
     });
+    function removeNavClass() {
+		$("#nav-home").removeClass("active");
+		$("#nav-dolbom-list").removeClass("active").addClass("active");
+		$("#nav-adopt").removeClass("active");
+		$("#nav-dolbom-list-review").removeClass("active");
+		$("#nav-adopt-review").removeClass("active");
+		$("#nav-adopt-request").removeClass("active");
+		$("#nav-board-list").removeClass("active");
+		$("#nav-sevice").removeClass("active");
+		$("#nav-about").removeClass("active");
+		$("#nav-Contact").removeClass("active");
+		$("#nav-Contact").removeClass("active");
+		
+	}
     function removeNavClass() {
 		$("#nav-home").removeClass("active");
 		$("#nav-dolbom-list").removeClass("active").addClass("active");

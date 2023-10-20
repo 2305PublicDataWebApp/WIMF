@@ -105,9 +105,16 @@ public class BoardStoreLogic implements BoardStore{
 	}
 
 	@Override
+	public int increaseLikeCount(SqlSession sqlSession, Integer boardNo) {
+		int result = sqlSession.update("BoardMapper.increaseLikeCount", boardNo);
+		return result;
+	}
+	
+	@Override
 	public List<Board> selectAllBoardList(SqlSession sqlSession) {
 		List<Board> searchList = sqlSession.selectList("BoardMapper.selectAllBoardList");
 		return searchList;
 	}
+
 
 }

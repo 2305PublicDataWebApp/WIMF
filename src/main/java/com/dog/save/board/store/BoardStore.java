@@ -103,7 +103,15 @@ public interface BoardStore {
 	 * @return
 	 */
 	int increaseViewCount(SqlSession sqlSession, Integer boardNo);
+	/**
+	 * 게시글 좋아요 Store
+	 * @param sqlSession
+	 * @param boardNo
+	 * @return
+	 */
+	int increaseLikeCount(SqlSession sqlSession, Integer boardNo);
 	
 	List<Board> selectAllBoardList(SqlSession sqlSession);
+	
 
 }

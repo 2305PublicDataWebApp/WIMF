@@ -11,6 +11,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>상세 페이지</title>
   <link href="/css/board/communityDetail.css" rel="stylesheet">
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <!-- css -->
   <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -55,6 +57,10 @@
             <tr>
             	<th>${board.boardContent }</th>
             </tr>
+          </div>
+          <div id="board-like">
+          	<p>좋아요 수: <span id="likeCount">${likeCount}</span></p>
+   			<button id="likeButton">좋아요</button>
           </div>
           <c:choose>
           	<c:when test="${board.boardWriter eq userId}">
@@ -222,6 +228,37 @@
 		document.body.appendChild(form);
 		form.submit();
 	}
+	// 게시글 삭제 버튼
+	$(document).ready(function () {
+	    // 삭제 버튼에 클릭 이벤트 핸들러 연결
+	    $("#reset-btn").click(function (event) {
+	        var confirmDelete = confirm("게시글을 정말 삭제하시겠습니까?");
+	        if (!confirmDelete) {
+	            event.preventDefault(); // 삭제를 취소하고 기본 동작을 막음
+	        }
+	    });
+	});
+	// 좋아요 기능
+	$(document).ready(function () {
+		$("#likeButton").click(function () {
+			var boardNo = ${board.boardNo};
+			$.ajax({
+				type: "POST",
+				url: "/like.dog",
+				data: {
+					boardNo: boardNo
+				},
+				success: function (data) {
+					$("#likeCount").text(data);
+					$("#likeButton").prop("disabled", true); // 좋아요 버튼 비활성화
+				},
+				error: function (error) {
+					alert("관리자에게 문의바랍니다.");
+				}
+			});
+		});
+	});
+	u
   </script>
 
 	<!-- footer -->

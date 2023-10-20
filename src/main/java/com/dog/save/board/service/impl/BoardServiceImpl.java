@@ -105,8 +105,15 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
+	public int increaseLikeCount(Integer boardNo) {
+		int result = bStore.increaseLikeCount(sqlSession, boardNo);
+		return result;
+	}
+	
+	@Override
 	public List<Board> selectAllBoardList() {
 		List<Board> searchList = bStore.selectAllBoardList(sqlSession);
 		return searchList;
 	}
+
 }
