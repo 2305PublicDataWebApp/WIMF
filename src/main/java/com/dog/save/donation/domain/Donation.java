@@ -9,7 +9,7 @@ public class Donation {
 
 	private int donationNo;
 	private int donationDogNo;
-	private String donationName;
+	private String donationUser;
 	private int donationMoney;
 	private Timestamp donationDate;
 	

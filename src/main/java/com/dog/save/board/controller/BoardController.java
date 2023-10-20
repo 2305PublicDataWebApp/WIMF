@@ -271,7 +271,7 @@ public class BoardController {
 		paramMap.put("searchCondition", searchCondition);
 		paramMap.put("searchKeyword", searchKeyword);
 		
-		int totalCount = bService.getListCount(paramMap);
+		int totalCount = bService.getListSearchCount(paramMap);
 		bPageInfo bpInfo = this.getPageInfo(currentPage, totalCount);
 		List<Board> searchList = bService.searchBoardByKeyword(bpInfo, paramMap);
 		

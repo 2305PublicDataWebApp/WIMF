@@ -63,8 +63,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public int getListCount(Map<String, String> paramMap) {
-		int result = bStore.selectListCount(sqlSession, paramMap);
+	public int getListSearchCount(Map<String, String> paramMap) {
+		int result = bStore.getListSearchCount(sqlSession, paramMap);
 		return result;
 	}
 

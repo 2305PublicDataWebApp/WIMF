@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DonationMapper">
+	<!-- 유기견 후원 정보 DB 저장 -->
+	<insert id="insertDonation">
+		INSERT INTO DONATION_TBL VALUES(DONATION_NO_SEQ.NEXTVAL, #{donationDogNo}, #{donationUser}, #{donationMoney}, DEFAULT)
+	</insert>
+	
+</mapper>

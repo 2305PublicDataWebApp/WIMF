@@ -60,8 +60,8 @@ public class BoardStoreLogic implements BoardStore{
 	}
 
 	@Override
-	public int selectListCount(SqlSession sqlSession, Map<String, String> paramMap) {
-		int result = sqlSession.selectOne("BoardMapper.selectListCount", paramMap);
+	public int getListSearchCount(SqlSession sqlSession, Map<String, String> paramMap) {
+		int result = sqlSession.selectOne("BoardMapper.getListSearchCount", paramMap);
 		return result;
 	}
 

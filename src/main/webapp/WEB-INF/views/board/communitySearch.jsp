@@ -84,19 +84,19 @@
 	        	<tr align="center">
 	          	<td colspan="5">
 	          		<c:if test="${bpInfo.startNavi != 1}">
-	          			<c:url var="prevUrl" value="/board/list.dog">
+	          			<c:url var="prevUrl" value="/board/search.dog?searchCondition=${searchCondition }&searchKeyword=${searchKeyword }">
 	          				<c:param name="page" value="${bpInfo.startNavi - 1 }"></c:param>
 	          			</c:url>
 	          			<a href="${prevUrl }">◀</a>
 	          		</c:if>
 	          		<c:forEach begin="${bpInfo.startNavi }" end="${bpInfo.endNavi }" var="p">
-	          			<c:url var="pageUrl" value="/board/list.dog">
+	          			<c:url var="pageUrl" value="/board/search.dog?searchCondition=${searchCondition }&searchKeyword=${searchKeyword }">
 	          				<c:param name="page" value="${p }"></c:param>
 	          			</c:url>
 	          			<a href="${pageUrl }">${p }</a>&nbsp;
 	          		</c:forEach>
 	          		<c:if test="${bpInfo.endNavi != bpInfo.naviTotalCount}">
-						<c:url var="nextUrl" value="/board/list.dog">
+						<c:url var="nextUrl" value="/board/search.dog?searchCondition=${searchCondition }&searchKeyword=${searchKeyword }">
 							<c:param name="page" value="${bpInfo.endNavi + 1 }"></c:param>
 						</c:url>          		
 	          			<a href="${nextUrl }">▶</a>
