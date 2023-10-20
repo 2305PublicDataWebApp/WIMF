@@ -78,4 +78,13 @@ public interface AdoptStore {
 	 * @return
 	 */
 	int getSelectAdoptByKeywordCount(SqlSession sqlSession, Map<String, String> paramMap);
+
+	// 기진 코드
+	/**
+	 * 전체 리스트 가져오기 Store
+	 * @param sqlSession
+	 * @return
+	 */
+	List<Adopt> selectAllAdobtList(SqlSession sqlSession);
+	// 기진 코드
 }

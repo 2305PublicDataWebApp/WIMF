@@ -75,4 +75,12 @@ public class AdoptServiceImpl implements AdoptService {
 		return result;
 	}
 
+	// 기진 코드
+	@Override
+	public List<Adopt> selectAllAdobtList() {
+		List<Adopt> aList = aStore.selectAllAdobtList(sqlSession);
+		return aList;
+	}
+	// 기진 코드
+
 }

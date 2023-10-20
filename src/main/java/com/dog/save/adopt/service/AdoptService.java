@@ -71,4 +71,12 @@ public interface AdoptService {
 	 * @return
 	 */
 	int getSelectAdoptByKeywordCount(Map<String, String> paramMap);
+
+	// 기진 코드
+	/**
+	 * 전체 리스트 가져오기 Service
+	 * @return
+	 */
+	List<Adopt> selectAllAdobtList();
+	// 기진 코드
 }

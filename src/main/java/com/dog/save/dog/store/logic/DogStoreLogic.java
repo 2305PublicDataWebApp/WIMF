@@ -96,13 +96,6 @@ public class DogStoreLogic implements DogStore{
 		return dogList;	
 	}
 
-//	기진 코드
-	@Override
-	public List<Dog> selectAllDogList(SqlSession session) {
-		List<Dog> dogList = session.selectList("DogMapper.selectAllDogList");
-		return dogList;
-	}
-//	기진 코드
 	@Override
 	public int insertReply(SqlSession session, DogReply dogReply) {
 		int result = session.insert("DogMapper.insertReply", dogReply);
@@ -152,7 +145,25 @@ public class DogStoreLogic implements DogStore{
 		return result;
 	}
 
-
+//	기진 코드
+	@Override
+	public List<Dog> selectAllDogList(SqlSession session) {
+		List<Dog> dogList = session.selectList("DogMapper.selectAllDogList");
+		return dogList;
+	}
+	
+	@Override
+	public int getListCountByPStartDate(SqlSession session) {
+		int result = session.selectOne("DogMapper.getListCountByPStartDate");
+		return result;
+	}
+	
+	@Override
+	public int getListCountByAdoptedCheck(SqlSession session) {
+		int result = session.selectOne("DogMapper.getListCountByAdoptedCheck");
+		return result;
+	}
+//	기진 코드
 
 
 }

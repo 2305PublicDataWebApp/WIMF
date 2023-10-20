@@ -151,13 +151,6 @@ public class DogServiceImpl implements DogService{
 		List<Dog> dogList = dStore.selectDogsBySearch(session,searchInput,pInfo);
 		return dogList;
 	}
-//	기진 코드
-	@Override
-	public List<Dog> selectAllDogList() {
-		List<Dog> dogList = dStore.selectAllDogList(session);
-		return dogList;
-	}	
-//	기진 코드
 	@Override
 	public int insertReply(DogReply dogReply) {
 		int result = dStore.insertReply(session,dogReply);
@@ -271,8 +264,23 @@ public class DogServiceImpl implements DogService{
 		int result = dStore.deleteDog(session,dogNo);
 		return result;
 	}
-
-
+//	기진 코드
+	@Override
+	public List<Dog> selectAllDogList() {
+		List<Dog> dogList = dStore.selectAllDogList(session);
+		return dogList;
+	}	
+	@Override
+	public int getListCountByPStartDate() {
+		int result = dStore.getListCountByPStartDate(session);
+		return result;
+	}
+	@Override
+	public int getListCountByAdoptedCheck() {
+		int result = dStore.getListCountByAdoptedCheck(session);
+		return result;
+	}
+//	기진 코드
 	
 
 }

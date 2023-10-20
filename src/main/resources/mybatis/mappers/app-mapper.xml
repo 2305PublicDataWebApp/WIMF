@@ -39,4 +39,10 @@
 		WHERE	APP_NO = #{appNo}
 	</select>
 	
+	<!-- 기진 코드 -->
+	<!-- <select id="appAllList" resultType="App">
+		SELECT * FROM APP_TBL ORDER BY APP_NO DESC
+	</select> -->
+	<!-- 기진 코드 -->
+	
 </mapper>

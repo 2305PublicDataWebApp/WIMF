@@ -1,7 +1,5 @@
 package com.dog.save.user.service;
 
-import java.util.List;
-
 import com.dog.save.user.domain.User;
 
 public interface UserService {
@@ -64,11 +62,4 @@ public interface UserService {
 	 */
 	User checkUserByNameIdEmail(User user);
 
-	// 기진코드
-	/**
-	 * 모든 유저 정보 가져오기
-	 * @return
-	 */
-	List<User> selectAllUser();
-	// 기진코드
 }

@@ -66,12 +66,4 @@ public class UserStoreLogic implements UserStore{
 		return UOne;
 	}
 
-	// 기진 코드
-	@Override
-	public List<User> selectAllUser(SqlSession session) {
-		List<User> uList = session.selectList("UserMapper.selectAllUser");
-		return uList;
-	}
-	// 기진 코드
-
 }

@@ -87,8 +87,8 @@
 				onImageUpload: function(image) {
 					/* 기진 코드 */
 					// 이미지 파일을 폼 데이터에 추가
-					var data = new FormData();/* 
-					data.append("image", image[0]); */
+					//var data = new FormData();
+					//data.append("image", image[0]);
 					/* 기진 코드 */
 					
 					// 이미지를 에디터에 추가

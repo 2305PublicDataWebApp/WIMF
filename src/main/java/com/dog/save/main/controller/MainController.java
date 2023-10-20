@@ -3,22 +3,29 @@ package com.dog.save.main.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.dog.save.adopt.domain.Adopt;
+import com.dog.save.adopt.service.AdoptService;
+import com.dog.save.app.domain.App;
+import com.dog.save.app.service.AppService;
 import com.dog.save.board.domain.Board;
 import com.dog.save.board.service.BoardService;
 import com.dog.save.dog.domain.Dog;
 import com.dog.save.dog.domain.DogFile;
 import com.dog.save.dog.domain.DogSet;
 import com.dog.save.dog.service.DogService;
+import com.dog.save.donation.domain.Donation;
+import com.dog.save.donation.service.DonationService;
 import com.dog.save.user.domain.User;
 import com.dog.save.user.service.UserService;
 
@@ -32,6 +39,10 @@ public class MainController {
 	private DogService dService;
 	@Autowired
 	private UserService uService;
+	@Autowired
+	private AdoptService aService;
+	@Autowired
+	private DonationService dnService;
 	
 	//==================== main 리스트 조회 ====================
 	@GetMapping("")
@@ -39,8 +50,7 @@ public class MainController {
 
 			// board List 가져오기
 		List<Board> bList = bService.selectAllBoardList();
-		
-			// 닉네임 가져오기
+		// user 닉네임, 프로필 가져오기
 		for (Board board : bList) {
 	        String userId = board.getBoardWriter();
 	        User user = uService.selectOneById(userId);
@@ -52,6 +62,15 @@ public class MainController {
 			// dog List 가져오기
 		List<Dog> dList = dService.selectAllDogList();
 		
+		// count 정보 가져오기
+		int careCount = dService.getListCountByPStartDate();
+		int adoptCount = dService.getListCountByAdoptedCheck();
+		int allDogCount = dList.size();
+		model.addAttribute("careCount", careCount);
+		model.addAttribute("adoptCount", adoptCount);
+		model.addAttribute("allDogCount", allDogCount);
+		
+		// 사진 매칭
 		List<DogFile> dogFileList;
 		dogFileList = dService.selectFirstDogFile();
 		
@@ -70,47 +89,18 @@ public class MainController {
 		}		
 		model.addAttribute("combinedList", combinedList);
 		
+			// adopt List 가져오기
+		List<Adopt> aList = aService.selectAllAdobtList();
+		// user 닉네임, 프로필 가져오기
+			for (Adopt adopt : aList) {
+		        String userId = adopt.getUserId();
+		        User user = uService.selectOneById(userId);
+		        adopt.setUserNickName(user.getUserNickname());
+		        adopt.setUserProfile(user.getUserFilePath());
+		    }
+		model.addAttribute("aList", aList);
+		
 		return "index";
-	}
-	
-	// ajax 마이페이지 회원 개인정보 출력 
-	@ResponseBody
-	@GetMapping(value="getUserImage.dog", produces="application/json;charset=utf-8")
-	public String getUserImage(
-//			@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile
-//			, @RequestParam("userId") String userId
-//			, HttpServletRequest request
-			) {
-		try {
-//			User user = uService.selectOneById(userId);
-			List<User> uList = uService.selectAllUser();
-			
-			JSONArray usersArray = new JSONArray();
-			
-			for (User user : uList) {
-				JSONObject userJson = new JSONObject();
-//				userJson.put("userIdVal", user.getUserId());
-//				userJson.put("userNameVal", user.getUserName());
-//				userJson.put("userNicknameVal", user.getUserNickname());
-//				userJson.put("userAddressVal", user.getUserAddress());
-//				userJson.put("userPhoneVal", user.getUserPhone());
-//				userJson.put("userEmailVal", user.getUserEmail());
-				
-				if(user.getUserFileRename() != null) {
-					userJson.put("userFileRenameVal", user.getUserFileRename());
-				} else {
-//						String setDefaultProfile = user.setUserFileRename("noneProfile");
-					userJson.put("userFileRenameVal", "noneProfile");
-				}
-				
-				// 사용자 JSON 객체를 배열에 추가
-	            usersArray.add(userJson);
-			}
-			return usersArray.toString();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "null";
-		}
 	}
 	
 }
