@@ -146,6 +146,12 @@ public class DogStoreLogic implements DogStore{
 		return result;
 	}
 
+	@Override
+	public int deleteDog(SqlSession session, int dogNo) {
+		int result = session.delete("DogMapper.deleteDog", dogNo);
+		return result;
+	}
+
 
 
 

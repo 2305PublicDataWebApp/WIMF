@@ -94,6 +94,26 @@ public class DogController {
 		return mv;
 	}
 	
+	@GetMapping("/delete.dog")
+	public ModelAndView deleteDog(ModelAndView mv
+			,@RequestParam(value="dogNo") int dogNo) {
+		try {
+			int result = dService.deleteDog(dogNo);
+			if(result>0) {
+				mv.setViewName("dog/dogList");
+			}else {
+				mv.addObject("msg", "돌봄 강아지 삭제가 완료되지 않았습니다");
+				mv.addObject("error", "돌봄 강아지 삭제 실패");
+				mv.setViewName("common/error");				
+			}			
+		} catch (Exception e) {
+			mv.addObject("msg", "돌봄 강아지 삭제 에러");
+			mv.addObject("error", e.getMessage());
+			mv.setViewName("common/error");				
+		}
+		return mv;
+	}
+	
 	@GetMapping("/list.dog")
 	public ModelAndView showDogList(ModelAndView mv			
 			,@RequestParam(value = "page", required = false, defaultValue = "1") Integer currentPage

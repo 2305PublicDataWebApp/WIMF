@@ -171,6 +171,14 @@ public interface DogStore {
 	 */
 	int deleteDogFileByFilePath(SqlSession session, String toDeleteFilePath);
 
+	/**
+	 * 돌봄 강아지 삭제 Store
+	 * @param session
+	 * @param dogNo
+	 * @return
+	 */
+	int deleteDog(SqlSession session, int dogNo);
+
 
 
 

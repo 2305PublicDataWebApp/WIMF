@@ -39,6 +39,9 @@
 	<delete id="deleteDogFileByFilePath">
 		DELETE FROM DOG_FILE_TBL WHERE DOG_FILE_PATH = #{toDeleteFilePath}
 	</delete>
+	<delete id="deleteDog">
+		DELETE FROM DOG_TBL WHERE DOG_NO = #{dogNo}
+	</delete>
 	<select id="selectDogNoSeq" resultType="_int">
 		SELECT SEQ_DOG_NO.CURRVAL FROM DUAL
 	</select>	
@@ -61,13 +64,13 @@
 		SELECT * FROM DOG_TBL WHERE DOG_NAME LIKE '%'||#{searchInput}||'%'
 	</select>
 	<select id="selectFirstDogFile" resultType="DogFile">
-		SELECT * FROM DOG_FILE_TBL WHERE DOG_FILE_ORDER = 1
+		SELECT * FROM DOG_FILE_TBL WHERE DOG_FILE_ORDER = 1 
 	</select>
 	<select id="selectDogByDogNo" resultType="Dog">
 		SELECT * FROM DOG_TBL WHERE DOG_NO = #{dogNo}	
 	</select>
 	<select id="selectDogFileByDogNo" resultType="DogFile">
-		SELECT * FROM DOG_FILE_TBL WHERE REF_DOG_NO = #{dogNo}
+		SELECT * FROM DOG_FILE_TBL WHERE REF_DOG_NO = #{dogNo} ORDER BY REF_DOG_NO ASC, DOG_FILE_ORDER ASC
 	</select>
 	
 	<!-- 기진 코드 -->

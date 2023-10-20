@@ -1,6 +1,7 @@
 package com.dog.save.dog.service.impl;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -183,34 +184,26 @@ public class DogServiceImpl implements DogService{
 	public int modifyDog(Dog dog, MultipartFile[] uploadFiles, List<Integer> noChangeFileOrder, HttpServletRequest request) {
 		int result = dStore.modifyDog(session, dog);
 		if(result>0) {
-			int dogNo = dog.getDogNo();
+			int dogNo = dog.getDogNo();			
 			List<DogFile> newFiles = new ArrayList<>();
 			List<Integer> availableFileOrders = new ArrayList<>(Arrays.asList(1, 2, 3));
 			Set<String> toDeleteSet = new HashSet<>();
 			List<DogFile> oldFileList = dStore.selectDogFileByDogNo(session, dogNo);
-			// 기존 파일의 순서를 확인하고 사용 중인 순서를 제외한 순서를 선택
-			System.out.println(noChangeFileOrder);
-			System.out.println(noChangeFileOrder);
-			System.out.println(noChangeFileOrder);
-			System.out.println(noChangeFileOrder);
-			System.out.println(noChangeFileOrder);
-			System.out.println(noChangeFileOrder);
-			System.out.println(noChangeFileOrder);
-			System.out.println(noChangeFileOrder);
-			
-			for (Integer order : noChangeFileOrder) {
-				availableFileOrders.remove(order);
-			}   
-			System.out.println(availableFileOrders);
-			System.out.println(availableFileOrders);
-			
+			// 기존 파일의 순서를 확인하고 사용 중인 순서를 제외한 순서를 선택			
+			if (noChangeFileOrder == null) {
+			    availableFileOrders = new ArrayList<>(Arrays.asList(1, 2, 3));
+			} else {
+			    for (Integer order : noChangeFileOrder) {
+			        availableFileOrders.remove(order);
+			    }
+			} 			
 			// 2. 기존 파일 삭제
 			for (DogFile oldFile : oldFileList) {
-				// 파일 경로를 toDeleteSet에 추가
-				if (!noChangeFileOrder.contains(oldFile.getDogFileOrder())) {
-					toDeleteSet.add(oldFile.getDogFilePath());
-				}
-			}  
+			    // 파일 경로를 toDeleteSet에 추가
+			    if (noChangeFileOrder == null || !noChangeFileOrder.contains(oldFile.getDogFileOrder())) {
+			        toDeleteSet.add(oldFile.getDogFilePath());
+			    }
+			}
 			// 1. 새 파일 업로드
 			for (int i = 0; i < uploadFiles.length; i++) {
 				// 업로드할 파일이 존재하는 경우만 처리
@@ -238,16 +231,10 @@ public class DogServiceImpl implements DogService{
 						e.printStackTrace();
 					}
 				}
-			}
-			System.out.println(newFiles);
-			System.out.println(newFiles);
-			System.out.println(newFiles);
-			System.out.println(newFiles);
-			System.out.println(newFiles);
-			
+			}			
 			// 3. 기존 파일 삭제 및 새 파일 등록
-			for (String filePath : toDeleteSet) {
-				deleteFile(filePath);
+			for (String filePath : toDeleteSet) {			
+				this.deleteFile(filePath);
 				dStore.deleteDogFileByFilePath(session, filePath);
 			}
 			
@@ -260,13 +247,30 @@ public class DogServiceImpl implements DogService{
 		return result;
     }
 
-    public void deleteFile(String filePath) {
-        File file = new File(filePath);
-        if (file.exists()) {
-            file.delete();
-            System.out.println("파일 삭제: " + filePath);
-        }
+    public void deleteFile(String filePath) {   	
+    	try {
+    		String[] pathParts = filePath.split("/");    		
+    		String fileName = pathParts[pathParts.length - 1];    		
+    		String basePath = "src/main/webapp/resources/dogUploadFiles/";    		
+    		String fullPath = basePath + fileName;    		
+			String absolutePath = new File(fullPath).getCanonicalPath();			
+			File file = new File(absolutePath);
+			if (file.exists()) {
+			    file.delete();
+			    System.out.println("파일 삭제: " + absolutePath);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+      
     }
+	@Override
+	public int deleteDog(int dogNo) {
+		int result = dStore.deleteDog(session,dogNo);
+		return result;
+	}
 
 
 	

@@ -30,8 +30,11 @@
 			<br>
 			<hr>
 			<br>	
-				<div>					
-					<button onclick="location.href='/dog/modify.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;">수정하기</button>
+				<div>
+					<c:if test="${adminCheck eq 'Y' }">					
+						<button onclick="location.href='/dog/modify.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;">수정하기</button>
+						<button onclick="location.href='/dog/delete.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;">삭제하기</button>
+					</c:if>
 					<p>${dog.dogRegion }</p>
 					<p>${dog.dogKind }</p>
 					<h3>${dog.dogName }</h3>
@@ -58,7 +61,7 @@
 			        </tr>
 			        <tr>
 			            <td>나이</td>
-			            <td>${dog.dogAge }</td>
+			            <td>${dog.dogAge }살</td>
 			        </tr>
 			        <tr>
 			            <td>성별</td>
@@ -70,7 +73,7 @@
 			        </tr>
 			        <tr>
 			            <td>몸무게</td>
-			            <td>${dog.dogWeight }</td>
+			            <td>${dog.dogWeight }kg</td>
 			        </tr>
 			        <tr>
 			            <td>성격</td>
@@ -96,7 +99,7 @@
 			    <br><br><br><br><br><br><br><br>
 			    <div id="btn-area">
 				    <button onclick="location.href='/app/insert.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;">돌봄(입양)신청서로 이동</button>		    
-				    <button onclick="location.href='/donation/money.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;">${dog.dogName } 후원하러 가기</button>				    
+				    <button onclick="location.href='/donation/money.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;">후원하러 가기</button>				    
 			    </div>
 			</div>
 		</div>
