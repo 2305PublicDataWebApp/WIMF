@@ -31,7 +31,7 @@ public class MailServiceImpl implements MailService{
 			String body = "";
 			body += "<h3>이메일 인증번호</h3>";
 			body += "<h1>" + number + "</h1>";
-			body += "<h3>인증번호 입력 칸에 6자리를 입력해주세요.";
+			body += "<h3>인증번호 입력 칸에 6자리를 입력해주세요.</h3>";
 			message.setText(body, "UTF-8", "html");
 		} catch (Exception e) {
 			e.printStackTrace();
