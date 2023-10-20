@@ -20,4 +20,5 @@ public class App {
     private Date appEndDate;
     private String appDogAdopt;
     private char appStatus;
+    private int dogNo;
 }
