@@ -9,16 +9,30 @@ public interface UserService {
 	/**
 	 * ajax 유저 회원가입
 	 * @param user
-	 * @return
+	 * @return int
 	 */
 	int insertUser(User userData);
 
 	/**
 	 * ajax 유저 개인정보 수정
 	 * @param userData
-	 * @return
+	 * @return int
 	 */
 	int updateUser(User userData);
+	
+	/**
+	 * ajax 유저 마이페이지 비밀번호 변경
+	 * @param user
+	 * @return int
+	 */
+	int updateUserPw(User user);
+	
+	/**
+	 * ajax 유저 회원탈퇴
+	 * @param userId
+	 * @return int
+	 */
+	int deleteUser(String userId);
 
 	/**
 	 * ajax 회원가입 아이디 중복 체크
@@ -71,4 +85,8 @@ public interface UserService {
 	 */
 	List<User> selectAllUser();
 	// 기진코드
+
+	
+
+	
 }

@@ -929,7 +929,7 @@
     width: 47%;
     margin: 0 auto;
 }
-#update-pw-title-box{
+#update-pw-title-box, #delete-user-title-box{
 	text-align: center;
 }
 #update-pw-box, #check-pw-box{
@@ -949,17 +949,63 @@
 	color: var(--contrast-color);
     background-color: var(--primary-color);
     font-size: 14px;
-    width: 70%;
+    width: 354px;
     height: 50px;
     margin: 15px auto 0px auto;
     border: none;
     border-radius: 4px;
     transition: 0.3s;
+    font-weight: bold;
 }
 #update-pw-btn:hover, #check-pw-btn:hover{
 	color: var(--contrast-color);
 	background: rgba(var(--primary-color-rgb), 0.85);
 }
+
+#main-sub-section1, #main-sub-section2{
+	margin-top: 145px;
+}
+#main-choice-section{
+    width: 38%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+}
+.choice-btn-box {
+		    width: 150px;
+			height : 45px;
+    		border: 1px solid #EAE7E7;
+    		border-radius: 5px;
+		}
+		.choice-btn-box input[type=radio] {
+			display: none;
+		}
+		.choice-btn-box label {
+			display: block;
+    		border-radius: 5px;
+   			margin: 0 auto;
+    		text-align: center;
+    		height: -webkit-fill-available;
+    		line-height: 45px;
+		}
+		 
+		/* Checked */
+		.choice-btn-box input[type=radio]:checked + label {
+			background: var(--primary-color);
+			color: var(--contrast-color);
+			font-weight: bold;
+		}
+		 
+		/* Hover */
+		.choice-btn-box:hover {
+			color: rgba(var(--primary-color-rgb), 0.85);
+		}
+		 
+		/* Disabled */
+		.choice-btn-box input[type=radio] + label {
+			background: #F9FAFC;
+			color: #666;
+		}
 /* .main-active{ */
 /* 	display:none !important; */
 /* } */

@@ -248,7 +248,7 @@
 						
 					</div>
 					
-					<div id="main-section1" class="projects-section" style="display: none;">
+					<div id="main-section1" class="projects-section">
 						<div class="projects-section-header">
 							<p>후원중인 유기견</p>
 <!-- 							<p class="time">December, 12</p> -->
@@ -610,25 +610,25 @@
 						3번
 					</div>
 					
-					<div id="main-section4" class="projects-section">
-						
+					<div id="main-section4" class="projects-section" style="display: none;">
 					
+
 						<div id="main-sub-section1">
                     		<div id="update-pw-title-box" class="user-info-box">
                     			<h1 class="update-pw-title">비밀번호 재설정</h1>
                     			<hr>
                     		</div>
 						
-							<div id="check-pw-box">
-								<div id="user-info-pwck" class="pw-sub-box">
-								    <label for="user-pw-now">현재 비밀번호 입력</label>
-								    <input type="password" id="user-pw-now" name="userPw" class="find-user-idpw-input" placeholder="현재 비밀번호를 입력해주세요.">
-								</div>
+<!-- 							<div id="check-pw-box"> -->
+<!-- 								<div id="user-info-pwck" class="pw-sub-box"> -->
+<!-- 								    <label for="user-pw-now">현재 비밀번호 입력</label> -->
+<!-- 								    <input type="password" id="user-pw-now" name="userPw" class="find-user-idpw-input" placeholder="현재 비밀번호를 입력해주세요."> -->
+<!-- 								</div> -->
 								
-								<div id="update-pw-btn-box" class="user-info-box">
-									<input type="button" id="check-pw-btn" value="확인">
-								</div>
-							</div>
+<!-- 								<div id="update-pw-btn-box1" class="user-info-box"> -->
+<!-- 									<input type="button" id="check-pw-btn" value="확인"> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 							
 							<div id="update-pw-box" style="display:none">
 								<div id="user-info-pw" class="pw-sub-box">
@@ -636,12 +636,12 @@
 								    <input type="password" id="user-pw" name="userPw" class="find-user-idpw-input" placeholder="소문자,숫자,특수문자 포함 10~20자" required>
 								</div>
 								
-								<div id="user-info-pwck" class="pw-sub-box">
+								<div class="pw-sub-box">
 								    <label for="user-pw-check">재설정할 비밀번호 확인</label>
 								    <input type="password" id="user-pw-check" name="userPwCheck" class="find-user-idpw-input" placeholder="비밀번호를 한 번 더 입력해주세요." required>
 								</div>
 								
-								<div id="update-pw-btn-box" class="pw-sub-box">
+								<div id="update-pw-btn-box2" class="user-info-box">
 									<input type="button" id="update-pw-btn" value="확인">
 								</div>
                     		</div>
@@ -650,7 +650,21 @@
 						
 						
 						<div id="main-sub-section2" style="display: none;">
-							회원 탈퇴
+							<div id="delete-user-title-box" class="user-info-box">
+                    			<h1 class="delete-user-title">회원탈퇴</h1>
+                    			<hr>
+                    		</div>
+						</div>
+						
+						<div id="check-pw-box">
+								<div class="pw-sub-box">
+								    <label for="user-pw-now">현재 비밀번호 입력</label>
+								    <input type="password" id="user-pw-now" name="userPw" class="find-user-idpw-input" placeholder="현재 비밀번호를 입력해주세요.">
+								</div>
+								
+								<div id="update-pw-btn-box1" class="user-info-box">
+									<input type="button" id="check-pw-btn" value="확인">
+								</div>
 						</div>
 						
 						<div id="main-choice-section">
@@ -705,14 +719,19 @@
 									userPw : userPw
 								},
 								success : function(data){
-									
+									alert("비밀번호가 변경되었습니다.");
+									$("#check-pw-box").show();
+									$("#update-pw-box").hide();
+									$("#user-pw").val("");
+									$("#user-pw-now").val("");
+									$("#user-pw-check").val("");
 								},
 								error : function(){
-									
+									alert("ajax 오류, 관리자에게 문의해주세요.");
 								}
 							});
 						} else {
-							alert("비밀번호가 다릅니다. 다시 시도해주세요.");
+							alert("비밀번호가 다릅니다. 다시 확인 해주세요.");
 						}
 					} else {
 						alert("빈 칸 없이 작성해주세요.");
@@ -725,6 +744,8 @@
 			$(document).ready(function(){
 				$("#check-pw-btn").on("click", function() {
 					var checkPwValue = $("#user-pw-now").val();
+					var selectRadioBtn = $('input[name="choiceSection"]:checked').val();
+					
 					if(checkPwValue == "" || checkPwValue == null){
 						alert("비밀번호를 다시 확인해주세요.");
 					} else {
@@ -736,20 +757,48 @@
 							},
 							success : function(data) {
 								if(data === "true"){
-									alert("확인되었습니다.");
-									$("#check-pw-box").hide();
-									$("#update-pw-box").show();
+									if(selectRadioBtn === "updatePw"){
+										alert("확인되었습니다.");
+										$("#check-pw-box").hide();
+										$("#update-pw-box").show();
+									} else if(selectRadioBtn === "deleteUser"){
+										confirm("복구가 불가능합니다. 정말 탈퇴하시겠습니까?");
+										if(confirm){
+											deleteUser();
+										} else {
+											alert("취소되었습니다.");
+										}
+									}
 								} else {
 									alert("비밀번호가 다릅니다. 다시 확인해주세요.");
 								}
 							},
 							error : function(){
-								alert("ajax 오류, 관리자에게 문의 부탁드립니다.");
+								alert("ajax 오류, 관리자에게 문의해주세요.");
 							}
 						});
 					}
 				});
 			});
+			
+			// 회원탈퇴 ajax
+			function deleteUser() {
+				$.ajax({
+					url : "/user/deleteUser.dog",
+					type : "POST",
+					success : function(data) {
+						if(data ==="true"){
+							alert("회원탈퇴가 완료되었습니다. 이용해주셔서 감사합니다.");
+							location.href = "/user/logout.dog";
+						} else {
+							alert("회원탈퇴에 실패하였습니다. 다시 시도해주세요.");
+						}
+					},
+					error : function(){
+						alert("ajax 오류, 관리자에게 문의해주세요.");
+					}
+				});
+			}
 		
 			// 비밀번호 변경, 회원탈퇴 div 변경
 			function changeSubSection(selectNum){
@@ -823,7 +872,7 @@
 						}
 					},
 					error : function() {
-						alert("ajax 오류, 관리자에게 문의해주세요.")
+						alert("ajax 오류, 관리자에게 문의해주세요.");
 					}
 				});
 			}

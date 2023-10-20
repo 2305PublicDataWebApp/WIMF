@@ -32,6 +32,18 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
+	public int updateUserPw(User user) {
+		int result = uStore.updateUserPw(session, user);
+		return result;
+	}
+	
+	@Override
+	public int deleteUser(String userId) {
+		int result = uStore.deleteUser(session, userId);
+		return result;
+	}
+	
+	@Override
 	public User checkDuplUserId(String userId) {
 		User uOne = uStore.checkDuplUserId(session, userId);
 		return uOne;
@@ -80,5 +92,9 @@ public class UserServiceImpl implements UserService{
 		return uList;
 	}
 	// 기진코드
+
+	
+
+	
 	
 }

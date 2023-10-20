@@ -12,7 +12,7 @@ public interface UserStore {
 	 * ajax 유저 회원가입
 	 * @param session
 	 * @param user
-	 * @return
+	 * @return int
 	 */
 	int insertUser(SqlSession session, User userData);
 
@@ -20,9 +20,25 @@ public interface UserStore {
 	 * ajax 유저 개인정보 수정
 	 * @param session
 	 * @param userData
-	 * @return
+	 * @return int
 	 */
 	int updateUser(SqlSession session, User userData);
+	
+	/**
+	 * ajax 유저 마이페이지에서 비밀번호 변경
+	 * @param session
+	 * @param user
+	 * @return int
+	 */
+	int updateUserPw(SqlSession session, User user);
+	
+	/**
+	 * ajax 유저 회원탈퇴
+	 * @param session
+	 * @param userId
+	 * @return
+	 */
+	int deleteUser(SqlSession session, String userId);
 
 	/**
 	 * ajax 회원가입 아이디 중복 체크
@@ -52,9 +68,10 @@ public interface UserStore {
 	 * 로그인 체크
 	 * @param session
 	 * @param user
-	 * @return
+	 * @return User
 	 */
 	User checkLogin(SqlSession session, User user);
+	
 	// 게시글 상세 조회 (작성자 닉네임)
 	User selectOneById(SqlSession session, String userId);
 	
@@ -62,7 +79,7 @@ public interface UserStore {
 	 * ajax 아이디 찾기 회원 유효성 체크
 	 * @param session
 	 * @param user
-	 * @return
+	 * @return User
 	 */
 	User checkUserByNameEmail(SqlSession session, User user);
 	
@@ -82,5 +99,9 @@ public interface UserStore {
 	 */
 	List<User> selectAllUser(SqlSession session);
 	// 기진 코드
+
+	
+
+	
 
 }

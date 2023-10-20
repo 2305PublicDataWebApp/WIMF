@@ -17,6 +17,14 @@
 		WHERE USER_ID = #{userId } 
 	</update>
 	
+	<update id="updateUserPw">
+		UPDATE USER_TBL SET USER_PW = #{userPw} WHERE USER_ID = #{userId}
+	</update>
+	
+	<delete id="deleteUser">
+		DELETE FROM USER_TBL WHERE USER_ID = #{userId}
+	</delete>
+	
 	<select id="checkDuplUserId" resultType="User">
 		SELECT * FROM USER_TBL WHERE USER_ID = #{userId}
 	</select>

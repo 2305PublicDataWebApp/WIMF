@@ -23,6 +23,18 @@ public class UserStoreLogic implements UserStore{
 		int result = session.update("UserMapper.updateUser", userData);
 		return result;
 	}
+	
+	@Override
+	public int updateUserPw(SqlSession session, User user) {
+		int result = session.update("UserMapper.updateUserPw", user);
+		return result;
+	}
+	
+	@Override
+	public int deleteUser(SqlSession session, String userId) {
+		int result = session.delete("UserMapper.deleteUser", userId);
+		return result;
+	}
 
 	@Override
 	public User checkDuplUserId(SqlSession session, String userId) {
@@ -73,5 +85,8 @@ public class UserStoreLogic implements UserStore{
 		return uList;
 	}
 	// 기진 코드
+
+	
+
 
 }

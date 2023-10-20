@@ -332,6 +332,52 @@ public class UserController {
 		}
 	}
 	
+	// 비밀번호 변경
+	@ResponseBody
+	@PostMapping(value="updatePw.dog")
+	public String updatePwByMyPage(
+			HttpSession session
+			, @RequestParam("userPw") String userPw
+			) {
+		try {
+			String userId = (String)session.getAttribute("userId");
+			User user = new User();
+			user.setUserId(userId);
+			user.setUserPw(userPw);
+			
+			int result = uService.updateUserPw(user);
+			if(result > 0) {
+				return "true";
+			} else {
+				return "false";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "false";
+		}
+	}
+	
+	// ajax 회원탈퇴
+	@ResponseBody
+	@PostMapping(value="deleteUser.dog")
+	public String deleteUser(
+			HttpSession session
+			) {
+		try {
+			String userId = (String)session.getAttribute("userId");
+			int result = uService.deleteUser(userId);
+			if(result > 0) {
+				return "true";
+			} else {
+				return "false";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "false";
+		}
+		
+	}
+	
 	// 아이디 유효성 체크 정규식
 	private boolean idIsValid(String userId) {
 		String pattern = "^[a-z0-9]{6,14}$";
