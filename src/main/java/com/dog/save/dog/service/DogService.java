@@ -129,7 +129,14 @@ public interface DogService {
 	 * @param request
 	 * @return
 	 */
-	int modifyDog(Dog dog, MultipartFile[] uploadFiles, String[] originalName,HttpServletRequest request);
+	int modifyDog(Dog dog, MultipartFile[] uploadFiles, List<Integer> noChangeFileOrder,HttpServletRequest request);
+
+	/**
+	 * 돌봄 강아지 삭제 Service
+	 * @param dogNo
+	 * @return
+	 */
+	int deleteDog(int dogNo);
 
 
 

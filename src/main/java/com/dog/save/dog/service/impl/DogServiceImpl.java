@@ -1,6 +1,7 @@
 package com.dog.save.dog.service.impl;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -180,94 +181,95 @@ public class DogServiceImpl implements DogService{
 	
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int modifyDog(Dog dog, MultipartFile[] uploadFiles, String[] originalName, HttpServletRequest request) {
-	    int result = 0;
-	    try {
-	        result = dStore.modifyDog(session, dog);
-	        if (result > 0) {
-	            int dogNo = dog.getDogNo();
-	            List<DogFile> existingFiles = dStore.selectDogFileByDogNo(session, dogNo);
-	            Set<String> usedFileRenameSet = new HashSet<>();
-	            Set<String> toDeleteFilePathSet = new HashSet<>();	            	            
-	            for (int i = 0; i < uploadFiles.length; i++) {
-	                MultipartFile uploadFile = uploadFiles[i];
-	                String checkDogFile = originalName[i];
+	public int modifyDog(Dog dog, MultipartFile[] uploadFiles, List<Integer> noChangeFileOrder, HttpServletRequest request) {
+		int result = dStore.modifyDog(session, dog);
+		if(result>0) {
+			int dogNo = dog.getDogNo();			
+			List<DogFile> newFiles = new ArrayList<>();
+			List<Integer> availableFileOrders = new ArrayList<>(Arrays.asList(1, 2, 3));
+			Set<String> toDeleteSet = new HashSet<>();
+			List<DogFile> oldFileList = dStore.selectDogFileByDogNo(session, dogNo);
+			// 기존 파일의 순서를 확인하고 사용 중인 순서를 제외한 순서를 선택			
+			if (noChangeFileOrder == null) {
+			    availableFileOrders = new ArrayList<>(Arrays.asList(1, 2, 3));
+			} else {
+			    for (Integer order : noChangeFileOrder) {
+			        availableFileOrders.remove(order);
+			    }
+			} 			
+			// 2. 기존 파일 삭제
+			for (DogFile oldFile : oldFileList) {
+			    // 파일 경로를 toDeleteSet에 추가
+			    if (noChangeFileOrder == null || !noChangeFileOrder.contains(oldFile.getDogFileOrder())) {
+			        toDeleteSet.add(oldFile.getDogFilePath());
+			    }
+			}
+			// 1. 새 파일 업로드
+			for (int i = 0; i < uploadFiles.length; i++) {
+				// 업로드할 파일이 존재하는 경우만 처리
+				if (!uploadFiles[i].isEmpty()) {
+					try {
+						Map<String, Object> fileMap = saveFile(request, uploadFiles[i]);
+						DogFile newFile = new DogFile();
+						newFile.setRefDogNo(dogNo);
+						newFile.setDogFileName(fileMap.get("dogFileName").toString());
+						newFile.setDogFileRename(fileMap.get("dogFileRename").toString());
+						newFile.setDogFilePath(fileMap.get("dogFilePath").toString());
+						
+						// 사용 가능한 순서 중 첫 번째 순서를 선택
+						if (!availableFileOrders.isEmpty()) {
+							int newFileOrder = availableFileOrders.get(0);
+							newFile.setDogFileOrder(newFileOrder); // 새 파일의 순서 설정
+							availableFileOrders.remove(0); // 사용한 순서를 제거
+						} else {
+							throw new Exception("모든 파일 순서가 사용 중입니다.");
+						}
+						newFiles.add(newFile);
+						
+					} catch (Exception e) {
+						// TODO: handle exception
+						e.printStackTrace();
+					}
+				}
+			}			
+			// 3. 기존 파일 삭제 및 새 파일 등록
+			for (String filePath : toDeleteSet) {			
+				this.deleteFile(filePath);
+				dStore.deleteDogFileByFilePath(session, filePath);
+			}
+			
+			// 3. 새 파일 등록 및 기존 파일 삭제
+			for (DogFile newFile : newFiles) {
+				// 새 파일 등록
+				dStore.insertDogFiles(session, newFile);            
+			}	
+		}
+		return result;
+    }
 
-	                if (uploadFile != null && !uploadFile.isEmpty()) {
-	                    // 파일이 업로드되었을 때
-	                    Map<String, Object> dogFileMap = this.saveFile(request, uploadFile);
-	                    String dogFileName = (String) dogFileMap.get("dogFileName");
-	                    String dogFileRename = (String) dogFileMap.get("dogFileRename");
-	                    String dogFilePath = (String) dogFileMap.get("dogFilePath");
-	                    int dogFileOrder = -1;
-
-	                    // 수정된 파일 중에서 이미 사용 중인 파일 이름을 찾음
-	                    for (DogFile existingFile : existingFiles) {
-	                    	// 전체 목록과 수정안할 파일 이름과 같으면
-	                        if (existingFile.getDogFileRename().equals(checkDogFile)) {
-	                        	// 파일순서는 원래 순서로 저장
-	                            dogFileOrder = existingFile.getDogFileOrder();
-	                            // 바꾸지않을 파일 리네임을 usedFileRenameSet에 저장
-	                            usedFileRenameSet.add(checkDogFile); 	                            
-	                            break;
-	                        }
-	                    }
-	                    
-	                    if (dogFileOrder == -1) {
-	                        // 수정된 파일이므로 순서를 찾음
-	                        dogFileOrder = findEmptyDogFileOrder(existingFiles, usedFileRenameSet);
-	                    }
-	                    DogFile dogFile = new DogFile(dogNo, dogFileOrder, dogFileName, dogFileRename, dogFilePath);
-	                    // 데이터베이스에 파일 추가
-	                    dStore.insertDogFiles(session, dogFile);
-	                } 	                
-	            }
-	         // 수정되지 않은 파일들을 찾아 삭제할 파일 경로를 집합에 추가합니다.
-	            for (DogFile existingFile : existingFiles) {
-	                if (!usedFileRenameSet.contains(existingFile.getDogFileRename())) {
-	                    String toDeleteFilePath = existingFile.getDogFilePath();
-	                    toDeleteFilePathSet.add(toDeleteFilePath);
-	                }
-	            }
-	            // toDeleteFilePathSet에 있는 파일들을 파일 시스템에서 삭제하고 데이터베이스에서 삭제할 수 있습니다.
-	            for (String toDeleteFilePath : toDeleteFilePathSet) {
-	                // 파일 시스템에서 파일 삭제 (이 부분을 파일 시스템에 따라 변경해야 할 수 있습니다)
-	                File fileToDelete = new File(toDeleteFilePath);
-	                if (fileToDelete.exists()) {
-	                    fileToDelete.delete();
-	                }
-
-	                // 데이터베이스에서 해당 파일 삭제 (파일 경로 또는 파일 ID를 사용하여 삭제)
-	                dStore.deleteDogFileByFilePath(session, toDeleteFilePath);
-	            }	            
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        result = -1;
-	    }
-	    return result;
-	}
-
-	private int findEmptyDogFileOrder(List<DogFile> existingFiles, Set<String> usedFileRenameSet) {
-	    // 사용 중인 dogFileOrder 값을 저장하는 집합 생성
-	    Set<Integer> usedOrderSet = new HashSet<>();
-	    
-	    // 기존 dogFileOrder 값을 집합에 추가
-	    for (DogFile existingFile : existingFiles) {
-	        if (usedFileRenameSet.contains(existingFile.getDogFileRename())) {
-	            usedOrderSet.add(existingFile.getDogFileOrder());
-	        }
-	    }
-
-	    // 사용 중이지 않은 순서를 찾아 반환
-	    for (int i = 1; i <= 3; i++) {
-	        if (!usedOrderSet.contains(i)) {
-	            return i;
-	        }
-	    }
-	    
-	    // 모든 순서가 사용 중인 경우, 100을 반환
-	    return 100;
+    public void deleteFile(String filePath) {   	
+    	try {
+    		String[] pathParts = filePath.split("/");    		
+    		String fileName = pathParts[pathParts.length - 1];    		
+    		String basePath = "src/main/webapp/resources/dogUploadFiles/";    		
+    		String fullPath = basePath + fileName;    		
+			String absolutePath = new File(fullPath).getCanonicalPath();			
+			File file = new File(absolutePath);
+			if (file.exists()) {
+			    file.delete();
+			    System.out.println("파일 삭제: " + absolutePath);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+      
+    }
+	@Override
+	public int deleteDog(int dogNo) {
+		int result = dStore.deleteDog(session,dogNo);
+		return result;
 	}
 
 

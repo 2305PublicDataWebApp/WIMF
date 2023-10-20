@@ -114,7 +114,7 @@
 						    </div><br>
 						    <div id="image_reg_btn1" class="image_reg_btn">
 						        <input type="file" id="image1" name="uploadFiles" onchange="handleFileSelection(this, 'dogFileRename1')"/>
-						        <input type="hidden" id="dogFileRename1" name="originalName" value="${dogFileList[0].dogFileRename }">
+						        <input type="hidden" id="dogFileRename1" name="noChangeFileOrder" value="${dogFileList[0].dogFileOrder }">
 						    </div>
 						</div>
 						<div id="image2" class="imageFile">
@@ -123,7 +123,7 @@
 						    </div><br>
 						    <div id="image_reg_btn2" class="image_reg_btn">
 						        <input type="file" id="image2" name="uploadFiles" onchange="handleFileSelection(this, 'dogFileRename2')"/>
-						        <input type="hidden" id="dogFileRename2" name="originalName" value="${dogFileList[1].dogFileRename }">
+						        <input type="hidden" id="dogFileRename2" name="noChangeFileOrder" value="${dogFileList[1].dogFileOrder }">
 						    </div>
 						</div>
 						<div id="image3" class="imageFile">
@@ -132,7 +132,7 @@
 						    </div><br>
 						    <div id="image_reg_btn3" class="image_reg_btn">
 						        <input type="file" id="image3" name="uploadFiles" onchange="handleFileSelection(this, 'dogFileRename3')"/>
-						        <input type="hidden" id="dogFileRename3" name="originalName" value="${dogFileList[2].dogFileRename }">
+						        <input type="hidden" id="dogFileRename3" name="noChangeFileOrder" value="${dogFileList[2].dogFileOrder }">
 						    </div>
 						</div>
 

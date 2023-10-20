@@ -9,6 +9,8 @@ public class DogFile {
 	private String dogFileName;
 	private String dogFileRename;
 	private String dogFilePath;
+	
+	
 	public DogFile(int refDogNo, int dogFileOrder,String dogFileName, String dogFileRename, String dogFilePath) {
 		super();
 		this.refDogNo = refDogNo;
@@ -22,6 +24,10 @@ public class DogFile {
 		this.refDogNo = refDogNo;	
 		this.dogFileOrder = dogFileOrder;
 	}
+	public DogFile() {
+		super();
+	}
+	
 	
 	
 	
