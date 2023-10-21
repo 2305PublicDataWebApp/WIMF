@@ -2,15 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="AppMapper">
-
+	
+	<!-- 지원서 목록 조회 -->
 	<select id="appAllList" resultType="App">
 		SELECT * FROM APP_TBL ORDER BY APP_NO DESC
 	</select>
 	
+	<!-- 게시글 전체 리스트 개수 -->
 	<select id="getTotalCount" resultType="_int">
 		SELECT COUNT(*) FROM APP_TBL
 	</select>
 	
+	<!-- 지원서 제출 -->
 	<insert id="insertApplication">
 		INSERT INTO APP_TBL (APP_NO, USER_ID, APP_DOG_HAD, APP_EXP_HAD, APP_QUESTION_ONE, APP_QUESTION_TWO, APP_QUESTION_THREE, APP_CONTENT, APP_START_DATE, APP_END_DATE, APP_DOG_ADOPT, APP_STATUS, DOG_NO)
 		VALUES (
@@ -23,7 +26,7 @@
 		    #{appQuestionThree},
 		    #{appContent}, 
 		    #{appStartDate}, 
-		    TO_DATE(#{appEndDate}, 'YYYY-MM-DD'), 
+		    #{appEndDate}, 
 		    <choose>
 		        <when test="appDogAdopt == 'adopt'"> 'Y' </when>
 		        <otherwise> 'N' </otherwise>
@@ -33,17 +36,28 @@
 		)
 	</insert>
 	
-	
+	<!-- 지원서 상세 조회 -->
 	<select id="selectAppByNo" resultType="App">
 		SELECT	* 
 		FROM 	APP_TBL 
 		WHERE	APP_NO = #{appNo}
 	</select>
 	
-	<!-- 기진 코드 -->
-	<!-- <select id="appAllList" resultType="App">
-		SELECT * FROM APP_TBL ORDER BY APP_NO DESC
-	</select> -->
-	<!-- 기진 코드 -->
+	<!-- 지원서 수락하면 데이터 넣기 -->
+	<update id="allowAdopt">
+		UPDATE DOG_TBL
+		SET DOG_P_STARTDATE = #{appStartDate}, 
+		    DOG_P_ENDDATE = #{appEndDate},
+		    DOG_ADOPT = #{appDogAdopt},
+		WHERE DOG_NO = #{dogNo}
+	</update>
+	
+	<!-- 지원서 수락하면 지원서 상태 변경 -->
+	<update id="updateStatus">
+		UPDATE APP_TBL
+		SET APP_STATUS = #{appStatus }
+		WHERE APP_NO = #{appNo }
+	</update>
+	
 	
 </mapper>
