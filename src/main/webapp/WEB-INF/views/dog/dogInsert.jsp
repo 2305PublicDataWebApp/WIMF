@@ -142,76 +142,47 @@
         });
     });	
 	
-    // 파일 선택 버튼 1에 이벤트 리스너 추가
-    document.querySelector('#image1 input[type="file"]').addEventListener('change', function(event) {
-        const selectedFile = event.target.files[0];
-        const imageContainer = document.querySelector('#image_container1');
+		// 강아지 파일 등록 썸네일 표시 함수
+	   function handleFileSelection(inputSelector, containerSelector) {
+	       // 파일 선택 버튼과 이미지 컨테이너를 선택합니다.
+	       const fileInput = document.querySelector(inputSelector);
+	       const imageContainer = document.querySelector(containerSelector);
+	
+	       // 파일 선택 버튼에 'change' 이벤트 리스너를 추가합니다.
+	       fileInput.addEventListener('change', function(event) {
+	           // 선택한 파일을 가져옵니다.
+	           const selectedFile = event.target.files[0];
+	
+	           // 선택한 파일이 이미지인지 확인합니다.
+	           if (selectedFile && selectedFile.type.startsWith('image')) {
+	               // FileReader 객체를 생성합니다.
+	               const reader = new FileReader();
+	
+	               // FileReader가 파일을 읽고 완료했을 때 실행할 함수를 정의합니다.
+	               reader.onload = function() {
+	                   // 이미지 엘리먼트를 생성하고 이미지 소스를 설정합니다.
+	                   const image = new Image();
+	                   image.src = reader.result;
+	
+	                   // 이미지 컨테이너를 초기화하고 이미지를 추가합니다.
+	                   imageContainer.innerHTML = '';
+	                   imageContainer.appendChild(image);
+	               };
+	
+	               // 선택한 파일을 데이터 URL로 읽습니다.
+	               reader.readAsDataURL(selectedFile);
+	           } else {
+	               // 이미지가 아닌 경우에 대한 처리: 에러 메시지를 이미지 컨테이너에 표시합니다.
+	               imageContainer.innerHTML = '선택한 파일이 이미지가 아닙니다.';
+	           }
+	       });
+	   }
+	
+	   // 각 파일 선택 버튼과 이미지 컨테이너에 handleFileSelection 함수를 적용합니다.
+	   handleFileSelection('#image1 input[type="file"]', '#image_container1');
+	   handleFileSelection('#image2 input[type="file"]', '#image_container2');
+	   handleFileSelection('#image3 input[type="file"]', '#image_container3');
 
-        // 이미지 파일인지 확인
-        if (selectedFile && selectedFile.type.startsWith('image')) {
-            const reader = new FileReader();
-
-            reader.onload = function() {
-                // 선택한 이미지를 미리보기로 표시
-                const image = new Image();
-                image.src = reader.result;
-                imageContainer.innerHTML = ''; // 이미지를 초기화
-                imageContainer.appendChild(image);
-            };
-
-            reader.readAsDataURL(selectedFile);
-        } else {
-            // 이미지 파일이 아닌 경우에 대한 처리
-            imageContainer.innerHTML = '선택한 파일이 이미지가 아닙니다.';
-        }
-    });
-
-    // 파일 선택 버튼 2, 3에 대해서도 동일하게 처리
-    document.querySelector('#image2 input[type="file"]').addEventListener('change', function(event) {
-        const selectedFile = event.target.files[0];
-        const imageContainer = document.querySelector('#image_container2');
-
-        // 이미지 파일인지 확인
-        if (selectedFile && selectedFile.type.startsWith('image')) {
-            const reader = new FileReader();
-
-            reader.onload = function() {
-                // 선택한 이미지를 미리보기로 표시
-                const image = new Image();
-                image.src = reader.result;
-                imageContainer.innerHTML = ''; // 이미지를 초기화
-                imageContainer.appendChild(image);
-            };
-
-            reader.readAsDataURL(selectedFile);
-        } else {
-            // 이미지 파일이 아닌 경우에 대한 처리
-            imageContainer.innerHTML = '선택한 파일이 이미지가 아닙니다.';
-        }
-    });
-
-    document.querySelector('#image3 input[type="file"]').addEventListener('change', function(event) {
-        const selectedFile = event.target.files[0];
-        const imageContainer = document.querySelector('#image_container3');
-
-        // 이미지 파일인지 확인
-        if (selectedFile && selectedFile.type.startsWith('image')) {
-            const reader = new FileReader();
-
-            reader.onload = function() {
-                // 선택한 이미지를 미리보기로 표시
-                const image = new Image();
-                image.src = reader.result;
-                imageContainer.innerHTML = ''; // 이미지를 초기화
-                imageContainer.appendChild(image);
-            };
-
-            reader.readAsDataURL(selectedFile);
-        } else {
-            // 이미지 파일이 아닌 경우에 대한 처리
-            imageContainer.innerHTML = '선택한 파일이 이미지가 아닙니다.';
-        }
-    });	
 	</script>			
 	</body>
 </html>

@@ -23,23 +23,16 @@
 		<jsp:include page="/WEB-INF/views/include/header.jsp" />
 	
 		<!-- My Code -->
-		<main>			
-<%-- 			<c:choose>
-				<c:when test="${empty category}">
-			    전체
-			</c:when>
-				<c:otherwise>
-			    ${foodProductSetList[0].foodProduct.fProductType}
-			    </c:otherwise>
-			</c:choose> --%>
+		<main>				
+			${region }		
 			<br> <span>돌봄 강아지 수 : ${pInfo.totalCount }</span> <br>
 			<form action="/dog/list.dog" method="get">
 			  <label for="region">지역 선택:</label>
 			  <select name="region" id="region">
 			    <option value="all">전체</option>
-			    <option value="seoul">서울</option>
-			    <option value="gyeonggi">경기</option>
-			    <option value="incheon">인천</option>
+			    <option value="서울">서울</option>
+			    <option value="경기">경기</option>
+			    <option value="인천">인천</option>
 			  </select>
 			
 			  <label for="sort">정렬:</label>
@@ -57,12 +50,12 @@
 			<br>
 			<hr>
 			<br>
-			<%-- <c:if test="${userId eq 'admin' }">
-				<button id="product_register_button" class="custom-btn btn-11">상품등록</button>
-			</c:if> --%>
-	
+			<c:if test="${adminCheck eq 'Y' }">					
+				<button onclick="location.href='/dog/insert.dog';" style="cursor: pointer;">강아지 등록</button>						
+			</c:if>
+
 			<div class="dog_list">
-				<!-- 상품 리스트를 반복하여 출력합니다 -->
+				
 				<c:forEach var="combinedList" items="${combinedList}">
 					<div class="dog_item">
 						<div class="image_thumbnail">
@@ -111,11 +104,8 @@
 						</c:if>
 					</c:url>
 					<a href="${nextUrl}">[다음]</a>
-				</c:if>
-	
-	
-			</div>
-	
+				</c:if>		
+			</div>	
 		</main>
 	
 		<!-- footer -->
