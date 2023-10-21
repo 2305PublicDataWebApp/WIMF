@@ -306,6 +306,34 @@ public class UserController {
 		}
 	}
 	
+	// 마이페이지 비밀번호 변경 전 본인확인
+	@ResponseBody
+	@PostMapping(value="checkUserPw.dog", produces="application/json;charset=utf-8")
+	public String checkUserbyIdPw (
+			HttpSession session
+			, @RequestParam("userPw") String userPw
+			) {
+		try {
+			String userId = (String)session.getAttribute("userId");
+			User user = new User();
+			user.setUserId(userId);
+			user.setUserPw(userPw);
+			
+			User uOne = uService.checkLogin(user);
+			if(uOne != null) {
+				JSONObject userJson = new JSONObject();
+				userJson.put("userPwVal", user.getUserPw());
+				return userJson.toString();
+			} else {
+				return "false";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "false";
+		}
+	}
+	
+
 	// 비밀번호 변경 시 본인확인
 	@ResponseBody
 	@PostMapping(value="updateCkPw.dog")
@@ -377,6 +405,8 @@ public class UserController {
 		}
 		
 	}
+	
+	
 	
 	// 아이디 유효성 체크 정규식
 	private boolean idIsValid(String userId) {
