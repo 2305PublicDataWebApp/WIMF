@@ -84,12 +84,5 @@ public class UserServiceImpl implements UserService{
 		User uOne = uStore.checkUserByNameIdEmail(session, user);
 		return uOne;
 	}
-	// 기진코드
-	@Override
-	public List<User> selectAllUser() {
-		List<User> uList = uStore.selectAllUser(session);
-		return uList;
-	}
-	// 기진코드
 	
 }

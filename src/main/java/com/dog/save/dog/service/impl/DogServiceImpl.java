@@ -288,16 +288,17 @@ public class DogServiceImpl implements DogService{
 		return dogList;
 	}	
 	@Override
-	public int getListCountByPStartDate() {
-		int result = dStore.getListCountByPStartDate(session);
-		return result;
+	public List<Dog> selectCareList() {
+		List<Dog> careList = dStore.selectCareList(session);
+		return careList;
 	}
 	@Override
-	public int getListCountByAdoptedCheck() {
-		int result = dStore.getListCountByAdoptedCheck(session);
-		return result;
+	public List<Dog> selectAdoptList() {
+		List<Dog> adoptList = dStore.selectAdoptList(session);
+		return adoptList;
 	}
 	//	기진 코드
+	
 	
 
 }

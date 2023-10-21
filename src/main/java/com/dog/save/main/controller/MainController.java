@@ -41,8 +41,6 @@ public class MainController {
 	private UserService uService;
 	@Autowired
 	private AdoptService aService;
-	@Autowired
-	private DonationService dnService;
 	
 	//==================== main 리스트 조회 ====================
 	@GetMapping("")
@@ -63,9 +61,36 @@ public class MainController {
 		List<Dog> dList = dService.selectAllDogList();
 		
 		// count 정보 가져오기
-		int careCount = dService.getListCountByPStartDate();
-		int adoptCount = dService.getListCountByAdoptedCheck();
-		int allDogCount = dList.size();
+		List<Dog> careList = dService.selectCareList();
+		List<Dog> adoptList = dService.selectAdoptList();
+		int careCount = (careList == null) ? 0 : careList.size();
+		int adoptCount = (adoptList == null) ? 0 : adoptList.size();
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("adoptCount = " + adoptCount);
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		System.out.println("=================================================");
+		int allDogCount = (dList == null) ? 0 : dList.size();
+		model.addAttribute("careList", careList);
+		model.addAttribute("adoptList", adoptList);
 		model.addAttribute("careCount", careCount);
 		model.addAttribute("adoptCount", adoptCount);
 		model.addAttribute("allDogCount", allDogCount);

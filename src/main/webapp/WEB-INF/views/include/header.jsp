@@ -23,10 +23,11 @@
 				<!-- Nav Menu -->
 				<nav id="navmenu" class="navmenu">
 					<ul>
-						<li><a href="/" id="nav-home" class="active">Home</a></li>
-						<li><a href="/dog/list.dog" id="nav-dolbom-list">돌봄 리스트</a></li>
+						<li><a href="/#hero" id="nav-home" class="active">Home</a></li>
+						<li><a href="/dog/list.dog#team" id="nav-dolbom-list">돌봄 리스트</a></li>
+						<li><a href="/board/list.dog#testimonials" id="nav-board-list">소통 게시판</a></li>
 						<li class="dropdown has-dropdown">
-							<a href="/adopt/list.dog" id="nav-adopt">
+							<a href="/adopt/list.dog#recent-posts" id="nav-adopt">
 								<span>후기</span>
 								<i class="bi bi-chevron-down"></i>
 							</a>
@@ -44,10 +45,9 @@
 <!-- 								<li><a href="#">Deep Dropdown 5</a></li> -->
 <!-- 							</ul> -->
 <!-- 						</li> -->
-						<li><a href="/board/list.dog" id="nav-board-list">소통 게시판</a></li>
-						<li><a href="index.html#services" id="nav-sevice">임시보호란?</a></li>
-						<li><a href="index.html#about" id="nav-about">WIMF 팀 소개</a></li>
-						<li><a href="index.html#contact" id="nav-Contact">Contact</a></li>
+						<li><a href="/#services" id="nav-sevice">임시보호란?</a></li>
+						<li><a href="/#about" id="nav-about">WIMF 팀 소개</a></li>
+						<li><a href="/#contact" id="nav-Contact">Contact</a></li>
 					</ul>
 	
 					<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

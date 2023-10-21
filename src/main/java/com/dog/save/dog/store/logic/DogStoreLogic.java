@@ -173,17 +173,19 @@ public class DogStoreLogic implements DogStore{
 	}
 	
 	@Override
-	public int getListCountByPStartDate(SqlSession session) {
-		int result = session.selectOne("DogMapper.getListCountByPStartDate");
-		return result;
+	public List<Dog> selectCareList(SqlSession session) {
+		List<Dog> careList = session.selectList("DogMapper.selectCareList");
+		return careList;
 	}
-	
+
 	@Override
-	public int getListCountByAdoptedCheck(SqlSession session) {
-		int result = session.selectOne("DogMapper.getListCountByAdoptedCheck");
-		return result;
+	public List<Dog> selectAdoptList(SqlSession session) {
+		List<Dog> adoptList = session.selectList("DogMapper.selectAdoptList");
+		return adoptList;
 	}
 //	기진 코드
+
+	
 
 
 }

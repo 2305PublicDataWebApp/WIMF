@@ -204,19 +204,21 @@ public interface DogStore {
 	List<Dog> selectAllDogList(SqlSession session);
 	
 	/**
-	 * pStartDate로 전체 갯수 가져오기 Store
+	 * 돌봄 강아지 리스트 가져오기 Store
 	 * @param session
 	 * @return
 	 */
-	int getListCountByPStartDate(SqlSession session);
-	
+	List<Dog> selectCareList(SqlSession session);
+
 	/**
-	 * 입양간 수 전체 갯수 가져오기 Store
+	 * 입양 강아지 리스트 가져오기 Store
 	 * @param session
 	 * @return
 	 */
-	int getListCountByAdoptedCheck(SqlSession session);
+	List<Dog> selectAdoptList(SqlSession session);
 //	기진 코드
+
+	
 
 	
 

@@ -91,9 +91,4 @@ public interface UserStore {
 	 */
 	User checkUserByNameIdEmail(SqlSession session, User user);
 	
-	
-	
-	List<User> selectAllUser(SqlSession session);
-
-
 }

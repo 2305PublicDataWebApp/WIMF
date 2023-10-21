@@ -778,7 +778,7 @@
     
 
     <!-- Team Section - Home Page -->
-    <section id="team dogSection" class="team">
+    <section id="team" class="team">
 
       <!--  Section Title -->
       <div class="container section-title" data-aos="fade-up">
@@ -916,7 +916,7 @@
             <div class="text-center">
               <h3>후원을 기다립니다</h3>
               <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              <a class="cta-btn" href="#">후원하기</a>
+              <a class="cta-btn" href="/dog/list.dog">후원하기</a>
             </div>
           </div>
         </div>
@@ -964,7 +964,12 @@
 		                <div class="swiper-slide">
 		                  <div class="testimonial-item">
 		                    <div class="d-flex">
-		                      <img src="${bList.userProfile }" class="testimonial-img flex-shrink-0" alt="">
+			                  <c:if test="${bList.userProfile == null}">
+		                        <img src="/img/user/default-profile.png" class="testimonial-img flex-shrink-0" alt="">
+			                  </c:if>
+			                  <c:if test="${bList.userProfile != null}">
+		                        <img src="${bList.userProfile }" class="testimonial-img flex-shrink-0" alt="">
+			                  </c:if>
 		                      <div>
 		                        <h3>${bList.boardTitle }</h3>
 		                        <h4>${bList.userNickName }</h4>
@@ -1080,7 +1085,7 @@
     </section><!-- End Testimonials Section -->
 
     <!-- Recent-posts Section - Home Page -->
-    <section id="recent-posts boardSection" class="recent-posts">
+    <section id="recent-posts" class="recent-posts">
 
       <!--  Section Title -->
       <div class="container section-title" data-aos="fade-up">
@@ -1233,7 +1238,7 @@
 
       <!--  Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Portfolio</h2>
+        <h2>'WIMF'를 거쳐간 친구들</h2>
         <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
 
@@ -1242,15 +1247,65 @@
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
 
           <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">App</li>
-            <li data-filter=".filter-product">Card</li>
-            <li data-filter=".filter-branding">Web</li>
+            <li data-filter="*" class="filter-active">전체</li>
+            <li data-filter=".filter-app">돌봄</li>
+            <li data-filter=".filter-product">입양</li>
+            <li data-filter=".filter-branding">대기</li>
           </ul><!-- End Portfolio Filters -->
 
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
+          
+          <c:forEach var="combinedList" items="${combinedList}">
+          
+            <!-- 입양 -->
+            <c:if test="${String(combinedList.dog.dogAdopt) eq 'Y'}">
+	            <!-- Start Portfolio Item -->
+	            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+	              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
+	              <div class="portfolio-info">
+	                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
+	                <p>${combinedList.dog.dogPStartDate }~</p>
+	                <a href="${combinedList.dogFile.dogFilePath}" title="${combinedList.dog.dogNo } / ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+	                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+	              </div>
+	            </div>
+	            <!-- End Portfolio Item -->
+            </c:if>
+          
+          	<!-- 돌봄 -->
+            <c:if test="${String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate != null && combinedList.dog.dogPEndDate == null}">
+	            <!-- Start Portfolio Item -->
+	            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+	              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
+	              <div class="portfolio-info">
+	                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
+	                <p>${combinedList.dog.dogPStartDate }~${combinedList.dog.dogPEndDate }</p>
+	                <a href="${combinedList.dogFile.dogFilePath}" title="${combinedList.dog.dogNo } / ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+	                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+	              </div>
+	            </div>
+	            <!-- End Portfolio Item -->
+            </c:if>
+            
+            <!-- 대기 -->
+            <c:if test="${String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate == null && combinedList.dog.dogPEndDate == null}">
+	            <!-- Start Portfolio Item -->
+		        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+	              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
+	              <div class="portfolio-info">
+	                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
+	                <p>${combinedList.dog.dogAge }살, ${combinedList.dog.dogWeight }kg, ${combinedList.dog.dogInfo }</p>
+	                <a href="${combinedList.dogFile.dogFilePath}" title="${combinedList.dog.dogNo } / ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+	                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+	              </div>
+	            </div>
+	            <!-- End Portfolio Item -->
+            </c:if>
+            
+          </c:forEach>
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+			<!-- Start Portfolio Item -->
+            <!-- <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
               <img src="/img/masonry-portfolio/masonry-portfolio-1.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>App 1</h4>
@@ -1258,9 +1313,10 @@
                 <a href="/img/masonry-portfolio/masonry-portfolio-1.jpg" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div> -->
+            <!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+            <!-- <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
               <img src="/img/masonry-portfolio/masonry-portfolio-2.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Product 1</h4>
@@ -1268,9 +1324,10 @@
                 <a href="/img/masonry-portfolio/masonry-portfolio-2.jpg" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div> -->
+            <!-- End Portfolio Item -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+            <!-- <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
               <img src="/img/masonry-portfolio/masonry-portfolio-3.jpg" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>Branding 1</h4>
@@ -1278,7 +1335,7 @@
                 <a href="/img/masonry-portfolio/masonry-portfolio-3.jpg" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>End Portfolio Item
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
               <img src="/img/masonry-portfolio/masonry-portfolio-4.jpg" class="img-fluid" alt="">
@@ -1288,7 +1345,7 @@
                 <a href="/img/masonry-portfolio/masonry-portfolio-4.jpg" title="App 2" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>End Portfolio Item
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
               <img src="/img/masonry-portfolio/masonry-portfolio-5.jpg" class="img-fluid" alt="">
@@ -1298,7 +1355,7 @@
                 <a href="/img/masonry-portfolio/masonry-portfolio-5.jpg" title="Product 2" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>End Portfolio Item
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
               <img src="/img/masonry-portfolio/masonry-portfolio-6.jpg" class="img-fluid" alt="">
@@ -1308,7 +1365,7 @@
                 <a href="/img/masonry-portfolio/masonry-portfolio-6.jpg" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>End Portfolio Item
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
               <img src="/img/masonry-portfolio/masonry-portfolio-7.jpg" class="img-fluid" alt="">
@@ -1318,7 +1375,7 @@
                 <a href="/img/masonry-portfolio/masonry-portfolio-7.jpg" title="App 3" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>End Portfolio Item
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
               <img src="/img/masonry-portfolio/masonry-portfolio-8.jpg" class="img-fluid" alt="">
@@ -1328,7 +1385,7 @@
                 <a href="/img/masonry-portfolio/masonry-portfolio-8.jpg" title="Product 3" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div>End Portfolio Item
 
             <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
               <img src="/img/masonry-portfolio/masonry-portfolio-9.jpg" class="img-fluid" alt="">
@@ -1338,7 +1395,8 @@
                 <a href="/img/masonry-portfolio/masonry-portfolio-9.jpg" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
                 <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
               </div>
-            </div><!-- End Portfolio Item -->
+            </div> -->
+            <!-- End Portfolio Item -->
 
           </div><!-- End Portfolio Container -->
 
