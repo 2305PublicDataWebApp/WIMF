@@ -114,8 +114,20 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public String getLikeStatus(BoardLike boardLike) {
-		// TODO Auto-generated method stub
-		return null;
+		String result = bStore.getLikeStatus(sqlSession, boardLike);
+		return result;
+	}
+
+	@Override
+	public int insertLikeStatus(BoardLike boardLike) {
+		int result = bStore.insertLikeStatus(sqlSession, boardLike);
+		return result;
+	}
+
+	@Override
+	public int updateLikeStatus(BoardLike boardLike) {
+		int result = bStore.updateLikeStatus(sqlSession, boardLike);
+		return result;
 	}
 
 	// 이승현 왔다감

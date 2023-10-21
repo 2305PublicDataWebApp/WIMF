@@ -1,29 +1,20 @@
 package com.dog.save.board.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.dog.save.board.domain.Board;
 import com.dog.save.board.domain.BoardLike;
@@ -31,10 +22,8 @@ import com.dog.save.board.domain.Reply;
 import com.dog.save.board.domain.bPageInfo;
 import com.dog.save.board.service.BoardService;
 import com.dog.save.board.service.ReplyService;
-import com.dog.save.main.service.SummernoteThumbnailService;
 import com.dog.save.user.domain.User;
 import com.dog.save.user.service.UserService;
-import com.google.gson.JsonObject;
 
 @Controller
 @RequestMapping(value="/board")
@@ -188,8 +177,9 @@ public class BoardController {
 			return "common/error";
 		}
 	}
-	@ResponseBody
+	// ==================== 게시글 좋아요 상태 체크 ====================
 	@GetMapping("/checkBoardLike.dog")
+	@ResponseBody
 	public String checkBoardLike(@ModelAttribute BoardLike boardLike, HttpSession session) {
 		String userId = (String) session.getAttribute("userId"); //  세션에서 userId 라는 속성을 가져오는 코드
 		
@@ -201,11 +191,34 @@ public class BoardController {
 			if("Y".equals(existingLikeStatus)) {
 				return "liked"; // 좋아요가 체크된 상태
 			} else {
-				return "noliked"; // 좋아요가 체크되지 않은 상태
+				return "notliked"; // 좋아요가 체크되지 않은 상태
 			}
 		} else {
 			return "unauthorized"; // 로그인이 되어 있지 않은 사용자
 		}
+	}
+	// ==================== 게시글 좋아요 ====================
+	@PostMapping("/updateBoardLike.dog")
+	@ResponseBody
+	public String updateBoardLike(@ModelAttribute BoardLike boardLike, HttpSession session) {
+		String userId = (String) session.getAttribute("userId");
+		int result = 0;
+		String existingLikeStatus = null;
+		
+		if(userId != null && !userId.equals("")) {
+			boardLike.setBoardWriteId(userId);
+			existingLikeStatus = bService.getLikeStatus(boardLike);
+			if(existingLikeStatus == null) {
+				// DB에 좋아요 데이터가 없는 상태 (insert)
+				result = bService.insertLikeStatus(boardLike);
+			} else {
+				// DB에 좋아요 데이터가 있는 상태 (update)
+				result = bService.updateLikeStatus(boardLike);
+			}
+		}
+		// 삼항연산자
+		// 조건 ? 참 : 거짓
+		return(result > 0) ? "success" : "fail";
 	}
 	// ==================== 게시글 페이징 처리 ====================
 	public bPageInfo getPageInfo(Integer currentPage, Integer totalCount) {

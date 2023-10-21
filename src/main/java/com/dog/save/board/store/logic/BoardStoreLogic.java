@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.dog.save.board.domain.Board;
+import com.dog.save.board.domain.BoardLike;
 import com.dog.save.board.domain.bPageInfo;
 import com.dog.save.board.store.BoardStore;
 import com.dog.save.user.domain.UserBoard;
@@ -118,6 +119,24 @@ public class BoardStoreLogic implements BoardStore{
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		List<UserBoard> uBList = sqlSession.selectList("BoardMapper.selectBoardListById", uBoard, rowBounds);
 		return uBList;
+	}
+	
+	@Override
+	public String getLikeStatus(SqlSession sqlSession, BoardLike boardLike) {
+		String result = sqlSession.selectOne("BoardMapper.getLikeStatus", boardLike);
+		return result;
+	}
+
+	@Override
+	public int insertLikeStatus(SqlSession sqlSession, BoardLike boardLike) {
+		int result = sqlSession.insert("BoardMapper.insertLikeStatus", boardLike);
+		return result;
+	}
+
+	@Override
+	public int updateLikeStatus(SqlSession sqlSession, BoardLike boardLike) {
+		int result = sqlSession.update("BoardMapper.updateLikeStatus", boardLike);
+		return result;
 	}
 
 
