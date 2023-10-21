@@ -295,9 +295,11 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 					var emailVal = $("#user-email").val();
 					if(emailVal == null || emailVal == ""){
 						alert("이메일을 먼저 입력해주세요.");
+						return;
 					}
 					if($("#user-ck-email").val() === "false"){
-						alert("사용할 수 없는 이메일입니다.")
+						alert("사용할 수 없는 이메일입니다.");
+						return;
 					} else {
 						alert("인증번호가 발송되었습니다. 이메일을 확인해주세요.");
 						
@@ -319,15 +321,19 @@ WIMF 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사�
 	     	function confirmNumber(){
 	     		var num1 = $("#user-email-check").val();
 	     		var num2 = $("#send-certification-num").val();
-	     		if(num1 == num2) {
-	     			alert("인증이 완료되었습니다.");
-	     			$("#check-certification-num").attr("value", "true");
-	     			$("#user-email-check").attr("readonly", "true");
-	     			$("#email-ck-msg").text("인증 완료").removeClass("error").addClass("success").show();
+	     		if(num2 == "" || num1 == ""){
+		     		alert("인증번호 전송 버튼을 먼저 눌러주세요.");
 	     		} else {
-	     			alert("작성한 인증번호가 다릅니다.");
-	     			$("#check-certification-num").attr("value", "false");
-	     			$("#email-ck-msg").text("인증 실패").removeClass("success").addClass("error").show();
+	     			if(num1 == num2) {
+		     			alert("인증이 완료되었습니다.");
+		     			$("#check-certification-num").attr("value", "true");
+		     			$("#user-email-check").attr("readonly", "true");
+		     			$("#email-ck-msg").text("인증 완료").removeClass("error").addClass("success").show();
+		     		} else {
+		     			alert("작성한 인증번호가 다릅니다.");
+		     			$("#check-certification-num").attr("value", "false");
+		     			$("#email-ck-msg").text("인증 실패").removeClass("success").addClass("error").show();
+		     		}
 	     		}
 	     	}
 	     	

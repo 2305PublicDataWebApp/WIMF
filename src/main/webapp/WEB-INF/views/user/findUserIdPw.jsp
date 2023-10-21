@@ -206,22 +206,8 @@
 					var emailVal = $("#user-email").val();
 					var emailPwVal = $("#user-pw-email").val();
 					if(emailVal == null || emailVal == ""){
-						if(emailPwVal == null || emailPwVal =="") {
 							alert("이메일을 먼저 입력해주세요.");
-						} else {
-							alert("인증번호가 발송되었습니다. 이메일을 확인해주세요.");
-							$.ajax({
-								url : "/user/sendMail.dog",
-								type : "POST",
-								data : { mail : emailPwVal },
-								success : function(data) {
-									$("#send-certification-number").attr("value", data);
-								},
-								error : function() {
-									alert:("ajax 오류, 관리자에게 문의 바랍니다.");
-								}
-							});
-						}
+							return;
 					} else {
 						alert("인증번호가 발송되었습니다. 이메일을 확인해주세요.");
 						$.ajax({

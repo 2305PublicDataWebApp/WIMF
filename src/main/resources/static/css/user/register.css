@@ -287,6 +287,9 @@ textarea {
     color: var(--contrast-color);
     background-color: var(--primary-color);
 }
+#user-info-email-check label{
+    width: 56% !important;
+}
 /* #user-info-nickname button:hover, #user-info-id button:hover, #user-info-email-check button:hover{ */
 /*     background: rgba(var(--primary-color-rgb), 0.85); */
 /* } */
