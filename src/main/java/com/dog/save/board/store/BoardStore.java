@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.dog.save.board.domain.Board;
 import com.dog.save.board.domain.bPageInfo;
+import com.dog.save.user.domain.UserBoard;
 
 public interface BoardStore {
 
@@ -105,6 +106,15 @@ public interface BoardStore {
 	int increaseViewCount(SqlSession sqlSession, Integer boardNo);
 	
 	List<Board> selectAllBoardList(SqlSession sqlSession);
+	
+	/**
+	 * 이승현 왔다감
+	 * 마이페이지 본인 게시글 조회 ajax
+	 * @param sqlSession
+	 * @param uBoard
+	 * @return List<UserBoard>
+	 */
+	List<UserBoard> selectBoardListById(SqlSession sqlSession, UserBoard uBoard);
 	
 
 }

@@ -1020,11 +1020,111 @@
 			background: #F9FAFC;
 			color: #666;
 		}
-/* .main-active{ */
-/* 	display:none !important; */
-/* } */
 
-/* Pricing Section - Home Page
+
+
+
+
+
+/*
+	마이페이지 css
+*/
+#write-list-box {
+  padding-top: 8%;
+  margin: 0 auto;
+  width: 88%;
+  height: 100%;
+  margin-bottom: 5%;
+}
+
+#write-list-box #board-content {
+  padding: 5%;
+}
+
+#write-list-box #board {
+  border: 5px double gray;
+  border-radius: 20px;
+}
+
+#write-list-box #select {
+  padding-bottom: 5%;
+  width: 70%;
+  float: left;
+}
+
+#write-list-box #search {
+  float: left;
+  margin-left: 10px;
+}
+#write-list-box #search-value {
+  padding-right: 10px;
+}
+
+#write-list-box #search-btn {
+  float: right;
+  width: 60px;
+  height: 35px;
+  border-radius: 4px;
+  border: none;
+  background-color: rgb(232, 69, 69);
+  color: white;
+  margin-left: 3px;
+}
+#write-list-box #search-btn:hover {
+  color: var(--contrast-color);
+  background: rgba(255,99,71, 0.85);
+}
+
+#write-list-box input[type="text"] {
+  border: solid 1px;
+  border-radius: 4px;
+  width: 175px;
+  height: 35px;
+  background-image: url(/img/돋보기.png);
+  background-repeat: no-repeat;
+  background-size: 30px;
+  text-align: right;
+}
+
+#write-list-box #paging {
+  list-style-type: none;
+  text-align: center;
+  font-size: 20px;
+  color: black
+}
+#write-list-box #paging:hover {
+  color: gray;
+}
+
+#write-list-box #create-btn {
+  float: right;
+  width: 70px;
+  height: 35px;
+  border-radius: 4px;
+  border: none;
+  background-color: rgb(232, 69, 69);
+  color: white;
+}
+
+#write-list-box #create-btn:hover {
+  color: var(--contrast-color);
+  background: rgba(255,99,71, 0.85);
+}
+
+#write-list-box #number-value {
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+/* 캘린더
 ------------------------------*/
 .pricing {
   padding: 60px 0 120px 0;
