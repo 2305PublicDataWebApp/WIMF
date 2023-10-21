@@ -40,4 +40,22 @@ public class AppStoreLogic implements AppStore {
 		return app;
 	}
 
+	@Override
+	public int allowAdopt(SqlSession sqlSession, App app) {
+		int result = sqlSession.insert("AppMapper.allowAdopt", app);
+		return result;
+	}
+
+	@Override
+	public int updateStatus(SqlSession sqlSession, App app) {
+		int result = sqlSession.insert("AppMapper.updateStatus", app);
+		return result;
+	}
+
+	@Override
+	public int allowCare(SqlSession sqlSession, App app) {
+		int result = sqlSession.insert("AppMapper.allowCare", app);
+		return result;
+	}
+
 }

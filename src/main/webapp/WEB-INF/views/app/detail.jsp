@@ -135,7 +135,25 @@
 				
 				<label for="app-content">자유롭게 하고 싶은 말이나 각오를 작성해주세요!</label>
 				<div><p>${app.appContent}</p></div>
-
+				
+				<form id="application-form" action="/app/detail.dog" method="POST">
+					<!-- 데이터를 넣기 위한 input hidden -->
+					<input type="hidden" name="appNo" value="${app.appNo }">
+					<input type="hidden" name="userId" value="${app.userId }">
+					<input type="hidden" name="dogNo" value="${app.dogNo }">
+					<input type="hidden" name="appStartDate" value="${app.appStartDate }">
+					<input type="hidden" name="appEndDate" value="${app.appEndDate }">
+					<input type="hidden" name="appDogAdopt" value="${app.appDogAdopt }">
+					<div class="radio-group">
+                        <input type="radio" id="app-reject" name="appStatus" value="N" <c:if test="${String(app.appStatus) eq 'N'}">checked</c:if>>
+                        <label for="app-reject">반려</label>
+                        <input type="radio" id="app-admit" name="appStatus" value="Y" <c:if test="${String(app.appStatus) eq 'Y'}">checked</c:if>>
+                        <label for="app-admit">승인</label>
+                        <input type="radio" id="app-pending" name="appStatus" value="W" <c:if test="${String(app.appStatus) eq 'W'}">checked</c:if>>
+                        <label for="app-pending">보류</label>
+                        <button type="submit">심사하기</button>
+                    </div>
+				</form>
             </div>
         </main>
         

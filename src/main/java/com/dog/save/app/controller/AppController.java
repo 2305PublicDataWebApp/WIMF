@@ -40,6 +40,7 @@ public class AppController {
 	@Autowired
 	private DogService dService;
 	
+	// 지원자 지원서 제출 페이지
 	@GetMapping("/insert.dog")
 	public ModelAndView showInsertForm(ModelAndView mv, HttpSession session
 			, @RequestParam(value="dogNo") int dogNo) {
@@ -66,13 +67,13 @@ public class AppController {
 		return mv;
 	}
 	
+	// 지원자 지원서 제출
 	@PostMapping("/insert.dog")
 	public ModelAndView insertApplication(ModelAndView mv
 			, @ModelAttribute App app) {
 		int result = aService.insertApplication(app);
 		try {
 			if(result > 0) {
-				mv.addObject("app", app);
 				mv.setViewName("/index");
 			} else {
 				mv.addObject("msg", "[서비스실패] 문의를 조회할 수 없습니다.");
@@ -93,7 +94,7 @@ public class AppController {
 	    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	}
 
-	
+	// 관리자 제출 지원서 목록 확인
 	@GetMapping("/list.dog")
 	public ModelAndView showAllList(
 			ModelAndView mv
@@ -121,6 +122,7 @@ public class AppController {
 		return mv;
 	}
 	
+	// 관리자 제출 지원서 상세 확인
 	@GetMapping("/detail.dog")
 	public ModelAndView applicationDetail (
 			ModelAndView mv
@@ -152,7 +154,51 @@ public class AppController {
 		return mv;
 	}
 	
-	
+	// 관리자 제출 지원서 확인 후 심사(반려, 승인)
+	@PostMapping("/detail.dog")
+	public ModelAndView applicationJudgment (
+			ModelAndView mv
+			, @ModelAttribute App app) {
+		try {
+			int result = 0;
+			// 관리자가 승인 시
+			int statusResult = 0;
+			if(app.getAppStatus() == 'Y') {
+				if (app.getAppDogAdopt().equals("Y")) {
+					result = aService.allowAdopt(app);
+				}else {
+					result = aService.allowCare(app);
+				}
+				if(result > 0) {
+					System.out.println("값 넣기 성공");
+					statusResult = aService.updateStatus(app);
+					if(statusResult > 0) {
+						mv.setViewName("redirect:/app/detail.dog?appNo=" + app.getAppNo());
+					}else {
+						mv.addObject("msg", "[서비스실패] 상태변경 실패");
+						mv.setViewName("common/error");
+					}
+				}else {
+					mv.addObject("msg", "[서비스실패] 잘못된 값을 넣었습니다.");
+					mv.setViewName("common/error");
+				}
+			}else {
+				statusResult = aService.updateStatus(app);
+				if(statusResult > 0) {
+					mv.setViewName("redirect:/app/detail.dog?appNo=" + app.getAppNo());
+				}else {
+					mv.addObject("msg", "[서비스실패] 상태변경 실패");
+					mv.setViewName("common/error");
+				}
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("msg", e.getMessage());
+			mv.addObject("url", "/app/list.dog");
+		}
+		return mv;
+	}
 	
 	private PageInfo getPageInfo(Integer currentPage, int totalCount) {
 		int recordCountPerPage = 10;

@@ -15,4 +15,10 @@ public interface AppService {
 
 	App selectAppByNo(int appNo);
 
+	int allowAdopt(App app);
+
+	int updateStatus(App app);
+
+	int allowCare(App app);
+
 }

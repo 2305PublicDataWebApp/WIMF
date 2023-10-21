@@ -43,12 +43,21 @@
 		WHERE	APP_NO = #{appNo}
 	</select>
 	
-	<!-- 지원서 수락하면 데이터 넣기 -->
+	<!-- 입양지원서 수락하면 데이터 넣기 -->
 	<update id="allowAdopt">
+		UPDATE DOG_TBL
+		SET DOG_P_STARTDATE = DEFAULT, 
+		    DOG_P_ENDDATE = DEFAULT,
+		    DOG_ADOPT = #{appDogAdopt}
+		WHERE DOG_NO = #{dogNo}
+	</update>
+	
+	<!-- 돌봄지원서 수락하면 데이터 넣기 -->
+	<update id="allowCare">
 		UPDATE DOG_TBL
 		SET DOG_P_STARTDATE = #{appStartDate}, 
 		    DOG_P_ENDDATE = #{appEndDate},
-		    DOG_ADOPT = #{appDogAdopt},
+		    DOG_ADOPT = #{appDogAdopt}
 		WHERE DOG_NO = #{dogNo}
 	</update>
 	

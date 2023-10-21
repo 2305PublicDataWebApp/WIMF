@@ -45,4 +45,22 @@ public class AppServiceImpl implements AppService {
 		return app;
 	}
 
+	@Override
+	public int allowAdopt(App app) {
+		int result = aStore.allowAdopt(sqlSession, app);
+		return result;
+	}
+
+	@Override
+	public int updateStatus(App app) {
+		int result = aStore.updateStatus(sqlSession, app);
+		return result;
+	}
+
+	@Override
+	public int allowCare(App app) {
+		int result = aStore.allowCare(sqlSession, app);
+		return result;
+	}
+
 }

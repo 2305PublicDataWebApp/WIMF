@@ -17,4 +17,10 @@ public interface AppStore {
 
 	App selectAppByNo(SqlSession sqlSession, int appNo);
 
+	int allowAdopt(SqlSession sqlSession, App app);
+
+	int updateStatus(SqlSession sqlSession, App app);
+
+	int allowCare(SqlSession sqlSession, App app);
+
 }
