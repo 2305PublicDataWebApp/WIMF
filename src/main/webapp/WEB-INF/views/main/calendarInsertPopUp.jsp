@@ -52,7 +52,7 @@
                <li>강아지 : 
                   <select name="dogNo" id="dogNo">
                      <c:forEach var="combinedList" items="${combinedList}">
-                        <option value="${combinedList.dog.dogNo }">${combinedList.dog.dogNo } / ${combinedList.dog.dogName }</option>	<!-- forEach로 개 번호 이름으로 전환해서 넣기 -->
+                        <option value="${combinedList.dog.dogNo }">No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</option>	<!-- forEach로 개 번호 이름으로 전환해서 넣기 -->
                      </c:forEach>
                   </select>
                </li>

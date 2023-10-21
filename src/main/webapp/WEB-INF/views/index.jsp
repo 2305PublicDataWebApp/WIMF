@@ -791,7 +791,7 @@
         <div class="row gy-5">
 
           <c:forEach var="combinedList" items="${combinedList}" varStatus="loop">
-            <c:if test="${loop.index < 6}">
+            <c:if test="${loop.index < 6 && String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate == null && combinedList.dog.dogPEndDate == null}">
             <!-- Start Team Member -->
               <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="100">
                 <div class="member-img">
@@ -806,7 +806,7 @@
                 </div>
                 <div class="member-info text-center">
                   <h4>${combinedList.dog.dogName }</h4>
-                  <span>${combinedList.dog.dogWeight }kg, ${combinedList.dog.dogAge }살</span>
+                  <span>${combinedList.dog.dogWeight }kg, ${combinedList.dog.dogAge }살, ${combinedList.dog.dogHealth }</span>
                   <p>${combinedList.dog.dogInfo }</p>
                 </div>
               </div>
@@ -916,7 +916,7 @@
             <div class="text-center">
               <h3>후원을 기다립니다</h3>
               <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-              <a class="cta-btn" href="/dog/list.dog">후원하기</a>
+              <a class="cta-btn" href="/dog/list.dog?region=all&sort=euthanasia">후원하기</a>
             </div>
           </div>
         </div>
@@ -1265,7 +1265,7 @@
 	              <div class="portfolio-info">
 	                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
 	                <p>${combinedList.dog.dogPStartDate }~</p>
-	                <a href="${combinedList.dogFile.dogFilePath}" title="${combinedList.dog.dogNo } / ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+	                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
 	                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
 	              </div>
 	            </div>
@@ -1280,7 +1280,7 @@
 	              <div class="portfolio-info">
 	                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
 	                <p>${combinedList.dog.dogPStartDate }~${combinedList.dog.dogPEndDate }</p>
-	                <a href="${combinedList.dogFile.dogFilePath}" title="${combinedList.dog.dogNo } / ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+	                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
 	                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
 	              </div>
 	            </div>
@@ -1295,7 +1295,7 @@
 	              <div class="portfolio-info">
 	                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
 	                <p>${combinedList.dog.dogAge }살, ${combinedList.dog.dogWeight }kg, ${combinedList.dog.dogInfo }</p>
-	                <a href="${combinedList.dogFile.dogFilePath}" title="${combinedList.dog.dogNo } / ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+	                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
 	                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
 	              </div>
 	            </div>
@@ -1503,10 +1503,13 @@
 
           <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="100">
             <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-briefcase"></i></div>
+              <div class="icon flex-shrink-0"><i class="bi bi-binoculars"></i></div>
               <div>
-                <h4 class="title"><a href="services-details.html" class="stretched-link">Lorem Ipsum</a></h4>
-                <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident</p>
+                <h4 class="title">#1 임보가 뭘까?</h4>
+                <p class="description">
+                	임보란 '임시 보호'의 줄임말이에요. 구조된 강아지들이 새로운 삶을 찾게 될 때까지, 통상적으로 '구조-임시 보호-입양'의 3단계를 거치게 되는데요. <br>
+					구조되자마자 바로 입양을 갈 수 있다면 좋겠지만, 통상적으로 평생 함께할 가족을 찾는 데는 시간이 걸리기 때문에 그 중간을 이어주는 임보 과정이 필요하답니다.
+                </p>
               </div>
             </div>
           </div>
@@ -1514,50 +1517,77 @@
 
           <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="200">
             <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-card-checklist"></i></div>
+              <div class="icon flex-shrink-0"><i class="bi bi-bar-chart"></i></div>
               <div>
-                <h4 class="title"><a href="services-details.html" class="stretched-link">Dolor Sitema</a></h4>
-                <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata</p>
+                <h4 class="title">#2 임보가 왜 필요할까?</h4>
+                <p class="description">
+                	안타깝게도 현재 국내 유기견 관리 시스템상으로는 인력도 자원도 턱없이 부족해 대다수 보호소에서 안락사를 시행할 수밖에 없는 실정이에요. <br>
+					따라서 임시 보호는 한 생명을 구하는 가장 효과적이고 확실한 방법입니다. 임보가 없다면 한 생명의 미래도 없어진다는 것, 'WIMF'가 임보의 중요성을 널리 알리고자 하는 이유입니다.
+                </p>
               </div>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="300">
             <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-bar-chart"></i></div>
+              <div class="icon flex-shrink-0"><i class="bi bi-calendar4-week"></i></div>
               <div>
-                <h4 class="title"><a href="services-details.html" class="stretched-link">Sed ut perspiciatis</a></h4>
-                <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                <h4 class="title">#3 임보자는 뭘 해야 할까?</h4>
+                <p class="description">
+                	• 유기견이 지낼 수 있는 안전한 공간 제공 <br>
+					• 밥과 물 챙겨주기, 배변 처리하기 <br>
+					• 인간을 다시 믿을 수 있도록 사랑 듬뿍 주기 <br>
+					• 입양 홍보를 위해 예쁜 사진과 영상 많이 찍어주기 <br>
+					• 가능하다면 SNS 등을 통해 입양 홍보 돕기
+                </p>
               </div>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="400">
             <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-binoculars"></i></div>
+              <div class="icon flex-shrink-0"><i class="bi bi-brightness-high"></i></div>
               <div>
-                <h4 class="title"><a href="services-details.html" class="stretched-link">Magni Dolores</a></h4>
-                <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                <h4 class="title">#4 나도 임보를 할 수 있을까?</h4>
+                <p class="description">
+                	• 집에서 강아지을 키우는 것이 문제 되지 않는다<br>
+					• 털 알레르기가 없거나 심하지 않다<br>
+					• 반려동물을 키워봤거나 대하는 데 능숙하다<br>
+					• 다른 생명체를 챙겨줄 정도의 시간적 여유가 있다 <br>
+					• 안정적인 경제력을 갖추고 있는 성인이다
+                </p>
               </div>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="500">
             <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-brightness-high"></i></div>
+              <div class="icon flex-shrink-0"><i class="bi bi-briefcase"></i></div>
               <div>
-                <h4 class="title"><a href="services-details.html" class="stretched-link">Nemo Enim</a></h4>
-                <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque</p>
+                <h4 class="title">#5 이런 분들께 추천해요</h4>
+                <p class="description">
+                	• 입양을 결정하기 전에 먼저 경험해 보고 싶어요<br>
+					• 오래 키운 아이를 보내서 한동안 입양은 못 할 것 같아요<br>
+					• 상황이 유동적이라 당장 입양은 어렵지만 몇 개월은 가능해요<br>
+					• 혼자서는 우울하고 무서운데 집에 귀여운 룸메이트가 있으면 좋을 것 같아요<br>
+					• 자녀들이 독립하니 집이 적적하고 허전해요
+                </p>
               </div>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="600">
             <div class="service-item d-flex">
-              <div class="icon flex-shrink-0"><i class="bi bi-calendar4-week"></i></div>
+              <div class="icon flex-shrink-0"><i class="bi bi-card-checklist"></i></div>
               <div>
-                <h4 class="title"><a href="services-details.html" class="stretched-link">Eiusmod Tempor</a></h4>
-                <p class="description">Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi</p>
+                <h4 class="title">#6 이런 점은 미리 말씀드려요</h4>
+                <p class="description">
+                	• 강아지과 함께하는 삶이 예상보다 힘들 수 있어요<br>
+					• 임보 기간이 생각보다 짧거나 길어질 수 있어요<br>
+					• 정이 많이 들면 입양 보낼 때 마음이 아플 수 있어요<br>
+					• 상처가 많다면 마음을 여는 데 오래 걸릴 수 있어요<br>
+					'WIMF'는 임시보호 과정에서 일어날 수 있는 다양한 문제를 최소화하고, 쉽고 안전한 임보 문화가 정착될 수 있도록 최선을 다할 거에요.
+                </p>
               </div>
             </div>
           </div><!-- End Service Item -->
@@ -1651,7 +1681,7 @@
               <br>
               벽이 높은 임시보호에 부담을 덜어드립니다.
             </p>
-            <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+            <!-- <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a> -->
           </div>
 
           <div class="col-xl-7">
@@ -1661,7 +1691,7 @@
                 <div class="icon-box">
                   <i class="bi bi-buildings"></i>
                   <h3>믿을 수 있는 규모</h3>
-                  <p>Magni repellendus vel ullam hic officia accusantium ipsa dolor omnis dolor voluptatem</p>
+                  <p>'WIMF'는 검증된 구조자와 임보자가 안전하게 연결될 수 있는 임시보호 플랫폼을 제공해요.</p>
                 </div>
               </div> <!-- End Icon Box -->
 
@@ -1669,7 +1699,7 @@
                 <div class="icon-box">
                   <i class="bi bi-clipboard-pulse"></i>
                   <h3>확실한 체계</h3>
-                  <p>Autem saepe animi et aut aspernatur culpa facere. Rerum saepe rerum voluptates quia</p>
+                  <p>'WIMF'는 후원시스템을 통해 임시보호자의 직접적인 부담을 덜어주고, 더 나아가 직접 유기견들을 보호합니다.</p>
                 </div>
               </div> <!-- End Icon Box -->
 
@@ -1677,7 +1707,7 @@
                 <div class="icon-box">
                   <i class="bi bi-command"></i>
                   <h3>소통의 장</h3>
-                  <p>Omnis perferendis molestias culpa sed. Recusandae quas possimus. Quod consequatur corrupti</p>
+                  <p>'WIMF'는 유기견에 대한 인식을 개선하고 올바른 구조-임시보호-입양 절차에 대해 널리 알려요.</p>
                 </div>
               </div> <!-- End Icon Box -->
 
@@ -1685,7 +1715,7 @@
                 <div class="icon-box">
                   <i class="bi bi-graph-up-arrow"></i>
                   <h3>높은 입양률</h3>
-                  <p>Sint et dolor voluptas minus possimus nostrum. Reiciendis commodi eligendi omnis quideme lorenda</p>
+                  <p>'WIMF'는 유기견 사망률을 낮추기 위해 임시보호 시스템의 체계화 및 대중화에 앞장서요.</p>
                 </div>
               </div> <!-- End Icon Box -->
 
@@ -1717,8 +1747,8 @@
                 <div class="info-item" data-aos="fade" data-aos-delay="200">
                   <i class="bi bi-geo-alt"></i>
                   <h3>Address</h3>
-                  <p>A108 Adam Street</p>
-                  <p>New York, NY 535022</p>
+                  <p>서울 중구 남대문로 120</p>
+                  <p>대일빌딩 2층, 3층</p>
                 </div>
               </div><!-- End Info Item -->
 
@@ -1745,7 +1775,7 @@
                   <i class="bi bi-clock"></i>
                   <h3>Open Hours</h3>
                   <p>Monday - Friday</p>
-                  <p>9:00AM - 05:00PM</p>
+                  <p>09:00 AM - 18:00 PM</p>
                 </div>
               </div><!-- End Info Item -->
 

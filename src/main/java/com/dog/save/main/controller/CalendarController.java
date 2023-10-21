@@ -29,14 +29,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.dog.save.dog.controller.DogController;
 import com.dog.save.dog.domain.Dog;
 import com.dog.save.dog.domain.DogFile;
 import com.dog.save.dog.domain.DogSet;
 import com.dog.save.dog.service.DogService;
 import com.dog.save.main.domain.Calendar;
 import com.dog.save.main.service.CalendarService;
-import com.dog.save.user.service.UserService;
 
 @Controller
 @RequestMapping("/calendar")
@@ -44,10 +42,6 @@ public class CalendarController {
 	
 	@Autowired
 	private CalendarService cService;
-	@Autowired
-	private UserService uService;
-	@Autowired
-	private DogController dController;
 	@Autowired
 	private DogService dService;
 	
