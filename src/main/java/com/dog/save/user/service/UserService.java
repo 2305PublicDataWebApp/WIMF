@@ -77,14 +77,5 @@ public interface UserService {
 	 * @return User
 	 */
 	User checkUserByNameIdEmail(User user);
-
-	// 기진코드
-	/**
-	 * 모든 유저 정보 가져오기
-	 * @return
-	 */
-	List<User> selectAllUser();
-	// 기진코드
-
 	
 }

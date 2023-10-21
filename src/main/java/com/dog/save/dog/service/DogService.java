@@ -140,16 +140,16 @@ public interface DogService {
 	List<Dog> selectAllDogList();
 	
 	/**
-	 * pStartDate로 전체 갯수 가져오기 Service
+	 * 돌봄 강아지 리스트 가져오기 Service
 	 * @return
 	 */
-	int getListCountByPStartDate();
+	List<Dog> selectCareList();
 
 	/**
-	 * 입양간 수 전체 갯수 가져오기 Service
+	 * 입양 강아지 리스트 가져오기 Service
 	 * @return
 	 */
-	int getListCountByAdoptedCheck();
+	List<Dog> selectAdoptList();
 	
 //	기진 코드
 
@@ -175,6 +175,8 @@ public interface DogService {
 	 * @return
 	 */
 	int updateLikeStatus(DogLike dogLike);
+
+	
 
 
 

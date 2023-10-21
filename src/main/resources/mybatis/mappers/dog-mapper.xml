@@ -89,11 +89,11 @@
 	<select id="selectAllDogList" resultType="Dog">
 		SELECT * FROM DOG_TBL ORDER BY DOG_NO DESC
 	</select>
-	<select id="getListCountByPStartDate" resultType="_int">
-		SELECT COUNT(*) FROM DOG_TBL WHERE DOG_P_STARTDATE IS NOT NULL
+	<select id="selectCareList" resultType="Dog">
+		SELECT * FROM DOG_TBL WHERE DOG_P_STARTDATE IS NOT NULL ORDER BY DOG_NO DESC
 	</select>
-	<select id="getListCountByAdoptedCheck" resultType="_int">
-		SELECT COUNT(*) FROM DOG_TBL WHERE DOG_ADOPT='Y'
+	<select id="selectAdoptList" resultType="Dog">
+		SELECT * FROM DOG_TBL WHERE DOG_ADOPT='Y' ORDER BY DOG_NO DESC
 	</select>
 	<!-- 기진 코드 -->
 </mapper>
