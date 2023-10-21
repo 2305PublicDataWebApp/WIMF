@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.dog.save.board.domain.Board;
+import com.dog.save.board.domain.BoardLike;
 import com.dog.save.board.domain.bPageInfo;
 
 public interface BoardService {
@@ -91,8 +92,8 @@ public interface BoardService {
 	 */
 	int increaseViewCount(Integer boardNo);
 	
-	int increaseLikeCount(Integer boardNo);
-	
 	List<Board> selectAllBoardList();
+	
+	String getLikeStatus(BoardLike boardLike);
 
 }
