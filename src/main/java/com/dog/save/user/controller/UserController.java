@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,7 +25,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dog.save.board.domain.Board;
+import com.dog.save.board.domain.bPageInfo;
+import com.dog.save.board.service.BoardService;
 import com.dog.save.user.domain.User;
+import com.dog.save.user.domain.UserBoard;
 import com.dog.save.user.service.UserService;
 
 @Controller
@@ -34,6 +39,8 @@ public class UserController {
 	@Autowired
 	private UserService uService;
 	
+	@Autowired
+	private BoardService bService;
 	
 	
 	// 로그인 페이지 url
@@ -59,10 +66,12 @@ public class UserController {
 	public String showMypage(
 			Model model
 			, HttpSession session
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage
 			) {
 		try {
 			String sessionId = (String)session.getAttribute("userId");
 			if(sessionId != null) {
+				
 				return "user/myPage";
 			} else {
 				model.addAttribute("msg", "로그인이 필요한 기능입니다.");
@@ -74,6 +83,33 @@ public class UserController {
 			model.addAttribute("msg", "관리자에게 문의해주세요.");
 			model.addAttribute("url", "/user/login.dog");
 			return "common/error";
+		}
+	}
+	
+	// ajax 마이페이지 본인 게시물 리스트 출력
+	@ResponseBody
+	@PostMapping(value="myPageBoardList.dog", produces="application/json;charset=utf-8")
+	public String showUserBoardList(
+			HttpSession session
+			, @RequestParam(value="page", required=false) Integer currentPage
+			) {
+		try {
+			String userId = (String)session.getAttribute("userId");
+			Integer totalCount = bService.getListCount();
+			bPageInfo bpInfo = this.getPageInfo(currentPage, totalCount);
+			UserBoard uBoard = new UserBoard(userId, bpInfo.getCurrentPage(), bpInfo.getTotalCount(), bpInfo.getNaviTotalCount(), bpInfo.getRecordCountPerPage()
+					, bpInfo.getNaviCountPerPage(), bpInfo.getStartNavi(), bpInfo.getEndNavi());
+			List<UserBoard> uBList = bService.selectBoardListById(uBoard);
+//			List<Board> bList = bService.selectBoardList(bpInfo);
+			if(uBList.size() > 0 || !uBList.isEmpty()) {
+//				("bList", bList)("bpInfo", bpInfo);
+				return "";
+			} else {
+				return "";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "false";
 		}
 	}
 	
@@ -406,7 +442,20 @@ public class UserController {
 		
 	}
 	
-	
+	// 페이징처리
+	public bPageInfo getPageInfo(Integer currentPage, Integer totalCount) {
+		int recordCountPerPage = 7;
+		int naviCountPerPage = 5;
+		int naviTotalCount = (int)Math.ceil((double)totalCount/recordCountPerPage);
+		int startNavi = ((int)((double)currentPage/naviCountPerPage+0.9)-1)*naviCountPerPage+1;
+		int endNavi = startNavi + naviCountPerPage - 1;
+		if(endNavi > naviTotalCount) {
+			endNavi = naviTotalCount;
+		}
+		bPageInfo bpInfo = new bPageInfo(currentPage, totalCount, naviTotalCount, recordCountPerPage, naviCountPerPage, startNavi, endNavi);
+			
+		return bpInfo;
+	}
 	
 	// 아이디 유효성 체크 정규식
 	private boolean idIsValid(String userId) {

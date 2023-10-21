@@ -6,6 +6,7 @@ import java.util.Map;
 import com.dog.save.board.domain.Board;
 import com.dog.save.board.domain.BoardLike;
 import com.dog.save.board.domain.bPageInfo;
+import com.dog.save.user.domain.UserBoard;
 
 public interface BoardService {
 	/**
@@ -95,5 +96,13 @@ public interface BoardService {
 	List<Board> selectAllBoardList();
 	
 	String getLikeStatus(BoardLike boardLike);
+	
+	/**
+	 * 이승현 왔다감
+	 * 마이페이지 본인 게시글 조회 ajax
+	 * @param uBoard
+	 * @return List<UserBoard>
+	 */
+	List<UserBoard> selectBoardListById(UserBoard uBoard);
 
 }

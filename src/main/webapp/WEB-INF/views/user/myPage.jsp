@@ -603,7 +603,119 @@
 					</div>
 					
 					<div id="main-section2" class="projects-section" style="display: none;">
-						2번
+					
+						<div id="section2-title-box">
+							<div id="section2-title">
+								<h1>나의 활동</h1>
+							</div>
+						</div>
+						
+						<div id="section-choice-box">
+							<input type="radio" id="my-write-board" class="choice-radio-btn" name="section2Choice" value="" onclick="changeSection2(1)" checked>
+							<label for="my-write-board">작성한 게시글</label>
+							
+							<input type="radio" id="my-like-board" class="choice-radio-btn" name="section2Choice" onclick="changeSection2(2)" value="">
+							<label for="my-like-board">좋아요 누른 게시글</label>
+							
+							<input type="radio" id="my-adopt-subscription" class="choice-radio-btn" name="section2Choice" onclick="changeSection2(3)" value="">
+							<label for="my-adopt-subscription">작성한 입양신청서</label>
+						</div>
+						
+						<div id="my-write-board-box">
+							<div id="write-title-section">
+								<h3>작성한 게시글</h3>
+							</div>
+							<div id="write-list-box">
+								<div id="board">
+							        <div id="board-content">
+							          <table class="table">
+							            <div id="board-top-content">
+							              <div id="select">
+							              	<form action="/board/search.dog" method="get">
+								                <select name="searchCondition">
+								                  <option value="all">전체</option>
+								                  <option value="writer">작성자</option>
+								                  <option value="title">제목</option>
+								                  <option value="content">내용</option>
+								                </select>
+									          </div>
+								              <div id="search">
+								                <input id="search-value" type="text" name="searchKeyword" placeholder="Search">
+								              </div>
+								              <div id="search-btn">
+								                <input id="search-btn" type="submit" value="검색">
+								              </div>
+							              	</form>
+							            </div>
+							            <colgroup>
+							              <col width="5%" />
+							              <col width="35%" />
+							              <col width="10%" />
+							              <col width="10%" />
+							              <col width="5%" />
+							            </colgroup>
+							            <tr>
+							              <th id="number-value">번호</th>
+							              <th>글 제목</th>
+							              <th>작성자</th>
+							              <th>작성일</th>
+							              <th id="number-value">조회수</th>
+							            </tr>
+							            <c:forEach var="board" items="${bList }">
+								            <tr>
+								              <td id="number-value">${board.boardNo }</td>
+								              <c:url var="detailUrl" value="/board/detail.dog">
+								              	<c:param name="boardNo" value="${board.boardNo }"></c:param>
+								              </c:url>
+								              <td><a href="${detailUrl }">${board.boardTitle }</a></td>
+								              <td>${board.userNickName }</td>
+								              <td>
+								              	<fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
+								              </td>
+								              <td id="number-value">${board.viewCount }</td>
+								            </tr>
+							            </c:forEach>
+							            </table>
+							            <div id="paging">
+								        	<tr align="center">
+								          	<td colspan="5">
+								          		<c:if test="${bpInfo.startNavi != 1}">
+								          			<c:url var="prevUrl" value="/user/myPage.dog">
+								          				<c:param name="page" value="${bpInfo.startNavi - 1 }"></c:param>
+								          			</c:url>
+								          			<a href="${prevUrl }">◀</a>
+								          		</c:if>
+								          		<c:forEach begin="${bpInfo.startNavi }" end="${bpInfo.endNavi }" var="p">
+								          			<c:url var="pageUrl" value="/user/myPage.dog">
+								          				<c:param name="page" value="${p }"></c:param>
+								          			</c:url>
+								          			<a href="${pageUrl }">${p }</a>&nbsp;
+								          		</c:forEach>
+								          		<c:if test="${bpInfo.endNavi != bpInfo.naviTotalCount}">
+													<c:url var="nextUrl" value="/user/myPage.dog">
+														<c:param name="page" value="${bpInfo.endNavi + 1 }"></c:param>
+													</c:url>          		
+								          			<a href="${nextUrl }">▶</a>
+								          		</c:if>
+								          	</td>
+								          </tr>
+							            </div>
+<!-- 							          <div id="create-btn"> -->
+<!-- 							            <input id="create-btn" type="button" value="글 작성" onClick="checkLogin()"> -->
+<!-- 							          </div> -->
+							        </div>
+							      </div>
+							</div>
+							
+						</div>
+						
+						<div id="my-like-board-box" style="display: none;">
+							2
+						</div>
+						
+						<div id="my-adopt-subscription-box" style="display: none;">
+							3
+						</div>
 					</div>
 					
 					<div id="main-section3" class="projects-section" style="display: none;">
@@ -615,7 +727,6 @@
       <!--  Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Calendar</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -782,8 +893,7 @@
 	
 		<!-- 부트스트랩 JS 및 jQuery 스크립트 -->
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script
-			src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 		<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 		<script src="/vendor/glightbox/js/glightbox.min.js"></script>
 		<script src="/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -797,6 +907,23 @@
 			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 		<script>
+		
+			// 작성한 게시글 리스트 출력 ajax
+			let currentPage = 1;
+			function showBoardList() {
+				$.ajax({
+					url : "/user/myPageBoardList.dog",
+					type : "POST",
+					data : { currentPage : currentPage },
+					success : function(data) {
+						
+					},
+					error : function(){
+						
+					}
+					
+				});
+			});
 			
 			// 비밀번호 유효성 체크
 			$(document).ready(function() {
@@ -947,6 +1074,16 @@
 			function changeSubSection(selectNum){
 				$("#main-sub-section1, #main-sub-section2").hide();
 				$("#main-sub-section" + selectNum).show();
+			}
+			function changeSection2(selectNum){
+				$("#my-write-board-box, #my-like-board-box, #my-adopt-subscription-box").hide();
+				if(selectNum == "1"){
+					$("#my-write-board-box").show();
+				} else if(selectNum == "2"){
+					$("#my-like-board-box").show();
+				} else {
+					$("#my-adopt-subscription-box").show();
+				}
 			}
 		
 			// 사이드바 아이콘 스크립트
@@ -1118,6 +1255,8 @@
 				$("#nav-about").removeClass("active");
 				$("#nav-Contact").removeClass("active");
 			}
+			
+			
 		</script>
 		
 		<!-- 풀캘린더 -->

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.dog.save.board.domain.Board;
 import com.dog.save.board.domain.bPageInfo;
 import com.dog.save.board.store.BoardStore;
+import com.dog.save.user.domain.UserBoard;
 
 @Repository
 public class BoardStoreLogic implements BoardStore{
@@ -108,6 +109,15 @@ public class BoardStoreLogic implements BoardStore{
 	public List<Board> selectAllBoardList(SqlSession sqlSession) {
 		List<Board> searchList = sqlSession.selectList("BoardMapper.selectAllBoardList");
 		return searchList;
+	}
+
+	@Override
+	public List<UserBoard> selectBoardListById(SqlSession sqlSession, UserBoard uBoard) {
+		int limit = uBoard.getRecordCountPerPage();
+		int offset = (uBoard.getCurrentPage()-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<UserBoard> uBList = sqlSession.selectList("BoardMapper.selectBoardListById", uBoard, rowBounds);
+		return uBList;
 	}
 
 

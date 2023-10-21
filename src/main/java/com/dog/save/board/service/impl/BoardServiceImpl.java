@@ -12,6 +12,7 @@ import com.dog.save.board.domain.BoardLike;
 import com.dog.save.board.domain.bPageInfo;
 import com.dog.save.board.service.BoardService;
 import com.dog.save.board.store.BoardStore;
+import com.dog.save.user.domain.UserBoard;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -115,6 +116,14 @@ public class BoardServiceImpl implements BoardService{
 	public String getLikeStatus(BoardLike boardLike) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	// 이승현 왔다감
+	// 마이페이지 본인 게시글 조회
+	@Override
+	public List<UserBoard> selectBoardListById(UserBoard uBoard) {
+		List<UserBoard> ubList = bStore.selectBoardListById(sqlSession, uBoard);
+		return ubList;
 	}
 
 }
