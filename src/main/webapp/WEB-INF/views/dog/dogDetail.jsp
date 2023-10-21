@@ -17,6 +17,8 @@
 		<link href="/vendor/aos/aos.css" rel="stylesheet">
 		<link rel="stylesheet" href="/css/common/reset.css">
 		<link rel="stylesheet" href="/css/dog/dogDetail.css">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">		
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	</head>
 	<body>
@@ -43,7 +45,32 @@
 			<div id="dog_image_container">
 				<br><br><br>
 				<div>
-					<img src=${dogFileList[0].dogFilePath } alt=${dogFileList[0].dogFileName }>
+				    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+				        <div class="carousel-indicators">
+				          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+				        </div>
+				        <div class="carousel-inner">
+				          <div class="carousel-item active">
+				            <img src=${dogFileList[0].dogFilePath } alt=${dogFileList[0].dogFileName }>
+				          </div>
+				          <div class="carousel-item">
+				            <img src=${dogFileList[1].dogFilePath } alt=${dogFileList[1].dogFileName }>
+				          </div>
+				          <div class="carousel-item">
+				            <img src=${dogFileList[2].dogFilePath } alt=${dogFileList[2].dogFileName }>
+				          </div>
+				        </div>
+				        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				          <span class="visually-hidden">Previous</span>
+				        </button>
+				        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				          <span class="visually-hidden">Next</span>
+				        </button>
+				      </div>					
 				</div>
 				<div>
 					<c:if test ="${userId ne null }">
@@ -106,6 +133,15 @@
 			</div>
 		</div>
 		<br><hr>
+		<h1>강아지 구조 위치</h1>
+		<div id="dogMap">
+		</div>
+		<hr>
+		<h1>댓글</h1>
+		
+		
+		
+		
         <div class="review-input">
                  <div class="input_box">
                       <div class="input_title">
@@ -232,16 +268,15 @@
 		    tableBody.empty(); // 기존 내용을 지우고 새로운 댓글 목록을 추가
 		    const headerRow = $("<tr>");
 		    headerRow.append("<th width='10%'>작성자</th>");
-		    headerRow.append("<th width='40%'>댓글 내용</th>");
-		    headerRow.append("<th width='15%'>추천수</th>");
+		    headerRow.append("<th width='60%'>댓글 내용</th>");		    
 		    headerRow.append("<th width='20%'>작성일(수정일)</th>");
-		    headerRow.append("<th width='15%'>수정/삭제</th>");
+		    headerRow.append("<th width='10%'>수정/삭제</th>");
 		    tableBody.append(headerRow);
 		    if (data.length > 0) {
 		        for (let i in data) {
 		            const tr = $("<tr>");
 		            const dogReplyWriter = $("<td>").text(data[i].dogReplyWriter);
-		            const dogReplyContent = $("<td>").text(data[i].dogReplyContent);
+		            const dogReplyContent = $("<td>").text(data[i].dogReplyContent).attr("id", "content-input");
 		            const dogReplyCreateDate = new Date(data[i].dogReplyCreateDate);
 		            const formattedDate = dogReplyCreateDate.toLocaleString('ko-KR', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
 		            const dogReplyUpdateDate = new Date(data[i].dogReplyUpdateDate);
@@ -250,14 +285,13 @@
 		                formattedDate2 += " (수정됨)";
 		            }
 		            
-		            const dogReplyRecommend = $("<td>").text(data[i].dogReplyRecommend);
+		            
 		            const btnArea = $("<td>")		            	
 		                .append("<a href='javascript:void(0)' onclick='modifyView(this, " + data[i].dogReplyNo + ", \"" + data[i].dogReplyContent + "\");'>수정</a>&nbsp;&nbsp;")
 		                .append("<a href='javascript:void(0)' onclick='removeReply(" + data[i].dogReplyNo + ");'>삭제</a>");
 		            const dateCell = $("<td>").text(formattedDate2).attr("id", "date-cell");		            
 		            tr.append(dogReplyWriter);
-		            tr.append(dogReplyContent);		        		            
-		            tr.append(dogReplyRecommend);
+		            tr.append(dogReplyContent);		        		            		            
 		            tr.append(dateCell);
 		            tr.append(btnArea);
 		            tableBody.append(tr);
