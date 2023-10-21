@@ -117,4 +117,16 @@
 	<select id="selectAllBoardList" resultType="Board">
 		SELECT * FROM BOARD_TBL ORDER BY BOARD_TBL.BOARD_NO DESC
 	</select>
+	<!-- 게시글 좋아요 체크 확인 -->
+	<select id="getLikeStatus" resultType="String">
+		SELECT BOARD_LIKE FROM BOARD_LIKE_TBL WHERE BOARD_WRITE_ID = #{boardWriteId} AND BOARD_WRITE_NO = #{boardWriteNo}
+	</select>
+	<!-- DB에 좋아요 데이터가 없는 상태  -->
+	<insert id="insertLikeStatus">
+		INSERT INTO BOARD_LIKE_TBL VALUES(#{boardWriteId}, #{boardWriteNo}, #{boardLike})		
+	</insert>
+	<!-- DB에 좋아요 데이터가 있는 상태 -->
+	<update id="updateLikeStatus">
+		UPDATE BOARD_LIKE_TBL SET BOARD_LIKE = #{boardLike} WHERE BOARD_WRITE_NO = #{boardWriteNo} AND BOARD_WRITE_ID = #{boardWriteId}
+	</update>
 </mapper>

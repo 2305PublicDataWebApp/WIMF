@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.dog.save.board.domain.Board;
+import com.dog.save.board.domain.BoardLike;
 import com.dog.save.board.domain.bPageInfo;
 
 public interface BoardStore {
@@ -105,6 +106,27 @@ public interface BoardStore {
 	int increaseViewCount(SqlSession sqlSession, Integer boardNo);
 	
 	List<Board> selectAllBoardList(SqlSession sqlSession);
+	/**
+	 * 게시글 좋아요 체크 상태 Store
+	 * @param sqlSession
+	 * @param boardLike
+	 * @return
+	 */
+	String getLikeStatus(SqlSession sqlSession, BoardLike boardLike);
+	/**
+	 * DB에 좋아요 데이터가 없는 상태(insert) Store
+	 * @param sqlSession
+	 * @param boardLike
+	 * @return
+	 */
+	int insertLikeStatus(SqlSession sqlSession, BoardLike boardLike);
+	/**
+	 * DB에 좋아요 데이터가 있는 상태(update) Store
+	 * @param sqlSession
+	 * @param boardLike
+	 * @return
+	 */
+	int updateLikeStatus(SqlSession sqlSession, BoardLike boardLike);
 	
 
 }

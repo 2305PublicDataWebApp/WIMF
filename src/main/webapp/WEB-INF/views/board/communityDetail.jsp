@@ -13,6 +13,9 @@
   <link href="/css/board/communityDetail.css" rel="stylesheet">
   
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
   <!-- css -->
   <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -57,6 +60,12 @@
             <tr>
             	<th>${board.boardContent }</th>
             </tr>
+            <div id="like-btn">
+            	<c:if test ="${userId ne null }">
+					<i class="heart-btn"></i>
+					<span class="like-text">좋아요~!</span>
+				</c:if>
+            </div>
           </div>
           <c:choose>
           	<c:when test="${board.boardWriter eq userId}">
@@ -71,7 +80,7 @@
 			      </div>
 	          </form>
           	</c:when>
-          	<c:when test="${userId eq 'admin' }">
+          	<c:when test="${adminCheck eq 'Y' }">
           		<form action="/board/delete.dog" method="get">
 		            <input type="hidden" name="boardNo" value="${board.boardNo }">
 		            <input type="hidden" name="boardWriter" value="${board.boardWriter }">
@@ -162,6 +171,82 @@
     </div>
   </main>
   <script>
+
+	 // 좋아요 버튼 클릭 이벤트 처리
+	$(document).ready(function() {
+	  // 페이지 로딩 시 "좋아요" 상태 가져오기
+	  checkLikeStatus();
+	  
+	  // 좋아요 버튼 클릭 이벤트 처리
+	  $(".heart-btn").on("click", function() {
+	    toggleLikeStatus();
+	  });
+	  
+	  $(".heart-btn").click(function() {
+	    $(".heart-btn, .like-text").toggleClass( "press", 1000 );
+	  });
+	  
+	  //게시글 삭제 버튼
+	  // 삭제 버튼에 클릭 이벤트 핸들러 연결
+	  $("#reset-btn").click(function (event) {
+	      var confirmDelete = confirm("게시글을 정말 삭제하시겠습니까?");
+	      if (!confirmDelete) {
+	          event.preventDefault(); // 삭제를 취소하고 기본 동작을 막음
+	      }
+	  });
+	});
+	
+	let isLiked = false; // "좋아요" 상태를 전역 변수로 선언
+	
+	function checkLikeStatus() {
+	  // 게시판 번호를 이용하여 서버로부터 "좋아요" 상태를 가져오는 AJAX 요청
+	  const boardWriteNo = ${board.boardNo};
+	  
+	  $.ajax({
+	    url: "/board/checkBoardLike.dog", // "좋아요" 상태를 확인하는 URL
+	    type: "GET",
+	    data: { "boardWriteNo": boardWriteNo },
+	    success: function (result) {
+	      if (result == "liked") {
+	        isLiked = true; // 이미 "좋아요"한 상태임을 설정
+	        $(".heart-btn").css("color", "#e23b3b");
+	      }
+	    },
+	    error: function() {
+	      alert("좋아요 상태 가져오기 실패");
+	    }
+	  });
+	}
+	
+	function toggleLikeStatus() {
+		  // 게시판 번호와 현재 "좋아요" 상태를 서버로 전송하는 AJAX 요청
+		  const boardWriteNo = ${board.boardNo};
+		  let boardLike = isLiked ? 'N' : 'Y'; // isLiked가 true일 때 'N', false일 때 'Y' 초기값 false 'Y'
+		  $.ajax({
+		    url: "/board/updateBoardLike.dog", // "좋아요" 상태를 토글하는 URL
+		    type: "POST",
+		    data: { "boardWriteNo": boardWriteNo, "boardLike": boardLike },
+		    success: function (result) {
+		      if (result == "success") {
+		        if (boardLike == 'Y') {
+		          isLiked = true; // "좋아요" 상태로 변경
+		          // 버튼을 빨간색으로 변경
+		          $(".heart-btn").css("color", "#e23b3b");
+		        } else {
+		          isLiked = false; // "좋아요" 취소 상태로 변경
+		          // 버튼 색상 제거
+		          $(".heart-btn").css("color", "#aaa");
+		        }
+		      } else {
+		        alert("좋아요 업데이트 실패!!");
+		      }
+		    },
+		    error: function() {
+		      alert("관리자에게 문의 바랍니다.");
+		    }
+		  });
+		}
+	
   function replyDeleteForm(delUrl){
 	  	var confirmed = confirm("정말 삭제하시겠습니까?");
 	  	
@@ -224,16 +309,6 @@
 		document.body.appendChild(form);
 		form.submit();
 	}
-	// 게시글 삭제 버튼
-	$(document).ready(function () {
-	    // 삭제 버튼에 클릭 이벤트 핸들러 연결
-	    $("#reset-btn").click(function (event) {
-	        var confirmDelete = confirm("게시글을 정말 삭제하시겠습니까?");
-	        if (!confirmDelete) {
-	            event.preventDefault(); // 삭제를 취소하고 기본 동작을 막음
-	        }
-	    });
-	});
 	
   </script>
 

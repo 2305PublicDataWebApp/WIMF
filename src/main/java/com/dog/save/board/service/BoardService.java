@@ -93,7 +93,23 @@ public interface BoardService {
 	int increaseViewCount(Integer boardNo);
 	
 	List<Board> selectAllBoardList();
-	
+	/**
+	 * 게시글 좋아요 체크 상태 Service
+	 * @param boardLike
+	 * @return
+	 */
 	String getLikeStatus(BoardLike boardLike);
+	/**
+	 * DB에 좋아요 데이터가 없는 상태(insert) Service
+	 * @param boardLike
+	 * @return
+	 */
+	int insertLikeStatus(BoardLike boardLike);
+	/**
+	 * DB에 좋아요 데이터가 있는 상태(update) Service
+	 * @param boardLike
+	 * @return
+	 */
+	int updateLikeStatus(BoardLike boardLike);
 
 }
