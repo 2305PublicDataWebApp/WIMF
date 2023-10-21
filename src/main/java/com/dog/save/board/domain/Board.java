@@ -15,7 +15,6 @@ public class Board {
 	private Timestamp createDate;
 	private Timestamp updateDate;
 	private int viewCount;
-	private int likeCount;
 	private String boardFileName;
 	private String boardFileRename;
 	private String boardFilePath;

@@ -103,12 +103,6 @@ public class BoardStoreLogic implements BoardStore{
 		int result = sqlSession.update("BoardMapper.increaseViewCount", boardNo);
 		return result;
 	}
-
-	@Override
-	public int increaseLikeCount(SqlSession sqlSession, Integer boardNo) {
-		int result = sqlSession.update("BoardMapper.increaseLikeCount", boardNo);
-		return result;
-	}
 	
 	@Override
 	public List<Board> selectAllBoardList(SqlSession sqlSession) {

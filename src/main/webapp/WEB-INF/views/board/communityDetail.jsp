@@ -58,10 +58,6 @@
             	<th>${board.boardContent }</th>
             </tr>
           </div>
-          <div id="board-like">
-          	<p>좋아요 수: <span id="likeCount">${likeCount}</span></p>
-   			<button id="likeButton">좋아요</button>
-          </div>
           <c:choose>
           	<c:when test="${board.boardWriter eq userId}">
 	          <div>
@@ -238,27 +234,7 @@
 	        }
 	    });
 	});
-	// 좋아요 기능
-	$(document).ready(function () {
-		$("#likeButton").click(function () {
-			var boardNo = ${board.boardNo};
-			$.ajax({
-				type: "POST",
-				url: "/like.dog",
-				data: {
-					boardNo: boardNo
-				},
-				success: function (data) {
-					$("#likeCount").text(data);
-					$("#likeButton").prop("disabled", true); // 좋아요 버튼 비활성화
-				},
-				error: function (error) {
-					alert("관리자에게 문의바랍니다.");
-				}
-			});
-		});
-	});
-	u
+	
   </script>
 
 	<!-- footer -->

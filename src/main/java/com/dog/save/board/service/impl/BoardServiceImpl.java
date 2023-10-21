@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dog.save.board.domain.Board;
+import com.dog.save.board.domain.BoardLike;
 import com.dog.save.board.domain.bPageInfo;
 import com.dog.save.board.service.BoardService;
 import com.dog.save.board.store.BoardStore;
@@ -103,17 +104,17 @@ public class BoardServiceImpl implements BoardService{
 		int result = bStore.increaseViewCount(sqlSession, boardNo);
 		return result;
 	}
-
-	@Override
-	public int increaseLikeCount(Integer boardNo) {
-		int result = bStore.increaseLikeCount(sqlSession, boardNo);
-		return result;
-	}
 	
 	@Override
 	public List<Board> selectAllBoardList() {
 		List<Board> searchList = bStore.selectAllBoardList(sqlSession);
 		return searchList;
+	}
+
+	@Override
+	public String getLikeStatus(BoardLike boardLike) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

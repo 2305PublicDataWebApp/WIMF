@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.dog.save.board.domain.Board;
+import com.dog.save.board.domain.BoardLike;
 import com.dog.save.board.domain.Reply;
 import com.dog.save.board.domain.bPageInfo;
 import com.dog.save.board.service.BoardService;
@@ -45,8 +46,6 @@ public class BoardController {
 	private UserService uService;
 	@Autowired
 	private ReplyService rService;
-	@Autowired
-	private SummernoteThumbnailService stService;
 	
 	// ==================== 게시글 작성 페이지 ====================
 	@GetMapping("/write.dog")
@@ -177,8 +176,6 @@ public class BoardController {
 				}
 				model.addAttribute("userNickName", userNickName);
 				model.addAttribute("board", board);
-				int likeCount = board.getLikeCount();
-				model.addAttribute("likeCount", likeCount);
 				return "board/communityDetail";
 			}else {
 				model.addAttribute("msg", "게시글 조회에 실패하였습니다.");
@@ -191,30 +188,25 @@ public class BoardController {
 			return "common/error";
 		}
 	}
-	// ===================== 게시글 좋아요 ======================
-	@PostMapping("/like.dog")
-    @ResponseBody
-    public String likeBoard(Model model
-    		, @RequestParam("boardNo") Integer boardNo) {
-        try {
-            Board board = bService.showOneByBoard(boardNo);
-            if (board != null) {
-            	bService.increaseLikeCount(boardNo); // 좋아요 수 증가 처리
-            	int likeCount = board.getLikeCount();
-            	model.addAttribute("likeCount", likeCount);
-                return "true";
-            } else {
-            	model.addAttribute("msg", "게시글 조회에 실패하였습니다.");
-				model.addAttribute("url", "/board/list.dog");
-				return "false";
-            }
-        } catch (Exception e) {
-        	model.addAttribute("msg", "관리자에게 문의 바랍니다");
-			model.addAttribute("url", "/board/list.dog");
-			return "false";
-        }
-    }
-	
+	@ResponseBody
+	@GetMapping("/checkBoardLike.dog")
+	public String checkBoardLike(@ModelAttribute BoardLike boardLike, HttpSession session) {
+		String userId = (String) session.getAttribute("userId"); //  세션에서 userId 라는 속성을 가져오는 코드
+		
+		if(userId != null && !userId.equals("")) { // userId 변수가 null이 아니고 비어있지 않을 때만 조건문이 참
+			
+			boardLike.setBoardWriteId(userId); // boardLike 객체의 setBoardWriteId 메서드를 호출하여 userId 값을 설정
+			String existingLikeStatus = bService.getLikeStatus(boardLike); // boardLike 객체에 관련된 좋아요 상태를 가져와서 existingLikeStatus 변수에 할당
+			
+			if("Y".equals(existingLikeStatus)) {
+				return "liked"; // 좋아요가 체크된 상태
+			} else {
+				return "noliked"; // 좋아요가 체크되지 않은 상태
+			}
+		} else {
+			return "unauthorized"; // 로그인이 되어 있지 않은 사용자
+		}
+	}
 	// ==================== 게시글 페이징 처리 ====================
 	public bPageInfo getPageInfo(Integer currentPage, Integer totalCount) {
 		int recordCountPerPage = 7;

@@ -8,7 +8,7 @@
 	<!-- 게시글 등록 -->
 	<insert id="insertBoard">
 		INSERT INTO BOARD_TBL VALUES(BOARD_NO_SEQ.NEXTVAL, #{boardTitle}, #{boardContent}, #{boardWriter}, DEFAULT, DEFAULT, DEFAULT
-		, #{boardFileName}, #{boardFileRename}, #{boardFilePath}, #{boardFileLength}, DEFAULT)
+		, #{boardFileName}, #{boardFileRename}, #{boardFilePath}, #{boardFileLength})
 	</insert>
 	<!-- 게시글 수정 -->
 	<update id="updateBoard">
@@ -35,10 +35,6 @@
 	</select>
 	<!-- 게시글 조회수 증가 -->
 	<update id="increaseViewCount">
-		UPDATE BOARD_TBL SET VIEW_COUNT = VIEW_COUNT + 1 WHERE BOARD_NO = #{boardNo}
-	</update>
-	<!-- 게시글 좋아요 증가 -->
-	<update id="increaseLikeCount">
 		UPDATE BOARD_TBL SET VIEW_COUNT = VIEW_COUNT + 1 WHERE BOARD_NO = #{boardNo}
 	</update>
 	<!-- 단체 게시글 갯수 -->
