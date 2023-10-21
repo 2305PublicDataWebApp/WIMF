@@ -20,6 +20,7 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">		
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=0d52709ffacc68e58aa4c5df1743f8ea&libraries=services"></script>
 	</head>
 	<body>
 		<!-- header -->
@@ -28,7 +29,7 @@
 		<!-- My Code -->
 		<main>			
 			<br>
-			<h1>강아지 상세정보</h1>
+			<h1 id="detail_h1">강아지 상세정보</h1>
 			<br>
 			<hr>
 			<br>	
@@ -41,9 +42,9 @@
 					<p>${dog.dogKind }</p>
 					<h3>${dog.dogName }</h3>
 				</div>
+				<hr>
 		<div id="detail-container">
 			<div id="dog_image_container">
-				<br><br><br>
 				<div>
 				    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
 				        <div class="carousel-indicators">
@@ -133,15 +134,11 @@
 			</div>
 		</div>
 		<br><hr>
-		<h1>강아지 구조 위치</h1>
+		<h1 id="detail_h1">강아지 발견 장소</h1>
 		<div id="dogMap">
 		</div>
 		<hr>
-		<h1>댓글</h1>
-		
-		
-		
-		
+		<h1 id="detail_h1">댓글</h1>		
         <div class="review-input">
                  <div class="input_box">
                       <div class="input_title">
@@ -169,13 +166,41 @@
 		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		
 		<script>
+		// ================ 지도시작 ================
+		// 주소-좌표 변환 객체를 생성합니다
+		var geocoder = new kakao.maps.services.Geocoder();
+		// 주소로 좌표를 검색합니다
+		geocoder.addressSearch('${dog.dogRLocation}', function(result, status) {
+		    // 정상적으로 검색이 완료됐으면
+		    if (status === kakao.maps.services.Status.OK) {
+		        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+		     // 이미지 지도를 생성한다
+		        var staticMapContainer = document.getElementById('dogMap'); // 이미지 지도를 표시할 div
+		        var staticMapOption = {
+		            marker: {
+		                text: '발견장소', // 마커와 함께 표시할 텍스트
+		                position: coords // 좌표를 직접 전달
+		            },
+		            center: coords, // 이미지 지도의 중심 좌표
+		            level: 4, // 이미지 지도의 확대 레벨
+		            mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도종류
+		        };
+		        // 이미지 지도를 생성한다
+		        var staticMap = new kakao.maps.StaticMap(staticMapContainer, staticMapOption);
+		    }
+		});
+		
+		// ================ 지도 종료 ================
+		
+		
+		
+		
 		
 		
 		 // 좋아요 버튼 클릭 이벤트 처리
 		$(document).ready(function() {
 		  // 페이지 로딩 시 "좋아요" 상태 가져오기
-		  checkLikeStatus();
-		  
+		  checkLikeStatus();		  
 		  // 좋아요 버튼 클릭 이벤트 처리
 		  $("#likeSubmit").on("click", function() {
 		    toggleLikeStatus();
@@ -203,7 +228,8 @@
 		    }
 		  });
 		}
-		
+
+		// 상태 업데이트 토글
 		function toggleLikeStatus() {
 			  // 동물 번호와 현재 "좋아요" 상태를 서버로 전송하는 AJAX 요청
 			  const refDogNo = ${dog.dogNo};
@@ -235,9 +261,6 @@
 			  });
 			}
 
-
-
-
 		// "제출" 버튼 클릭 시 호출되는 부분
 		$("#rSubmit").on("click", function() {
 		    const dogReplyContent = $("#dogReplyContent").val();
@@ -262,7 +285,7 @@
 		    });
 		});
 
-		// 다음의 코드를 추가하여 댓글 목록을 업데이트
+		// 댓글 목록 업데이트
 		const updateReplyTable = (data) => {
 		    const tableBody = $("#replyTable tbody");
 		    tableBody.empty(); // 기존 내용을 지우고 새로운 댓글 목록을 추가
@@ -283,9 +306,7 @@
 		            let formattedDate2 = dogReplyUpdateDate.toLocaleString('ko-KR', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
 		            if (formattedDate !== formattedDate2) {
 		                formattedDate2 += " (수정됨)";
-		            }
-		            
-		            
+		            }		            		            
 		            const btnArea = $("<td>")		            	
 		                .append("<a href='javascript:void(0)' onclick='modifyView(this, " + data[i].dogReplyNo + ", \"" + data[i].dogReplyContent + "\");'>수정</a>&nbsp;&nbsp;")
 		                .append("<a href='javascript:void(0)' onclick='removeReply(" + data[i].dogReplyNo + ");'>삭제</a>");
@@ -294,13 +315,12 @@
 		            tr.append(dogReplyContent);		        		            		            
 		            tr.append(dateCell);
 		            tr.append(btnArea);
-		            tableBody.append(tr);
-		            
-
+		            tableBody.append(tr);		            
 		        }
 		    }
 		}
 
+		// 댓글리스트 가져오기
 		const getReplyList = () => {
 		    const dogNo = ${dog.dogNo};
 		    $.ajax({
@@ -317,7 +337,7 @@
 		    });
 		}
 		
-		
+		// 댓글 수정 입력 생성
 		const modifyView = (obj, dogReplyNo, dogReplyContent) => {
 		    // 이미 있는 수정 입력 행이 있는지 확인하고 제거
 		    let existingEditRow = $("tr.edit-row");
@@ -331,7 +351,8 @@
 		        $(obj).parent().parent().after(tr);
 		    }
 		}
-		
+	
+		// 댓글 수정하기
 		const modifyReply = (dogReplyNo, obj) => {
 			// <input type='text' size='50'>
 			const inputTag = $(obj).parent().prev().children();
@@ -353,7 +374,8 @@
 				}
 			});
 		}
-	
+		
+		// 댓글 삭제하기
 		const removeReply = (dogReplyNo) => {
 			$.ajax({
 				url:"/dog/replyDelete.dog",

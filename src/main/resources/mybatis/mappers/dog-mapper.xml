@@ -52,22 +52,22 @@
 		SELECT SEQ_DOG_NO.CURRVAL FROM DUAL
 	</select>	
 	<select id="getListCount" resultType="_int">
-		SELECT COUNT(*) FROM DOG_TBL
+		SELECT COUNT(*) FROM DOG_TBL WHERE DOG_ADOPT = 'N'
 	</select>
 	<select id="getListCountByRegion" resultType="_int">
-		SELECT COUNT(*) FROM DOG_TBL WHERE DOG_REGION = #{region}
+		SELECT COUNT(*) FROM DOG_TBL WHERE DOG_REGION = #{region} AND DOG_ADOPT = 'N'
 	</select>
 	<select id="getListCountBySearch" resultType="_int">
-		SELECT COUNT(*) FROM DOG_TBL WHERE DOG_NAME LIKE '%'||#{searchInput}||'%' 
+		SELECT COUNT(*) FROM DOG_TBL WHERE DOG_NAME LIKE '%'||#{searchInput}||'%' AND DOG_ADOPT = 'N'
 	</select>
 	<select id="selectAllDog" resultType="Dog">
-		SELECT * FROM DOG_TBL ORDER BY DOG_NO ASC
+		SELECT * FROM DOG_TBL WHERE DOG_ADOPT = 'N' ORDER BY DOG_NO ASC
 	</select>
 	<select id="selectDogsByRegion" resultType="Dog">
-		SELECT * FROM DOG_TBL WHERE DOG_REGION = #{region}
+		SELECT * FROM DOG_TBL WHERE DOG_REGION = #{region} AND DOG_ADOPT = 'N' ORDER BY DOG_NO ASC
 	</select>
 	<select id="selectDogsBySearch" resultType="Dog">
-		SELECT * FROM DOG_TBL WHERE DOG_NAME LIKE '%'||#{searchInput}||'%'
+		SELECT * FROM DOG_TBL WHERE DOG_NAME LIKE '%'||#{searchInput}||'%' AND DOG_ADOPT = 'N' ORDER BY DOG_NO ASC
 	</select>
 	<select id="selectFirstDogFile" resultType="DogFile">
 		SELECT * FROM DOG_FILE_TBL WHERE DOG_FILE_ORDER = 1 

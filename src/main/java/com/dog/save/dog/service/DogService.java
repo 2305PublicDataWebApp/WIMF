@@ -130,9 +130,8 @@ public interface DogService {
 	 * @param dogNo
 	 * @return
 	 */
-	int deleteDog(int dogNo);
+	int deleteDog(int dogNo);	
 	
-//	기진 코드
 	/**
 	 * 모든 강아지 리스트 가져오기 Service
 	 * @return
@@ -151,10 +150,6 @@ public interface DogService {
 	 */
 	List<Dog> selectAdoptList();
 	
-//	기진 코드
-
-	
-
 	/**
 	 * 돌봄 강아지 좋아요 등록 Service
 	 * @param dogLike
