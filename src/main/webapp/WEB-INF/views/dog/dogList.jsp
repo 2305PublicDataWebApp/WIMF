@@ -28,7 +28,7 @@
 			<br> <span>돌봄 강아지 수 : ${pInfo.totalCount }</span> <br>
 			<form action="/dog/list.dog" method="get">
 			  <label for="region">지역 선택:</label>
-			  <select name="region" id="region">
+			  <select name="region" id="region" class="pl">
 			    <option value="all">전체</option>
 			    <option value="서울">서울</option>
 			    <option value="경기">경기</option>
@@ -36,7 +36,7 @@
 			  </select>
 			
 			  <label for="sort">정렬:</label>
-			  <select name="sort" id="sort">
+			  <select name="sort" id="sort" class="pl">
 			    <option value="latest">최신 등록 순</option>
 			    <option value="euthanasia">안락사 임박 순</option>
 			  </select>
@@ -81,8 +81,11 @@
 				<c:if test="${ pInfo.startNavi != 1 }">
 					<c:url var="prevUrl" value="/dog/list.dog">
 						<c:param name="page" value="${ pInfo.startNavi - 1 }"></c:param>
-						<c:if test="${not empty category}">
-							<c:param name="category" value="${category}" />
+						<c:if test="${not empty region}">
+							<c:param name="region" value="${region}" />
+						</c:if>
+						<c:if test="${not empty sort}">
+							<c:param name="sort" value="${sort}" />
 						</c:if>
 					</c:url>
 					<a href="${prevUrl}">[이전]</a>
@@ -90,8 +93,11 @@
 				<c:forEach begin="${pInfo.startNavi}" end="${pInfo.endNavi}" var="p">
 					<c:url var="pageUrl" value="/dog/list.dog">
 						<c:param name="page" value="${p}"></c:param>
-						<c:if test="${not empty category}">
-							<c:param name="category" value="${category}" />
+						<c:if test="${not empty region}">
+							<c:param name="region" value="${region}" />
+						</c:if>
+						<c:if test="${not empty sort}">
+							<c:param name="sort" value="${sort}" />
 						</c:if>
 					</c:url>
 					<a href="${pageUrl}">${p}</a>&nbsp;
@@ -100,7 +106,10 @@
 					<c:url var="nextUrl" value="/dog/list.dog">
 						<c:param name="page" value="${pInfo.endNavi + 1 }"></c:param>
 						<c:if test="${not empty category}">
-							<c:param name="category" value="${category}" />
+							<c:param name="region" value="${region}" />
+						</c:if>
+						<c:if test="${not empty sort}">
+							<c:param name="sort" value="${sort}" />
 						</c:if>
 					</c:url>
 					<a href="${nextUrl}">[다음]</a>

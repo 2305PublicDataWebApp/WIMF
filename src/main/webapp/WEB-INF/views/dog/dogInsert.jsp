@@ -27,9 +27,9 @@
 			<h1>돌봄 동물 등록</h1><hr>
 			<form action="/dog/insert.dog" method="POST" enctype="multipart/form-data">
             <select name="dogRegion" id="dogRegion" class="pl">
-                <option value="seoul">서울</option>
-                <option value="gyeonggi">경기</option>
-                <option value="incheon">인천</option>                
+                <option value="서울">서울</option>
+                <option value="경기">경기</option>
+                <option value="인천">인천</option>                
             </select>
 				<div id="insertForm_container">
 					<div id="dateInsert">
