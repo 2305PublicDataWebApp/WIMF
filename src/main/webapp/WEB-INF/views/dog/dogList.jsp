@@ -24,31 +24,30 @@
 	
 		<!-- My Code -->
 		<main>				
-			${region }		
-			<br> <span>돌봄 강아지 수 : ${pInfo.totalCount }</span> <br>
+			<div class="seven">
+			  <h1>강아지 리스트</h1>
+			</div>
+			<div class="divider div-transparent"></div>
+			지역 : ${region }		
+			<br> <p>돌봄 강아지 수 : ${pInfo.totalCount }</p> <br>
 			<form action="/dog/list.dog" method="get">
-			  <label for="region">지역 선택:</label>
-			  <select name="region" id="region" class="pl">
+			  <label for="region">지역</label>
+			  <select name="region" id="region" class="pl" style="width: 80px;">
 			    <option value="all">전체</option>
 			    <option value="서울">서울</option>
 			    <option value="경기">경기</option>
 			    <option value="인천">인천</option>
 			  </select>
 			
-			  <label for="sort">정렬:</label>
-			  <select name="sort" id="sort" class="pl">
+			  <label for="sort">정렬</label>
+			  <select name="sort" id="sort" class="pl" style="width: 150px;">
 			    <option value="latest">최신 등록 순</option>
 			    <option value="euthanasia">안락사 임박 순</option>
 			  </select>
 			
-			  <input type="submit" value="적용">
+			  <input type="submit" class="custom-btn" value="적용">
 			</form>			
-		
-			<br>
-			<br>
-			<h1>강아지 리스트</h1>
-			<br>
-			<hr>
+			<br>			
 			<br>
 			<c:if test="${adminCheck eq 'Y' }">					
 				<button onclick="location.href='/dog/insert.dog';" style="cursor: pointer;">강아지 등록</button>						
@@ -61,65 +60,77 @@
 						<div class="image_thumbnail">
 							<img src="${combinedList.dogFile.dogFilePath}"
 								alt="${combinedList.dogFile.dogFileName}"
-								onclick="showDogDetail(${combinedList.dog.dogNo})">
+								onclick="showDogDetail(${combinedList.dog.dogNo})" style="cursor: pointer;">
 						</div>
 						<div class="dog_info">
-							<h2>${combinedList.dog.dogName }</h2>
-							<p><br>${combinedList.dog.dogKind } <br>
-							${combinedList.dog.dogInfo}</p>
+							<span id="dog_title">
+								<p id="dog_name">${combinedList.dog.dogName }</p><p>(${combinedList.dog.dogKind })</p>
+							</span>
+							<p>
+							<c:choose>
+							    <c:when test="${not empty combinedList.dog.dogPStartDate}">
+									<span class="left-align">
+									    임시보호 시작 : ${combinedList.dog.dogPStartDate }<br>
+									    임시보호 종료 : ${combinedList.dog.dogPEndDate }<br>
+									    <p class="death-date">안락사 예정일 : ${combinedList.dog.dogDeathDate }<br></p>
+									    
+									</span>						        
+							    </c:when>
+							    <c:otherwise>
+									<span class="left-align">
+									    돌봄 대기 중<br>
+									    <p class="death-date">안락사 예정 : ${combinedList.dog.dogDeathDate }</p>
+									</span>	
+							    </c:otherwise>
+							</c:choose>
+							</p>
 						</div>
 					</div>
 				</c:forEach>
 			</div>
+			<br><br>
 			<div id="searchDog">
 			    <input type="text" id="searchInput" name="searchInput" placeholder="강아지 이름을 검색해보세요!">
-			    <button id="searchButton">검색</button>
+			    <button id="searchButton" class="custom-btn btn-5"><span>검색</span></button>
 			</div>
-			
+			<br><br>
 			
 			<div class="pagination">
+				<!-- 이전 페이지 링크 -->
 				<c:if test="${ pInfo.startNavi != 1 }">
-					<c:url var="prevUrl" value="/dog/list.dog">
-						<c:param name="page" value="${ pInfo.startNavi - 1 }"></c:param>
-						<c:if test="${not empty region}">
-							<c:param name="region" value="${region}" />
-						</c:if>
-						<c:if test="${not empty sort}">
-							<c:param name="sort" value="${sort}" />
-						</c:if>
-					</c:url>
-					<a href="${prevUrl}">[이전]</a>
+				    <c:url var="prevUrl" value="/dog/list.dog">
+				        <c:param name="page" value="${ pInfo.startNavi - 1 }"></c:param>
+				        <c:param name="region" value="${region}"></c:param>
+				        <c:param name="sort" value="${sort}"></c:param>
+				    </c:url>
+				    <a href="${prevUrl}">[이전]</a>
 				</c:if>
+				
+				<!-- 페이지 번호 링크 -->
 				<c:forEach begin="${pInfo.startNavi}" end="${pInfo.endNavi}" var="p">
-					<c:url var="pageUrl" value="/dog/list.dog">
-						<c:param name="page" value="${p}"></c:param>
-						<c:if test="${not empty region}">
-							<c:param name="region" value="${region}" />
-						</c:if>
-						<c:if test="${not empty sort}">
-							<c:param name="sort" value="${sort}" />
-						</c:if>
-					</c:url>
-					<a href="${pageUrl}">${p}</a>&nbsp;
-			</c:forEach>
+				    <c:url var="pageUrl" value="/dog/list.dog">
+				        <c:param name="page" value="${p}"></c:param>
+				        <c:param name="region" value="${region}"></c:param>
+				        <c:param name="sort" value="${sort}"></c:param>
+				    </c:url>
+				    <a href="${pageUrl}">${p}</a>&nbsp&nbsp&nbsp;
+				</c:forEach>
+				
+				<!-- 다음 페이지 링크 -->
 				<c:if test="${pInfo.endNavi != pInfo.naviTotalCount }">
-					<c:url var="nextUrl" value="/dog/list.dog">
-						<c:param name="page" value="${pInfo.endNavi + 1 }"></c:param>
-						<c:if test="${not empty category}">
-							<c:param name="region" value="${region}" />
-						</c:if>
-						<c:if test="${not empty sort}">
-							<c:param name="sort" value="${sort}" />
-						</c:if>
-					</c:url>
-					<a href="${nextUrl}">[다음]</a>
-				</c:if>		
+				    <c:url var="nextUrl" value="/dog/list.dog">
+				        <c:param name="page" value="${pInfo.endNavi + 1 }"></c:param>
+				        <c:param name="region" value="${region}"></c:param>
+				        <c:param name="sort" value="${sort}"></c:param>
+				    </c:url>
+				    <a href="${nextUrl}">[다음]</a>
+				</c:if>	
 			</div>	
 		</main>
 	
 		<!-- footer -->
 		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
-		<script>
+		<script>	
 	      function showDogDetail(dogNo) {    	    	    	       	       
 	    	        var url = "/dog/detail.dog?dogNo=" + dogNo;
 	    	        window.location.href = url;	    	    

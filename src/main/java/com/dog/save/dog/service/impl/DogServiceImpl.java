@@ -310,6 +310,18 @@ public class DogServiceImpl implements DogService{
 		List<Dog> dogList = dStore.selectAllDogListMap(session);
 		return dogList;
 	}
+
+	@Override
+	public List<Dog> selectDogsByEuthanasiaAndRegion(String region, PageInfo pInfo) {
+		List<Dog> dogList = dStore.selectDogsByEuthanasiaAndRegion(session,region,pInfo);
+		return dogList;
+	}
+
+	@Override
+	public List<Dog> selectDogsByEuthanasia(PageInfo pInfo) {
+		List<Dog> dogList = dStore.selectDogsByEuthanasia(session,pInfo);
+		return dogList;
+	}
 	
 	
 	

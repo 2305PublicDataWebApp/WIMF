@@ -29,21 +29,23 @@
 		<!-- My Code -->
 		<main>			
 			<br>
-			<h1 id="detail_h1">강아지 상세정보</h1>
+			<div class="seven">
+			  <h1>강아지 상세정보</h1>
+			</div>
 			<br>
-			<hr>	
+				
 				<div>
 					<c:if test="${adminCheck eq 'Y' }">					
 						<button onclick="location.href='/dog/modify.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;">수정하기</button>
 						<button onclick="location.href='/dog/delete.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;">삭제하기</button>
 					</c:if>
 					<p>${dog.dogRegion } > ${dog.dogKind }</p>
-					<h2  id="detail_h2">${dog.dogName }</h2>
+					<h2  id="detail_h2">${dog.dogName }</h2><br>
 				</div>
-				<hr>
+				<div class="divider div-transparent"></div>
 		<div id="detail-container">
 			<div id="dog_image_container">
-				<div>
+				<div id="dog_thumbnail">
 				    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
 				        <div class="carousel-indicators">
 				          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -124,19 +126,26 @@
 			            <td>${dog.dogDeathDate }</td>
 			        </tr>
 			    </table>
-			    <br><br><br><br><br><br><br><br>
+			    <br><br><br><br>
 			    <div id="btn-area">
 				    <button onclick="location.href='/app/insert.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;" class="btn"><span>돌봄신청서로 이동</span></button>		    
 				    <button onclick="location.href='/donation/money.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;" class="btn"><span>${dog.dogName } 후원하러 가기</span></button>				    
 			    </div>
 			</div>
 		</div>
-		<br><hr>
-		<h1 id="detail_h1">강아지 발견 장소</h1>
+		<br>
+			<div class="divider div-transparent"></div>
+			<br><br>			
+			<div class="seven">
+			  <h1>강아지 발견장소</h1>
+			</div>
 		<div id="dogMap">
 		</div>
-		<hr>
-		<h1 id="detail_h1">댓글</h1>		
+		<br><br>
+		<div class="divider div-transparent"></div><br><br>
+			<div class="seven">
+			  <h1>댓글</h1>
+			</div>		
         <div class="review-input">
                  <div class="input_box">
                       <div class="input_title">

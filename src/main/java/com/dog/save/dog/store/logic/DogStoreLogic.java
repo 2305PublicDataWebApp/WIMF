@@ -201,6 +201,24 @@ public class DogStoreLogic implements DogStore{
 		return dlList;
 	}
 
+	@Override
+	public List<Dog> selectDogsByEuthanasiaAndRegion(SqlSession session, String region, PageInfo pInfo) {
+		int limit = pInfo.getRecordCountPerPage();
+		int offset = (pInfo.getCurrentPage()-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Dog> dogList = session.selectList("DogMapper.selectDogsByEuthanasiaAndRegion", region, rowBounds);
+		return dogList;			
+	}
+
+	@Override
+	public List<Dog> selectDogsByEuthanasia(SqlSession session, PageInfo pInfo) {
+		int limit = pInfo.getRecordCountPerPage();
+		int offset = (pInfo.getCurrentPage()-1)*limit;
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		List<Dog> dogList = session.selectList("DogMapper.selectDogsByEuthanasia", null, rowBounds);
+		return dogList;		
+	}
+
 	
 
 
