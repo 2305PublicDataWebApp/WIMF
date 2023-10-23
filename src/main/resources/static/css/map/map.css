@@ -1,0 +1,49 @@
+@charset "UTF-8"; /* 문자 인코딩을 UTF-8로 설정합니다. */
+
+.customoverlay {
+    position: relative; /* 요소의 위치를 상대적으로 설정합니다. */
+    bottom: 85px; /* 하단으로부터의 거리를 85px로 설정합니다. */
+    border-radius: 6px; /* 테두리의 경계를 둥글게 만듭니다. */
+    border: 1px solid #ccc; /* 테두리의 속성을 설정하고 색상을 #ccc로 지정합니다. */
+    border-bottom: 2px solid #ddd; /* 하단 테두리의 속성을 설정하고 색상을 #ddd로 지정합니다. */
+    float: left; /* 요소를 왼쪽으로 부동(floating)시킵니다. */
+}
+
+.customoverlay:nth-of-type(n) {
+    border: 0; /* 요소의 테두리를 제거합니다. */
+    box-shadow: 0px 1px 2px #888; /* 상자 그림자 효과를 추가합니다. */
+}
+
+.customoverlay a {
+    display: block; /* 요소를 블록 수준 요소로 설정합니다. */
+    text-decoration: none; /* 텍스트의 장식을 제거합니다. */
+    color: #000; /* 텍스트 색상을 #000으로 지정합니다. */
+    text-align: center; /* 텍스트를 가운데 정렬합니다. */
+    border-radius: 6px; /* 테두리의 경계를 둥글게 만듭니다. */
+    font-size: 14px; /* 폰트 크기를 14px로 설정합니다. */
+    font-weight: bold; /* 폰트를 굵게(bold) 설정합니다. */
+    overflow: hidden; /* 내용이 넘칠 경우 숨깁니다. */
+    background: #d95050; /* 배경 색상을 #d95050으로 설정합니다. */
+    background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center; /* 배경 이미지를 추가합니다. */
+}
+
+.customoverlay .title {
+    display: block; /* 요소를 블록 수준 요소로 설정합니다. */
+    text-align: center; /* 텍스트를 가운데 정렬합니다. */
+    background: #fff; /* 배경 색상을 #fff로 설정합니다. */
+    margin-right: 35px; /* 오른쪽 여백을 35px로 설정합니다. */
+    padding: 10px 15px; /* 안쪽 여백을 위아래 10px, 좌우 15px로 설정합니다. */
+    font-size: 14px; /* 폰트 크기를 14px로 설정합니다. */
+    font-weight: bold; /* 폰트를 굵게(bold) 설정합니다. */
+}
+
+.customoverlay:after {
+    content: ''; /* 가상 요소에 콘텐츠를 추가합니다. */
+    position: absolute; /* 요소를 절대적으로 배치합니다. */
+    margin-left: -12px; /* 왼쪽 여백을 -12px로 설정합니다. */
+    left: 50%; /* 왼쪽 여백을 50%로 설정합니다. */
+    bottom: -12px; /* 아래쪽 여백을 -12px로 설정합니다. */
+    width: 22px; /* 너비를 22px로 설정합니다. */
+    height: 12px; /* 높이를 12px로 설정합니다. */
+    background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png'); /* 배경 이미지를 추가합니다. */
+}

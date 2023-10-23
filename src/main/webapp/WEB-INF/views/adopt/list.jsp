@@ -11,6 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>입양 후기 게시판</title>
 		<link href="/css/adopt/communityList.css" rel="stylesheet">
+		<link href="/css/main.css" rel="stylesheet">
 		
 		<!-- css -->
 		<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -26,6 +27,8 @@
 		
 		<!-- ====== Main ====== -->
 		<main id="main">
+		
+		
 			<div id="container">
 				<h3 style="padding-bottom: 2%;">
 					<c:if test="${adoptType == 'adopt'}">입양</c:if>
@@ -84,6 +87,53 @@
 							</c:forEach>
 						</table>
 						
+						<div class="recent-posts container row gy-4">
+							<c:forEach var="aList" items="${aList}">
+								<div class="col-xl-4 col-md-6" >
+								<article>
+									<div class="post-img">
+										<c:if test="${aList.adoptFilePath == null}">
+											<a href="/adopt/detail.dog?adoptNo=${aList.adoptNo}">
+												<img src="/img/user/default-profile.png" alt="후기게시판사진" class="img-fluid">
+											</a>
+										</c:if>
+										<c:if test="${aList.adoptFilePath != null}">
+											<a href="/adopt/detail.dog?adoptNo=${aList.adoptNo}">
+												<img src="${aList.adoptFilePath }" alt="후기게시판사진" class="img-fluid">
+											</a>
+										</c:if>
+									</div>
+									<div style="display:inline;">
+										<c:if test="${aList.adoptType == 'care'}">
+											<p class="post-category">돌봄 후기</p>
+										</c:if>
+										<c:if test="${aList.adoptType == 'adopt'}">
+											<p class="post-category">입양 후기</p>
+										</c:if>
+										<p class="post-category">조회수 ${aList.viewCount }</p>
+									</div>
+									<c:url var="detailUrl" value="/adopt/detail.dog">
+										<c:param name="adoptNo" value="${aList.adoptNo }"></c:param>
+									</c:url>
+									<h2 class="title">
+										<a href="${detailUrl }">${aList.adoptTitle }</a>
+									</h2>
+									
+									<div class="d-flex align-items-center">
+										<img src = "${aList.userFilePath }"alt="프로필사진" class="img-fluid post-author-img flex-shrink-0">
+										<div class="post-meta">
+											<p class="post-author">${aList.userNickName }</p>
+											<p class="post-date">
+												<fmt:formatDate value="${aList.adoptDate }" pattern="yyyy-MM-dd"/>~
+												<fmt:formatDate value="${aList.giveUpDate }" pattern="yyyy-MM-dd"/>
+									        </p>
+										</div>
+									</div>
+								</article>
+								</div><!-- End post list item -->
+							</c:forEach>
+						</div>
+						
 						<div id="paging">
 							<div align="center">
 								<c:if test="${bpInfo.startNavi != 1}">
@@ -114,6 +164,10 @@
 				</div>
 			</div>
 		</main>
+		
+		<!-- footer -->
+		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
+		
 		<script>
 			function checkLogin(){
 				var sessionId = "${sessionScope.userId}";
@@ -126,9 +180,6 @@
 				}
 			}
 		</script>
-		  
-		<!-- footer -->
-		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 	
 	</body>
 </html>

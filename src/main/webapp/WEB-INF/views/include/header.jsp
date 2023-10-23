@@ -48,6 +48,7 @@
 						<li><a href="/#services" id="nav-sevice">임시보호란?</a></li>
 						<li><a href="/#about" id="nav-about">WIMF 팀 소개</a></li>
 						<li><a href="/#contact" id="nav-Contact">Contact</a></li>
+						<li><a href="/map/map.dog" id="nav-Contact">구조위치</a></li>
 					</ul>
 	
 					<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

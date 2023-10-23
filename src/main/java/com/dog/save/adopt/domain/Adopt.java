@@ -23,4 +23,5 @@ public class Adopt {
     
     private String userNickName;
     private String userProfile;	// 기진 코드
+    private String userFilePath;
 }

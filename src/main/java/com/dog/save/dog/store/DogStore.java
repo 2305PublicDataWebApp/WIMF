@@ -218,6 +218,13 @@ public interface DogStore {
 	List<Dog> selectAdoptList(SqlSession session);
 //	기진 코드
 
+	/**
+	 * 모든 강아지 리스트 가져오기 for Map Store
+	 * @param session
+	 * @return
+	 */
+	List<Dog> selectAllDogListMap(SqlSession session);
+
 	
 
 	

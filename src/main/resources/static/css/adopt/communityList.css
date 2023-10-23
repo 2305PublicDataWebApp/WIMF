@@ -86,3 +86,7 @@
 #container #number-value {
   text-align: center;
 }
+
+#container img{
+	vertical-align: middle;
+}

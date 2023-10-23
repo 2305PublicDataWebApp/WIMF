@@ -41,24 +41,24 @@
 							<a style="font-weight:bold">${adopt.adoptTitle }</a>
 						</div>
 						<div id="borad-writer">
-							<p style="font-weight:bold; color: tomato">작성자 : </p> ${userNickName }
+							<p id="borad-writer-value" class="domain">작성자 : </p> ${userNickName }	
 						</div>
 						<div id="borad-create-date">
-							<p style="font-weight:bold; color: tomato">작성일 : </p>
+							<p class="domain">작성일 : </p>
 							<fmt:formatDate pattern="yyyy-MM-dd a HH:mm:ss" value="${adopt.adoptCreateDate }"/>
 						</div>
-						<div>
-							<a style="font-weight:bold; color: tomato">데려온 날 : </a>
+						<div id="borad-create-date">
+							<p class="domain">데려온 날 : </p>
 							<fmt:formatDate pattern="yyyy-MM-dd" value="${adopt.adoptDate }"/><br>
 							<c:if test="${not empty adopt.giveUpDate}">
-								<a style="font-weight:bold; color: tomato">돌봄 종료일 : </a>
+								<p class="domain">돌봄 종료일 : </p>
 								<fmt:formatDate pattern="yyyy-MM-dd" value="${adopt.giveUpDate }"/>
 							</c:if>
 						</div>
 						<div id="borad-deep-content">
-						<c:if test="${!empty adopt.adoptFileName }">
-							<img alt="첨부파일" src="../resources/adoptUploadFiles/${adopt.adoptFileRename }"  style="width: 100%; height: auto;">
-						</c:if>
+							<c:if test="${!empty adopt.adoptFileName }">
+								<img id="borad-deep-content-value" alt="첨부파일" src="../resources/adoptUploadFiles/${adopt.adoptFileRename }" >
+							</c:if>
 							${adopt.adoptContent }
 						</div>
 						

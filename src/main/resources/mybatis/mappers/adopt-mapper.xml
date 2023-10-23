@@ -38,7 +38,7 @@
 	
 	<!-- 게시글 리스트 조회 -->
 	<select id="selectAdoptList" resultType="Adopt" resultMap="AdoptResultMap">
-		SELECT ADOPT_TBL.*, USER_TBL.USER_NICKNAME
+		SELECT ADOPT_TBL.*, USER_TBL.USER_NICKNAME, USER_TBL.USER_FILE_PATH
 	    FROM ADOPT_TBL
 	    LEFT JOIN USER_TBL ON ADOPT_TBL.USER_ID = USER_TBL.USER_ID
 	    <if test="adoptType == 'all'" />
@@ -75,7 +75,7 @@
 	
 	<!-- 게시글 키워드 검색 -->
 	<select id="selectAdoptByKeyword" resultType="Adopt">
-	    SELECT ADOPT_TBL.*, USER_TBL.USER_NICKNAME
+	    SELECT ADOPT_TBL.*, USER_TBL.USER_NICKNAME, USER_TBL.USER_FILE_PATH
 	    FROM ADOPT_TBL
 	    LEFT JOIN USER_TBL ON ADOPT_TBL.USER_ID = USER_TBL.USER_ID 
 	    <if test="searchCondition == 'all'">

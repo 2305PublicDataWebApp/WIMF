@@ -171,6 +171,13 @@ public interface DogService {
 	 */
 	int updateLikeStatus(DogLike dogLike);
 
+	/**
+	 * 모든 강아지 리스트 가져오기 for Map Service
+	 * @return
+	 */
+	List<Dog> selectAllDogListMap();
+
+
 	
 
 

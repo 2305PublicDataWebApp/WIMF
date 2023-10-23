@@ -295,6 +295,13 @@ public class DogServiceImpl implements DogService{
 	    }
 	    return randomString.toString();
 	}
+
+	// 솔 코드 for Map
+	@Override
+	public List<Dog> selectAllDogListMap() {
+		List<Dog> dogList = dStore.selectAllDogListMap(session);
+		return dogList;
+	}
 	
 	
 
