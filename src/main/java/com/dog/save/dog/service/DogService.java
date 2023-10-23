@@ -12,6 +12,7 @@ import com.dog.save.dog.domain.Dog;
 import com.dog.save.dog.domain.DogFile;
 import com.dog.save.dog.domain.DogLike;
 import com.dog.save.dog.domain.DogReply;
+import com.dog.save.user.domain.UserDog;
 
 
 public interface DogService {
@@ -183,7 +184,7 @@ public interface DogService {
 	 * @param userId
 	 * @return
 	 */
-	List<DogLike> selectLikeDogList(String userId);
+	List<UserDog> selectLikeDogList(String userId);
 
 	/**
 	 * 안락사 임박 순 및 지역 선택해서 강아지 리스트 가져오기 Service

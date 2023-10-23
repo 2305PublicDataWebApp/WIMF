@@ -107,9 +107,10 @@
 	<!-- 기진 코드 -->
 	
 	<!-- 이승현 왔다감 -->
-	<select id="selectLikeDogList">
-		SELECT DOG_TBL.*, DOG_LIKE_TBL.* FROM DOG_TBL
+	<select id="selectLikeDogList" resultType="UserDog">
+		SELECT DOG_TBL.*, DOG_LIKE_TBL.*, DOG_FILE_TBL.* FROM DOG_TBL
 		LEFT JOIN DOG_LIKE_TBL ON DOG_TBL.DOG_NO = DOG_LIKE_TBL.REF_DOG_NO
-		WHERE DOG_LIKE_TBL.REF_USER_ID = #{userId}
+		LEFT JOIN DOG_FILE_TBL ON DOG_TBL.DOG_NO = DOG_FILE_TBL.REF_DOG_NO
+		WHERE DOG_LIKE_TBL.REF_USER_ID = #{userId} AND DOG_FILE_TBL.DOG_FILE_ORDER = '1'
 	</select>
 </mapper>

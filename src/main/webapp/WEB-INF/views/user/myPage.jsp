@@ -34,51 +34,51 @@
 		<main id="container">
 			<div class="app-container">
 				<div class="app-header">
-					<div class="app-header-left">
-						<span class="app-icon"></span>
-						<p class="app-name">Portfolio</p>
-						<div class="search-wrapper">
-							<input class="search-input" type="text" placeholder="Search">
-							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-								fill="none" stroke="currentColor" stroke-linecap="round"
-								stroke-linejoin="round" stroke-width="2"
-								class="feather feather-search" viewBox="0 0 24 24">
-				          <defs></defs>
-				          <circle cx="11" cy="11" r="8"></circle>
-				          <path d="M21 21l-4.35-4.35"></path>
-				        </svg>
-						</div>
-					</div>
-					<div class="app-header-right">
-						<button class="mode-switch" title="Switch Theme">
-							<svg class="moon" fill="none" stroke="currentColor"
-								stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-								width="24" height="24" viewBox="0 0 24 24">
-				          <defs></defs>
-				          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
-				        </svg>
-						</button>
-						<button class="add-btn" title="Add New Project">
-							<svg class="btn-icon" xmlns="http://www.w3.org/2000/svg"
-								width="16" height="16" viewBox="0 0 24 24" fill="none"
-								stroke="currentColor" stroke-width="3" stroke-linecap="round"
-								stroke-linejoin="round" class="feather feather-plus">
-				          <line x1="12" y1="5" x2="12" y2="19" />
-				          <line x1="5" y1="12" x2="19" y2="12" /></svg>
-						</button>
-						<button class="notification-btn">
-							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-								viewBox="0 0 24 24" fill="none" stroke="currentColor"
-								stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-								class="feather feather-bell">
-				          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-				          <path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg>
-						</button>
-						<button class="profile-btn">
-							<img src="https://assets.codepen.io/3306515/IMG_2025.jpg" /> <span>Aybüke
-								C.</span>
-						</button>
-					</div>
+<!-- 					<div class="app-header-left"> -->
+<!-- 						<span class="app-icon"></span> -->
+<!-- 						<p class="app-name">Portfolio</p> -->
+<!-- 						<div class="search-wrapper"> -->
+<!-- 							<input class="search-input" type="text" placeholder="Search"> -->
+<!-- 							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" -->
+<!-- 								fill="none" stroke="currentColor" stroke-linecap="round" -->
+<!-- 								stroke-linejoin="round" stroke-width="2" -->
+<!-- 								class="feather feather-search" viewBox="0 0 24 24"> -->
+<!-- 				          <defs></defs> -->
+<%-- 				          <circle cx="11" cy="11" r="8"></circle> --%>
+<!-- 				          <path d="M21 21l-4.35-4.35"></path> -->
+<!-- 				        </svg> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 					<div class="app-header-right"> -->
+<!-- 						<button class="mode-switch" title="Switch Theme"> -->
+<!-- 							<svg class="moon" fill="none" stroke="currentColor" -->
+<!-- 								stroke-linecap="round" stroke-linejoin="round" stroke-width="2" -->
+<!-- 								width="24" height="24" viewBox="0 0 24 24"> -->
+<!-- 				          <defs></defs> -->
+<!-- 				          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path> -->
+<!-- 				        </svg> -->
+<!-- 						</button> -->
+<!-- 						<button class="add-btn" title="Add New Project"> -->
+<!-- 							<svg class="btn-icon" xmlns="http://www.w3.org/2000/svg" -->
+<!-- 								width="16" height="16" viewBox="0 0 24 24" fill="none" -->
+<!-- 								stroke="currentColor" stroke-width="3" stroke-linecap="round" -->
+<!-- 								stroke-linejoin="round" class="feather feather-plus"> -->
+<!-- 				          <line x1="12" y1="5" x2="12" y2="19" /> -->
+<!-- 				          <line x1="5" y1="12" x2="19" y2="12" /></svg> -->
+<!-- 						</button> -->
+<!-- 						<button class="notification-btn"> -->
+<!-- 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" -->
+<!-- 								viewBox="0 0 24 24" fill="none" stroke="currentColor" -->
+<!-- 								stroke-width="2" stroke-linecap="round" stroke-linejoin="round" -->
+<!-- 								class="feather feather-bell"> -->
+<!-- 				          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" /> -->
+<!-- 				          <path d="M13.73 21a2 2 0 0 1-3.46 0" /></svg> -->
+<!-- 						</button> -->
+<!-- 						<button class="profile-btn"> -->
+<!-- 							<img src="https://assets.codepen.io/3306515/IMG_2025.jpg" /> <span>Aybüke -->
+<!-- 								C.</span> -->
+<!-- 						</button> -->
+<!-- 					</div> -->
 					<button class="messages-btn">
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
 							viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -250,355 +250,50 @@
 					
 					<div id="main-section1" class="projects-section">
 						<div class="projects-section-header">
-							<p>후원중인 유기견</p>
+							<p>후원했던 유기견</p>
 <!-- 							<p class="time">December, 12</p> -->
 						</div>
-						<div class="projects-section-line">
-							<div class="projects-status">
-								<div class="item-status">
-									<span class="status-number">45</span> <span class="status-type">In
-										Progress</span>
-								</div>
-								<div class="item-status">
-									<span class="status-number">24</span> <span class="status-type">Upcoming</span>
-								</div>
-								<div class="item-status">
-									<span class="status-number">62</span> <span class="status-type">Total
-										Projects</span>
-								</div>
-							</div>
-							<div class="view-actions">
-								<button class="view-btn list-view" title="List View">
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-										viewBox="0 0 24 24" fill="none" stroke="currentColor"
-										stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-										class="feather feather-list">
-				              <line x1="8" y1="6" x2="21" y2="6" />
-				              <line x1="8" y1="12" x2="21" y2="12" />
-				              <line x1="8" y1="18" x2="21" y2="18" />
-				              <line x1="3" y1="6" x2="3.01" y2="6" />
-				              <line x1="3" y1="12" x2="3.01" y2="12" />
-				              <line x1="3" y1="18" x2="3.01" y2="18" /></svg>
-								</button>
-								<button class="view-btn grid-view active" title="Grid View">
-									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-										viewBox="0 0 24 24" fill="none" stroke="currentColor"
-										stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-										class="feather feather-grid">
-				              <rect x="3" y="3" width="7" height="7" />
-				              <rect x="14" y="3" width="7" height="7" />
-				              <rect x="14" y="14" width="7" height="7" />
-				              <rect x="3" y="14" width="7" height="7" /></svg>
-								</button>
-							</div>
-						</div>
-						<div class="project-boxes jsGridView">
-							<div class="project-box-wrapper">
-								<div class="project-box" style="background-color: #fee4cb;">
-									<div class="project-box-header">
-										<span>December 10, 2020</span>
-										<div class="more-wrapper">
-											<button class="project-btn-more">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24"
-													height="24" viewBox="0 0 24 24" fill="none"
-													stroke="currentColor" stroke-width="2"
-													stroke-linecap="round" stroke-linejoin="round"
-													class="feather feather-more-vertical">
-				                    <circle cx="12" cy="12" r="1" />
-				                    <circle cx="12" cy="5" r="1" />
-				                    <circle cx="12" cy="19" r="1" /></svg>
-											</button>
-										</div>
-									</div>
-									<div class="project-box-content-header">
-										<p class="box-content-header">Web Designing</p>
-										<p class="box-content-subheader">Prototyping</p>
-									</div>
-									<div class="box-progress-wrapper">
-										<p class="box-progress-header">Progress</p>
-										<div class="box-progress-bar">
-											<span class="box-progress"
-												style="width: 60%; background-color: #ff942e"></span>
-										</div>
-										<p class="box-progress-percentage">60%</p>
-									</div>
-									<div class="project-box-footer">
-										<div class="participants">
-											<img
-												src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
-												alt="participant"> <img
-												src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-												alt="participant">
-											<button class="add-participant" style="color: #ff942e;">
-												<svg xmlns="http://www.w3.org/2000/svg" width="12"
-													height="12" viewBox="0 0 24 24" fill="none"
-													stroke="currentColor" stroke-width="3"
-													stroke-linecap="round" stroke-linejoin="round"
-													class="feather feather-plus">
-				                <path d="M12 5v14M5 12h14" />
-				              </svg>
-											</button>
-										</div>
-										<div class="days-left" style="color: #ff942e;">2 Days
-											Left</div>
-									</div>
-								</div>
-							</div>
-							<div class="project-box-wrapper">
-								<div class="project-box" style="background-color: #e9e7fd;">
-									<div class="project-box-header">
-										<span>December 10, 2020</span>
-										<div class="more-wrapper">
-											<button class="project-btn-more">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24"
-													height="24" viewBox="0 0 24 24" fill="none"
-													stroke="currentColor" stroke-width="2"
-													stroke-linecap="round" stroke-linejoin="round"
-													class="feather feather-more-vertical">
-				                <circle cx="12" cy="12" r="1" />
-				                <circle cx="12" cy="5" r="1" />
-				                <circle cx="12" cy="19" r="1" /></svg>
-											</button>
-										</div>
-									</div>
-									<div class="project-box-content-header">
-										<p class="box-content-header">Testing</p>
-										<p class="box-content-subheader">Prototyping</p>
-									</div>
-									<div class="box-progress-wrapper">
-										<p class="box-progress-header">Progress</p>
-										<div class="box-progress-bar">
-											<span class="box-progress"
-												style="width: 50%; background-color: #4f3ff0"></span>
-										</div>
-										<p class="box-progress-percentage">50%</p>
-									</div>
-									<div class="project-box-footer">
-										<div class="participants">
-											<img
-												src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80"
-												alt="participant"> <img
-												src="https://images.unsplash.com/photo-1583195764036-6dc248ac07d9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2555&q=80"
-												alt="participant">
-											<button class="add-participant" style="color: #4f3ff0;">
-												<svg xmlns="http://www.w3.org/2000/svg" width="12"
-													height="12" viewBox="0 0 24 24" fill="none"
-													stroke="currentColor" stroke-width="3"
-													stroke-linecap="round" stroke-linejoin="round"
-													class="feather feather-plus">
-				                <path d="M12 5v14M5 12h14" />
-				              </svg>
-											</button>
-										</div>
-										<div class="days-left" style="color: #4f3ff0;">2 Days
-											Left</div>
-									</div>
-								</div>
-							</div>
-							<div class="project-box-wrapper">
-								<div class="project-box">
-									<div class="project-box-header">
-										<span>December 10, 2020</span>
-										<div class="more-wrapper">
-											<button class="project-btn-more">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24"
-													height="24" viewBox="0 0 24 24" fill="none"
-													stroke="currentColor" stroke-width="2"
-													stroke-linecap="round" stroke-linejoin="round"
-													class="feather feather-more-vertical">
-				                <circle cx="12" cy="12" r="1" />
-				                <circle cx="12" cy="5" r="1" />
-				                <circle cx="12" cy="19" r="1" /></svg>
-											</button>
-										</div>
-									</div>
-									<div class="project-box-content-header">
-										<p class="box-content-header">Svg Animations</p>
-										<p class="box-content-subheader">Prototyping</p>
-									</div>
-									<div class="box-progress-wrapper">
-										<p class="box-progress-header">Progress</p>
-										<div class="box-progress-bar">
-											<span class="box-progress"
-												style="width: 80%; background-color: #096c86"></span>
-										</div>
-										<p class="box-progress-percentage">80%</p>
-									</div>
-									<div class="project-box-footer">
-										<div class="participants">
-											<img
-												src="https://images.unsplash.com/photo-1587628604439-3b9a0aa7a163?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjR8fHdvbWFufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-												alt="participant"> <img
-												src="https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1215&q=80"
-												alt="participant">
-											<button class="add-participant" style="color: #096c86;">
-												<svg xmlns="http://www.w3.org/2000/svg" width="12"
-													height="12" viewBox="0 0 24 24" fill="none"
-													stroke="currentColor" stroke-width="3"
-													stroke-linecap="round" stroke-linejoin="round"
-													class="feather feather-plus">
-				                <path d="M12 5v14M5 12h14" />
-				              </svg>
-											</button>
-										</div>
-										<div class="days-left" style="color: #096c86;">2 Days
-											Left</div>
-									</div>
-								</div>
-							</div>
-							<div class="project-box-wrapper">
-								<div class="project-box" style="background-color: #ffd3e2;">
-									<div class="project-box-header">
-										<span>December 10, 2020</span>
-										<div class="more-wrapper">
-											<button class="project-btn-more">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24"
-													height="24" viewBox="0 0 24 24" fill="none"
-													stroke="currentColor" stroke-width="2"
-													stroke-linecap="round" stroke-linejoin="round"
-													class="feather feather-more-vertical">
-				                <circle cx="12" cy="12" r="1" />
-				                <circle cx="12" cy="5" r="1" />
-				                <circle cx="12" cy="19" r="1" /></svg>
-											</button>
-										</div>
-									</div>
-									<div class="project-box-content-header">
-										<p class="box-content-header">UI Development</p>
-										<p class="box-content-subheader">Prototyping</p>
-									</div>
-									<div class="box-progress-wrapper">
-										<p class="box-progress-header">Progress</p>
-										<div class="box-progress-bar">
-											<span class="box-progress"
-												style="width: 20%; background-color: #df3670"></span>
-										</div>
-										<p class="box-progress-percentage">20%</p>
-									</div>
-									<div class="project-box-footer">
-										<div class="participants">
-											<img
-												src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
-												alt="participant"> <img
-												src="https://images.unsplash.com/photo-1587628604439-3b9a0aa7a163?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjR8fHdvbWFufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-												alt="participant">
-											<button class="add-participant" style="color: #df3670;">
-												<svg xmlns="http://www.w3.org/2000/svg" width="12"
-													height="12" viewBox="0 0 24 24" fill="none"
-													stroke="currentColor" stroke-width="3"
-													stroke-linecap="round" stroke-linejoin="round"
-													class="feather feather-plus">
-				                <path d="M12 5v14M5 12h14" />
-				              </svg>
-											</button>
-										</div>
-										<div class="days-left" style="color: #df3670;">2 Days
-											Left</div>
-									</div>
-								</div>
-							</div>
-							<div class="project-box-wrapper">
-								<div class="project-box" style="background-color: #c8f7dc;">
-									<div class="project-box-header">
-										<span>December 10, 2020</span>
-										<div class="more-wrapper">
-											<button class="project-btn-more">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24"
-													height="24" viewBox="0 0 24 24" fill="none"
-													stroke="currentColor" stroke-width="2"
-													stroke-linecap="round" stroke-linejoin="round"
-													class="feather feather-more-vertical">
-				                <circle cx="12" cy="12" r="1" />
-				                <circle cx="12" cy="5" r="1" />
-				                <circle cx="12" cy="19" r="1" /></svg>
-											</button>
-										</div>
-									</div>
-									<div class="project-box-content-header">
-										<p class="box-content-header">Data Analysis</p>
-										<p class="box-content-subheader">Prototyping</p>
-									</div>
-									<div class="box-progress-wrapper">
-										<p class="box-progress-header">Progress</p>
-										<div class="box-progress-bar">
-											<span class="box-progress"
-												style="width: 60%; background-color: #34c471"></span>
-										</div>
-										<p class="box-progress-percentage">60%</p>
-									</div>
-									<div class="project-box-footer">
-										<div class="participants">
-											<img
-												src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
-												alt="participant"> <img
-												src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-												alt="participant">
-											<button class="add-participant" style="color: #34c471;">
-												<svg xmlns="http://www.w3.org/2000/svg" width="12"
-													height="12" viewBox="0 0 24 24" fill="none"
-													stroke="currentColor" stroke-width="3"
-													stroke-linecap="round" stroke-linejoin="round"
-													class="feather feather-plus">
-				                <path d="M12 5v14M5 12h14" />
-				              </svg>
-											</button>
-										</div>
-										<div class="days-left" style="color: #34c471;">2 Days
-											Left</div>
-									</div>
-								</div>
-							</div>
-							<div class="project-box-wrapper">
-								<div class="project-box" style="background-color: #d5deff;">
-									<div class="project-box-header">
-										<span>December 10, 2020</span>
-										<div class="more-wrapper">
-											<button class="project-btn-more">
-												<svg xmlns="http://www.w3.org/2000/svg" width="24"
-													height="24" viewBox="0 0 24 24" fill="none"
-													stroke="currentColor" stroke-width="2"
-													stroke-linecap="round" stroke-linejoin="round"
-													class="feather feather-more-vertical">
-				                <circle cx="12" cy="12" r="1" />
-				                <circle cx="12" cy="5" r="1" />
-				                <circle cx="12" cy="19" r="1" /></svg>
-											</button>
-										</div>
-									</div>
-									<div class="project-box-content-header">
-										<p class="box-content-header">Web Designing</p>
-										<p class="box-content-subheader">Prototyping</p>
-									</div>
-									<div class="box-progress-wrapper">
-										<p class="box-progress-header">Progress</p>
-										<div class="box-progress-bar">
-											<span class="box-progress"
-												style="width: 40%; background-color: #4067f9"></span>
-										</div>
-										<p class="box-progress-percentage">40%</p>
-									</div>
-									<div class="project-box-footer">
-										<div class="participants">
-											<img
-												src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
-												alt="participant"> <img
-												src="https://images.unsplash.com/photo-1583195764036-6dc248ac07d9?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2555&q=80"
-												alt="participant">
-											<button class="add-participant" style="color: #4067f9;">
-												<svg xmlns="http://www.w3.org/2000/svg" width="12"
-													height="12" viewBox="0 0 24 24" fill="none"
-													stroke="currentColor" stroke-width="3"
-													stroke-linecap="round" stroke-linejoin="round"
-													class="feather feather-plus">
-				                <path d="M12 5v14M5 12h14" />
-				              </svg>
-											</button>
-										</div>
-										<div class="days-left" style="color: #4067f9;">2 Days
-											Left</div>
-									</div>
-								</div>
-							</div>
+<!-- 						<div class="projects-section-line"> -->
+<!-- 							<div class="projects-status"> -->
+<!-- 								<div class="item-status"> -->
+<!-- 									<span class="status-number">45</span> <span class="status-type">In -->
+<!-- 										Progress</span> -->
+<!-- 								</div> -->
+<!-- 								<div class="item-status"> -->
+<!-- 									<span class="status-number">24</span> <span class="status-type">Upcoming</span> -->
+<!-- 								</div> -->
+<!-- 								<div class="item-status"> -->
+<!-- 									<span class="status-number">62</span> <span class="status-type">Total -->
+<!-- 										Projects</span> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="view-actions"> -->
+<!-- 								<button class="view-btn list-view" title="List View"> -->
+<!-- 									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" -->
+<!-- 										viewBox="0 0 24 24" fill="none" stroke="currentColor" -->
+<!-- 										stroke-width="2" stroke-linecap="round" stroke-linejoin="round" -->
+<!-- 										class="feather feather-list"> -->
+<!-- 				              <line x1="8" y1="6" x2="21" y2="6" /> -->
+<!-- 				              <line x1="8" y1="12" x2="21" y2="12" /> -->
+<!-- 				              <line x1="8" y1="18" x2="21" y2="18" /> -->
+<!-- 				              <line x1="3" y1="6" x2="3.01" y2="6" /> -->
+<!-- 				              <line x1="3" y1="12" x2="3.01" y2="12" /> -->
+<!-- 				              <line x1="3" y1="18" x2="3.01" y2="18" /></svg> -->
+<!-- 								</button> -->
+<!-- 								<button class="view-btn grid-view active" title="Grid View"> -->
+<!-- 									<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" -->
+<!-- 										viewBox="0 0 24 24" fill="none" stroke="currentColor" -->
+<!-- 										stroke-width="2" stroke-linecap="round" stroke-linejoin="round" -->
+<!-- 										class="feather feather-grid"> -->
+<!-- 				              <rect x="3" y="3" width="7" height="7" /> -->
+<!-- 				              <rect x="14" y="3" width="7" height="7" /> -->
+<!-- 				              <rect x="14" y="14" width="7" height="7" /> -->
+<!-- 				              <rect x="3" y="14" width="7" height="7" /></svg> -->
+<!-- 								</button> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+						<div id="donation-dog-box" class="project-boxes jsGridView">
+							
 						</div>
 					</div>
 					
@@ -620,7 +315,7 @@
 							
 							<div id="choice-btn-box2" class="choice-btn-box">
 								<input type="radio" id="my-like-board" class="choice-radio-btn" name="section2Choice" onclick="changeSection2(2)" value="">
-								<label for="my-like-board">좋아요 누른 게시글</label>
+								<label for="my-like-board">좋아요 한 강아지</label>
 							</div>
 							
 							<div id="choice-btn-box3" class="choice-btn-box">
@@ -665,11 +360,21 @@
 						</div>
 						
 						<div id="my-like-board-box" style="display: none;">
-							2
+							<div id="like-title-section">
+								<h3>좋아요 한 강아지</h3>
+							</div>
+							<div id="like-list-box">
+								
+							</div>
 						</div>
 						
 						<div id="my-adopt-subscription-box" style="display: none;">
-							3
+							<div id="app-title-section">
+								<h3>작성한 입양신청서</h3>
+							</div>
+							<div id="app-list-box">
+								
+							</div>
 						</div>
 					</div>
 					
@@ -862,6 +567,115 @@
 			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 		<script>
+		
+			// 함수 실행
+			$(document).ready(function(){
+				removeNavClass();
+				showUserPersnalInfo();
+				showDonationDogList();
+// 				showBoardList();
+// 				showBoardLikeList();
+// 				showAdoptApplicationList();
+			});
+			
+			// 마이페이지 후원중인 강아지 리스트 출력 ajax
+			function showDonationDogList(){
+				$.ajax({
+					url : "/user/myPageDonationList.dog",
+					type : "POST",
+					success : function(data) {
+						if(data !== "false") {
+							let donationList = "";
+							for(let i = 0; i < data.length - 1; i++){
+// 							let donationWon = data[i].donationMoney;
+								if(data[i].dogNo == data[i+1].dogNo){
+// 									donationWon = data[i].donationMoney + data[i+1].donationMoney;
+									return;
+								} else {
+									donationList +=
+										"<div class='project-box-wrapper'>" + 
+											"<div class='project-box' style='background-color: #fee4cb;''>" +
+												"<div class='project-box-header'>" + 
+													"<span>최근 후원 날짜 : " + data[i].donationDate + "</span>" +
+// 													"<div class='more-wrapper'>" +
+// 														"<button class='project-btn-more'>" +
+// 															"<svg xmlns='http://www.w3.org/2000/svg' width='24'"+
+// 																"height='24' viewBox='0 0 24 24' fill='none'"+
+// 																"stroke='currentColor' stroke-width='2'"+
+// 																"stroke-linecap='round' stroke-linejoin='round'"+
+// 																"class='feather feather-more-vertical'>"+
+// 							                    "<circle cx='12' cy='12' r='1' />"+
+// 							                    "<circle cx='12' cy='5' r='1' />"+
+// 							                    "<circle cx='12' cy='19' r='1' /></svg>"+
+// 														"</button>" +
+// 													"</div>" +
+												"</div>" +
+												"<div class='project-box-content-header'>" +
+	// 												<p class="box-content-header">Web Designing</p>
+													"<img src='" + data[i].dogFilePath + "' alt='" + data[i].dogFileName + "' id='donation-dog-img' />"+
+	// 												<p class="box-content-subheader">Prototyping</p>
+													"<p id='donation-dog-name' class='box-content-subheader'>" + 
+														"<a href='/dog/detail.dog?dogNo=" + data[i].dogNo + "'>" +
+															data[i].dogName +
+														"</a>" +
+													"</p>"+
+												"</div>"+
+	// 											"<div class='box-progress-wrapper'>"+
+	// 												"<p class='box-progress-header'>Progress</p>"+
+	// 												"<div class='box-progress-bar'>"+
+	// 													"<span class='box-progress'"+
+	// 														"style='width: 60%; background-color: #ff942e'></span>"+
+	// 												"</div>" +
+	// 												"<p class='box-progress-percentage'>60%</p>" +
+	// 											"</div>"+
+												"<div class='project-box-footer'>";
+	// 												"<div class='participants'>" +
+	// 													"<img"+
+	// 														"src='https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80'"+
+	// 														"alt='participant'> <img" +
+	// 														"src='https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60'"+
+	// 														"alt='participant'>"+
+	// 													"<button class='add-participant' style='color: #ff942e;'>"+
+	// 														"<svg xmlns='http://www.w3.org/2000/svg' width='12'"+
+	// 															"height='12' viewBox='0 0 24 24' fill='none'"+
+	// 															"stroke='currentColor' stroke-width='3'"+
+	// 															"stroke-linecap='round' stroke-linejoin='round'"+
+	// 															"class='feather feather-plus'>"+
+	// 											                "<path d='M12 5v14M5 12h14' />"+
+	// 										                "</svg>"+
+	// 													"</button>"+
+	// 												"</div>" +
+													if(data[i].dogAdopt !== 'Y'){
+														donationList +=
+															"<div class='days-left' style='color: #ff942e;'>" + 
+																"안락사 예정일 : " + data[i].dogDeathDate +
+															"</div>";
+													} else {
+														donationList +=
+															"<div class='days-left' style='color: #ff942e;'>" + 
+																"입양" +
+															"</div>";
+													}
+													donationList +=
+														"<div class='days-left' style='color: #ff942e;'>" + 
+															"금액 : " + data[i].donationMoney + " 원" +
+														"</div>" +
+													"</div>" +
+												"</div>"+ 
+											"</div>";
+									$("#donation-dog-box").html(donationList);
+								}
+							}
+							
+						} else {
+							alert("후원중인 강아지가 없습니다.");
+						}
+					},
+					error : function() {
+						alert("ajax 오류, 관리자에게 문의해주세요.");
+					}
+				});
+			}
 			
 			// 입양, 돌봄 신청중인 신청서 리스트 출력 ajax
 			function showAdoptApplicationList() {
@@ -870,11 +684,11 @@
 					type : "POST",
 					success : function(data){
 						if(data !== "false"){
-							let writeList =
-			                    "<div id='board'>" +
-			                    "<div id='board-content'>" +
+							let appList =
+			                    "<div class='board'>" +
+			                    "<div class='board-content'>" +
 			                    "<table class='table'>" +
-			                    "<div id='board-top-content'>" +
+			                    "<div class='board-top-content'>" +
 			                    "<colgroup>" +
 			                    "<col width='5%' />" +
 			                    "<col width='35%' />" +
@@ -883,32 +697,32 @@
 			                    "<col width='5%' />" +
 			                    "</colgroup>" +
 			                    "<tr>" +
-			                    "<th id='number-value'>번호</th>" +
+			                    "<th class='number-value'>번호</th>" +
 			                    "<th>강아지 이름</th>" +
 			                    "<th>신청자</th>" +
 			                    "<th>작성일</th>" +
-			                    "<th id='number-value'>상태</th>" +
+			                    "<th class='number-value'>상태</th>" +
 			                    "</tr>";
 			
-			                for (let i = 0; i < data.length; i++) {
-			                    writeList +=
+			                for (let i = 0; i < 5; i++) {
+			                    appList +=
 			                        "<tr>" +
-			                        "<td id='number-value'>" + data[i].boardNo + "</td>" +
-			                        "<td><a href='/board/detail.dog?boardNo=" + data[i].boardNo + "'>" + data[i].boardTitle + "</a></td>" +
+			                        "<td class='number-value'>" + data[i].appNo + "</td>" +
+			                        "<td><a href='/dog/detail.dog?dogNo=" + data[i].dogNo + "'>" + data[i].dogName + "</a></td>" +
 			                        "<td>" + data[i].userNickname + "</td>" +
 			                        "<td>" + data[i].appCreateDate +
 			                        "</td>";
 			                        if(data[i].appStatus == "Y"){
-			                        	writeList += "<td id='number-value'>승인</td>";
+			                        	appList += "<td class='number-value'>승인</td>";
 			                        } else if(data[i].appStatus == "N"){
-			                        	writeList += "<td id='number-value'>반려</td>";
+			                        	appList += "<td class='number-value'>반려</td>";
 			                        } else {
-			                        	writeList += "<td id='number-value'>심사중</td>";
+			                        	appList += "<td class='number-value'>심사중</td>";
 			                        }
-			                        writeList += "</tr>";
+			                        appList += "</tr>";
 			                }
 			
-			                $("#write-list-box").html(writeList);
+			                $("#app-list-box").html(appList);
 						} else {
 							alert("입양 신청한 게시물이 없습니다.")
 						}
@@ -920,14 +734,38 @@
 			}
 			
 			
-			// 좋아요 누른 게시글 리스트 출력 ajax
+			// 좋아요 누른 강아지 리스트 출력 ajax
 			function showBoardLikeList(){
 				$.ajax({
 					url : "/user/myPageLikeList.dog",
 					type : "POST",
 					success: function(data) {
 						if(data !== "false"){
+							let likeList = "";
+							for(let i = 0; i < data.length; i++){
+								likeList +=
+									"<div class='dog_item'>" +
+										"<div class='image_thumbnail'>" +
+											"<img src='" + data[i].dogFilePath + "' " +
+												"alt='" + data[i].dogFileName + "'> "+
+// 												"onclick='showDogDetail(" + data[i].dogNo + ")'
+										"</div>" +
+										"<div class='dog_info'>" +
+												"<h2>" + 
+													"<a href='/dog/detail.dog?dogNo=" + data[i].refDogNo + "'>" +
+														data[i].dogName + 
+													"</a>" +
+												"</h2>" +
+											"<p><br>" + data[i].dogKind +" <br>" +
+											data[i].dogInfo + "</p>" +
+										"</div>" +
+									"</div>";
+								
+							}
 							
+							$("#like-list-box").html(likeList);
+						} else {
+							alert("좋아요 한 강아지가 없습니다.");
 						}
 					},
 					error : function() {
@@ -945,10 +783,9 @@
 			        data: { currentPage: currentPage },
 			        success: function(data) {
 			            if (data !== "false") {
-			            	console.log(data);
 			                let writeList =
-			                    "<div id='board'>" +
-			                    "<div id='board-content'>" +
+			                    "<div class='board'>" +
+			                    "<div class='board-content'>" +
 			                    "<table class='table'>" +
 			                    "<colgroup>" +
 			                    "<col width='5%' />" +
@@ -958,26 +795,26 @@
 			                    "<col width='5%' />" +
 			                    "</colgroup>" +
 			                    "<tr>" +
-			                    "<th id='number-value'>번호</th>" +
+			                    "<th class='number-value'>번호</th>" +
 			                    "<th>글 제목</th>" +
 			                    "<th>작성자</th>" +
 			                    "<th>작성일</th>" +
-			                    "<th id='number-value'>조회수</th>" +
+			                    "<th class='number-value'>조회수</th>" +
 			                    "</tr>";
 			
 			                for (let i = 0; i < data.length; i++) {
 			                    writeList +=
 			                        "<tr>" +
-			                        "<td id='number-value'>" + data[i].boardNo + "</td>" +
+			                        "<td class='number-value'>" + data[i].boardNo + "</td>" +
 			                        "<td><a href='/board/detail.dog?boardNo=" + data[i].boardNo + "'>" + data[i].boardTitle + "</a></td>" +
 			                        "<td>" + data[i].userNickname + "</td>" +
 			                        "<td>" + data[i].createDate +
 			                        "</td>" +
-			                        "<td id='number-value'>" + data[i].viewCount + "</td>" +
+			                        "<td class='number-value'>" + data[i].viewCount + "</td>" +
 			                        "</tr>";
 			                }
 			
-// 			                $("#write-list-box").html(writeList);
+			                $("#write-list-box").html(writeList);
 			            }
 			        },
 			        error: function () {
@@ -1229,11 +1066,7 @@
 					}
 				});
 			}
-			$(document).ready(function(){
-				showUserPersnalInfo();
-				removeNavClass();
-				showBoardList();
-			});
+			
 			
 			// 개인정보 수정
 			$(document).ready(function(){

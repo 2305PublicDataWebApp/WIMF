@@ -2,6 +2,7 @@ package com.dog.save.user.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -9,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.lang.reflect.Type;
+import java.text.DecimalFormat;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,16 +30,24 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.dog.save.app.domain.App;
 import com.dog.save.app.service.AppService;
-import com.dog.save.board.domain.Board;
 import com.dog.save.board.domain.bPageInfo;
 import com.dog.save.board.service.BoardService;
-import com.dog.save.dog.domain.DogLike;
 import com.dog.save.dog.service.DogService;
+import com.dog.save.donation.service.DonationService;
 import com.dog.save.user.domain.User;
 import com.dog.save.user.domain.UserBoard;
+import com.dog.save.user.domain.UserDog;
+import com.dog.save.user.domain.UserDonation;
 import com.dog.save.user.service.UserService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+
 
 @Controller
 @RequestMapping(value="/user/")
@@ -53,6 +64,9 @@ public class UserController {
 	
 	@Autowired
 	private AppService aService;
+	
+	@Autowired
+	private DonationService donaService;
 	
 	// 로그인 페이지 url
 	@GetMapping(value="login.dog")
@@ -99,6 +113,26 @@ public class UserController {
 		}
 	}
 	
+	// ajax 마이페이지 후원중인 강아지 리스트 출력
+	@ResponseBody
+	@PostMapping(value="myPageDonationList.dog", produces="application/json;charset=utf-8")
+	public String showDonationDogList(HttpSession session) {
+		try {
+			String userId = (String)session.getAttribute("userId");
+			List<UserDonation> donaList = donaService.selectListById(userId);
+			if(donaList.size() > 0 || !donaList.isEmpty()) {
+				Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+				return gson.toJson(donaList);
+			} else {
+				return "false";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "false";
+		}
+		
+	}
+	
 	// ajax 마이페이지 본인 게시물 리스트 출력
 	@ResponseBody
 	@PostMapping(value="myPageBoardList.dog", produces="application/json;charset=utf-8")
@@ -131,12 +165,16 @@ public class UserController {
 	public String showUserLikeList(HttpSession session) {
 		try {
 			String userId = (String)session.getAttribute("userId");
-			List<DogLike> dLList = dService.selectLikeDogList(userId);
+			List<UserDog> dLList = dService.selectLikeDogList(userId);
+			if(dLList.size() > 0 || !dLList.isEmpty()) {
+				Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+				return gson.toJson(dLList);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "false";
 		}
-		return "";
+		return "false";
 	}
 	
 	// ajax 마이페이지 신청중인 입양신청서 게시물 리스트 출력
@@ -485,6 +523,15 @@ public class UserController {
 			return "false";
 		}
 		
+	}
+	
+	// gson 숫자 데이터 포맷 형식 변환(숫자 -> 금액)
+	public class NumberFormatterSerializer implements JsonSerializer<Number> {
+	    @Override
+	    public JsonElement serialize(Number number, Type type, JsonSerializationContext jsonSerializationContext) {
+	        DecimalFormat formatter = new DecimalFormat("###,###,###");
+	        return jsonSerializationContext.serialize(formatter.format(number));
+	    }
 	}
 	
 	// 페이징처리
