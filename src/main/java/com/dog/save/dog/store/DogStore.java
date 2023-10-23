@@ -219,6 +219,16 @@ public interface DogStore {
 //	기진 코드
 
 	
+	/**
+	 * 이승현 왔다감
+	 * 마이페이지 좋아요 누른 강아지 리스트 Store
+	 * @param session
+	 * @param userId
+	 * @return
+	 */
+	List<DogLike> selectLikeDogList(SqlSession session, String userId);
+
+	
 
 	
 

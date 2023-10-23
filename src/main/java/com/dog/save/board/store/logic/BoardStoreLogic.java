@@ -112,6 +112,8 @@ public class BoardStoreLogic implements BoardStore{
 		return searchList;
 	}
 
+	// 이승현 왔다 감
+	// 마이페이지 본인이 작성한 게시글 조회 ajax
 	@Override
 	public List<UserBoard> selectBoardListById(SqlSession sqlSession, UserBoard uBoard) {
 		int limit = uBoard.getRecordCountPerPage();

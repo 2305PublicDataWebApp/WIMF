@@ -118,12 +118,14 @@
 		SELECT * FROM BOARD_TBL ORDER BY BOARD_TBL.BOARD_NO DESC
 	</select>
 	
-	<select id="" resultType="UserBoard">
-		SELECT BOARD_TBL.* FROM BOARD_TBL
+	<!-- 마이페이지 본인이 작성한 게시물 리스트 -->
+	<select id="selectBoardListById" resultType="UserBoard">
+		SELECT BOARD_TBL.*, USER_TBL.USER_NICKNAME FROM BOARD_TBL
 		LEFT JOIN USER_TBL ON BOARD_TBL.BOARD_WRITER = USER_TBL.USER_ID
 		WHERE USER_TBL.USER_ID = #{userId}
 		ORDER BY BOARD_TBL.CREATE_DATE DESC
 	</select>
+	
 	<!-- 게시글 좋아요 체크 확인 -->
 	<select id="getLikeStatus" resultType="String">
 		SELECT BOARD_LIKE FROM BOARD_LIKE_TBL WHERE BOARD_WRITE_ID = #{boardWriteId} AND BOARD_WRITE_NO = #{boardWriteNo}

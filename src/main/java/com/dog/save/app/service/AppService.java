@@ -21,4 +21,12 @@ public interface AppService {
 
 	int allowCare(App app);
 
+	/**
+	 * 이승현 왔다감
+	 * 마이페이지 작성한 입양신청서 리스트 출력
+	 * @param userId
+	 * @return List<App>
+	 */
+	List<App> selectAppListById(String userId);
+
 }

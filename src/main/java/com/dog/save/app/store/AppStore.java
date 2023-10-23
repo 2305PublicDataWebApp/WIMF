@@ -23,4 +23,13 @@ public interface AppStore {
 
 	int allowCare(SqlSession sqlSession, App app);
 
+	/**
+	 * 이승현 왔다감
+	 * 마이페이지 작성한 입양신청서 리스트 출력
+	 * @param sqlSession
+	 * @param userId
+	 * @return List<App>
+	 */
+	List<App> selectAppListById(SqlSession sqlSession, String userId);
+
 }

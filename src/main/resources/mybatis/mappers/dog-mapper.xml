@@ -96,4 +96,11 @@
 		SELECT * FROM DOG_TBL WHERE DOG_ADOPT='Y' ORDER BY DOG_NO DESC
 	</select>
 	<!-- 기진 코드 -->
+	
+	<!-- 이승현 왔다감 -->
+	<select id="">
+		SELECT DOG_TBL.*, DOG_LIKE_TBL.* FROM DOG_TBL
+		LEFT JOIN DOG_LIKE_TBL ON DOG_TBL.DOG_NO = DOG_LIKE_TBL.REF_DOG_NO
+		WHERE DOG_LIKE_TBL.REF_USER_ID = #{userId}
+	</select>
 </mapper>

@@ -186,6 +186,15 @@ public class DogStoreLogic implements DogStore{
 //	기진 코드
 
 	
+	// 이승현 왔다감
+	// 마이페이지 좋아요 누른 강아지 리스트
+	@Override
+	public List<DogLike> selectLikeDogList(SqlSession session, String userId) {
+		List<DogLike> dlList = session.selectList("DogMapper.selectLikeDogList", userId);
+		return dlList;
+	}
+
+	
 
 
 }

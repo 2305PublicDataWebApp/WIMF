@@ -611,14 +611,23 @@
 						</div>
 						
 						<div id="section-choice-box">
-							<input type="radio" id="my-write-board" class="choice-radio-btn" name="section2Choice" value="" onclick="changeSection2(1)" checked>
-							<label for="my-write-board">작성한 게시글</label>
+						
+							<div id="choice-btn-box1" class="choice-btn-box">
+								<input type="radio" id="my-write-board" class="choice-radio-btn" name="section2Choice" value="" onclick="changeSection2(1)" checked>
+								<label for="my-write-board">작성한 게시글</label>
 							
-							<input type="radio" id="my-like-board" class="choice-radio-btn" name="section2Choice" onclick="changeSection2(2)" value="">
-							<label for="my-like-board">좋아요 누른 게시글</label>
+							</div>
 							
-							<input type="radio" id="my-adopt-subscription" class="choice-radio-btn" name="section2Choice" onclick="changeSection2(3)" value="">
-							<label for="my-adopt-subscription">작성한 입양신청서</label>
+							<div id="choice-btn-box2" class="choice-btn-box">
+								<input type="radio" id="my-like-board" class="choice-radio-btn" name="section2Choice" onclick="changeSection2(2)" value="">
+								<label for="my-like-board">좋아요 누른 게시글</label>
+							</div>
+							
+							<div id="choice-btn-box3" class="choice-btn-box">
+								<input type="radio" id="my-adopt-subscription" class="choice-radio-btn" name="section2Choice" onclick="changeSection2(3)" value="">
+								<label for="my-adopt-subscription">작성한 입양신청서</label>
+							</div>
+							
 						</div>
 						
 						<div id="my-write-board-box">
@@ -626,85 +635,31 @@
 								<h3>작성한 게시글</h3>
 							</div>
 							<div id="write-list-box">
-								<div id="board">
-							        <div id="board-content">
-							          <table class="table">
-							            <div id="board-top-content">
-							              <div id="select">
-							              	<form action="/board/search.dog" method="get">
-								                <select name="searchCondition">
-								                  <option value="all">전체</option>
-								                  <option value="writer">작성자</option>
-								                  <option value="title">제목</option>
-								                  <option value="content">내용</option>
-								                </select>
-									          </div>
-								              <div id="search">
-								                <input id="search-value" type="text" name="searchKeyword" placeholder="Search">
-								              </div>
-								              <div id="search-btn">
-								                <input id="search-btn" type="submit" value="검색">
-								              </div>
-							              	</form>
-							            </div>
-							            <colgroup>
-							              <col width="5%" />
-							              <col width="35%" />
-							              <col width="10%" />
-							              <col width="10%" />
-							              <col width="5%" />
-							            </colgroup>
-							            <tr>
-							              <th id="number-value">번호</th>
-							              <th>글 제목</th>
-							              <th>작성자</th>
-							              <th>작성일</th>
-							              <th id="number-value">조회수</th>
-							            </tr>
-							            <c:forEach var="board" items="${bList }">
-								            <tr>
-								              <td id="number-value">${board.boardNo }</td>
-								              <c:url var="detailUrl" value="/board/detail.dog">
-								              	<c:param name="boardNo" value="${board.boardNo }"></c:param>
-								              </c:url>
-								              <td><a href="${detailUrl }">${board.boardTitle }</a></td>
-								              <td>${board.userNickName }</td>
-								              <td>
-								              	<fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>
-								              </td>
-								              <td id="number-value">${board.viewCount }</td>
-								            </tr>
-							            </c:forEach>
-							            </table>
-							            <div id="paging">
-								        	<tr align="center">
-								          	<td colspan="5">
-								          		<c:if test="${bpInfo.startNavi != 1}">
-								          			<c:url var="prevUrl" value="/user/myPage.dog">
-								          				<c:param name="page" value="${bpInfo.startNavi - 1 }"></c:param>
-								          			</c:url>
-								          			<a href="${prevUrl }">◀</a>
-								          		</c:if>
-								          		<c:forEach begin="${bpInfo.startNavi }" end="${bpInfo.endNavi }" var="p">
-								          			<c:url var="pageUrl" value="/user/myPage.dog">
-								          				<c:param name="page" value="${p }"></c:param>
-								          			</c:url>
-								          			<a href="${pageUrl }">${p }</a>&nbsp;
-								          		</c:forEach>
-								          		<c:if test="${bpInfo.endNavi != bpInfo.naviTotalCount}">
-													<c:url var="nextUrl" value="/user/myPage.dog">
-														<c:param name="page" value="${bpInfo.endNavi + 1 }"></c:param>
-													</c:url>          		
-								          			<a href="${nextUrl }">▶</a>
-								          		</c:if>
-								          	</td>
-								          </tr>
-							            </div>
-<!-- 							          <div id="create-btn"> -->
-<!-- 							            <input id="create-btn" type="button" value="글 작성" onClick="checkLogin()"> -->
-<!-- 							          </div> -->
-							        </div>
-							      </div>
+							
+<!-- 					            <div id="paging"> -->
+<!-- 						        	<tr align="center"> -->
+<!-- 						          	<td colspan="5"> -->
+<%-- 						          		<c:if test="${bpInfo.startNavi != 1}"> --%>
+<%-- 						          			<c:url var="prevUrl" value="/user/myPage.dog"> --%>
+<%-- 						          				<c:param name="page" value="${bpInfo.startNavi - 1 }"></c:param> --%>
+<%-- 						          			</c:url> --%>
+<%-- 						          			<a href="${prevUrl }">◀</a> --%>
+<%-- 						          		</c:if> --%>
+<%-- 						          		<c:forEach begin="${bpInfo.startNavi }" end="${bpInfo.endNavi }" var="p"> --%>
+<%-- 						          			<c:url var="pageUrl" value="/user/myPage.dog"> --%>
+<%-- 						          				<c:param name="page" value="${p }"></c:param> --%>
+<%-- 						          			</c:url> --%>
+<%-- 						          			<a href="${pageUrl }">${p }</a>&nbsp; --%>
+<%-- 						          		</c:forEach> --%>
+<%-- 						          		<c:if test="${bpInfo.endNavi != bpInfo.naviTotalCount}"> --%>
+<%-- 											<c:url var="nextUrl" value="/user/myPage.dog"> --%>
+<%-- 												<c:param name="page" value="${bpInfo.endNavi + 1 }"></c:param> --%>
+<%-- 											</c:url>          		 --%>
+<%-- 						          			<a href="${nextUrl }">▶</a> --%>
+<%-- 						          		</c:if> --%>
+<!-- 						          	</td> -->
+<!-- 						          </tr> -->
+<!-- 					            </div> -->
 							</div>
 							
 						</div>
@@ -907,23 +862,141 @@
 			src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 		<script>
-		
-			// 작성한 게시글 리스트 출력 ajax
-			let currentPage = 1;
-			function showBoardList() {
+			
+			// 입양, 돌봄 신청중인 신청서 리스트 출력 ajax
+			function showAdoptApplicationList() {
 				$.ajax({
-					url : "/user/myPageBoardList.dog",
+					url : "/user/myPageAdoptList.dog",
 					type : "POST",
-					data : { currentPage : currentPage },
-					success : function(data) {
-						
+					success : function(data){
+						if(data !== "false"){
+							let writeList =
+			                    "<div id='board'>" +
+			                    "<div id='board-content'>" +
+			                    "<table class='table'>" +
+			                    "<div id='board-top-content'>" +
+			                    "<colgroup>" +
+			                    "<col width='5%' />" +
+			                    "<col width='35%' />" +
+			                    "<col width='10%' />" +
+			                    "<col width='10%' />" +
+			                    "<col width='5%' />" +
+			                    "</colgroup>" +
+			                    "<tr>" +
+			                    "<th id='number-value'>번호</th>" +
+			                    "<th>강아지 이름</th>" +
+			                    "<th>신청자</th>" +
+			                    "<th>작성일</th>" +
+			                    "<th id='number-value'>상태</th>" +
+			                    "</tr>";
+			
+			                for (let i = 0; i < data.length; i++) {
+			                    writeList +=
+			                        "<tr>" +
+			                        "<td id='number-value'>" + data[i].boardNo + "</td>" +
+			                        "<td><a href='/board/detail.dog?boardNo=" + data[i].boardNo + "'>" + data[i].boardTitle + "</a></td>" +
+			                        "<td>" + data[i].userNickname + "</td>" +
+			                        "<td>" + data[i].appCreateDate +
+			                        "</td>";
+			                        if(data[i].appStatus == "Y"){
+			                        	writeList += "<td id='number-value'>승인</td>";
+			                        } else if(data[i].appStatus == "N"){
+			                        	writeList += "<td id='number-value'>반려</td>";
+			                        } else {
+			                        	writeList += "<td id='number-value'>심사중</td>";
+			                        }
+			                        writeList += "</tr>";
+			                }
+			
+			                $("#write-list-box").html(writeList);
+						} else {
+							alert("입양 신청한 게시물이 없습니다.")
+						}
 					},
-					error : function(){
-						
+					error : function() {
+						alert("ajax 오류, 관리자에게 문의해주세요.");
 					}
-					
 				});
-			});
+			}
+			
+			
+			// 좋아요 누른 게시글 리스트 출력 ajax
+			function showBoardLikeList(){
+				$.ajax({
+					url : "/user/myPageLikeList.dog",
+					type : "POST",
+					success: function(data) {
+						if(data !== "false"){
+							
+						}
+					},
+					error : function() {
+						alert("ajax 오류, 관리자에게 문의해주세요.");
+					}
+				});
+			}
+			
+			// 작성한 게시글 리스트 출력 ajax
+			function showBoardList() {
+			let currentPage = 1;
+			    $.ajax({
+			        url: "/user/myPageBoardList.dog",
+			        type: "POST",
+			        data: { currentPage: currentPage },
+			        success: function(data) {
+			            if (data !== "false") {
+			            	console.log(data);
+			                let writeList =
+			                    "<div id='board'>" +
+			                    "<div id='board-content'>" +
+			                    "<table class='table'>" +
+			                    "<colgroup>" +
+			                    "<col width='5%' />" +
+			                    "<col width='35%' />" +
+			                    "<col width='10%' />" +
+			                    "<col width='10%' />" +
+			                    "<col width='5%' />" +
+			                    "</colgroup>" +
+			                    "<tr>" +
+			                    "<th id='number-value'>번호</th>" +
+			                    "<th>글 제목</th>" +
+			                    "<th>작성자</th>" +
+			                    "<th>작성일</th>" +
+			                    "<th id='number-value'>조회수</th>" +
+			                    "</tr>";
+			
+			                for (let i = 0; i < data.length; i++) {
+			                    writeList +=
+			                        "<tr>" +
+			                        "<td id='number-value'>" + data[i].boardNo + "</td>" +
+			                        "<td><a href='/board/detail.dog?boardNo=" + data[i].boardNo + "'>" + data[i].boardTitle + "</a></td>" +
+			                        "<td>" + data[i].userNickname + "</td>" +
+			                        "<td>" + data[i].createDate +
+			                        "</td>" +
+			                        "<td id='number-value'>" + data[i].viewCount + "</td>" +
+			                        "</tr>";
+			                }
+			
+// 			                $("#write-list-box").html(writeList);
+			            }
+			        },
+			        error: function () {
+			            alert("ajax 오류, 관리자에게 문의해주세요.");
+			        },
+			    });
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
 			
 			// 비밀번호 유효성 체크
 			$(document).ready(function() {
@@ -1159,6 +1232,7 @@
 			$(document).ready(function(){
 				showUserPersnalInfo();
 				removeNavClass();
+				showBoardList();
 			});
 			
 			// 개인정보 수정
