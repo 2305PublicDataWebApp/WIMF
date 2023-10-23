@@ -120,5 +120,11 @@ public interface BoardService {
 	 * @return
 	 */
 	int updateLikeStatus(BoardLike boardLike);
+	/**
+	 * 댓글 개수 Service
+	 * @param boardNo
+	 * @return
+	 */
+	int getReplyCount(int boardNo);
 
 }

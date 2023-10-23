@@ -138,4 +138,10 @@ public class BoardServiceImpl implements BoardService{
 		return ubList;
 	}
 
+	@Override
+	public int getReplyCount(int boardNo) {
+		int result = bStore.getReplyCount(sqlSession, boardNo);
+		return result;
+	}
+
 }

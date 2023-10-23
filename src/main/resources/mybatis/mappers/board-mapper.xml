@@ -142,4 +142,10 @@
 	<update id="updateLikeStatus">
 		UPDATE BOARD_LIKE_TBL SET BOARD_LIKE = #{boardLike} WHERE BOARD_WRITE_NO = #{boardWriteNo} AND BOARD_WRITE_ID = #{boardWriteId}
 	</update>
+	
+	<!-- 댓글 개수 -->
+	<select id="getReplyCount" resultType="int">
+        SELECT COUNT(*) FROM REPLY_TBL WHERE REPLY_BOARD_NO = #{boardNo}
+    </select>
+    
 </mapper>

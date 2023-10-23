@@ -137,6 +137,13 @@ public interface BoardStore {
 	 * @return List<UserBoard>
 	 */
 	List<UserBoard> selectBoardListById(SqlSession sqlSession, UserBoard uBoard);
+	/**
+	 * 댓글 개수 Store
+	 * @param sqlSession
+	 * @param boardNo
+	 * @return
+	 */
+	int getReplyCount(SqlSession sqlSession, int boardNo);
 	
 
 }

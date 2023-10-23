@@ -141,5 +141,11 @@ public class BoardStoreLogic implements BoardStore{
 		return result;
 	}
 
+	@Override
+	public int getReplyCount(SqlSession sqlSession, int boardNo) {
+		int result = sqlSession.selectOne("BoardMapper.getReplyCount", boardNo);
+		return result;
+	}
+
 
 }

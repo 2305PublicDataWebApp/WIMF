@@ -19,6 +19,7 @@ public class Board {
 	private String boardFileRename;
 	private String boardFilePath;
 	private long boardFileLength;
+	private int replyCount;
 	
 	private String userNickName;
 	private String userProfile;	// 기진 코드
