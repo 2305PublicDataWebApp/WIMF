@@ -65,23 +65,24 @@ public class MainController {
 		
 			// dog List 가져오기
 		List<Dog> dList = dService.selectAllDogList();
-		
-		// count 정보 가져오기
 		List<Dog> careList = dService.selectCareList();
 		List<Dog> adoptList = dService.selectAdoptList();
+		List<Dog> noneList = dService.selectNoneList();
+		// count 정보 가져오기
+		int allDogCount = (dList == null) ? 0 : dList.size();
 		int careCount = (careList == null) ? 0 : careList.size();
 		int adoptCount = (adoptList == null) ? 0 : adoptList.size();
-		int allDogCount = (dList == null) ? 0 : dList.size();
-		model.addAttribute("careList", careList);
-		model.addAttribute("adoptList", adoptList);
+		int noneCount = (noneList == null) ? 0 : noneList.size();
+		model.addAttribute("allDogCount", allDogCount);
 		model.addAttribute("careCount", careCount);
 		model.addAttribute("adoptCount", adoptCount);
-		model.addAttribute("allDogCount", allDogCount);
+		model.addAttribute("noneCount", noneCount);
 		
-		// 사진 매칭
+			// 사진 매칭
 		List<DogFile> dogFileList;
 		dogFileList = dService.selectFirstDogFile();
 		
+		// allDogList 사진 매칭
 		List<DogSet> combinedList = new ArrayList<>();
 		for (Dog dog : dList) {
 			DogSet dogSet = new DogSet();
@@ -96,6 +97,54 @@ public class MainController {
 			combinedList.add(dogSet);
 		}		
 		model.addAttribute("combinedList", combinedList);
+		
+		// careDogList 사진 매칭
+		List<DogSet> careDogList = new ArrayList<>();
+		for (Dog dog : careList) {
+			DogSet dogSet = new DogSet();
+			dogSet.setDog(dog);
+			// 각 Dog와 매칭되는 DogFile 찾기
+			for (DogFile dogFile : dogFileList) {
+				if (dog.getDogNo() == dogFile.getRefDogNo()) {
+					dogSet.setDogFile(dogFile);
+					break;
+				}
+			}
+			careDogList.add(dogSet);
+		}		
+		model.addAttribute("careDogList", careDogList);
+		
+		// adoptDogList 사진 매칭
+		List<DogSet> adoptDogList = new ArrayList<>();
+		for (Dog dog : adoptList) {
+			DogSet dogSet = new DogSet();
+			dogSet.setDog(dog);
+			// 각 Dog와 매칭되는 DogFile 찾기
+			for (DogFile dogFile : dogFileList) {
+				if (dog.getDogNo() == dogFile.getRefDogNo()) {
+					dogSet.setDogFile(dogFile);
+					break;
+				}
+			}
+			adoptDogList.add(dogSet);
+		}		
+		model.addAttribute("adoptDogList", adoptDogList);
+		
+		// noneDogList 사진 매칭
+		List<DogSet> noneDogList = new ArrayList<>();
+		for (Dog dog : noneList) {
+			DogSet dogSet = new DogSet();
+			dogSet.setDog(dog);
+			// 각 Dog와 매칭되는 DogFile 찾기
+			for (DogFile dogFile : dogFileList) {
+				if (dog.getDogNo() == dogFile.getRefDogNo()) {
+					dogSet.setDogFile(dogFile);
+					break;
+				}
+			}
+			noneDogList.add(dogSet);
+		}		
+		model.addAttribute("noneDogList", noneDogList);
 		
 			// adopt List 가져오기
 		List<Adopt> aList = aService.selectAllAdobtList();

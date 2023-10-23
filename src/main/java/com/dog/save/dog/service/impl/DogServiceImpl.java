@@ -322,6 +322,13 @@ public class DogServiceImpl implements DogService{
 		List<Dog> dogList = dStore.selectDogsByEuthanasia(session,pInfo);
 		return dogList;
 	}
+	// 기진 코드
+	@Override
+	public List<Dog> selectNoneList() {
+		List<Dog> noneList = dStore.selectNoneList(session);
+		return noneList;
+	}
+	// 기진 코드
 	
 	
 	

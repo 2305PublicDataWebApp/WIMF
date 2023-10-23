@@ -24,6 +24,8 @@ import com.dog.save.common.domain.PageInfo;
 import com.dog.save.dog.domain.Dog;
 import com.dog.save.dog.domain.DogFile;
 import com.dog.save.dog.service.DogService;
+import com.dog.save.main.domain.Calendar;
+import com.dog.save.main.service.CalendarService;
 import com.dog.save.user.domain.User;
 import com.dog.save.user.service.UserService;
 
@@ -39,6 +41,9 @@ public class AppController {
 	
 	@Autowired
 	private DogService dService;
+	
+	@Autowired
+	private CalendarService cService;	// 기진 코드
 	
 	// 지원자 지원서 제출 페이지
 	@GetMapping("/insert.dog")
@@ -199,7 +204,35 @@ public class AppController {
 						mv.setViewName("common/error");
 					}
 				}else {
+					result = aService.allowCare(app);
+					
+					// 기진 코드
+					Calendar calendar = new Calendar();
+					calendar.setDogNo(app.getDogNo());
+					Dog dogOne = dService.selectDogByDogNo(app.getDogNo());
+					String dogName = dogOne.getDogName();
+					calendar.setUserId(app.getUserId());
+					calendar.setSchStartDate(app.getAppStartDate());
+					
+					if(app.getAppEndDate() == null) {
+						calendar.setSchEndDate(app.getAppStartDate());
+						calendar.setSchTitle("'" + dogName + "' 임시보호 시작");
+						calendar.setSchContent("'" + dogName + "' 임시보호 시작");
+					} else {
+						calendar.setSchEndDate(app.getAppEndDate());
+						calendar.setSchTitle("'" + dogName + "' 임시보호");
+						calendar.setSchContent("'" + dogName + "' 임시보호");
+					}
+					calendar.setSchOption("임시보호");
+					calendar.setSchTitleCount(1);
+					
+					cService.insertEvent(calendar);
+					// 기진 코드
+				}
+				if(result > 0) {
+					System.out.println("값 넣기 성공");
 					statusResult = aService.updateStatus(app);
+					
 					if(statusResult > 0) {
 						mv.setViewName("redirect:/app/detail.dog?appNo=" + app.getAppNo());
 					}else {

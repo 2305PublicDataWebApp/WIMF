@@ -216,7 +216,13 @@ public class DogStoreLogic implements DogStore{
 		int offset = (pInfo.getCurrentPage()-1)*limit;
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		List<Dog> dogList = session.selectList("DogMapper.selectDogsByEuthanasia", null, rowBounds);
-		return dogList;		
+		return dogList;
+	}
+	
+	@Override
+	public List<Dog> selectNoneList(SqlSession session) {
+		List<Dog> noneList = session.selectList("DogMapper.selectNoneList");
+		return noneList;
 	}
 
 	
