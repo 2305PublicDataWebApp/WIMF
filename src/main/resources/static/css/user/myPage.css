@@ -257,10 +257,10 @@
  .projects-section {
 	 flex: 2;
 	 background-color: var(--projects-section);
-	 border-radius: 32px;
+	 border-radius: 30px;
 	 padding: 32px 32px 0 32px;
-	 overflow: hidden;
-	 height: 100%;
+     overflow: auto;
+	 height: 770px;
 	 display: flex;
 	 flex-direction: column;
 }
@@ -351,7 +351,8 @@
 	 margin-right: 24px;
 	 flex: 1;
 	 width: 100%;
-	 border-radius: 30px;
+	 height: 770px;
+	 border-radius: 30px 0 0 30px;
 	 position: relative;
 	 overflow: auto;
 	 transition: all 300ms cubic-bezier(0.19, 1, 0.56, 1);
@@ -530,7 +531,7 @@
 }
  .project-box-content-header {
 	 text-align: center;
-	 margin-bottom: 16px;
+     margin-bottom: 10px;
 }
  .project-box-content-header p {
 	 margin: 0;
@@ -612,6 +613,8 @@
 	 justify-content: space-between;
 	 padding-top: 16px;
 	 position: relative;
+     flex-direction: column;
+    align-items: flex-start;
 }
  .project-box-footer:after {
 	 content: '';
@@ -655,6 +658,7 @@
 	 flex-shrink: 0;
 	 padding: 6px 16px;
 	 font-weight: 700;
+	 margin-top: 5px;
 }
  .mode-switch.active .moon {
 	 fill: var(--main-color);
@@ -1036,7 +1040,7 @@
 #choice-btn-box1, #choice-btn-box2, #choice-btn-box3{
 	margin-right: 20px;
 }
-#write-title-section{
+#write-title-section, #like-title-section, #app-title-section{
 	margin: 0 auto;
     width: 88%;
 }
@@ -1044,6 +1048,15 @@
 /*
 	마이페이지 css
 */
+#donation-dog-img{
+    width: 300px;
+    height: 390px;
+}
+#donation-dog-name{
+	font-weight: bold;
+    font-size: 18px;
+    padding-top: 10px;
+}
 #write-list-box {
   padding-top: 15px;
   margin: 0 auto;
@@ -1052,11 +1065,11 @@
   margin-bottom: 5%;
 }
 
-#write-list-box #board-content {
+#write-list-box .board-content {
   padding: 5%;
 }
 
-#write-list-box #board {
+#write-list-box .board {
   border: 5px double gray;
   border-radius: 20px;
 }
@@ -1126,14 +1139,139 @@
   background: rgba(255,99,71, 0.85);
 }
 
-#write-list-box #number-value {
+#write-list-box .number-value {
   text-align: center;
 }
 
 
 
 
+#like-list-box{
+	display: flex;
+    flex-wrap: wrap; /* 상품이 넘칠 경우 다음 줄로 줄 바꿈되도록 설정 */
+    justify-content: space-between; /* 가로로 균등하게 배치 */
+    margin-left: 50px;
+}
 
+#like-list-box .dog_item {
+	width: calc(33.33% - 20px); /* 한 줄에 3개의 상품이 오도록 너비 설정 */
+    margin-bottom: 20px; /* 아래 여백 추가 */
+}
+
+#like-list-box .image_thumbnail {
+	/* border: 1px solid black; */
+	width: 100%;
+	height: 400px;
+	padding: 15px;
+	/* margin: 30px; */
+	/* display: inline-block; */
+}
+
+#like-list-box .dog_info {
+	/* margin: 10px; */
+	padding: 15px;
+	height: 40%;
+    text-align: center;
+	/* border: 1px solid black; */
+}
+
+#like-list-box img {
+	width: 100%;
+	height: 100%;
+}
+.dog_info a {
+	color : black !important;
+}
+
+
+
+
+
+#app-list-box {
+  padding-top: 15px;
+  margin: 0 auto;
+  width: 88%;
+  height: 100%;
+  margin-bottom: 5%;
+}
+
+#app-list-box .board-content {
+  padding: 5%;
+}
+
+#app-list-box .board {
+  border: 5px double gray;
+  border-radius: 20px;
+}
+
+#app-list-box #select {
+  padding-bottom: 5%;
+  width: 70%;
+  float: left;
+}
+
+#app-list-box #search {
+  float: left;
+  margin-left: 10px;
+}
+#app-list-box #search-value {
+  padding-right: 10px;
+}
+
+#app-list-box #search-btn {
+  float: right;
+  width: 60px;
+  height: 35px;
+  border-radius: 4px;
+  border: none;
+  background-color: rgb(232, 69, 69);
+  color: white;
+  margin-left: 3px;
+}
+#app-list-box #search-btn:hover {
+  color: var(--contrast-color);
+  background: rgba(255,99,71, 0.85);
+}
+
+#app-list-box input[type="text"] {
+  border: solid 1px;
+  border-radius: 4px;
+  width: 175px;
+  height: 35px;
+  background-image: url(/img/돋보기.png);
+  background-repeat: no-repeat;
+  background-size: 30px;
+  text-align: right;
+}
+
+#app-list-box #paging {
+  list-style-type: none;
+  text-align: center;
+  font-size: 20px;
+  color: black
+}
+#app-list-box #paging:hover {
+  color: gray;
+}
+
+#app-list-box #create-btn {
+  float: right;
+  width: 70px;
+  height: 35px;
+  border-radius: 4px;
+  border: none;
+  background-color: rgb(232, 69, 69);
+  color: white;
+}
+
+#app-list-box #create-btn:hover {
+  color: var(--contrast-color);
+  background: rgba(255,99,71, 0.85);
+}
+
+#app-list-box .number-value {
+  text-align: center;
+}
 
 
 

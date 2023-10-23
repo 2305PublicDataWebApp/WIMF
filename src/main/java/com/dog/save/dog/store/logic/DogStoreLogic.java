@@ -12,6 +12,7 @@ import com.dog.save.dog.domain.DogFile;
 import com.dog.save.dog.domain.DogLike;
 import com.dog.save.dog.domain.DogReply;
 import com.dog.save.dog.store.DogStore;
+import com.dog.save.user.domain.UserDog;
 
 @Repository
 public class DogStoreLogic implements DogStore{
@@ -196,8 +197,8 @@ public class DogStoreLogic implements DogStore{
 	// 이승현 왔다감
 	// 마이페이지 좋아요 누른 강아지 리스트
 	@Override
-	public List<DogLike> selectLikeDogList(SqlSession session, String userId) {
-		List<DogLike> dlList = session.selectList("DogMapper.selectLikeDogList", userId);
+	public List<UserDog> selectLikeDogList(SqlSession session, String userId) {
+		List<UserDog> dlList = session.selectList("DogMapper.selectLikeDogList", userId);
 		return dlList;
 	}
 

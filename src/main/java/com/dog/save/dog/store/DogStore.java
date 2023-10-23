@@ -9,6 +9,7 @@ import com.dog.save.dog.domain.Dog;
 import com.dog.save.dog.domain.DogFile;
 import com.dog.save.dog.domain.DogLike;
 import com.dog.save.dog.domain.DogReply;
+import com.dog.save.user.domain.UserDog;
 
 public interface DogStore {
 
@@ -233,7 +234,7 @@ public interface DogStore {
 	 * @param userId
 	 * @return
 	 */
-	List<DogLike> selectLikeDogList(SqlSession session, String userId);
+	List<UserDog> selectLikeDogList(SqlSession session, String userId);
 
 	
 

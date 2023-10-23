@@ -12,6 +12,7 @@ import com.dog.save.dog.domain.Dog;
 import com.dog.save.dog.domain.DogFile;
 import com.dog.save.dog.domain.DogLike;
 import com.dog.save.dog.domain.DogReply;
+import com.dog.save.user.domain.UserDog;
 
 
 public interface DogService {
@@ -183,7 +184,7 @@ public interface DogService {
 	 * @param userId
 	 * @return
 	 */
-	List<DogLike> selectLikeDogList(String userId);
+	List<UserDog> selectLikeDogList(String userId);
 
 	
 

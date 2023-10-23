@@ -28,6 +28,7 @@ import com.dog.save.dog.domain.DogLike;
 import com.dog.save.dog.domain.DogReply;
 import com.dog.save.dog.service.DogService;
 import com.dog.save.dog.store.DogStore;
+import com.dog.save.user.domain.UserDog;
 
 @Service
 public class DogServiceImpl implements DogService{
@@ -239,8 +240,8 @@ public class DogServiceImpl implements DogService{
 	// 이승현 왔다감
 	// 마이페이지 좋아요 누른 강아지 리스트
 	@Override
-	public List<DogLike> selectLikeDogList(String userId) {
-		List<DogLike> dlList = dStore.selectLikeDogList(session, userId);
+	public List<UserDog> selectLikeDogList(String userId) {
+		List<UserDog> dlList = dStore.selectLikeDogList(session, userId);
 		return dlList;
 	}
 	
