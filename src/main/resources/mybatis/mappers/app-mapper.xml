@@ -57,7 +57,8 @@
 		UPDATE DOG_TBL
 		SET DOG_P_STARTDATE = DEFAULT, 
 		    DOG_P_ENDDATE = DEFAULT,
-		    DOG_ADOPT = #{appDogAdopt}
+		    DOG_ADOPT = #{appDogAdopt},
+		    DOG_DEATHDATE = NULL
 		WHERE DOG_NO = #{dogNo}
 	</update>
 	
@@ -66,7 +67,8 @@
 		UPDATE DOG_TBL
 		SET DOG_P_STARTDATE = #{appStartDate}, 
 		    DOG_P_ENDDATE = #{appEndDate},
-		    DOG_ADOPT = #{appDogAdopt}
+		    DOG_ADOPT = #{appDogAdopt},
+		    DOG_DEATHDATE = NULL
 		WHERE DOG_NO = #{dogNo}
 	</update>
 	

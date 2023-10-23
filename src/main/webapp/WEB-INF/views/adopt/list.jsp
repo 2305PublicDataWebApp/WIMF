@@ -56,36 +56,36 @@
 							</form>
 						</div>
 						
-						<table class="table">
-							<colgroup>
-								<col width="5%" />
-								<col width="35%" />
-								<col width="10%" />
-								<col width="10%" />
-								<col width="5%" />
-							</colgroup>
-							<tr>
-								<th id="number-value">번호</th>
-								<th>글 제목</th>
-								<th>작성자</th>
-								<th>작성일</th>
-								<th id="number-value">조회수</th>
-							</tr>
-							<c:forEach var="adopt" items="${aList }">
-								<tr>
-									<td id="number-value">${adopt.adoptNo }</td>
-									<c:url var="detailUrl" value="/adopt/detail.dog">
-										<c:param name="adoptNo" value="${adopt.adoptNo }"></c:param>
-									</c:url>
-									<td><a href="${detailUrl }">${adopt.adoptTitle }</a></td>
-									<td>${adopt.userNickName }</td>
-									<td>
-										<fmt:formatDate value="${adopt.adoptCreateDate }" pattern="yyyy-MM-dd"/>
-									</td>
-									<td id="number-value">${adopt.viewCount }</td>
-								</tr>
-							</c:forEach>
-						</table>
+<!-- 						<table class="table"> -->
+<%-- 							<colgroup> --%>
+<%-- 								<col width="5%" /> --%>
+<%-- 								<col width="35%" /> --%>
+<%-- 								<col width="10%" /> --%>
+<%-- 								<col width="10%" /> --%>
+<%-- 								<col width="5%" /> --%>
+<%-- 							</colgroup> --%>
+<!-- 							<tr> -->
+<!-- 								<th id="number-value">번호</th> -->
+<!-- 								<th>글 제목</th> -->
+<!-- 								<th>작성자</th> -->
+<!-- 								<th>작성일</th> -->
+<!-- 								<th id="number-value">조회수</th> -->
+<!-- 							</tr> -->
+<%-- 							<c:forEach var="adopt" items="${aList }"> --%>
+<!-- 								<tr> -->
+<%-- 									<td id="number-value">${adopt.adoptNo }</td> --%>
+<%-- 									<c:url var="detailUrl" value="/adopt/detail.dog"> --%>
+<%-- 										<c:param name="adoptNo" value="${adopt.adoptNo }"></c:param> --%>
+<%-- 									</c:url> --%>
+<%-- 									<td><a href="${detailUrl }">${adopt.adoptTitle }</a></td> --%>
+<%-- 									<td>${adopt.userNickName }</td> --%>
+<!-- 									<td> -->
+<%-- 										<fmt:formatDate value="${adopt.adoptCreateDate }" pattern="yyyy-MM-dd"/> --%>
+<!-- 									</td> -->
+<%-- 									<td id="number-value">${adopt.viewCount }</td> --%>
+<!-- 								</tr> -->
+<%-- 							</c:forEach> --%>
+<!-- 						</table> -->
 						
 						<div class="recent-posts container row gy-4">
 							<c:forEach var="aList" items="${aList}">

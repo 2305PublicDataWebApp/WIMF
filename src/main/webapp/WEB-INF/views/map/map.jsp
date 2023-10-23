@@ -23,7 +23,7 @@
 	
 		<!-- 메인 -->
 	    <main>
-	        <div id="map" style="width: 100%; height: 90vh; margin: 100px auto 0 auto;"></div>
+	        <div id="map" style="width: 100%; height: 90vh; margin: 100px auto 0px auto;"></div>
 	    </main>
 	    
 	     <!-- footer -->
@@ -65,11 +65,12 @@
 		        var locations = [];
 		        
 		        // dList 배열에 저장된 dogRLocation 및 dogName 추가
-		        <c:forEach items="${dList}" var="dog">
+		        <c:forEach items="${combinedList}" var="combinedList">
 		            locations.push({
-		                address: '<c:out value="${dog.dogRLocation}" />',
-		                name: '<c:out value="${dog.dogName}" />',
-		                no: '<c:out value="${dog.dogNo}" />'
+		                address: '<c:out value="${combinedList.dog.dogRLocation}" />',
+		                name: '<c:out value="${combinedList.dog.dogName}" />',
+		                no: '<c:out value="${combinedList.dog.dogNo}" />',
+		                path: '<c:out value="${combinedList.dogFile.dogFilePath}" />'
 		            });
 		        </c:forEach>
 		        
@@ -87,6 +88,8 @@
 		                    // 마커를 클릭했을 때 이벤트 핸들러를 추가합니다.
 		                    var overlayVisible = false; // 오버레이의 표시 여부를 추적하는 변수
 		                    kakao.maps.event.addListener(marker, 'click', function() {
+		                    	 console.log("Marker clicked!"); // 클릭 이벤트가 발생했는지 확인
+		                    	    console.log("Overlay visibility: " + overlayVisible); // 오버레이 상태를 확인
 		                        // 오버레이가 표시 중이면 숨깁니다.
 		                        if (overlayVisible) {
 		                            overlay.setMap(null);
@@ -98,11 +101,16 @@
 		                    });
 
 		                    // 커스텀 오버레이를 생성하고 컨텐츠를 설정합니다.
-		                    var content = '<div class="customoverlay">' +
-		                        '  <a href="/dog/detail.dog?dogNo='+location.no +'" target="_blank">' +
-		                        '    <span class="title">' + location.name + '</span>' +
-		                        '  </a>' +
-		                        '</div>';
+		                    var content = '<div id="customoverlay" class="customoverlay">' +
+				                        '      <a href="/dog/detail.dog?dogNo='+location.no +'" target="_blank">' +
+				                        '          <span class="title">' +
+				                        '              <div id="dogImg"class="img">' +
+				                        '                  <img src="' + location.path +'" width="73" height="70">' +
+				                        '              </div>' +
+				                        			location.name + 
+			                        	'          </span>' +
+				                        '      </a>' +
+				                        '</div>';
 		                    var overlay = new kakao.maps.CustomOverlay({
 		                        content: content,
 		                        map: null, // 초기에는 지도에 표시하지 않음

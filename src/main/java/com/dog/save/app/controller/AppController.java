@@ -97,22 +97,29 @@ public class AppController {
 	// 관리자 제출 지원서 목록 확인
 	@GetMapping("/list.dog")
 	public ModelAndView showAllList(
-			ModelAndView mv
+			ModelAndView mv, HttpSession session
 			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage) {
 		try {
 			int totalCount = aService.getTotalCount();
 			PageInfo pageInfo = getPageInfo(currentPage, totalCount);
 			List<App> aList = aService.appAllList(pageInfo);
-			if(aList.size() > 0) {
-				mv.addObject("pageInfo", pageInfo);
-				mv.addObject("totalCount", totalCount);
-				mv.addObject("aList", aList);
-				mv.setViewName("app/list");
-			} else {
-				mv.addObject("msg", "[서비스실패] 목록을 조회할 수 없습니다.");
+			String adminCheck = (String)session.getAttribute("adminCheck");
+			if(adminCheck.equals("Y")) {
+				if(aList.size() > 0) {
+					mv.addObject("pageInfo", pageInfo);
+					mv.addObject("totalCount", totalCount);
+					mv.addObject("aList", aList);
+					mv.setViewName("app/list");
+				} else {
+					mv.addObject("msg", "[서비스실패] 목록을 조회할 수 없습니다.");
+					mv.addObject("url", "/");
+					mv.setViewName("common/error");
+				}
+			}else {
+				mv.addObject("msg", "[서비스실패] 관리자만 접속할 수 있습니다.");
 				mv.addObject("url", "/");
 				mv.setViewName("common/error");
-			}	
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("msg", "[서비스실패] 관리자에 문의바랍니다.");
@@ -125,24 +132,31 @@ public class AppController {
 	// 관리자 제출 지원서 상세 확인
 	@GetMapping("/detail.dog")
 	public ModelAndView applicationDetail (
-			ModelAndView mv
+			ModelAndView mv, HttpSession session
 			, @RequestParam(value="appNo") int appNo) {
 		try {
 			App app = aService.selectAppByNo(appNo);
-			if(app != null) {
-				int dogNo = app.getDogNo();
-				Dog dog = dService.selectDogByDogNo(dogNo);
-				List<DogFile> dogFileList = dService.selectDogFileByDogNo(dogNo);
-				String userId = app.getUserId();
-				User user = uService.selectOneById(userId);
-				mv.addObject("app", app);
-				mv.addObject("user", user);
-				mv.addObject("dog", dog);
-				mv.addObject("dogFileList", dogFileList);
-				mv.setViewName("app/detail");
-			} else {
-				mv.addObject("msg", "[서비스실패] 신청서를 조회할 수 없습니다..");
-				mv.addObject("url", "/app/list.dog");
+			String adminCheck = (String)session.getAttribute("adminCheck");
+			if(adminCheck.equals("Y")) {
+				if(app != null) {
+					int dogNo = app.getDogNo();
+					Dog dog = dService.selectDogByDogNo(dogNo);
+					List<DogFile> dogFileList = dService.selectDogFileByDogNo(dogNo);
+					String userId = app.getUserId();
+					User user = uService.selectOneById(userId);
+					mv.addObject("app", app);
+					mv.addObject("user", user);
+					mv.addObject("dog", dog);
+					mv.addObject("dogFileList", dogFileList);
+					mv.setViewName("app/detail");
+				} else {
+					mv.addObject("msg", "[서비스실패] 신청서를 조회할 수 없습니다..");
+					mv.addObject("url", "/app/list.dog");
+					mv.setViewName("common/error");
+				}
+			}else {
+				mv.addObject("msg", "[서비스실패] 관리자만 접속할 수 있습니다.");
+				mv.addObject("url", "/");
 				mv.setViewName("common/error");
 			}
 		} catch (Exception e) {
@@ -157,20 +171,34 @@ public class AppController {
 	// 관리자 제출 지원서 확인 후 심사(반려, 승인)
 	@PostMapping("/detail.dog")
 	public ModelAndView applicationJudgment (
-			ModelAndView mv
+			ModelAndView mv, HttpSession session
 			, @ModelAttribute App app) {
 		try {
+			String adminCheck = (String)session.getAttribute("adminCheck");
 			int result = 0;
-			// 관리자가 승인 시
 			int statusResult = 0;
-			if(app.getAppStatus() == 'Y') {
-				if (app.getAppDogAdopt().equals("Y")) {
-					result = aService.allowAdopt(app);
+			if(adminCheck.equals("Y")) {
+				// 관리자가 승인 시
+				if(app.getAppStatus() == 'Y') {
+					if (app.getAppDogAdopt().equals("Y")) {
+						result = aService.allowAdopt(app);
+					}else {
+						result = aService.allowCare(app);
+					}
+					if(result > 0) {
+						System.out.println("값 넣기 성공");
+						statusResult = aService.updateStatus(app);
+						if(statusResult > 0) {
+							mv.setViewName("redirect:/app/detail.dog?appNo=" + app.getAppNo());
+						}else {
+							mv.addObject("msg", "[서비스실패] 상태변경 실패");
+							mv.setViewName("common/error");
+						}
+					}else {
+						mv.addObject("msg", "[서비스실패] 잘못된 값을 넣었습니다.");
+						mv.setViewName("common/error");
+					}
 				}else {
-					result = aService.allowCare(app);
-				}
-				if(result > 0) {
-					System.out.println("값 넣기 성공");
 					statusResult = aService.updateStatus(app);
 					if(statusResult > 0) {
 						mv.setViewName("redirect:/app/detail.dog?appNo=" + app.getAppNo());
@@ -178,19 +206,12 @@ public class AppController {
 						mv.addObject("msg", "[서비스실패] 상태변경 실패");
 						mv.setViewName("common/error");
 					}
-				}else {
-					mv.addObject("msg", "[서비스실패] 잘못된 값을 넣었습니다.");
-					mv.setViewName("common/error");
+					
 				}
 			}else {
-				statusResult = aService.updateStatus(app);
-				if(statusResult > 0) {
-					mv.setViewName("redirect:/app/detail.dog?appNo=" + app.getAppNo());
-				}else {
-					mv.addObject("msg", "[서비스실패] 상태변경 실패");
-					mv.setViewName("common/error");
-				}
-
+				mv.addObject("msg", "[서비스실패] 관리자만 접속할 수 있습니다.");
+				mv.addObject("url", "/");
+				mv.setViewName("common/error");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

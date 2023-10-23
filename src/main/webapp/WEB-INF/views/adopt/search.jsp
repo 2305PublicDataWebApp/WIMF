@@ -11,6 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>입양 후기 게시판</title>
 		<link href="/css/adopt/communityList.css" rel="stylesheet">
+		<link href="/css/main.css" rel="stylesheet">
 		
 		<!-- css -->
 		<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -53,36 +54,83 @@
 							</form>
 						</div>
 						
-						<table class="table">
-							<colgroup>
-								<col width="5%" />
-								<col width="35%" />
-								<col width="10%" />
-								<col width="10%" />
-								<col width="5%" />
-							</colgroup>
-							<tr>
-								<th id="number-value">번호</th>
-								<th>글 제목</th>
-								<th>작성자</th>
-								<th>작성일</th>
-								<th id="number-value">조회수</th>
-							</tr>
-							<c:forEach var="adopt" items="${aList }">
-								<tr>
-									<td id="number-value">${adopt.adoptNo }</td>
+<!-- 						<table class="table"> -->
+<%-- 							<colgroup> --%>
+<%-- 								<col width="5%" /> --%>
+<%-- 								<col width="35%" /> --%>
+<%-- 								<col width="10%" /> --%>
+<%-- 								<col width="10%" /> --%>
+<%-- 								<col width="5%" /> --%>
+<%-- 							</colgroup> --%>
+<!-- 							<tr> -->
+<!-- 								<th id="number-value">번호</th> -->
+<!-- 								<th>글 제목</th> -->
+<!-- 								<th>작성자</th> -->
+<!-- 								<th>작성일</th> -->
+<!-- 								<th id="number-value">조회수</th> -->
+<!-- 							</tr> -->
+<%-- 							<c:forEach var="adopt" items="${aList }"> --%>
+<!-- 								<tr> -->
+<%-- 									<td id="number-value">${adopt.adoptNo }</td> --%>
+<%-- 									<c:url var="detailUrl" value="/adopt/detail.dog"> --%>
+<%-- 										<c:param name="adoptNo" value="${adopt.adoptNo }"></c:param> --%>
+<%-- 									</c:url> --%>
+<%-- 									<td><a href="${detailUrl }">${adopt.adoptTitle }</a></td> --%>
+<%-- 									<td>${adopt.userNickName }</td> --%>
+<!-- 									<td> -->
+<%-- 										<fmt:formatDate value="${adopt.adoptCreateDate }" pattern="yyyy-MM-dd"/> --%>
+<!-- 									</td> -->
+<%-- 									<td id="number-value">${adopt.viewCount }</td> --%>
+<!-- 								</tr> -->
+<%-- 							</c:forEach> --%>
+<!-- 						</table> -->
+						
+						<div class="recent-posts container row gy-4">
+							<c:forEach var="aList" items="${aList}">
+								<div class="col-xl-4 col-md-6" >
+								<article>
+									<div class="post-img">
+										<c:if test="${aList.adoptFilePath == null}">
+											<a href="/adopt/detail.dog?adoptNo=${aList.adoptNo}">
+												<img src="/img/user/default-profile.png" alt="후기게시판사진" class="img-fluid">
+											</a>
+										</c:if>
+										<c:if test="${aList.adoptFilePath != null}">
+											<a href="/adopt/detail.dog?adoptNo=${aList.adoptNo}">
+												<img src="${aList.adoptFilePath }" alt="후기게시판사진" class="img-fluid">
+											</a>
+										</c:if>
+									</div>
+									<div style="display:inline;">
+										<c:if test="${aList.adoptType == 'care'}">
+											<p class="post-category">돌봄 후기</p>
+										</c:if>
+										<c:if test="${aList.adoptType == 'adopt'}">
+											<p class="post-category">입양 후기</p>
+										</c:if>
+										<p class="post-category">조회수 ${aList.viewCount }</p>
+									</div>
 									<c:url var="detailUrl" value="/adopt/detail.dog">
-										<c:param name="adoptNo" value="${adopt.adoptNo }"></c:param>
+										<c:param name="adoptNo" value="${aList.adoptNo }"></c:param>
 									</c:url>
-									<td><a href="${detailUrl }">${adopt.adoptTitle }</a></td>
-									<td>${adopt.userNickName }</td>
-									<td>
-										<fmt:formatDate value="${adopt.adoptCreateDate }" pattern="yyyy-MM-dd"/>
-									</td>
-									<td id="number-value">${adopt.viewCount }</td>
-								</tr>
+									<h2 class="title">
+										<a href="${detailUrl }">${aList.adoptTitle }</a>
+									</h2>
+									
+									<div class="d-flex align-items-center">
+										<img src = "${aList.userFilePath }"alt="프로필사진" class="img-fluid post-author-img flex-shrink-0">
+										<div class="post-meta">
+											<p class="post-author">${aList.userNickName }</p>
+											<p class="post-date">
+												<fmt:formatDate value="${aList.adoptDate }" pattern="yyyy-MM-dd"/>~
+												<fmt:formatDate value="${aList.giveUpDate }" pattern="yyyy-MM-dd"/>
+									        </p>
+										</div>
+									</div>
+								</article>
+								</div><!-- End post list item -->
 							</c:forEach>
-						</table>
+						</div>
 						
 						<div id="paging">
 							<div align="center">
