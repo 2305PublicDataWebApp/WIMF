@@ -185,6 +185,14 @@ public interface DogService {
 	 */
 	List<DogLike> selectLikeDogList(String userId);
 
+	// 기진 코드
+	/**
+	 * 돌봄, 입양 아닌 강아지 리스트 가져오기 Service
+	 * @return
+	 */
+	List<Dog> selectNoneList();
+	// 기진 코드
+
 	
 
 

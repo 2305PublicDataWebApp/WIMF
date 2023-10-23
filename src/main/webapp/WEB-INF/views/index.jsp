@@ -533,11 +533,11 @@
         <div class="row gy-4">
 
           <div class="col-xl-2 col-md-3 col-6 client-logo">
-            <img src="/img/main/한국유기동물보호협회1.jpg" class="img-fluid" alt="">
+          	<img src="/img/main/동물권행동카라2.jpg" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
           <div class="col-xl-2 col-md-3 col-6 client-logo">
-            <img src="/img/main/동물보호연대1.jpg" class="img-fluid" alt="">
+            <img src="/img/main/유엄빠1.jpeg" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
           <div class="col-xl-2 col-md-3 col-6 client-logo">
@@ -545,15 +545,15 @@
           </div><!-- End Client Item -->
 
           <div class="col-xl-2 col-md-3 col-6 client-logo">
-            <img src="/img/main/동물권행동카라2.jpg" class="img-fluid" alt="">
+          	<img src="/img/main/도로시지켜줄개.png" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
           <div class="col-xl-2 col-md-3 col-6 client-logo">
-            <img src="/img/main/도로시지켜줄개.png" class="img-fluid" alt="">
+            <img src="/img/main/한국유기동물보호협회1.jpg" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
           <div class="col-xl-2 col-md-3 col-6 client-logo">
-            <img src="/img/main/유엄빠1.jpeg" class="img-fluid" alt="">
+          	<img src="/img/main/동물보호연대1.jpg" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
         </div>
@@ -571,34 +571,33 @@
 
         <div class="row gy-4">
 
-          <div class="col-lg-4 col-md-4">
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item text-center w-100 h-100">
+              <span data-purecounter-start="0" data-purecounter-end="${noneCount }" data-purecounter-duration="1" class="purecounter"></span>
+              <p>대기 강아지 수</p>
+            </div>
+          </div>
+          
+          <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
               <span data-purecounter-start="0" data-purecounter-end="${careCount }" data-purecounter-duration="1" class="purecounter"></span>
               <p>돌봄 진행 수</p>
             </div>
           </div><!-- End Stats Item -->
 
-          <div class="col-lg-4 col-md-4">
+          <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
               <span data-purecounter-start="0" data-purecounter-end="${adoptCount }" data-purecounter-duration="1" class="purecounter"></span>
               <p>입양 진행 수</p>
             </div>
           </div><!-- End Stats Item -->
 
-          <div class="col-lg-4 col-md-4">
+          <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
               <span data-purecounter-start="0" data-purecounter-end="${allDogCount }" data-purecounter-duration="1" class="purecounter"></span>
-              <p>보호 강아지 수</p>
+              <p>'WIMF'를 거쳐간 강아지들</p>
             </div>
           </div><!-- End Stats Item -->
-
-          <!-- <div class="col-lg-3 col-md-6">
-            <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
-              <p>안락사 수</p>
-            </div>
-          </div> -->
-          <!-- End Stats Item -->
 
         </div>
 
@@ -711,25 +710,34 @@
 
         <div class="row gy-5">
 
-          <c:forEach var="combinedList" items="${combinedList}" varStatus="loop">
-            <c:if test="${loop.index < 6 && String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate == null && combinedList.dog.dogPEndDate == null}">
-            <!-- Start Team Member -->
-              <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="100">
-                <div class="member-img">
-                  <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
-                  <div class="social" onclick="showDogDetail(${combinedList.dog.dogNo})">
-                    <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }">보러가기</a>
-                  </div>
-                </div>
-                <div class="member-info text-center">
-                  <h4>${combinedList.dog.dogName }</h4>
-                  <span>${combinedList.dog.dogAge }살, ${combinedList.dog.dogWeight }kg, ${combinedList.dog.dogHealth }</span>
-                  <p>${combinedList.dog.dogInfo }</p>
-                </div>
-              </div>
-            <!-- End Team Member -->
+          <c:set var="count" value="0" />
+          
+          <c:forEach var="noneDogList" items="${noneDogList}" varStatus="loop">
+           	<c:if test="${loop.index < 6 }">
+	            <!-- Start Team Member -->
+	              <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="100">
+	                <div class="member-img">
+	                  <img src="${noneDogList.dogFile.dogFilePath}" class="img-fluid" alt="${noneDogList.dogFile.dogFileName}">
+	                  <div class="social" onclick="showDogDetail(${noneDogList.dog.dogNo})">
+	                    <a href="/dog/detail.dog?dogNo=${noneDogList.dog.dogNo }">보러가기</a>
+	                  </div>
+	                </div>
+	                <div class="member-info text-center">
+	                  <h4>${noneDogList.dog.dogName }</h4>
+	                  <span>${noneDogList.dog.dogAge }살, ${noneDogList.dog.dogWeight }kg, ${noneDogList.dog.dogHealth }</span>
+	                  <p>${noneDogList.dog.dogInfo }</p>
+	                </div>
+	              </div>
+	            <!-- End Team Member -->
             </c:if>
+		    
           </c:forEach>
+          
+        </div>
+         
+      </div>
+         
+    </section>
 
     <!-- Call-to-action Section - Home Page -->
     <section id="call-to-action" class="call-to-action">
@@ -901,15 +909,17 @@
       <!--  Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>'WIMF'를 거쳐간 친구들</h2>
-        <p>기억할 수 있는 곳입니다.</p>
+        <!-- <p>.</p> -->
       </div><!-- End Section Title -->
 
       <div class="container">
 
-        <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
+        <!-- <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order"> -->
+        <div class="isotope-layout" data-default-filter=".filter-all" data-layout="masonry" data-sort="original-order">
 
           <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">전체</li>
+            <!-- <li data-filter="*" class="filter-active">전체</li> -->
+            <li data-filter=".filter-all" class="filter-active">전체</li>
             <li data-filter=".filter-app">돌봄</li>
             <li data-filter=".filter-product">입양</li>
             <li data-filter=".filter-branding">대기</li>
@@ -917,8 +927,125 @@
 
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
           
-          <c:forEach var="combinedList" items="${combinedList}" varStatus="loop">
+          		<!-- 전체 -->
+          		<c:forEach var="combinedList" items="${combinedList}" varStatus="loop">
+          			<c:if test="${loop.index < 10}">
+          			
+          			<!-- 돌봄 -->
+			            <c:if test="${String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate ne null}">
+				            <!-- Start Portfolio Item -->
+				            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-all">
+				              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
+				              <div class="portfolio-info">
+				                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
+				                <p>${combinedList.dog.dogPStartDate } ~ ${combinedList.dog.dogPEndDate }</p>
+				                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+				                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+				              </div>
+				            </div>
+				            <!-- End Portfolio Item -->
+			            </c:if>
+		          
+			            <!-- 입양 -->
+			            <c:if test="${String(combinedList.dog.dogAdopt) eq 'Y'}">
+				            <!-- Start Portfolio Item -->
+				            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-all">
+				              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
+				              <div class="portfolio-info">
+				                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
+				                <p>입양 완료</p>
+				                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+				                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+				              </div>
+				            </div>
+				            <!-- End Portfolio Item -->
+			            </c:if>
+			            
+			            <!-- 대기 -->
+			            <c:if test="${String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate eq null}">
+				            <!-- Start Portfolio Item -->
+					        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-all">
+				              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
+				              <div class="portfolio-info">
+				                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
+				                <p>${combinedList.dog.dogAge }살, ${combinedList.dog.dogWeight }kg, ${combinedList.dog.dogHealth }, ${combinedList.dog.dogInfo }</p>
+				                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+				                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+				              </div>
+				            </div>
+				            <!-- End Portfolio Item -->
+			            </c:if>
+		            </c:if>
+	            </c:forEach>
+          
+          		<!-- 돌봄 -->
+          		<c:forEach var="careDogList" items="${careDogList}" varStatus="loop">
+          			<c:if test="${loop.index < 10}">
+		            <!-- Start Portfolio Item -->
+			            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+			              <img src="${careDogList.dogFile.dogFilePath}" class="img-fluid" alt="${careDogList.dogFile.dogFileName}">
+			              <div class="portfolio-info">
+			                <h4>No.${careDogList.dog.dogNo } ${careDogList.dog.dogName }</h4>
+			                <p>${careDogList.dog.dogPStartDate } ~ ${careDogList.dog.dogPEndDate }</p>
+			                <a href="${careDogList.dogFile.dogFilePath}" title="No.${careDogList.dog.dogNo } ${careDogList.dog.dogName }" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+			                <a href="/dog/detail.dog?dogNo=${careDogList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+			              </div>
+			            </div>
+		            <!-- End Portfolio Item -->
+		            </c:if>
+	            </c:forEach>
+          
+	            <!-- 입양 -->
+	            <c:forEach var="adoptDogList" items="${adoptDogList}" varStatus="loop">
+          			<c:if test="${loop.index < 10}">
+		            <!-- Start Portfolio Item -->
+		            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+		              <img src="${adoptDogList.dogFile.dogFilePath}" class="img-fluid" alt="${adoptDogList.dogFile.dogFileName}">
+		              <div class="portfolio-info">
+		                <h4>No.${adoptDogList.dog.dogNo } ${adoptDogList.dog.dogName }</h4>
+		                <p>입양 완료</p>
+		                <a href="${adoptDogList.dogFile.dogFilePath}" title="No.${adoptDogList.dog.dogNo } ${adoptDogList.dog.dogName }" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+		                <a href="/dog/detail.dog?dogNo=${adoptDogList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+		              </div>
+		            </div>
+		            <!-- End Portfolio Item -->
+	                </c:if>
+	            </c:forEach>
+	            
+	            <!-- 대기 -->
+	            <c:forEach var="noneDogList" items="${noneDogList}" varStatus="loop">
+          			<c:if test="${loop.index < 10}">
+		            <!-- Start Portfolio Item -->
+			        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+		              <img src="${noneDogList.dogFile.dogFilePath}" class="img-fluid" alt="${noneDogList.dogFile.dogFileName}">
+		              <div class="portfolio-info">
+		                <h4>No.${noneDogList.dog.dogNo } ${noneDogList.dog.dogName }</h4>
+		                <p>${noneDogList.dog.dogAge }살, ${noneDogList.dog.dogWeight }kg, ${noneDogList.dog.dogHealth }, ${noneDogList.dog.dogInfo }</p>
+		                <a href="${noneDogList.dogFile.dogFilePath}" title="No.${noneDogList.dog.dogNo } ${noneDogList.dog.dogName }" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+		                <a href="/dog/detail.dog?dogNo=${noneDogList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+		              </div>
+		            </div>
+		            <!-- End Portfolio Item -->
+	                </c:if>
+	            </c:forEach>
+	            
+           <%-- <c:forEach var="combinedList" items="${combinedList}" varStatus="loop">
           	<c:if test="${loop.index < 10}">
+          	
+          		<!-- 돌봄 -->
+	            <c:if test="${String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate ne null}">
+		            <!-- Start Portfolio Item -->
+		            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+		              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
+		              <div class="portfolio-info">
+		                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
+		                <p>${combinedList.dog.dogPStartDate } ~ ${combinedList.dog.dogPEndDate }</p>
+		                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+		                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+		              </div>
+		            </div>
+		            <!-- End Portfolio Item -->
+	            </c:if>
           
 	            <!-- 입양 -->
 	            <c:if test="${String(combinedList.dog.dogAdopt) eq 'Y'}">
@@ -927,6 +1054,7 @@
 		              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
 		              <div class="portfolio-info">
 		                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
+		                <p>입양 완료</p>
 		                <p>${combinedList.dog.dogPStartDate }~</p>
 		                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
 		                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
@@ -934,24 +1062,9 @@
 		            </div>
 		            <!-- End Portfolio Item -->
 	            </c:if>
-	          
-	          	<!-- 돌봄 -->
-	            <c:if test="${String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate != null && combinedList.dog.dogPEndDate == null}">
-		            <!-- Start Portfolio Item -->
-		            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-		              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
-		              <div class="portfolio-info">
-		                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
-		                <p>${combinedList.dog.dogPStartDate }~${combinedList.dog.dogPEndDate }</p>
-		                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-		                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-		              </div>
-		            </div>
-		            <!-- End Portfolio Item -->
-	            </c:if>
 	            
 	            <!-- 대기 -->
-	            <c:if test="${String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate == null && combinedList.dog.dogPEndDate == null}">
+	            <c:if test="${String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate eq null}">
 		            <!-- Start Portfolio Item -->
 			        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
 		              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
@@ -966,7 +1079,7 @@
 	            </c:if>
 	            
             </c:if>
-          </c:forEach>
+          </c:forEach> --%>
 
           </div><!-- End Portfolio Container -->
 
@@ -1087,7 +1200,7 @@
     </section><!-- End Services Section -->
 
     <!-- Faq Section - Home Page -->
-    <section id="faq" class="faq">
+    <!-- <section id="faq" class="faq">
 
       <div class="container">
 
@@ -1111,7 +1224,7 @@
                   <p>Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
+              </div>End Faq item
 
               <div class="faq-item">
                 <h3><span class="num">2.</span> <span>Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?</span></h3>
@@ -1119,7 +1232,7 @@
                   <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
+              </div>End Faq item
 
               <div class="faq-item">
                 <h3><span class="num">3.</span> <span>Dolor sit amet consectetur adipiscing elit pellentesque?</span></h3>
@@ -1127,7 +1240,7 @@
                   <p>Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
+              </div>End Faq item
 
               <div class="faq-item">
                 <h3><span class="num">4.</span> <span>Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?</span></h3>
@@ -1135,7 +1248,7 @@
                   <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
+              </div>End Faq item
 
               <div class="faq-item">
                 <h3><span class="num">5.</span> <span>Tempus quam pellentesque nec nam aliquam sem et tortor consequat?</span></h3>
@@ -1143,7 +1256,7 @@
                   <p>Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in</p>
                 </div>
                 <i class="faq-toggle bi bi-chevron-right"></i>
-              </div><!-- End Faq item-->
+              </div>End Faq item
 
             </div>
 
@@ -1152,7 +1265,8 @@
 
       </div>
 
-    </section><!-- End Faq Section -->
+    </section> -->
+    <!-- End Faq Section -->
 
     <!-- About Section - Home Page -->
     <section id="about" class="about">

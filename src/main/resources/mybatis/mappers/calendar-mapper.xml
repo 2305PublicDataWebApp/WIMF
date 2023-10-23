@@ -28,7 +28,6 @@
            OR (SCH_START_DATE >= #{date} AND SCH_END_DATE <= #{date}))
 	    ]]>
 	</select>
-
     
     <!-- 일정 삭제 -->
     <delete id="deleteEvent" parameterType="int">

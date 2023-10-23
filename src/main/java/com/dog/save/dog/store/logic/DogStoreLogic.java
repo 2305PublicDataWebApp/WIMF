@@ -201,6 +201,12 @@ public class DogStoreLogic implements DogStore{
 		return dlList;
 	}
 
+	@Override
+	public List<Dog> selectNoneList(SqlSession session) {
+		List<Dog> noneList = session.selectList("DogMapper.selectNoneList");
+		return noneList;
+	}
+
 	
 
 

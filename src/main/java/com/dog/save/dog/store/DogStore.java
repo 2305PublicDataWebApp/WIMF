@@ -235,6 +235,15 @@ public interface DogStore {
 	 */
 	List<DogLike> selectLikeDogList(SqlSession session, String userId);
 
+	// 기진 코드
+	/**
+	 * 돌봄, 입양 아닌 강아지 리스트 가져오기 Store
+	 * @param session
+	 * @return
+	 */
+	List<Dog> selectNoneList(SqlSession session);
+	// 기진 코드
+
 	
 
 	
