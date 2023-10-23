@@ -71,7 +71,7 @@
 	              <c:url var="detailUrl" value="/board/detail.dog">
 	              	<c:param name="boardNo" value="${board.boardNo }"></c:param>
 	              </c:url>
-	              <td><a href="${detailUrl }">${board.boardTitle }</a></td>
+	              <td><a id="detail-text" href="${detailUrl }">${board.boardTitle } [${board.replyCount }]</a></td>
 	              <td>${board.userNickName }</td>
 	              <td>
 	              	<fmt:formatDate value="${board.createDate }" pattern="yyyy-MM-dd"/>

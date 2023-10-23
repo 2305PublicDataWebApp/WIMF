@@ -41,5 +41,5 @@ public class ReplyServiceImpl implements ReplyService{
 		List<Reply> rList = rStore.selectReplyList(session, replyBoardNo);
 		return rList;
 	}
-
+	
 }
