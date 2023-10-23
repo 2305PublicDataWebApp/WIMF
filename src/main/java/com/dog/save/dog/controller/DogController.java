@@ -187,6 +187,12 @@ public class DogController {
 			for (Dog dog : dogList) {
 			    DogSet dogSet = new DogSet(); // 강아지 정보와 파일을 합쳐서 저장하기위해 생성
 			    dogSet.setDog(dog);
+			    
+			    int dogNo = dog.getDogNo();
+			    int totalDonation = dService.getTotalDonationByDogNo(dogNo);
+			    int maxDonation = 1000000; // 최대 기부 금액
+	            int progress = (totalDonation * 100) / maxDonation;
+	            dogSet.setProgress(progress); // 진행률을 설정			    
 			    // 각 Dog와 매칭되는 DogFile 찾기
 			    for (DogFile dogFile : dogFileList) {
 			        if (dog.getDogNo() == dogFile.getRefDogNo()) { // 강아지 연관번호로 매칭
@@ -195,7 +201,8 @@ public class DogController {
 			        }
 			    }
 			    combinedList.add(dogSet);
-			}			
+			}
+			
 			mv.addObject("combinedList", combinedList);
 			mv.addObject("region", region);
 			mv.addObject("sort", sort);

@@ -6,4 +6,5 @@ import lombok.Data;
 public class DogSet {
 	private Dog dog;
 	private DogFile dogFile;
+	private int progress;
 }

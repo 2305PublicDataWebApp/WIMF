@@ -330,6 +330,12 @@ public class DogServiceImpl implements DogService{
 		return noneList;
 	}
 	// 기진 코드
+
+	@Override
+	public int getTotalDonationByDogNo(int dogNo) {
+		int result = dStore.getTotalDonationByDogNo(session,dogNo);
+		return result;
+	}
 	
 	
 	

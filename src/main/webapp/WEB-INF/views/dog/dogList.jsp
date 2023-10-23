@@ -40,7 +40,7 @@
 			  </select>
 			
 			  <label for="sort">정렬</label>
-			  <select name="sort" id="sort" class="pl" style="width: 150px;">
+			  <select name="sort" id="sort" class="pl" style="width: 120px;">
 			    <option value="latest">최신 등록 순</option>
 			    <option value="euthanasia">안락사 임박 순</option>
 			  </select>
@@ -50,11 +50,10 @@
 			<br>			
 			<br>
 			<c:if test="${adminCheck eq 'Y' }">					
-				<button onclick="location.href='/dog/insert.dog';" style="cursor: pointer;">강아지 등록</button>						
+				<button onclick="location.href='/dog/insert.dog';" style="cursor: pointer; width: 150px;" class="custom-btn" >강아지 등록</button>					
 			</c:if>
 
-			<div class="dog_list">
-				
+			<div class="dog_list">				
 				<c:forEach var="combinedList" items="${combinedList}">
 					<div class="dog_item">
 						<div class="image_thumbnail">
@@ -84,6 +83,16 @@
 							    </c:otherwise>
 							</c:choose>
 							</p>
+							<div class="progress" style="width: 300px; margin: 15px;">
+							    <div class="progress-bar progress-bar-striped bg-success"
+							        role="progressbar"
+							        style="width: ${combinedList.progress}%"
+							        aria-valuenow="25"
+							        aria-valuemin="0"
+							        aria-valuemax="100">							        
+							    </div>
+							</div>
+							<span>${combinedList.progress}%</span>										
 						</div>
 					</div>
 				</c:forEach>
@@ -131,16 +140,24 @@
 		<!-- footer -->
 		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		<script>	
+		document.addEventListener('DOMContentLoaded', function () {
+			  var imageThumbnails = document.querySelectorAll('.image_thumbnail img');
+			  imageThumbnails.forEach(function (img) {
+			    img.classList.add('show');
+			  });
+			});		
+		
 	      function showDogDetail(dogNo) {    	    	    	       	       
 	    	        var url = "/dog/detail.dog?dogNo=" + dogNo;
-	    	        window.location.href = url;	    	    
+	    	        window.location.href = url;	    	 
 	    	}	
 
 	      document.getElementById('searchButton').addEventListener('click', function () {
 	          var searchInput = document.getElementById('searchInput').value;
 	          var url = '/dog/list.dog?searchInput=' + searchInput;
 	          window.location.href = url;
-	      });	      
+	      });	
+	      
 		</script>
 	</body>
 </html>

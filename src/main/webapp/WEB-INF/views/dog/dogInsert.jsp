@@ -24,7 +24,7 @@
 		
 		<!-- My Code -->
         <main>
-			<h1>돌봄 동물 등록</h1><hr>
+			<h1 id="insert">돌봄 동물 등록</h1><hr>
 			<form action="/dog/insert.dog" method="POST" enctype="multipart/form-data">
             <select name="dogRegion" id="dogRegion" class="pl">
                 <option value="서울">서울</option>

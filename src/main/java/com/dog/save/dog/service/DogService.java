@@ -208,6 +208,13 @@ public interface DogService {
 	List<Dog> selectNoneList();
 	// 기진 코드
 
+	/**
+	 * 강아지 번호로 후원금액 조회 Service
+	 * @param dogNo
+	 * @return
+	 */
+	int getTotalDonationByDogNo(int dogNo);
+
 	
 
 
