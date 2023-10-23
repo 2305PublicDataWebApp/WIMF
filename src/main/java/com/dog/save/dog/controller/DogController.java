@@ -162,27 +162,25 @@ public class DogController {
 	        }						
 			PageInfo pInfo = this.getPageInfo(currentPage, totalCount,6);								
 			List<Dog> dogList;
-	        if (searchInput != null && !searchInput.isEmpty()) {	            
-	            dogList = dService.selectDogsBySearch(searchInput, pInfo); // 검색어를 사용하여 돌봄 강아지 목록 조회
-	        } else if (!region.equals("all")) {
-	        	// "region"이 "all"이 아닌 경우에만 필터링 적용
-	            dogList = dService.selectDogsByRegion(region, pInfo); // 지역을 사용하여 돌봄 강아지 목록 조회
+	        if (searchInput != null && !searchInput.isEmpty()) {
+	            // 검색어가 있는 경우 검색을 수행
+	            dogList = dService.selectDogsBySearch(searchInput, pInfo);
 	        } else {
-	            dogList = dService.selectAllDog(pInfo); // 전체 돌봄 강아지 조회
-	        }	
-	        // "sort" 값에 따라 정렬
-	        if (sort.equals("euthanasia")) {
-	            // "안락사 순" 정렬
-	            Collections.sort(dogList, new Comparator<Dog>() {
-	                @Override
-	                public int compare(Dog dog1, Dog dog2) {
-	                    // 비교 로직 구현 (안락사 순으로 정렬)
-	                    return dog1.getDogDeathDate().compareTo(dog2.getDogDeathDate());
-	                }
-	            });
-	        } else {
-	            // "최신 순" 정렬이 기본값이므로 추가 정렬 로직이 필요하지 않음
-	        }			
+	            // 검색어가 없을 경우 정렬 및 지역 필터링 조건을 적용한 돌봄 강아지 목록 가져오기
+	            if ("euthanasia".equals(sort) && !"all".equals(region)) {
+	                // "안락사 순" 정렬 및 지역 필터링
+	                dogList = dService.selectDogsByEuthanasiaAndRegion(region, pInfo);
+	            } else if ("euthanasia".equals(sort)) {
+	                // "안락사 순" 정렬만 적용 (지역 필터링 없음)
+	                dogList = dService.selectDogsByEuthanasia(pInfo);
+	            } else if (!"all".equals(region)) {
+	                // "최신 순" 정렬 및 지역 필터링
+	                dogList = dService.selectDogsByRegion(region, pInfo);
+	            } else {
+	                // "최신 순" 정렬만 적용 (지역 필터링 없음)
+	                dogList = dService.selectAllDog(pInfo);
+	            }
+	        }		
 			List<DogFile> dogFileList;
 			dogFileList = dService.selectFirstDogFile(); // dogFileOrder가 1인 파일을 dogFileList에 저장 (썸네일용)
 			List<DogSet> combinedList = new ArrayList<>();

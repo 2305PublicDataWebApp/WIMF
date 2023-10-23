@@ -235,6 +235,23 @@ public interface DogStore {
 	 */
 	List<DogLike> selectLikeDogList(SqlSession session, String userId);
 
+	/**
+	 * 안락사 임박 순 및 지역 선택해서 강아지 리스트 가져오기 Store
+	 * @param session
+	 * @param region
+	 * @param pInfo
+	 * @return
+	 */
+	List<Dog> selectDogsByEuthanasiaAndRegion(SqlSession session, String region, PageInfo pInfo);
+
+	/**
+	 * 안락사 임박 순 선택 및 전체 지역 강아지 리스트 가져오기 Store
+	 * @param session
+	 * @param pInfo
+	 * @return
+	 */
+	List<Dog> selectDogsByEuthanasia(SqlSession session, PageInfo pInfo);
+
 	
 
 	
