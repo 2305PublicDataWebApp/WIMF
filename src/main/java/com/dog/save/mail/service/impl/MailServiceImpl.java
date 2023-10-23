@@ -1,5 +1,7 @@
 package com.dog.save.mail.service.impl;
 
+import java.util.Map;
+
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,6 +17,7 @@ public class MailServiceImpl implements MailService{
 
 	private final JavaMailSender javaMailSender;
 	private static int number;
+	private static String userMessage;	// 기진 코드
 	
 	public static void createRandomNum() {
 		number = (int)(Math.random() * (900000)) + 100000;
@@ -46,5 +49,42 @@ public class MailServiceImpl implements MailService{
 		
 		return number;
 	}
+	
+	
+	// 기진 코드
+	public MimeMessage CreateUserVoiceMail(Map<String, String> emailParams) {
+		MimeMessage message = javaMailSender.createMimeMessage();
+		
+		try {
+			String userName = emailParams.get("userName");
+	        String userEmail = emailParams.get("userEmail");
+	        String userEmailSubject = emailParams.get("userEmailSubject");
+	        String userEmailContent = emailParams.get("userEmailContent");
+			
+			message.setFrom(userEmail);
+			message.setRecipients(MimeMessage.RecipientType.TO, "goflrlwls94@naver.com");
+			message.setSubject("To. WIMF '" + userName + "' 님이 보낸 메일입니다.");
+			String body = "";
+			body += "<h3>";
+			body += "• 보내신 분 : " + userName + "<br>";
+			body += "• 이메일 : " + userEmail + "<br>";
+			body += "• 제목 : " + userEmailSubject + "<br>";
+			body += "• 내용 : " + userEmailContent;
+			body += "</h3>";
+			message.setText(body, "UTF-8", "html");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return message;
+	}
+	
+	@Override
+	public String MailSenderToWimfFromUser(Map<String, String> emailParams) {
+		MimeMessage message = CreateUserVoiceMail(emailParams);
+		javaMailSender.send(message);
+		
+		return userMessage;
+	}
+	// 기진 코드
 
 }

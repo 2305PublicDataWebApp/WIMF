@@ -78,3 +78,13 @@
 	display: flex;
 	align-items: center;
 }
+.error{
+	font-size: smaller;
+    color: red;
+    font-weight: bold;
+}
+.success{
+	font-size: smaller;
+    color: green;
+    font-weight: bold;
+}

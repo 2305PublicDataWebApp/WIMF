@@ -115,7 +115,11 @@
 	</select>
 	
 	<select id="selectAllBoardList" resultType="Board">
-		SELECT * FROM BOARD_TBL ORDER BY BOARD_TBL.BOARD_NO DESC
+		<![CDATA[
+			SELECT * FROM
+				(SELECT * FROM BOARD_TBL ORDER BY BOARD_TBL.BOARD_NO DESC)
+			WHERE ROWNUM <= 5
+		]]>
 	</select>
 	
 	<select id="" resultType="UserBoard">

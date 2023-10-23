@@ -1,5 +1,7 @@
 package com.dog.save.mail.service;
 
+import java.util.Map;
+
 public interface MailService {
 
 	/**
@@ -8,5 +10,14 @@ public interface MailService {
 	 * @return int
 	 */
 	int sendMail(String mail);
+
+	// 기진 코드
+	/**
+	 * 이메일 보내기
+	 * @param emailParams
+	 * @return
+	 */
+	String MailSenderToWimfFromUser(Map<String, String> emailParams);
+	// 기진 코드
 
 }

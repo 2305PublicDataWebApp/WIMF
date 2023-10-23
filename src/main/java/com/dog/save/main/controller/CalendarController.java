@@ -45,6 +45,7 @@ public class CalendarController {
 	@Autowired
 	private DogService dService;
 	
+	// ==================== 일정 리스트 가져오기 ====================
 	@ResponseBody
 	@RequestMapping(value="/list.dog", method=RequestMethod.GET)
 	public List<Map<String, Object>> getEventList(HttpSession session) {
@@ -65,7 +66,6 @@ public class CalendarController {
 	            endDate.setTime(endDate.getTime() + TimeUnit.DAYS.toMillis(1));
 	            hash.put("end", endDate);
 	            hash.put("option", AllEventList.get(i).getSchOption());
-//	            hash.put("time", AllEventList.get(i).getScheduleTime());
 
 	            jsonObj = new JSONObject(hash);
 	            jsonArr.add(jsonObj);
@@ -76,6 +76,7 @@ public class CalendarController {
 	    }
     }
 	
+	// ==================== 선택한 날짜 일정정보 가져오기 ====================
 	@ResponseBody
 	@GetMapping("/getEventListByDate.dog")
 	public List<Map<String, Object>> getEventListByDate(@RequestParam("date") String date, HttpSession session) {
@@ -139,6 +140,7 @@ public class CalendarController {
 
 	}
 
+	// ==================== 팝업창 띄우기 ====================
 	@RequestMapping(value="/popup.dog", method=RequestMethod.GET)
 	public ModelAndView showPopupForm(ModelAndView mv) {
 		
@@ -165,6 +167,7 @@ public class CalendarController {
 		return mv;
 	}
 	
+	// ==================== 일정 등록 ====================
 	@PostMapping("/insert.dog")
 	public ModelAndView insertEvent(ModelAndView mv
 			, @ModelAttribute Calendar calendar
@@ -175,9 +178,6 @@ public class CalendarController {
 			if(userId != null && !userId.equals("")) {
 				
 				calendar.setUserId(userId);
-				
-				
-				
 				
 				// 중복된 title 처리
 	            List<Calendar> allEventList = cService.getAllEventList(userId);
@@ -202,9 +202,6 @@ public class CalendarController {
 	            calendar.setSchTitleCount(titleCount);
 	            calendar.setSchTitle(newTitle + titleSuffix);
 	            
-	            
-	            
-				
 				int result = cService.insertEvent(calendar);
 				if(result > 0) {
 					mv.setViewName("redirect:/");
@@ -227,6 +224,7 @@ public class CalendarController {
 		}
 		return mv;
 	}
+	
 	// 중복된 title 확인 메소드
 	private boolean isTitleMatch(String existingTitle, String newTitle) {
 	    // 여기에 중복된 title 비교 로직을 추가해야 함
@@ -275,9 +273,7 @@ public class CalendarController {
 	}
 
 	
-	/**
-     * calendar-admin-update 페이지 조회
-     */
+	// ==================== 일정 업데이트 ====================
     @GetMapping("/update.dog")
     @ResponseBody
     public List<Map<String, Object>> showAllEventInUpdate(HttpSession session) throws Exception {
@@ -309,9 +305,7 @@ public class CalendarController {
 		}
     }
     
-    /**
-     * calendar-admin-update 페이지 이벤트 생성
-     */
+    // ==================== 일정 업데이트 ====================
     @PostMapping("/update.dog")
     @ResponseBody
     public String modifyEvent(@RequestBody List<Map<String, Object>> param, HttpSession session) {
@@ -343,24 +337,7 @@ public class CalendarController {
 	                System.out.println("oldTitle = " + oldTitle);
 	                System.out.println("oldStart = " + oldStartDate);
 	                System.out.println("oldEnd = " + oldEndDate);
-	    
-//	                Calendar calendar = cService.findByScheduleDateTimeStartAndScheduleDateTimeEnd(oldStart, oldEnd).get();
-//	                Integer scheduleId = schedule.getId();
-	    // 
-	    // 
-//	                System.out.println("=====================================");
-//	                System.out.println("scheduleId = " + scheduleId);
-//	                if (scheduleId != null) {
-	    // 
-//	                    ScheduleDto scheduleDto = ScheduleDto.builder()
-//	                            .scheduleDateTimeStart(modifiedStartDate)
-//	                            .scheduleDateTimeEnd(modifiedEndDate)
-//	                            .build();
-	    // 
-//	                    scheduleService.update(scheduleId, scheduleDto);
-//	                }
 	                
-	                // endDate에서 하루를 뺀다.
 	                java.util.Calendar calendar = java.util.Calendar.getInstance();
 	                calendar.setTime(oldEndDate);
 	                calendar.add(java.util.Calendar.DAY_OF_MONTH, -1);
@@ -418,6 +395,7 @@ public class CalendarController {
 	    }
     }
 	
+    // ==================== 일정 삭제 ====================
 	@PostMapping("/delete.dog")
     @ResponseBody
     public String deleteEvent(@RequestBody List<Map<String, Object>> param, HttpSession session) {
