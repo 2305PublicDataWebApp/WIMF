@@ -985,6 +985,18 @@
     display: flex;
     justify-content: space-around;
 }
+#section2-title-box{
+	margin: 0 auto;
+    width: 88%;
+}
+#section-choice-box{
+	margin: 0 auto;
+    width: 88%;
+	margin-top: 5px;
+    margin-bottom: 50px;
+	display: flex;
+    justify-content: flex-start;
+}
 .choice-btn-box {
 		    width: 150px;
 			height : 45px;
@@ -1021,16 +1033,19 @@
 			color: #666;
 		}
 
-
-
-
-
+#choice-btn-box1, #choice-btn-box2, #choice-btn-box3{
+	margin-right: 20px;
+}
+#write-title-section{
+	margin: 0 auto;
+    width: 88%;
+}
 
 /*
 	마이페이지 css
 */
 #write-list-box {
-  padding-top: 8%;
+  padding-top: 15px;
   margin: 0 auto;
   width: 88%;
   height: 100%;

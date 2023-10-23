@@ -63,4 +63,12 @@ public class AppServiceImpl implements AppService {
 		return result;
 	}
 
+	// 이승현 왔다감
+	// 마이페이지 작성한 입양신청서 리스트 출력
+	@Override
+	public List<App> selectAppListById(String userId) {
+		List<App> aList = aStore.selectAppListById(sqlSession, userId);
+		return aList;
+	}
+
 }

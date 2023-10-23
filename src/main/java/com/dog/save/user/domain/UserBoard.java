@@ -1,6 +1,7 @@
 package com.dog.save.user.domain;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.Data;
 
@@ -22,6 +23,19 @@ public class UserBoard {
 	private long userFileLength;
 	private String adminCheck;
 	private Date userCreateDate;
+	
+	private int boardNo;
+	private String boardTitle;
+	private String boardContent;
+	private String boardWriter;
+	private Timestamp createDate;
+	private Timestamp updateDate;
+	private int viewCount;
+	private String boardFileName;
+	private String boardFileRename;
+	private String boardFilePath;
+	private long boardFileLength;
+	
 	private int currentPage;
 	private int totalCount;
 	private int naviTotalCount;

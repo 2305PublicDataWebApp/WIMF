@@ -176,7 +176,14 @@ public interface DogService {
 	 * @return
 	 */
 	List<Dog> selectAllDogListMap();
-
+	
+	/**
+	 * 이승현 왔다감
+	 * 마이페이지 강아지 좋아요 리스트 Service 
+	 * @param userId
+	 * @return
+	 */
+	List<DogLike> selectLikeDogList(String userId);
 
 	
 

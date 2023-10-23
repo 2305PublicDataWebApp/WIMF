@@ -25,12 +25,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dog.save.app.domain.App;
+import com.dog.save.app.service.AppService;
 import com.dog.save.board.domain.Board;
 import com.dog.save.board.domain.bPageInfo;
 import com.dog.save.board.service.BoardService;
+import com.dog.save.dog.domain.DogLike;
+import com.dog.save.dog.service.DogService;
 import com.dog.save.user.domain.User;
 import com.dog.save.user.domain.UserBoard;
 import com.dog.save.user.service.UserService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @Controller
 @RequestMapping(value="/user/")
@@ -42,6 +48,11 @@ public class UserController {
 	@Autowired
 	private BoardService bService;
 	
+	@Autowired
+	private DogService dService;
+	
+	@Autowired
+	private AppService aService;
 	
 	// 로그인 페이지 url
 	@GetMapping(value="login.dog")
@@ -71,7 +82,9 @@ public class UserController {
 		try {
 			String sessionId = (String)session.getAttribute("userId");
 			if(sessionId != null) {
-				
+				Integer totalCount = bService.getListCount();
+				bPageInfo bpInfo = this.getPageInfo(currentPage, totalCount);
+				model.addAttribute("bpInfo", bpInfo);
 				return "user/myPage";
 			} else {
 				model.addAttribute("msg", "로그인이 필요한 기능입니다.");
@@ -91,7 +104,7 @@ public class UserController {
 	@PostMapping(value="myPageBoardList.dog", produces="application/json;charset=utf-8")
 	public String showUserBoardList(
 			HttpSession session
-			, @RequestParam(value="page", required=false) Integer currentPage
+			, @RequestParam(value="page", required=false, defaultValue="1") Integer currentPage
 			) {
 		try {
 			String userId = (String)session.getAttribute("userId");
@@ -100,12 +113,44 @@ public class UserController {
 			UserBoard uBoard = new UserBoard(userId, bpInfo.getCurrentPage(), bpInfo.getTotalCount(), bpInfo.getNaviTotalCount(), bpInfo.getRecordCountPerPage()
 					, bpInfo.getNaviCountPerPage(), bpInfo.getStartNavi(), bpInfo.getEndNavi());
 			List<UserBoard> uBList = bService.selectBoardListById(uBoard);
-//			List<Board> bList = bService.selectBoardList(bpInfo);
 			if(uBList.size() > 0 || !uBList.isEmpty()) {
-//				("bList", bList)("bpInfo", bpInfo);
-				return "";
+				Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+				return gson.toJson(uBList);
 			} else {
-				return "";
+				return "false";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "false";
+		}
+	}
+	
+	// ajax 마이페이지 좋아요 누른 게시물 리스트 출력
+	@ResponseBody
+	@PostMapping(value="myPageLikeList.dog", produces="application/json;charset=utf-8")
+	public String showUserLikeList(HttpSession session) {
+		try {
+			String userId = (String)session.getAttribute("userId");
+			List<DogLike> dLList = dService.selectLikeDogList(userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "false";
+		}
+		return "";
+	}
+	
+	// ajax 마이페이지 신청중인 입양신청서 게시물 리스트 출력
+	@ResponseBody
+	@PostMapping(value="myPageAdoptList.dog", produces="application/json;charset=utf-8")
+	public String showDogAdoptList(HttpSession session) {
+		try {
+			String userId = (String)session.getAttribute("userId");
+			List<App> aList = aService.selectAppListById(userId);
+			if(aList.size() > 0 || !aList.isEmpty()) {
+				Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+				return gson.toJson(aList);
+			} else {
+				return "false";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
