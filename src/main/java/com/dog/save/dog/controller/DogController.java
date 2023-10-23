@@ -128,7 +128,7 @@ public class DogController {
 		try {
 			int result = dService.deleteDog(dogNo); // 강아지 번호로 돌봄 강아지 삭제			
 			if(result>0) {
-				mv.setViewName("dog/dogList"); // 돌봄 강아지 전체 리스트로 이동
+				mv.setViewName("redirect:/dog/list.dog"); // 돌봄 강아지 전체 리스트로 이동
 			}else {
 				mv.addObject("msg", "돌봄 강아지 삭제가 완료되지 않았습니다");
 				mv.addObject("error", "돌봄 강아지 삭제 실패");
@@ -200,6 +200,7 @@ public class DogController {
 			}			
 			mv.addObject("combinedList", combinedList);
 			mv.addObject("region", region);
+			mv.addObject("sort", sort);
 			mv.addObject("pInfo", pInfo);
 			mv.setViewName("dog/dogList"); // 강아지 전체 리스트로 이동
 		} catch (Exception e) {
