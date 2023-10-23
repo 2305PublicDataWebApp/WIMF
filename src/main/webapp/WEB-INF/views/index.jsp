@@ -13,10 +13,6 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <!-- <link href="assets/img/favicon.png" rel="icon"> -->
-  <!-- <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
-
   <link href="/img/favicon.png" rel="icon">
   <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
 
@@ -25,33 +21,15 @@
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <!-- <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet"> -->
-
   <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="/vendor/aos/aos.css" rel="stylesheet">
 
-  <!-- Template Main CSS File -->
-  <!-- <link href="assets/css/main.css" rel="stylesheet"> -->
-
   <link href="/css/header.css" rel="stylesheet">
   <link href="/css/footer.css" rel="stylesheet">
   <link href="/css/main.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Append
-  * Updated: Sep 18 2023 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/append-bootstrap-website-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
   
   <!-- 풀캘린더 -->
   <link href='/vendor/fullcalendar-5/lib/main.css' rel='stylesheet' />
@@ -78,11 +56,11 @@
 
                 return year + "년 " + month + "월";
               },
-              headerToolbar: {
+              /* headerToolbar: {
                 left: 'prev,next today',
                 center: 'title',
                 right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-              },
+              }, */
               editable: true,
               droppable: true, // this allows things to be dropped onto the calendar
               selectable: true,	// 날짜 선택
@@ -310,11 +288,11 @@
 
               return year + "년 " + month + "월";
             },
-            headerToolbar: {
+            /* headerToolbar: {
               left: 'prev,next today',
               center: 'title',
               right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-            },
+            }, */
             editable: true,
             droppable: true, // this allows things to be dropped onto the calendar
             selectable: true,	// 날짜 선택
@@ -529,26 +507,6 @@
 	<!-- header -->
   <jsp:include page="/WEB-INF/views/include/header.jsp"></jsp:include>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <main id="main">
 
     <!-- Hero Section - Home Page -->
@@ -561,12 +519,6 @@
           <div class="col-lg-10">
             <h2 data-aos="fade-up" data-aos-delay="100">WIMF</h2>
             <p data-aos="fade-up" data-aos-delay="200">Where Is My Family?</p>
-          </div>
-          <div class="col-lg-5">
-            <!-- <form action="#" class="sign-up-form d-flex" data-aos="fade-up" data-aos-delay="300">
-              <input type="text" class="form-control" placeholder="Enter email address">
-              <input type="submit" class="btn btn-primary" value="Sign up">
-            </form> -->
           </div>
         </div>
       </div>
@@ -581,27 +533,27 @@
         <div class="row gy-4">
 
           <div class="col-xl-2 col-md-3 col-6 client-logo">
-            <img src="/img/clients/client-1.png" class="img-fluid" alt="">
+            <img src="/img/main/한국유기동물보호협회1.jpg" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
           <div class="col-xl-2 col-md-3 col-6 client-logo">
-            <img src="/img/clients/client-2.png" class="img-fluid" alt="">
+            <img src="/img/main/동물보호연대1.jpg" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
           <div class="col-xl-2 col-md-3 col-6 client-logo">
-            <img src="/img/clients/client-3.png" class="img-fluid" alt="">
+            <img src="/img/main/동물자유연대1.png" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
           <div class="col-xl-2 col-md-3 col-6 client-logo">
-            <img src="/img/clients/client-4.png" class="img-fluid" alt="">
+            <img src="/img/main/동물권행동카라2.jpg" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
           <div class="col-xl-2 col-md-3 col-6 client-logo">
-            <img src="/img/clients/client-5.png" class="img-fluid" alt="">
+            <img src="/img/main/도로시지켜줄개.png" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
           <div class="col-xl-2 col-md-3 col-6 client-logo">
-            <img src="/img/clients/싱글벙글 댕댕이의 세계_.JPG" class="img-fluid" alt="">
+            <img src="/img/main/유엄빠1.jpeg" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
         </div>
@@ -613,7 +565,7 @@
     <!-- Stats Section - Home Page -->
     <section id="stats" class="stats">
 
-      <img src="/img/stats-bg.jpg" alt="" data-aos="fade-in">
+      <img src="/img/main/카운트.jpg" alt="" data-aos="fade-in">
 
       <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
 
@@ -654,20 +606,6 @@
 
     </section><!-- End Stats Section -->
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- Pricing Section - Home Page -->
     <c:if test="${sessionScope.userId ne null}">
     
@@ -676,7 +614,7 @@
       <!--  Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Calendar</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p>일정을 관리할 수 있습니다. 일정을 등록하고, 옮기고, 눌러보세요!</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -760,30 +698,13 @@
     
     </c:if>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
     <!-- Team Section - Home Page -->
     <section id="team" class="team">
 
       <!--  Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>돌봄 대기리스트</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p>돌봄을 기다리고 있는 친구들 입니다. 따뜻한 손길을 내어주세요!</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -798,15 +719,11 @@
                   <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
                   <div class="social" onclick="showDogDetail(${combinedList.dog.dogNo})">
                     <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }">보러가기</a>
-                    <!-- <a href="#"><i class="bi bi-twitter"></i></a>
-                    <a href="#"><i class="bi bi-facebook"></i></a>
-                    <a href="#"><i class="bi bi-instagram"></i></a>
-                    <a href="#"><i class="bi bi-linkedin"></i></a> -->
                   </div>
                 </div>
                 <div class="member-info text-center">
                   <h4>${combinedList.dog.dogName }</h4>
-                  <span>${combinedList.dog.dogWeight }kg, ${combinedList.dog.dogAge }살, ${combinedList.dog.dogHealth }</span>
+                  <span>${combinedList.dog.dogAge }살, ${combinedList.dog.dogWeight }kg, ${combinedList.dog.dogHealth }</span>
                   <p>${combinedList.dog.dogInfo }</p>
                 </div>
               </div>
@@ -814,108 +731,17 @@
             </c:if>
           </c:forEach>
 
-          <!-- <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="200">
-            <div class="member-img">
-              <img src="/img/team/team-2.jpg" class="img-fluid" alt="">
-              <div class="social">
-                <a href="#"><i class="bi bi-twitter"></i></a>
-                <a href="#"><i class="bi bi-facebook"></i></a>
-                <a href="#"><i class="bi bi-instagram"></i></a>
-                <a href="#"><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-            <div class="member-info text-center">
-              <h4>Sarah Jhonson</h4>
-              <span>Product Manager</span>
-              <p>Labore ipsam sit consequatur exercitationem rerum laboriosam laudantium aut quod dolores exercitationem ut</p>
-            </div>
-          </div>End Team Member
-
-          <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="300">
-            <div class="member-img">
-              <img src="/img/team/team-3.jpg" class="img-fluid" alt="">
-              <div class="social">
-                <a href="#"><i class="bi bi-twitter"></i></a>
-                <a href="#"><i class="bi bi-facebook"></i></a>
-                <a href="#"><i class="bi bi-instagram"></i></a>
-                <a href="#"><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-            <div class="member-info text-center">
-              <h4>William Anderson</h4>
-              <span>CTO</span>
-              <p>Illum minima ea autem doloremque ipsum quidem quas aspernatur modi ut praesentium vel tque sed facilis at qui</p>
-            </div>
-          </div>End Team Member
-
-          <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="400">
-            <div class="member-img">
-              <img src="/img/team/team-4.jpg" class="img-fluid" alt="">
-              <div class="social">
-                <a href="#"><i class="bi bi-twitter"></i></a>
-                <a href="#"><i class="bi bi-facebook"></i></a>
-                <a href="#"><i class="bi bi-instagram"></i></a>
-                <a href="#"><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-            <div class="member-info text-center">
-              <h4>Amanda Jepson</h4>
-              <span>Accountant</span>
-              <p>Magni voluptatem accusamus assumenda cum nisi aut qui dolorem voluptate sed et veniam quasi quam consectetur</p>
-            </div>
-          </div>End Team Member
-
-          <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="500">
-            <div class="member-img">
-              <img src="/img/team/team-5.jpg" class="img-fluid" alt="">
-              <div class="social">
-                <a href="#"><i class="bi bi-twitter"></i></a>
-                <a href="#"><i class="bi bi-facebook"></i></a>
-                <a href="#"><i class="bi bi-instagram"></i></a>
-                <a href="#"><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-            <div class="member-info text-center">
-              <h4>Brian Doe</h4>
-              <span>Marketing</span>
-              <p>Qui consequuntur quos accusamus magnam quo est molestiae eius laboriosam sunt doloribus quia impedit laborum velit</p>
-            </div>
-          </div>End Team Member
-
-          <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="600">
-            <div class="member-img">
-              <img src="/img/team/team-6.jpg" class="img-fluid" alt="">
-              <div class="social">
-                <a href="#"><i class="bi bi-twitter"></i></a>
-                <a href="#"><i class="bi bi-facebook"></i></a>
-                <a href="#"><i class="bi bi-instagram"></i></a>
-                <a href="#"><i class="bi bi-linkedin"></i></a>
-              </div>
-            </div>
-            <div class="member-info text-center">
-              <h4>Josepha Palas</h4>
-              <span>Operation</span>
-              <p>Sint sint eveniet explicabo amet consequatur nesciunt error enim rerum earum et omnis fugit eligendi cupiditate vel</p>
-            </div>
-          </div>End Team Member
-
-        </div>
-
-      </div>
-
-    </section>End Team Section -->
-
     <!-- Call-to-action Section - Home Page -->
     <section id="call-to-action" class="call-to-action">
 
-      <img src="/img/cta-bg.jpg" alt="">
+      <img src="/img/main/후원.jpg" alt="">
 
       <div class="container">
         <div class="row justify-content-center" data-aos="zoom-in" data-aos-delay="100">
           <div class="col-xl-10">
             <div class="text-center">
               <h3>후원을 기다립니다</h3>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <p>도움을 우선하는 친구들을 볼 수 있습니다.</p>
               <a class="cta-btn" href="/dog/list.dog?region=all&sort=euthanasia">후원하기</a>
             </div>
           </div>
@@ -931,14 +757,14 @@
 
         <div class="row align-items-center">
 
-          <div class="col-lg-3 info" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-4 info" data-aos="fade-up" data-aos-delay="100">
             <h3>소통 게시판</h3>
             <p>
               돌봄으로 나눈 마음을 공유해주세요!
             </p>
           </div>
 
-          <div class="col-lg-9" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
 
             <div class="swiper">
               <template class="swiper-config">
@@ -946,7 +772,7 @@
                 "loop": true,
                 "speed" : 600,
                 "autoplay": {
-                "delay": 3000
+                "delay": 3500
                 },
                 "slidesPerView": "auto",
                 "pagination": {
@@ -959,7 +785,7 @@
               <div class="swiper-wrapper">
 
 				  <c:forEach var="bList" items="${bList}" varStatus="loop">
-		           	  <c:if test="${loop.index < 10}">
+		           	  <c:if test="${loop.index < 5}">
 		                <!-- Start testimonial item -->
 		                <div class="swiper-slide">
 		                  <div class="testimonial-item">
@@ -978,7 +804,7 @@
 		                        </div> -->
 		                      </div>
 		                    </div>
-		                    <div style="overflow-y: scroll; height: 400px;">
+		                    <div style="overflow-y: scroll; height: 350px;">
 			                    <p>
 			                      <i class="bi bi-quote quote-icon-left"></i>
 			                      <span>${bList.boardContent }</span>
@@ -990,87 +816,6 @@
 		                <!-- End testimonial item -->
 		              </c:if>
 	              </c:forEach>
-
-                <!-- <div class="swiper-slide">
-                  <div class="testimonial-item">
-                    <div class="d-flex">
-                      <img src="/img/testimonials/testimonials-2.jpg" class="testimonial-img flex-shrink-0" alt="">
-                      <div>
-                        <h3>Sara Wilsson</h3>
-                        <h4>Designer</h4>
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <p>
-                      <i class="bi bi-quote quote-icon-left"></i>
-                      <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
-                      <i class="bi bi-quote quote-icon-right"></i>
-                    </p>
-                  </div>
-                </div>End testimonial item
-
-                <div class="swiper-slide">
-                  <div class="testimonial-item">
-                    <div class="d-flex">
-                      <img src="/img/testimonials/testimonials-3.jpg" class="testimonial-img flex-shrink-0" alt="">
-                      <div>
-                        <h3>Jena Karlis</h3>
-                        <h4>Store Owner</h4>
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <p>
-                      <i class="bi bi-quote quote-icon-left"></i>
-                      <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
-                      <i class="bi bi-quote quote-icon-right"></i>
-                    </p>
-                  </div>
-                </div>End testimonial item
-
-                <div class="swiper-slide">
-                  <div class="testimonial-item">
-                    <div class="d-flex">
-                      <img src="/img/testimonials/testimonials-4.jpg" class="testimonial-img flex-shrink-0" alt="">
-                      <div>
-                        <h3>Matt Brandon</h3>
-                        <h4>Freelancer</h4>
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <p>
-                      <i class="bi bi-quote quote-icon-left"></i>
-                      <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
-                      <i class="bi bi-quote quote-icon-right"></i>
-                    </p>
-                  </div>
-                </div>End testimonial item
-
-                <div class="swiper-slide">
-                  <div class="testimonial-item">
-                    <div class="d-flex">
-                      <img src="/img/testimonials/testimonials-5.jpg" class="testimonial-img flex-shrink-0" alt="">
-                      <div>
-                        <h3>John Larson</h3>
-                        <h4>Entrepreneur</h4>
-                        <div class="stars">
-                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <p>
-                      <i class="bi bi-quote quote-icon-left"></i>
-                      <span>Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.</span>
-                      <i class="bi bi-quote quote-icon-right"></i>
-                    </p>
-                  </div>
-                </div> -->
-                <!-- End testimonial item -->
 
               </div>
               <div class="swiper-pagination"></div>
@@ -1090,42 +835,12 @@
       <!--  Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>후기 게시판</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p>'돌봄' 그리고 '입양'으로 행복한 시간을 보내고 있는 친구들의 글을 읽을 수 있어요!</p>
       </div><!-- End Section Title -->
 
       <div class="container">
 
         <div class="row gy-4">
-
-
-			<!-- Start post list item -->
-          <!-- <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <article>
-
-              <div class="post-img">
-                <img src="/img/blog/blog-1.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Politics</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Dolorum optio tempore voluptas dignissimos</a>
-              </h2>
-
-              <div class="d-flex align-items-center">
-                <img src="/img/blog/blog-author.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                <div class="post-meta">
-                  <p class="post-author">Maria Doe</p>
-                  <p class="post-date">
-                    <time datetime="2022-01-01">Jan 1, 2022</time>
-                  </p>
-                </div>
-              </div>
-
-            </article>
-          </div> -->
-          <!-- End post list item -->
-          
           
           <c:forEach var="aList" items="${aList}" varStatus="loop">
             <c:if test="${loop.index < 6}">
@@ -1174,64 +889,11 @@
             </c:if>
           </c:forEach>
 			
-          
-
-			<!-- Start post list item -->
-          <!-- <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <article>
-
-              <div class="post-img">
-                <img src="/img/blog/blog-3.jpg" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Entertainment</p>
-
-              <h2 class="title">
-                <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
-              </h2>
-
-              <div class="d-flex align-items-center">
-                <img src="/img/blog/blog-author-3.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
-                <div class="post-meta">
-                  <p class="post-author">Mark Dower</p>
-                  <p class="post-date">
-                    <time datetime="2022-01-01">Jun 22, 2022</time>
-                  </p>
-                </div>
-              </div>
-
-            </article>
-          </div> -->
-          <!-- End post list item -->
-
         </div><!-- End recent posts list -->
 
       </div>
 
     </section><!-- End Recent-posts Section -->
-
-    
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <!-- Portfolio Section - Home Page -->
     <section id="portfolio" class="portfolio">
@@ -1239,7 +901,7 @@
       <!--  Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>'WIMF'를 거쳐간 친구들</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p>기억할 수 있는 곳입니다.</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -1255,148 +917,56 @@
 
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
           
-          <c:forEach var="combinedList" items="${combinedList}">
+          <c:forEach var="combinedList" items="${combinedList}" varStatus="loop">
+          	<c:if test="${loop.index < 10}">
           
-            <!-- 입양 -->
-            <c:if test="${String(combinedList.dog.dogAdopt) eq 'Y'}">
-	            <!-- Start Portfolio Item -->
-	            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-	              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
-	              <div class="portfolio-info">
-	                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
-	                <p>${combinedList.dog.dogPStartDate }~</p>
-	                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-	                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-	              </div>
-	            </div>
-	            <!-- End Portfolio Item -->
+	            <!-- 입양 -->
+	            <c:if test="${String(combinedList.dog.dogAdopt) eq 'Y'}">
+		            <!-- Start Portfolio Item -->
+		            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+		              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
+		              <div class="portfolio-info">
+		                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
+		                <p>${combinedList.dog.dogPStartDate }~</p>
+		                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+		                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+		              </div>
+		            </div>
+		            <!-- End Portfolio Item -->
+	            </c:if>
+	          
+	          	<!-- 돌봄 -->
+	            <c:if test="${String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate != null && combinedList.dog.dogPEndDate == null}">
+		            <!-- Start Portfolio Item -->
+		            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+		              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
+		              <div class="portfolio-info">
+		                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
+		                <p>${combinedList.dog.dogPStartDate }~${combinedList.dog.dogPEndDate }</p>
+		                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+		                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+		              </div>
+		            </div>
+		            <!-- End Portfolio Item -->
+	            </c:if>
+	            
+	            <!-- 대기 -->
+	            <c:if test="${String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate == null && combinedList.dog.dogPEndDate == null}">
+		            <!-- Start Portfolio Item -->
+			        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+		              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
+		              <div class="portfolio-info">
+		                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
+		                <p>${combinedList.dog.dogAge }살, ${combinedList.dog.dogWeight }kg, ${combinedList.dog.dogHealth }, ${combinedList.dog.dogInfo }</p>
+		                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+		                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+		              </div>
+		            </div>
+		            <!-- End Portfolio Item -->
+	            </c:if>
+	            
             </c:if>
-          
-          	<!-- 돌봄 -->
-            <c:if test="${String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate != null && combinedList.dog.dogPEndDate == null}">
-	            <!-- Start Portfolio Item -->
-	            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-	              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
-	              <div class="portfolio-info">
-	                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
-	                <p>${combinedList.dog.dogPStartDate }~${combinedList.dog.dogPEndDate }</p>
-	                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-	                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-	              </div>
-	            </div>
-	            <!-- End Portfolio Item -->
-            </c:if>
-            
-            <!-- 대기 -->
-            <c:if test="${String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate == null && combinedList.dog.dogPEndDate == null}">
-	            <!-- Start Portfolio Item -->
-		        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-	              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
-	              <div class="portfolio-info">
-	                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
-	                <p>${combinedList.dog.dogAge }살, ${combinedList.dog.dogWeight }kg, ${combinedList.dog.dogInfo }</p>
-	                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-	                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-	              </div>
-	            </div>
-	            <!-- End Portfolio Item -->
-            </c:if>
-            
           </c:forEach>
-
-			<!-- Start Portfolio Item -->
-            <!-- <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <img src="/img/masonry-portfolio/masonry-portfolio-1.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 1</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="/img/masonry-portfolio/masonry-portfolio-1.jpg" title="App 1" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div> -->
-            <!-- End Portfolio Item -->
-
-            <!-- <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="/img/masonry-portfolio/masonry-portfolio-2.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Product 1</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="/img/masonry-portfolio/masonry-portfolio-2.jpg" title="Product 1" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div> -->
-            <!-- End Portfolio Item -->
-
-            <!-- <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <img src="/img/masonry-portfolio/masonry-portfolio-3.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Branding 1</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="/img/masonry-portfolio/masonry-portfolio-3.jpg" title="Branding 1" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>End Portfolio Item
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <img src="/img/masonry-portfolio/masonry-portfolio-4.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 2</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="/img/masonry-portfolio/masonry-portfolio-4.jpg" title="App 2" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>End Portfolio Item
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="/img/masonry-portfolio/masonry-portfolio-5.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Product 2</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="/img/masonry-portfolio/masonry-portfolio-5.jpg" title="Product 2" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>End Portfolio Item
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <img src="/img/masonry-portfolio/masonry-portfolio-6.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Branding 2</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="/img/masonry-portfolio/masonry-portfolio-6.jpg" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>End Portfolio Item
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <img src="/img/masonry-portfolio/masonry-portfolio-7.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>App 3</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="/img/masonry-portfolio/masonry-portfolio-7.jpg" title="App 3" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>End Portfolio Item
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="/img/masonry-portfolio/masonry-portfolio-8.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Product 3</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="/img/masonry-portfolio/masonry-portfolio-8.jpg" title="Product 3" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div>End Portfolio Item
-
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <img src="/img/masonry-portfolio/masonry-portfolio-9.jpg" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>Branding 3</h4>
-                <p>Lorem ipsum, dolor sit</p>
-                <a href="/img/masonry-portfolio/masonry-portfolio-9.jpg" title="Branding 2" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                <a href="portfolio-details.html" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-              </div>
-            </div> -->
-            <!-- End Portfolio Item -->
 
           </div><!-- End Portfolio Container -->
 
@@ -1406,95 +976,13 @@
 
     </section><!-- End Portfolio Section -->
 
-    
-
-    
-
-    <!-- Features Section - Home Page -->
-    <!-- <section id="features" class="features">
-
-       Section Title
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Features</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
-      </div>End Section Title
-
-      <div class="container">
-
-        <div class="row gy-4 align-items-center features-item">
-          <div class="col-lg-5 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
-            <h3>Corporis temporibus maiores provident</h3>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-            </p>
-            <a href="#" class="btn btn-get-started">Get Started</a>
-          </div>
-          <div class="col-lg-7 order-1 order-lg-2 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="100">
-            <div class="image-stack">
-              <img src="/img/features-light-1.jpg" alt="" class="stack-front">
-              <img src="/img/features-light-2.jpg" alt="" class="stack-back">
-            </div>
-          </div>
-        </div>Features Item
-
-        <div class="row gy-4 align-items-stretch justify-content-between features-item ">
-          <div class="col-lg-6 d-flex align-items-center features-img-bg" data-aos="zoom-out">
-            <img src="/img/features-light-3.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-lg-5 d-flex justify-content-center flex-column" data-aos="fade-up">
-            <h3>Sunt consequatur ad ut est nulla</h3>
-            <p>Cupiditate placeat cupiditate placeat est ipsam culpa. Delectus quia minima quod. Sunt saepe odit aut quia voluptatem hic voluptas dolor doloremque.</p>
-            <ul>
-              <li><i class="bi bi-check"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-              <li><i class="bi bi-check"></i><span> Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-              <li><i class="bi bi-check"></i> <span>Facilis ut et voluptatem aperiam. Autem soluta ad fugiat</span>.</li>
-            </ul>
-            <a href="#" class="btn btn-get-started align-self-start">Get Started</a>
-          </div>
-        </div>Features Item
-
-      </div>
-
-    </section> -->
-    <!-- End Features Section -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- Services Section - Home Page -->
     <section id="services" class="services">
 
       <!--  Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>'임시보호' 란?</h2>
-        <p>What is fostering?</p>
+        <p>What is 'Fostering' ?</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -1665,7 +1153,6 @@
       </div>
 
     </section><!-- End Faq Section -->
-    
 
     <!-- About Section - Home Page -->
     <section id="about" class="about">
@@ -1679,7 +1166,7 @@
             <p>
               Where Is My Family?
               <br>
-              벽이 높은 임시보호에 부담을 덜어드립니다.
+              임시보호에 부담을 덜어드릴게요!
             </p>
             <!-- <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a> -->
           </div>
@@ -1733,7 +1220,7 @@
       <!--  Section Title -->
       <div class="container section-title" data-aos="fade-up">
         <h2>Contact</h2>
-        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+        <p>건의사항이나 궁금한 점이 있다면 언제든 메일을 보내주세요!</p>
       </div><!-- End Section Title -->
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -1756,8 +1243,7 @@
                 <div class="info-item" data-aos="fade" data-aos-delay="300">
                   <i class="bi bi-telephone"></i>
                   <h3>Call Us</h3>
-                  <p>+1 5589 55488 55</p>
-                  <p>+1 6678 254445 41</p>
+                  <p>02 5321 2312</p>
                 </div>
               </div><!-- End Info Item -->
 
@@ -1765,8 +1251,7 @@
                 <div class="info-item" data-aos="fade" data-aos-delay="400">
                   <i class="bi bi-envelope"></i>
                   <h3>Email Us</h3>
-                  <p>info@example.com</p>
-                  <p>contact@example.com</p>
+                  <p>teamWIMF@wimf.com</p>
                 </div>
               </div><!-- End Info Item -->
 
@@ -1784,31 +1269,33 @@
           </div>
 
           <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <form action="/sendMail.dog" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+           	  <input type="hidden" id="user-ck-email">
               <div class="row gy-4">
 
                 <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                  <input type="text" class="form-control" name="user-name" id="user-name" placeholder="Your Name" required>
                 </div>
 
                 <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                  <input type="email" class="form-control" name="user-email" id="user-email" placeholder="Your Email" required>
+                  <span id="email-msg" class="dupl-msg" style="display: none;"></span>
                 </div>
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                  <input type="text" class="form-control" name="user-email-subject" id="user-email-subject" placeholder="Subject" required>
                 </div>
 
                 <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                  <textarea class="form-control" name="user-email-content" id="user-email-content" rows="6" placeholder="Message" required></textarea>
                 </div>
 
                 <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                  <div class="loading" id="email-send-loading">Loading</div>
+                  <!-- <div class="error-message" id="email-send-loading">Your message has been sent. Thank you!</div> -->
+                  <div class="sent-message" id="email-send-msg">Your message has been sent. Thank you!</div>
 
-                  <button type="submit">Send Message</button>
+                  <button type="submit" id="sendEmail-btn">Send Message</button>
                 </div>
 
               </div>
@@ -1822,13 +1309,7 @@
     </section><!-- End Contact Section -->
 
   </main>
-
-
-
-
-
-
-
+  
 <!-- footer -->
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
 
@@ -1895,8 +1376,8 @@
 	        liElement.html('• 제목 : ' + event.title
 	          + '&emsp;&emsp;&emsp; • 강아지 번호 : ' + event.dogNo
 	          + '&emsp;&emsp;&emsp; • 강아지 : ' + event.dogName
-	          + '&emsp;&emsp;&emsp; • 기간 : ' + event.start + ' ~ ' + event.end);
-	          + '&emsp;&emsp;&emsp; • 내용 : ' + event.content
+	          + '&emsp;&emsp;&emsp; • 기간 : ' + event.start + ' ~ ' + event.end
+	          + '&emsp;&emsp;&emsp; • 내용 : ' + event.content);
 	
 	        // ul에 li 엘리먼트를 추가합니다.
 	        ulElement.append(liElement);
@@ -1926,6 +1407,80 @@
       var url = "/dog/detail.dog?dogNo=" + dogNo;
       window.location.href = url;	    	    
     }
+ 	
+ 	// 이메일 정규식 유효성 ajax
+	$(document).ready(function() {
+		var userEmailTag = $("#user-email");
+		userEmailTag.on("change", function() {
+			var userEmail = userEmailTag.val();
+			
+			$.ajax({
+				url : "/checkDuplUserEmail.dog",
+				type : "POST",
+				data : { userEmail : userEmail },
+				success : function(data) {
+					var msg = "";
+    				var emailMsg = $("#email-msg");
+    				
+    				if(data == "false1") {
+    					emailMsg.removeClass("success").addClass("error");
+    					$("#user-ck-email").attr("value","false");
+    					msg = "이메일 형식만 가능합니다.";
+    					
+    				} else if(data == "false2") {
+    					emailMsg.removeClass("error").addClass("success");
+    					$("#user-ck-email").attr("value","true");
+        				msg = "사용 가능한 이메일 입니다.";
+        				
+    				} else {
+        				alert("오류");
+    				}
+    				
+    				emailMsg.text(msg).show();
+				},
+				error : function() {
+					alert("Ajax 오류, 관리자에게 문의바랍니다.");
+				}
+			});
+		});
+	});
+ 	
+ 	// 이메일 보내기 ajax
+ 	$(document).ready(function() {
+		$("#sendEmail-btn").on("click",function(){
+			var emailVal = $("#user-email").val();
+			if (emailVal == null || emailVal == ""){
+				alert("이메일을 먼저 입력해주세요.");
+				return;
+			}
+			if ($("#user-ck-email").val() === "false"){
+				alert("사용할 수 없는 이메일입니다.");
+				return;
+			} else {
+				$.ajax({
+					url : "/sendMail.dog",
+					type : "POST",
+					data : {
+						userName : $("#user-name").val()
+						, userEmail : $("#user-email").val()
+						, userEmailSubject : $("#user-email-subject").val()
+						, userEmailContent : $("#user-email-content").val()
+					},
+					success : function() {
+						$("#email-send-loading").removeClass('d-block');
+						$("#email-send-msg").addClass('d-block');
+						/* $("#email-send-msg").text("Your message has been sent. Thank you!").show(); */
+					},
+					error : function() {
+						alert("ajax 오류, 관리자에게 문의 바랍니다.");
+					},
+					complete : function() {
+						
+					}
+				});
+			}
+		});
+	});
  	
   </script>
 

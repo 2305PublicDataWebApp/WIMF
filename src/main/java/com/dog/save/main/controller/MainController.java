@@ -2,6 +2,9 @@ package com.dog.save.main.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,6 +29,7 @@ import com.dog.save.dog.domain.DogSet;
 import com.dog.save.dog.service.DogService;
 import com.dog.save.donation.domain.Donation;
 import com.dog.save.donation.service.DonationService;
+import com.dog.save.mail.service.MailService;
 import com.dog.save.user.domain.User;
 import com.dog.save.user.service.UserService;
 
@@ -41,8 +45,10 @@ public class MainController {
 	private UserService uService;
 	@Autowired
 	private AdoptService aService;
+	@Autowired
+	private MailService mService;
 	
-	//==================== main 리스트 조회 ====================
+	// ==================== main 리스트 조회 ====================
 	@GetMapping("")
 	public String boardAllListView(Model model) {
 
@@ -103,6 +109,36 @@ public class MainController {
 		model.addAttribute("aList", aList);
 		
 		return "index";
+	}
+	
+	// ==================== ajax 회원가입 이메일 중복체크 및 유효성 체크 ====================
+	@ResponseBody
+	@PostMapping(value="checkDuplUserEmail.dog")
+	public String checkDuplUserEmail(@RequestParam("userEmail") String userEmail) {
+		boolean isValid = emailIsValid(userEmail);
+		if(isValid) {
+			return "false2";
+		} else {
+			return "false1";
+		}
+	}
+	
+	// ==================== 이메일 유효성 체크 정규식 ====================
+	private boolean emailIsValid(String userEmail) {
+		String pattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
+		Pattern compiledPattern = Pattern.compile(pattern);
+        Matcher matcher = compiledPattern.matcher(userEmail);
+        boolean isValid = matcher.matches();
+		return isValid;
+	}
+	
+	// ==================== 이메일 보내기 ====================
+	@ResponseBody
+	@PostMapping(value="sendMail.dog")
+	public String MailSend(@RequestParam Map<String, String> emailParams) {
+		String userVoiceEmail = mService.MailSenderToWimfFromUser(emailParams);
+		System.out.println(userVoiceEmail);
+		return userVoiceEmail;
 	}
 	
 }
