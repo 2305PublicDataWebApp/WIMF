@@ -37,33 +37,25 @@
       <h3 style="padding-bottom: 2%;">글 상세</h3>
       <div id="board">
         <div id="board-content">
-          <div id="borad-subject">
-            <tr>
-            	<th><a style="font-weight:bold">${board.boardTitle }</a></th>
-            </tr>
+          <div>
+          	<div id="board-subject">
+	            <a style="font-weight:bold">${board.boardTitle }</a>
+          	</div>
           </div>
-          <div id="borad-writer">
-          	<tr>
-          		<th><a style="font-weight:bold; color: tomato">작성자 : </a></th>
-	      		<th>${userNickName }</th>
-	      	</tr>
+          <div id="board-writer">
+          	<a style="font-weight:bold; color: tomato">작성자 : </a>
+	      	${userNickName }
           </div>
-          <div id="borad-create-date">
-          	<tr>
-          		<th><a style="font-weight:bold; color: tomato">작성일 : </a></th>
-	      		<th>
-	      			<fmt:formatDate pattern="yyyy-MM-dd a HH:mm:ss" value="${board.createDate }"/>
-	      		</th>
-	      	</tr>
+          <div id="board-create-date">
+          	<a style="font-weight:bold; color: tomato">작성일 : </a>
+	      	<fmt:formatDate pattern="yyyy-MM-dd a HH:mm:ss" value="${board.createDate }"/>
           </div>
-          <div id="borad-deep-content">
-            <tr>
-            	<th>${board.boardContent }</th>
-            </tr>
-            <div id="like-btn">
+          <div id="board-deep-content">
+            ${board.boardContent }
+          <div id="like-btn">
             	<c:if test ="${userId ne null }">
 					<i class="heart-btn"></i>
-					<span class="like-text">좋아요~!</span>
+					<span class="like-text"></span>
 				</c:if>
             </div>
           </div>

@@ -19,7 +19,7 @@
   border: 5px double gray;
   border-radius: 20px;
 }
-#container #borad-subject {
+#container #board-subject {
   margin-bottom: 10px;
   font-size: 18px;
   border-bottom: 1px solid darkgray;
@@ -27,13 +27,13 @@
   padding-left: 20px;
   color: tomato;
 }
-#container #borad-subject-value {
+#container #board-subject-value {
   border-radius: 4px;
   padding-left: 10px;
   width: 90%;
   height: 35px;
 }
-#container #borad-writer {
+#container #board-writer {
   margin-bottom: 10px;
   font-size: 18px;
   border-bottom: 1px solid darkgray;
@@ -41,32 +41,32 @@
   padding-left: 20px;
     
 }
-#container #borad-writer-value {
+#container #board-writer-value {
   border-radius: 4px;
   padding-left: 10px;
   width: 90%;
   height: 35px;
 }
-#container #borad-create-date {
+#container #board-create-date {
   margin-bottom: 10px;
   font-size: 18px;
   border-bottom: 1px solid darkgray;
   padding: 10px;
   padding-left: 20px;
 }
-#container #borad-create-date-value {
+#container #board-create-date-value {
   border-radius: 4px;
   padding-left: 10px;
   width: 90%;
   height: 35px;
 }
-#container #borad-deep-content {
+#container #board-deep-content {
   margin-bottom: 10px;
   font-size: 18px;
   padding: 10px;
   padding-left: 20px;
 }
-#container #borad-deep-content-value {
+#container #board-deep-content-value {
   border-radius: 4px;
   padding-left: 10px;
   width: 90%;
@@ -275,7 +275,6 @@
 }
 
 .heart-btn.press {
-  animation: size .4s;
   color: #e23b3b;
 }
 
