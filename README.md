@@ -7,9 +7,10 @@ WIMF는 Where Is My Family? 의 약자로<br/><br/> 주인에게 버림받아 �
 ## 🖥  Spring Tool Suite 4 - Final Team Project
 
 ### 개발기간 : 2023/09/27 ~ 2023/10/26
+
 ### 팀명 : 개판오분전
 
-## 👨‍💻 팀 역할 
+## 👨‍👦‍👦 팀 역할 
 ![Team_1](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/73df8905-366c-4ab1-abf8-d413c713774d)
   
 ## 📝 프로젝트 개요
@@ -54,3 +55,5 @@ WIMF는 Where Is My Family? 의 약자로<br/><br/> 주인에게 버림받아 �
  <img src="https://img.shields.io/badge/slack-4A154B?style=for-the-badge&logo=slack&logoColor="purple">
  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 </div>
+
+## 📺 구현 화면
