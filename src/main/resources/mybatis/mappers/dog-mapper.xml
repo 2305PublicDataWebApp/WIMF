@@ -99,16 +99,44 @@
 	
 	<!-- 기진 코드 -->
 	<select id="selectAllDogList" resultType="Dog">
-		SELECT * FROM DOG_TBL ORDER BY DOG_NO DESC
+		<![CDATA[
+			SELECT * FROM
+				(SELECT * FROM DOG_TBL ORDER BY DOG_NO DESC)
+			WHERE ROWNUM <= 10
+		]]>
 	</select>
 	<select id="selectCareList" resultType="Dog">
-		SELECT * FROM DOG_TBL WHERE DOG_P_STARTDATE IS NOT NULL AND DOG_ADOPT='N' ORDER BY DOG_NO DESC
+		<![CDATA[
+			SELECT * FROM
+				(SELECT * FROM DOG_TBL WHERE DOG_P_STARTDATE IS NOT NULL AND DOG_ADOPT='N' ORDER BY DOG_NO DESC)
+			WHERE ROWNUM <= 10
+		]]>
 	</select>
 	<select id="selectAdoptList" resultType="Dog">
-		SELECT * FROM DOG_TBL WHERE DOG_ADOPT='Y' ORDER BY DOG_NO DESC
+		<![CDATA[
+			SELECT * FROM
+				(SELECT * FROM DOG_TBL WHERE DOG_ADOPT='Y' ORDER BY DOG_NO DESC)
+			WHERE ROWNUM <= 10
+		]]>
 	</select>
 	<select id="selectNoneList" resultType="Dog">
-		SELECT * FROM DOG_TBL WHERE DOG_P_STARTDATE IS NULL AND DOG_ADOPT='N' ORDER BY DOG_NO DESC
+		<![CDATA[
+			SELECT * FROM
+				(SELECT * FROM DOG_TBL WHERE DOG_P_STARTDATE IS NULL AND DOG_ADOPT='N' ORDER BY DOG_NO DESC)
+			WHERE ROWNUM <= 10
+		]]>
+	</select>
+	<select id="getAllDogCount" resultType="_int">
+		SELECT COUNT(*) FROM DOG_TBL ORDER BY DOG_NO DESC
+	</select>
+	<select id="getCareDogCount" resultType="_int">
+		SELECT COUNT(*) FROM DOG_TBL WHERE DOG_P_STARTDATE IS NOT NULL AND DOG_ADOPT='N' ORDER BY DOG_NO DESC
+	</select>
+	<select id="getAdoptDogCount" resultType="_int">
+		SELECT COUNT(*) FROM DOG_TBL WHERE DOG_ADOPT='Y' ORDER BY DOG_NO DESC
+	</select>
+	<select id="getNoneDogCount" resultType="_int">
+		SELECT COUNT(*) FROM DOG_TBL WHERE DOG_P_STARTDATE IS NULL AND DOG_ADOPT='N' ORDER BY DOG_NO DESC
 	</select>
 	<!-- 기진 코드 -->
 	

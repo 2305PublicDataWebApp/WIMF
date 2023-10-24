@@ -329,6 +329,30 @@ public class DogServiceImpl implements DogService{
 		List<Dog> noneList = dStore.selectNoneList(session);
 		return noneList;
 	}
+
+	@Override
+	public int getAllDogCount() {
+		int result = dStore.getAllDogCount(session);
+		return result;
+	}
+
+	@Override
+	public int getCareDogCount() {
+		int result = dStore.getCareDogCount(session);
+		return result;
+	}
+
+	@Override
+	public int getAdoptDogCount() {
+		int result = dStore.getAdoptDogCount(session);
+		return result;
+	}
+
+	@Override
+	public int getNoneDogCount() {
+		int result = dStore.getNoneDogCount(session);
+		return result;
+	}
 	// 기진 코드
 
 	@Override
@@ -336,7 +360,6 @@ public class DogServiceImpl implements DogService{
 		int result = dStore.getTotalDonationByDogNo(session,dogNo);
 		return result;
 	}
-	
 	
 	
 

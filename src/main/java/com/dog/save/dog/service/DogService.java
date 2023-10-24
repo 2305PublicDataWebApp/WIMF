@@ -200,12 +200,37 @@ public interface DogService {
 	 * @return
 	 */
 	List<Dog> selectDogsByEuthanasia(PageInfo pInfo);
+	
 	// 기진 코드
 	/**
 	 * 돌봄, 입양 아닌 강아지 리스트 가져오기 Service
 	 * @return
 	 */
 	List<Dog> selectNoneList();
+
+	/**
+	 * 전체 강아지 마릿수 가져오기 service
+	 * @return
+	 */
+	int getAllDogCount();
+
+	/**
+	 * 돌봄 강아지 마릿수 가져오기 service
+	 * @return
+	 */
+	int getCareDogCount();
+
+	/**
+	 * 입양 강아지 마릿수 가져오기 service
+	 * @return
+	 */
+	int getAdoptDogCount();
+
+	/**
+	 * 대기 강아지 마릿수 가져오기 service
+	 * @return
+	 */
+	int getNoneDogCount();
 	// 기진 코드
 
 	/**
