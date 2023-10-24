@@ -33,4 +33,10 @@ public class DonationServiceImpl implements DonationService{
 		return donaList;
 	}
 
+	@Override
+	public int totalDonationAmount(int dogNo) {
+		int result = dnStore.totalDonationAmount(sqlSession, dogNo);
+		return result;
+	}
+
 }

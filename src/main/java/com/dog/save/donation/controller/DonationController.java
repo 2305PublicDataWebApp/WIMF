@@ -36,7 +36,8 @@ public class DonationController {
 	// ==================== 후원 페이지 ====================
 	@GetMapping("/money.dog")
 	public String donationView(Model model, HttpSession session
-			, @RequestParam(value="dogNo") int dogNo) {
+			, @RequestParam(value="dogNo") int dogNo
+			) {
 		String userId = (String) session.getAttribute("userId");
 		if(userId == null || userId.isEmpty()) {
 			model.addAttribute("msg", "로그인 후에 후원 할 수 있습니다");
@@ -49,9 +50,11 @@ public class DonationController {
 			Dog dog = dService.selectDogByDogNo(dogNo);
 			List<DogFile> dogFileList = dService.selectDogFileByDogNo(dogNo);
 			if(dog != null && dogFileList.size()!=0) {
+				int donationAmount = dnService.totalDonationAmount(dogNo); // 후원 금액 조회
 				model.addAttribute("user", user);
 				model.addAttribute("dog", dog);
 				model.addAttribute("dogFileList", dogFileList);
+				model.addAttribute("donationAmount", donationAmount); // 후원 금액을 모델에 추가
 				return "donation/donationWrite";
 			} else {
 				model.addAttribute("msg", "돌봄 강아지 조회가 완료되지 않았습니다");

@@ -146,10 +146,10 @@ public class BoardController {
 		bPageInfo bpInfo = this.getPageInfo(currentPage, totalCount);
 		List<Board> bList = bService.selectBoardList(bpInfo);
 		
-		for (Board board : bList) {
-			int replyCount = bService.getReplyCount(board.getBoardNo());
-			board.setReplyCount(replyCount);
-		}
+//		for (Board board : bList) {
+//			int replyCount = bService.getReplyCount(board.getBoardNo());
+//			board.setReplyCount(replyCount);
+//		}
 		model.addAttribute("bList", bList).addAttribute("bpInfo", bpInfo);
 		return "board/communityList";
 	}

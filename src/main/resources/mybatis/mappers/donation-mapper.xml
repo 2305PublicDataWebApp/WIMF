@@ -16,4 +16,11 @@
 		LEFT JOIN DOG_TBL ON DONATION_TBL.DONATION_DOG_NO = DOG_TBL.DOG_NO
 		WHERE DONATION_TBL.DONATION_USER = #{userId} AND DOG_FILE_TBL.DOG_FILE_ORDER = '1'
 	</select>
+	
+	<!-- dogNo에 해당하는 유기견의 총 후원 금액을 계산하는 쿼리 -->
+	<select id="totalDonationAmount" resultType="_int">
+        SELECT COALESCE(SUM(DONATION_MONEY), 0) 
+        FROM DONATION_TBL 
+        WHERE DONATION_DOG_NO = #{dogNo}
+    </select>
 </mapper>

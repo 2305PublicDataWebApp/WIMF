@@ -24,7 +24,7 @@
 <!-- 	</select> -->
 	<!-- 게시글 리스트 조회 -->
 	<select id="selectBoardList" resultType="Board" resultMap="BoardResultMap">
-		SELECT BOARD_TBL.*, USER_TBL.USER_NICKNAME
+		SELECT BOARD_TBL.*, USER_TBL.USER_NICKNAME, (SELECT COUNT(*) FROM REPLY_TBL WHERE REPLY_BOARD_NO = BOARD_TBL.BOARD_NO) AS REPLY_COUNT
 	    FROM BOARD_TBL
 	    LEFT JOIN USER_TBL ON BOARD_TBL.BOARD_WRITER = USER_TBL.USER_ID
 	    ORDER BY BOARD_TBL.BOARD_NO DESC
@@ -144,8 +144,8 @@
 	</update>
 	
 	<!-- 댓글 개수 -->
-	<select id="getReplyCount" resultType="int">
-        SELECT COUNT(*) FROM REPLY_TBL WHERE REPLY_BOARD_NO = #{boardNo}
-    </select>
+<!-- 	<select id="getReplyCount" resultType="int"> -->
+<!--         SELECT COUNT(*) FROM REPLY_TBL WHERE REPLY_BOARD_NO = #{boardNo} -->
+<!--     </select> -->
     
 </mapper>

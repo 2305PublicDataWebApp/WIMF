@@ -46,6 +46,13 @@
 							<label for="donationDogName" style="margin-bottom: 5%">강아지 이름</label>
 							<input type="text" name="dogName" value="${dog.dogName }" class="leftContent" id="dogName" readonly>
 						</div>
+						<div style="width: 65%; margin: 0 auto;">
+							<label style="margin-bottom: 5%">${dog.dogName } 총 후원 금액</label><br/>
+							<div id="donationAmount"></div>
+						</div>
+						<div class="progress" style="width: 65%; height: 35px; font-size: 15px; font-weight: bold; margin: 0 auto;">
+							<div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="100" aria-valuemax="100" style="width: 100%;"></div>
+						</div>
 					</div>
 				</div>
 				<div id="right-content">
@@ -243,6 +250,23 @@
             }
         });
     }
+    function formatNumber(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    
+    var donationAmount = ${donationAmount};
+
+    // 프로그레스 바 업데이트 함수
+    function updateProgressBar(donationAmount) {
+        var progressBar = document.getElementById("progress-bar");
+
+     	// 프로그레스 바 내부에 퍼센트 표시
+        progressBar.textContent = formatNumber(donationAmount) + "원";
+    }
+
+    // 프로그레스 바 업데이트 호출 (애니메이션 포함)
+    updateProgressBar(donationAmount);
+    
 </script>
 
   <!-- footer -->
