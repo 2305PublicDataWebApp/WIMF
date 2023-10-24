@@ -573,9 +573,9 @@
 				removeNavClass();
 				showUserPersnalInfo();
 				showDonationDogList();
-// 				showBoardList();
-// 				showBoardLikeList();
-// 				showAdoptApplicationList();
+				showBoardList();
+				showBoardLikeList();
+				showAdoptApplicationList();
 			});
 			
 			// 마이페이지 후원중인 강아지 리스트 출력 ajax
