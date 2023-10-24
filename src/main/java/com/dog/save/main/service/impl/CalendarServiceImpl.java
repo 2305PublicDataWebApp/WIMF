@@ -26,10 +26,11 @@ public class CalendarServiceImpl implements CalendarService {
 		int result = cStore.insertEvent(session, calendar);
 		return result;
 	}
-
+	
 	@Override
-	public Optional<Calendar> findEventByUserIdAndTitleAndStartDateAndEndDate(Map<String, Object> params) {
-		return cStore.findEventByUserIdAndTitleAndStartDateAndEndDate(session, params);
+	public int updateEvent(Map<String, Object> newParams) {
+		int result = cStore.updateEvent(session, newParams);
+		return result;
 	}
 
 	@Override
@@ -39,9 +40,9 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	@Override
-	public int updateEvent(Map<String, Object> newParams) {
-		int result = cStore.updateEvent(session, newParams);
-		return result;
+	public List<Calendar> getAllEventList(String userId) {
+		List<Calendar> allEventList = cStore.getAllEventList(session, userId);
+		return allEventList;
 	}
 
 	@Override
@@ -49,11 +50,10 @@ public class CalendarServiceImpl implements CalendarService {
 		List<Calendar> eventList = cStore.getEventListByDate(session, dateRange);
 		return eventList;
 	}
-
+	
 	@Override
-	public List<Calendar> getAllEventList(String userId) {
-		List<Calendar> AllEventList = cStore.getAllEventList(session, userId);
-		return AllEventList;
+	public Optional<Calendar> findEventByUserIdAndTitleAndStartDateAndEndDate(Map<String, Object> params) {
+		return cStore.findEventByUserIdAndTitleAndStartDateAndEndDate(session, params);
 	}
 	
 }

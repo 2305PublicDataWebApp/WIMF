@@ -533,7 +533,7 @@
         <div class="row gy-4">
 
           <div class="col-xl-2 col-md-3 col-6 client-logo">
-          	<img src="/img/main/동물권행동카라2.jpg" class="img-fluid" alt="">
+            <img src="/img/main/동물권행동카라2.jpg" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
           <div class="col-xl-2 col-md-3 col-6 client-logo">
@@ -545,7 +545,7 @@
           </div><!-- End Client Item -->
 
           <div class="col-xl-2 col-md-3 col-6 client-logo">
-          	<img src="/img/main/도로시지켜줄개.png" class="img-fluid" alt="">
+            <img src="/img/main/도로시지켜줄개.png" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
           <div class="col-xl-2 col-md-3 col-6 client-logo">
@@ -553,7 +553,7 @@
           </div><!-- End Client Item -->
 
           <div class="col-xl-2 col-md-3 col-6 client-logo">
-          	<img src="/img/main/동물보호연대1.jpg" class="img-fluid" alt="">
+            <img src="/img/main/동물보호연대1.jpg" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
         </div>
@@ -620,20 +620,20 @@
 
         <div class="row g-4">
         
-        	<div class="pricing-item"> <!-- class="featured" -->
-        	
-	            <div id='calendar'></div>
-	            <!-- 날짜 누르면 표시되는 날짜에 대한 일정 가져오기 div -->
-	            <div class="calendarList" id="calendarList">
-	              <ul id="eventList">
-	                <li></li>
-	              </ul>
-	            </div>
-		        <div class="text-center">              
-		          <button type="button" onclick="openPopup1();" class="buy-btn text-center calendarPopupBtn">등록</button>
-		        </div>
-		        
+          <div class="pricing-item"> <!-- class="featured" -->
+          
+            <div id='calendar'></div>
+            <!-- 날짜 누르면 표시되는 날짜에 대한 일정 가져오기 div -->
+            <div class="calendarList" id="calendarList">
+              <ul id="eventList">
+                <li></li>
+              </ul>
             </div>
+            <div class="text-center">              
+              <button type="button" onclick="openPopup1();" class="buy-btn text-center calendarPopupBtn">등록</button>
+            </div>
+            
+          </div>
 
         </div>
 
@@ -659,30 +659,29 @@
           <c:set var="count" value="0" />
           
           <c:forEach var="noneDogList" items="${noneDogList}" varStatus="loop">
-           	<c:if test="${loop.index < 6 }">
-	            <!-- Start Team Member -->
-	              <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="100">
-	                <div class="member-img">
-	                  <img src="${noneDogList.dogFile.dogFilePath}" class="img-fluid" alt="${noneDogList.dogFile.dogFileName}">
-	                  <div class="social" onclick="showDogDetail(${noneDogList.dog.dogNo})">
-	                    <a href="/dog/detail.dog?dogNo=${noneDogList.dog.dogNo }">보러가기</a>
-	                  </div>
-	                </div>
-	                <div class="member-info text-center">
-	                  <h4>${noneDogList.dog.dogName }</h4>
-	                  <span>${noneDogList.dog.dogAge }살, ${noneDogList.dog.dogWeight }kg, ${noneDogList.dog.dogHealth }</span>
-	                  <p>${noneDogList.dog.dogInfo }</p>
-	                </div>
-	              </div>
-	            <!-- End Team Member -->
+            <c:if test="${loop.index < 6 }">
+              <!-- Start Team Member -->
+                <div class="col-lg-4 col-md-6 member" data-aos="fade-up" data-aos-delay="100">
+                  <div class="member-img">
+                    <img src="${noneDogList.dogFile.dogFilePath}" class="img-fluid" alt="${noneDogList.dogFile.dogFileName}">
+                    <div class="social" onclick="showDogDetail(${noneDogList.dog.dogNo})">
+                      <a href="/dog/detail.dog?dogNo=${noneDogList.dog.dogNo }">보러가기</a>
+                    </div>
+                  </div>
+                  <div class="member-info text-center">
+                    <h4>${noneDogList.dog.dogName }</h4>
+                    <span>${noneDogList.dog.dogAge }살, ${noneDogList.dog.dogWeight }kg, ${noneDogList.dog.dogHealth }</span>
+                    <p>${noneDogList.dog.dogInfo }</p>
+                  </div>
+                </div>
+              <!-- End Team Member -->
             </c:if>
-		    
           </c:forEach>
           
         </div>
-         
+
       </div>
-         
+
     </section>
 
     <!-- Call-to-action Section - Home Page -->
@@ -738,38 +737,38 @@
               </template>
               <div class="swiper-wrapper">
 
-				  <c:forEach var="bList" items="${bList}" varStatus="loop">
-		           	  <c:if test="${loop.index < 5}">
-		                <!-- Start testimonial item -->
-		                <div class="swiper-slide">
-		                  <div class="testimonial-item">
-		                    <div class="d-flex">
-			                  <c:if test="${bList.userProfile == null}">
-		                        <img src="/img/user/default-profile.png" class="testimonial-img flex-shrink-0" alt="">
-			                  </c:if>
-			                  <c:if test="${bList.userProfile != null}">
-		                        <img src="${bList.userProfile }" class="testimonial-img flex-shrink-0" alt="">
-			                  </c:if>
-		                      <div>
-		                        <h3>${bList.boardTitle }</h3>
-		                        <h4>${bList.userNickName }</h4>
-		                        <!-- <div class="stars">
-		                          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-		                        </div> -->
-		                      </div>
-		                    </div>
-		                    <div style="overflow-y: scroll; height: 350px;">
-			                    <p>
-			                      <i class="bi bi-quote quote-icon-left"></i>
-			                      <span>${bList.boardContent }</span>
-			                      <i class="bi bi-quote quote-icon-right"></i>
-			                    </p>
-		                    </div>
-		                  </div>
-		                </div>
-		                <!-- End testimonial item -->
-		              </c:if>
-	              </c:forEach>
+              <c:forEach var="bList" items="${bList}" varStatus="loop">
+                <c:if test="${loop.index < 5}">
+                  <!-- Start testimonial item -->
+                  <div class="swiper-slide">
+                    <div class="testimonial-item">
+                      <div class="d-flex">
+                      <c:if test="${bList.userProfile == null}">
+                          <img src="/img/user/default-profile.png" class="testimonial-img flex-shrink-0" alt="">
+                      </c:if>
+                      <c:if test="${bList.userProfile != null}">
+                          <img src="${bList.userProfile }" class="testimonial-img flex-shrink-0" alt="">
+                      </c:if>
+                        <div>
+                          <h3>${bList.boardTitle }</h3>
+                          <h4>${bList.userNickName }</h4>
+                          <!-- <div class="stars">
+                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                          </div> -->
+                        </div>
+                      </div>
+                      <div style="overflow-y: scroll; height: 350px;">
+                        <p>
+                          <i class="bi bi-quote quote-icon-left"></i>
+                          <span>${bList.boardContent }</span>
+                          <i class="bi bi-quote quote-icon-right"></i>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End testimonial item -->
+                </c:if>
+              </c:forEach>
 
               </div>
               <div class="swiper-pagination"></div>
@@ -802,24 +801,24 @@
                 <article>
     
                   <div class="post-img">
-                  	<c:if test="${aList.adoptFilePath == null}">
-                  		<a href="/adopt/detail.dog?adoptNo=${aList.adoptNo}">
-                  			<img src="/img/user/default-profile.png" alt="후기게시판사진" class="img-fluid">
-                  		</a>
-                  	</c:if>
-                  	<c:if test="${aList.adoptFilePath != null}">
-	                  	<a href="/adopt/detail.dog?adoptNo=${aList.adoptNo}">
-	               			<img src="${aList.adoptFilePath }" alt="후기게시판사진" class="img-fluid">
-	               		</a>
-                  	</c:if>
+                    <c:if test="${aList.adoptFilePath == null}">
+                      <a href="/adopt/detail.dog?adoptNo=${aList.adoptNo}">
+                        <img src="/img/user/default-profile.png" alt="후기게시판사진" class="img-fluid">
+                      </a>
+                    </c:if>
+                    <c:if test="${aList.adoptFilePath != null}">
+                      <a href="/adopt/detail.dog?adoptNo=${aList.adoptNo}">
+                        <img src="${aList.adoptFilePath }" alt="후기게시판사진" class="img-fluid">
+                      </a>
+                    </c:if>
                   </div>
     
-    			  <c:if test="${aList.adoptType == 'care'}">
-    			  	<p class="post-category">돌봄 후기</p>
-    			  </c:if>
-    			  <c:if test="${aList.adoptType == 'adopt'}">
-    			  	<p class="post-category">입양 후기</p>
-    			  </c:if>
+                  <c:if test="${aList.adoptType == 'care'}">
+                    <p class="post-category">돌봄 후기</p>
+                  </c:if>
+                  <c:if test="${aList.adoptType == 'adopt'}">
+                    <p class="post-category">입양 후기</p>
+                  </c:if>
                   <c:url var="detailUrl" value="/adopt/detail.dog">
                     <c:param name="adoptNo" value="${aList.adoptNo }"></c:param>
                   </c:url>
@@ -833,11 +832,11 @@
                     </c:if>
                     <c:if test="${aList.userProfile != null}">
                       <img src = "${aList.userProfile }" alt="프로필사진" class="img-fluid post-author-img flex-shrink-0">
-	                </c:if>
+                    </c:if>
                     <div class="post-meta">
                       <p class="post-author">${aList.userNickName }</p>
                       <p class="post-date">
-                      	<fmt:formatDate value="${aList.adoptDate }" pattern="yyyy-MM-dd"/>~
+                        <fmt:formatDate value="${aList.adoptDate }" pattern="yyyy-MM-dd"/>~
                         <fmt:formatDate value="${aList.giveUpDate }" pattern="yyyy-MM-dd"/>
                       </p>
                     </div>
@@ -878,107 +877,107 @@
 
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
           
-          		<!-- 전체 -->
-          		<c:forEach var="combinedList" items="${combinedList}" varStatus="loop">
-          			<c:if test="${loop.index < 10}">
-          			
-          			<!-- 돌봄 -->
-			            <c:if test="${String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate ne null}">
-				            <!-- Start Portfolio Item -->
-				            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-all">
-				              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
-				              <div class="portfolio-info">
-				                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
-				                <p>${combinedList.dog.dogPStartDate } ~ ${combinedList.dog.dogPEndDate }</p>
-				                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-				                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-				              </div>
-				            </div>
-				            <!-- End Portfolio Item -->
-			            </c:if>
-		          
-			            <!-- 입양 -->
-			            <c:if test="${String(combinedList.dog.dogAdopt) eq 'Y'}">
-				            <!-- Start Portfolio Item -->
-				            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-all">
-				              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
-				              <div class="portfolio-info">
-				                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
-				                <p>입양 완료</p>
-				                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-				                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-				              </div>
-				            </div>
-				            <!-- End Portfolio Item -->
-			            </c:if>
-			            
-			            <!-- 대기 -->
-			            <c:if test="${String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate eq null}">
-				            <!-- Start Portfolio Item -->
-					        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-all">
-				              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
-				              <div class="portfolio-info">
-				                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
-				                <p>${combinedList.dog.dogAge }살, ${combinedList.dog.dogWeight }kg, ${combinedList.dog.dogHealth }, ${combinedList.dog.dogInfo }</p>
-				                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-				                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-				              </div>
-				            </div>
-				            <!-- End Portfolio Item -->
-			            </c:if>
-		            </c:if>
-	            </c:forEach>
+            <!-- 전체 -->
+            <c:forEach var="combinedList" items="${combinedList}" varStatus="loop">
+              <c:if test="${loop.index < 10}">
+              
+              <!-- 돌봄 -->
+                <c:if test="${String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate ne null}">
+                  <!-- Start Portfolio Item -->
+                  <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-all">
+                    <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
+                    <div class="portfolio-info">
+                      <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
+                      <p>${combinedList.dog.dogPStartDate } ~ ${combinedList.dog.dogPEndDate }</p>
+                      <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                      <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                    </div>
+                  </div>
+                  <!-- End Portfolio Item -->
+                </c:if>
+            
+                <!-- 입양 -->
+                <c:if test="${String(combinedList.dog.dogAdopt) eq 'Y'}">
+                  <!-- Start Portfolio Item -->
+                  <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-all">
+                    <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
+                    <div class="portfolio-info">
+                      <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
+                      <p>입양 완료</p>
+                      <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                      <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                    </div>
+                  </div>
+                  <!-- End Portfolio Item -->
+                </c:if>
+                
+                <!-- 대기 -->
+                <c:if test="${String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate eq null}">
+                  <!-- Start Portfolio Item -->
+                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-all">
+                    <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
+                    <div class="portfolio-info">
+                      <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
+                      <p>${combinedList.dog.dogAge }살, ${combinedList.dog.dogWeight }kg, ${combinedList.dog.dogHealth }, ${combinedList.dog.dogInfo }</p>
+                      <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                      <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                    </div>
+                  </div>
+                  <!-- End Portfolio Item -->
+                </c:if>
+              </c:if>
+            </c:forEach>
           
-          		<!-- 돌봄 -->
-          		<c:forEach var="careDogList" items="${careDogList}" varStatus="loop">
-          			<c:if test="${loop.index < 10}">
-		            <!-- Start Portfolio Item -->
-			            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-			              <img src="${careDogList.dogFile.dogFilePath}" class="img-fluid" alt="${careDogList.dogFile.dogFileName}">
-			              <div class="portfolio-info">
-			                <h4>No.${careDogList.dog.dogNo } ${careDogList.dog.dogName }</h4>
-			                <p>${careDogList.dog.dogPStartDate } ~ ${careDogList.dog.dogPEndDate }</p>
-			                <a href="${careDogList.dogFile.dogFilePath}" title="No.${careDogList.dog.dogNo } ${careDogList.dog.dogName }" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-			                <a href="/dog/detail.dog?dogNo=${careDogList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-			              </div>
-			            </div>
-		            <!-- End Portfolio Item -->
-		            </c:if>
-	            </c:forEach>
+            <!-- 돌봄 -->
+            <c:forEach var="careDogList" items="${careDogList}" varStatus="loop">
+              <c:if test="${loop.index < 10}">
+              <!-- Start Portfolio Item -->
+                <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+                  <img src="${careDogList.dogFile.dogFilePath}" class="img-fluid" alt="${careDogList.dogFile.dogFileName}">
+                  <div class="portfolio-info">
+                    <h4>No.${careDogList.dog.dogNo } ${careDogList.dog.dogName }</h4>
+                    <p>${careDogList.dog.dogPStartDate } ~ ${careDogList.dog.dogPEndDate }</p>
+                    <a href="${careDogList.dogFile.dogFilePath}" title="No.${careDogList.dog.dogNo } ${careDogList.dog.dogName }" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    <a href="/dog/detail.dog?dogNo=${careDogList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  </div>
+                </div>
+              <!-- End Portfolio Item -->
+              </c:if>
+            </c:forEach>
           
-	            <!-- 입양 -->
-	            <c:forEach var="adoptDogList" items="${adoptDogList}" varStatus="loop">
-          			<c:if test="${loop.index < 10}">
-		            <!-- Start Portfolio Item -->
-		            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-		              <img src="${adoptDogList.dogFile.dogFilePath}" class="img-fluid" alt="${adoptDogList.dogFile.dogFileName}">
-		              <div class="portfolio-info">
-		                <h4>No.${adoptDogList.dog.dogNo } ${adoptDogList.dog.dogName }</h4>
-		                <p>입양 완료</p>
-		                <a href="${adoptDogList.dogFile.dogFilePath}" title="No.${adoptDogList.dog.dogNo } ${adoptDogList.dog.dogName }" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-		                <a href="/dog/detail.dog?dogNo=${adoptDogList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-		              </div>
-		            </div>
-		            <!-- End Portfolio Item -->
-	                </c:if>
-	            </c:forEach>
-	            
-	            <!-- 대기 -->
-	            <c:forEach var="noneDogList" items="${noneDogList}" varStatus="loop">
-          			<c:if test="${loop.index < 10}">
-		            <!-- Start Portfolio Item -->
-			        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-		              <img src="${noneDogList.dogFile.dogFilePath}" class="img-fluid" alt="${noneDogList.dogFile.dogFileName}">
-		              <div class="portfolio-info">
-		                <h4>No.${noneDogList.dog.dogNo } ${noneDogList.dog.dogName }</h4>
-		                <p>${noneDogList.dog.dogAge }살, ${noneDogList.dog.dogWeight }kg, ${noneDogList.dog.dogHealth }, ${noneDogList.dog.dogInfo }</p>
-		                <a href="${noneDogList.dogFile.dogFilePath}" title="No.${noneDogList.dog.dogNo } ${noneDogList.dog.dogName }" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-		                <a href="/dog/detail.dog?dogNo=${noneDogList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-		              </div>
-		            </div>
-		            <!-- End Portfolio Item -->
-	                </c:if>
-	            </c:forEach>
+            <!-- 입양 -->
+            <c:forEach var="adoptDogList" items="${adoptDogList}" varStatus="loop">
+              <c:if test="${loop.index < 10}">
+              <!-- Start Portfolio Item -->
+              <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
+                <img src="${adoptDogList.dogFile.dogFilePath}" class="img-fluid" alt="${adoptDogList.dogFile.dogFileName}">
+                <div class="portfolio-info">
+                  <h4>No.${adoptDogList.dog.dogNo } ${adoptDogList.dog.dogName }</h4>
+                  <p>입양 완료</p>
+                  <a href="${adoptDogList.dogFile.dogFilePath}" title="No.${adoptDogList.dog.dogNo } ${adoptDogList.dog.dogName }" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="/dog/detail.dog?dogNo=${adoptDogList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+              <!-- End Portfolio Item -->
+                </c:if>
+            </c:forEach>
+            
+            <!-- 대기 -->
+            <c:forEach var="noneDogList" items="${noneDogList}" varStatus="loop">
+              <c:if test="${loop.index < 10}">
+              <!-- Start Portfolio Item -->
+            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
+                <img src="${noneDogList.dogFile.dogFilePath}" class="img-fluid" alt="${noneDogList.dogFile.dogFileName}">
+                <div class="portfolio-info">
+                  <h4>No.${noneDogList.dog.dogNo } ${noneDogList.dog.dogName }</h4>
+                  <p>${noneDogList.dog.dogAge }살, ${noneDogList.dog.dogWeight }kg, ${noneDogList.dog.dogHealth }, ${noneDogList.dog.dogInfo }</p>
+                  <a href="${noneDogList.dogFile.dogFilePath}" title="No.${noneDogList.dog.dogNo } ${noneDogList.dog.dogName }" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                  <a href="/dog/detail.dog?dogNo=${noneDogList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                </div>
+              </div>
+              <!-- End Portfolio Item -->
+                </c:if>
+            </c:forEach>
 
           </div><!-- End Portfolio Container -->
 
@@ -1007,8 +1006,8 @@
               <div>
                 <h4 class="title">#1 임보가 뭘까?</h4>
                 <p class="description">
-                	임보란 '임시 보호'의 줄임말이에요. 구조된 강아지들이 새로운 삶을 찾게 될 때까지, 통상적으로 '구조-임시 보호-입양'의 3단계를 거치게 되는데요. <br>
-					구조되자마자 바로 입양을 갈 수 있다면 좋겠지만, 통상적으로 평생 함께할 가족을 찾는 데는 시간이 걸리기 때문에 그 중간을 이어주는 임보 과정이 필요하답니다.
+                  임보란 '임시 보호'의 줄임말이에요. 구조된 강아지들이 새로운 삶을 찾게 될 때까지, 통상적으로 '구조-임시 보호-입양'의 3단계를 거치게 되는데요. <br>
+                  구조되자마자 바로 입양을 갈 수 있다면 좋겠지만, 통상적으로 평생 함께할 가족을 찾는 데는 시간이 걸리기 때문에 그 중간을 이어주는 임보 과정이 필요하답니다.
                 </p>
               </div>
             </div>
@@ -1021,8 +1020,8 @@
               <div>
                 <h4 class="title">#2 임보가 왜 필요할까?</h4>
                 <p class="description">
-                	안타깝게도 현재 국내 유기견 관리 시스템상으로는 인력도 자원도 턱없이 부족해 대다수 보호소에서 안락사를 시행할 수밖에 없는 실정이에요. <br>
-					따라서 임시 보호는 한 생명을 구하는 가장 효과적이고 확실한 방법입니다. 임보가 없다면 한 생명의 미래도 없어진다는 것, 'WIMF'가 임보의 중요성을 널리 알리고자 하는 이유입니다.
+                  안타깝게도 현재 국내 유기견 관리 시스템상으로는 인력도 자원도 턱없이 부족해 대다수 보호소에서 안락사를 시행할 수밖에 없는 실정이에요. <br>
+                  따라서 임시 보호는 한 생명을 구하는 가장 효과적이고 확실한 방법입니다. 임보가 없다면 한 생명의 미래도 없어진다는 것, 'WIMF'가 임보의 중요성을 널리 알리고자 하는 이유입니다.
                 </p>
               </div>
             </div>
@@ -1034,11 +1033,11 @@
               <div>
                 <h4 class="title">#3 임보자는 뭘 해야 할까?</h4>
                 <p class="description">
-                	• 유기견이 지낼 수 있는 안전한 공간 제공 <br>
-					• 밥과 물 챙겨주기, 배변 처리하기 <br>
-					• 인간을 다시 믿을 수 있도록 사랑 듬뿍 주기 <br>
-					• 입양 홍보를 위해 예쁜 사진과 영상 많이 찍어주기 <br>
-					• 가능하다면 SNS 등을 통해 입양 홍보 돕기
+                  • 유기견이 지낼 수 있는 안전한 공간 제공 <br>
+                  • 밥과 물 챙겨주기, 배변 처리하기 <br>
+                  • 인간을 다시 믿을 수 있도록 사랑 듬뿍 주기 <br>
+                  • 입양 홍보를 위해 예쁜 사진과 영상 많이 찍어주기 <br>
+                  • 가능하다면 SNS 등을 통해 입양 홍보 돕기
                 </p>
               </div>
             </div>
@@ -1050,11 +1049,11 @@
               <div>
                 <h4 class="title">#4 나도 임보를 할 수 있을까?</h4>
                 <p class="description">
-                	• 집에서 강아지을 키우는 것이 문제 되지 않는다<br>
-					• 털 알레르기가 없거나 심하지 않다<br>
-					• 반려동물을 키워봤거나 대하는 데 능숙하다<br>
-					• 다른 생명체를 챙겨줄 정도의 시간적 여유가 있다 <br>
-					• 안정적인 경제력을 갖추고 있는 성인이다
+                  • 집에서 강아지을 키우는 것이 문제 되지 않는다<br>
+                  • 털 알레르기가 없거나 심하지 않다<br>
+                  • 반려동물을 키워봤거나 대하는 데 능숙하다<br>
+                  • 다른 생명체를 챙겨줄 정도의 시간적 여유가 있다 <br>
+                  • 안정적인 경제력을 갖추고 있는 성인이다
                 </p>
               </div>
             </div>
@@ -1066,11 +1065,11 @@
               <div>
                 <h4 class="title">#5 이런 분들께 추천해요</h4>
                 <p class="description">
-                	• 입양을 결정하기 전에 먼저 경험해 보고 싶어요<br>
-					• 오래 키운 아이를 보내서 한동안 입양은 못 할 것 같아요<br>
-					• 상황이 유동적이라 당장 입양은 어렵지만 몇 개월은 가능해요<br>
-					• 혼자서는 우울하고 무서운데 집에 귀여운 룸메이트가 있으면 좋을 것 같아요<br>
-					• 자녀들이 독립하니 집이 적적하고 허전해요
+                  • 입양을 결정하기 전에 먼저 경험해 보고 싶어요<br>
+                  • 오래 키운 아이를 보내서 한동안 입양은 못 할 것 같아요<br>
+                  • 상황이 유동적이라 당장 입양은 어렵지만 몇 개월은 가능해요<br>
+                  • 혼자서는 우울하고 무서운데 집에 귀여운 룸메이트가 있으면 좋을 것 같아요<br>
+                  • 자녀들이 독립하니 집이 적적하고 허전해요
                 </p>
               </div>
             </div>
@@ -1082,11 +1081,11 @@
               <div>
                 <h4 class="title">#6 이런 점은 미리 말씀드려요</h4>
                 <p class="description">
-                	• 강아지과 함께하는 삶이 예상보다 힘들 수 있어요<br>
-					• 임보 기간이 생각보다 짧거나 길어질 수 있어요<br>
-					• 정이 많이 들면 입양 보낼 때 마음이 아플 수 있어요<br>
-					• 상처가 많다면 마음을 여는 데 오래 걸릴 수 있어요<br>
-					'WIMF'는 임시보호 과정에서 일어날 수 있는 다양한 문제를 최소화하고, 쉽고 안전한 임보 문화가 정착될 수 있도록 최선을 다할 거에요.
+                  • 강아지과 함께하는 삶이 예상보다 힘들 수 있어요<br>
+                  • 임보 기간이 생각보다 짧거나 길어질 수 있어요<br>
+                  • 정이 많이 들면 입양 보낼 때 마음이 아플 수 있어요<br>
+                  • 상처가 많다면 마음을 여는 데 오래 걸릴 수 있어요<br>
+                  'WIMF'는 임시보호 과정에서 일어날 수 있는 다양한 문제를 최소화하고, 쉽고 안전한 임보 문화가 정착될 수 있도록 최선을 다할 거에요.
                 </p>
               </div>
             </div>
@@ -1215,7 +1214,7 @@
 
           <div class="col-lg-6">
             <form action="/sendMail.dog" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-           	  <input type="hidden" id="user-ck-email">
+              <input type="hidden" id="user-ck-email">
               <div class="row gy-4">
 
                 <div class="col-md-6">
@@ -1287,7 +1286,7 @@
         alert("팝업이 차단되었습니다. 팝업차단을 해제해주세요.");
       }
     }
-  	
+
     /* 캘린더 업데이트 되면 캘린더 리로드 */
     window.addEventListener('updateCalendarEvent', function () {
         getCalendar();
@@ -1295,42 +1294,42 @@
     
     /* 날짜에 따른 캘린더 정보 가져오기 */
     function getEventListByDate(events) {
-    	
-   	  $('#calendarList').css('display', 'none');
-      
-  	  console.log("Function called");
-  	  console.log(events);
 
-	  // id가 'eventList'인 UL 엘리먼트를 가져옵니다.
+      $('#calendarList').css('display', 'none');
+      
+      console.log("Function called");
+      console.log(events);
+
+	    // id가 'eventList'인 UL 엘리먼트를 가져옵니다.
       var ulElement = $('#eventList');
         console.log(ulElement);
 
-	    // 기존 콘텐츠를 지웁니다.
-      	ulElement.empty();
+	      // 기존 콘텐츠를 지웁니다.
+        ulElement.empty();
 
-	    // 받아온 이벤트 목록을 순회하면서 li 엘리먼트를 생성하고 추가합니다.
-      	events.forEach(function(event, index) {
+	      // 받아온 이벤트 목록을 순회하면서 li 엘리먼트를 생성하고 추가합니다.
+        events.forEach(function(event, index) {
 	        // 각 li 엘리먼트에 고유한 id를 만듭니다.
-	        var liId = 'eventItem_' + index;
+          var liId = 'eventItem_' + index;
 	
 	        // 해당 li 엘리먼트를 만듭니다.
-	        var liElement = $('<li>').attr('id', liId);
+          var liElement = $('<li>').attr('id', liId);
 	
 	        // 이벤트 정보를 li 엘리먼트에 추가합니다.
-	        liElement.html('• 제목 : ' + event.title
-	          + '&emsp;&emsp;&emsp; • 강아지 번호 : ' + event.dogNo
-	          + '&emsp;&emsp;&emsp; • 강아지 : ' + event.dogName
-	          + '&emsp;&emsp;&emsp; • 기간 : ' + event.start + ' ~ ' + event.end
-	          + '&emsp;&emsp;&emsp; • 내용 : ' + event.content);
+          liElement.html('• 제목 : ' + event.title
+            + '&emsp;&emsp;&emsp; • 강아지 번호 : ' + event.dogNo
+            + '&emsp;&emsp;&emsp; • 강아지 : ' + event.dogName
+            + '&emsp;&emsp;&emsp; • 기간 : ' + event.start + ' ~ ' + event.end
+            + '&emsp;&emsp;&emsp; • 내용 : ' + event.content);
 	
 	        // ul에 li 엘리먼트를 추가합니다.
-	        ulElement.append(liElement);
+          ulElement.append(liElement);
           
-            if (ulElement.children().length > 0) {
-       	      $('#calendarList').css('display', 'block');
-       	    } else {
-       	      $('#calendarList').css('display', 'none');
-       	    }
+          if (ulElement.children().length > 0) {
+            $('#calendarList').css('display', 'block');
+          } else {
+            $('#calendarList').css('display', 'none');
+          }
       });
     }
     
@@ -1351,7 +1350,7 @@
       var url = "/dog/detail.dog?dogNo=" + dogNo;
       window.location.href = url;	    	    
     }
- 	
+
  	// 이메일 정규식 유효성 ajax
 	$(document).ready(function() {
 		var userEmailTag = $("#user-email");
@@ -1364,23 +1363,23 @@
 				data : { userEmail : userEmail },
 				success : function(data) {
 					var msg = "";
-    				var emailMsg = $("#email-msg");
-    				
-    				if(data == "false1") {
-    					emailMsg.removeClass("success").addClass("error");
-    					$("#user-ck-email").attr("value","false");
-    					msg = "이메일 형식만 가능합니다.";
-    					
-    				} else if(data == "false2") {
-    					emailMsg.removeClass("error").addClass("success");
-    					$("#user-ck-email").attr("value","true");
-        				msg = "사용 가능한 이메일 입니다.";
-        				
-    				} else {
-        				alert("오류");
-    				}
-    				
-    				emailMsg.text(msg).show();
+          var emailMsg = $("#email-msg");
+          
+          if(data == "false1") {
+            emailMsg.removeClass("success").addClass("error");
+            $("#user-ck-email").attr("value","false");
+            msg = "이메일 형식만 가능합니다.";
+            
+          } else if(data == "false2") {
+            emailMsg.removeClass("error").addClass("success");
+            $("#user-ck-email").attr("value","true");
+              msg = "사용 가능한 이메일 입니다.";
+              
+          } else {
+              alert("오류");
+          }
+          
+          emailMsg.text(msg).show();
 				},
 				error : function() {
 					alert("Ajax 오류, 관리자에게 문의바랍니다.");
@@ -1388,9 +1387,9 @@
 			});
 		});
 	});
- 	
+
  	// 이메일 보내기 ajax
- 	$(document).ready(function() {
+  $(document).ready(function() {
 		$("#sendEmail-btn").on("click",function(){
 			var emailVal = $("#user-email").val();
 			if (emailVal == null || emailVal == ""){
@@ -1425,7 +1424,7 @@
 			}
 		});
 	});
- 	
+
   </script>
 
 </body>

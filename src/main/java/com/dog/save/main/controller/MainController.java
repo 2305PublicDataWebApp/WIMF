@@ -56,24 +56,18 @@ public class MainController {
 		List<Board> bList = bService.selectAllBoardList();
 		// user 닉네임, 프로필 가져오기
 		for (Board board : bList) {
-	        String userId = board.getBoardWriter();
-	        User user = uService.selectOneById(userId);
-	        board.setUserNickName(user.getUserNickname());
-	        board.setUserProfile(user.getUserFilePath());
-	    }
+			String userId = board.getBoardWriter();
+			User user = uService.selectOneById(userId);
+			board.setUserNickName(user.getUserNickname());
+			board.setUserProfile(user.getUserFilePath());
+		}
 		model.addAttribute("bList", bList);
 		
-			// dog List 가져오기
-		List<Dog> dList = dService.selectAllDogList();
-		List<Dog> careList = dService.selectCareList();
-		List<Dog> adoptList = dService.selectAdoptList();
-		List<Dog> noneList = dService.selectNoneList();
-		// count 정보 가져오기
-//		int allDogCount = (dList == null) ? 0 : dList.size();
-//		int careCount = (careList == null) ? 0 : careList.size();
-//		int adoptCount = (adoptList == null) ? 0 : adoptList.size();
-//		int noneCount = (noneList == null) ? 0 : noneList.size();
-		
+			// count 정보 가져오기
+		//		int allDogCount = (dList == null) ? 0 : dList.size();
+		//		int careCount = (careList == null) ? 0 : careList.size();
+		//		int adoptCount = (adoptList == null) ? 0 : adoptList.size();
+		//		int noneCount = (noneList == null) ? 0 : noneList.size();
 		int allDogCount = dService.getAllDogCount();
 		int careCount = dService.getCareDogCount();
 		int adoptCount = dService.getAdoptDogCount();
@@ -82,6 +76,12 @@ public class MainController {
 		model.addAttribute("careCount", careCount);
 		model.addAttribute("adoptCount", adoptCount);
 		model.addAttribute("noneCount", noneCount);
+		
+			// dog List 가져오기
+		List<Dog> dList = dService.selectAllDogList();
+		List<Dog> careList = dService.selectCareList();
+		List<Dog> adoptList = dService.selectAdoptList();
+		List<Dog> noneList = dService.selectNoneList();
 		
 			// 사진 매칭
 		List<DogFile> dogFileList;
@@ -154,14 +154,13 @@ public class MainController {
 			// adopt List 가져오기
 		List<Adopt> aList = aService.selectAllAdobtList();
 		// user 닉네임, 프로필 가져오기
-			for (Adopt adopt : aList) {
-		        String userId = adopt.getUserId();
-		        User user = uService.selectOneById(userId);
-		        adopt.setUserNickName(user.getUserNickname());
-		        adopt.setUserProfile(user.getUserFilePath());
-		    }
+		for (Adopt adopt : aList) {
+			String userId = adopt.getUserId();
+			User user = uService.selectOneById(userId);
+			adopt.setUserNickName(user.getUserNickname());
+			adopt.setUserProfile(user.getUserFilePath());
+		}
 		model.addAttribute("aList", aList);
-		
 		return "index";
 	}
 	
@@ -181,8 +180,8 @@ public class MainController {
 	private boolean emailIsValid(String userEmail) {
 		String pattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
 		Pattern compiledPattern = Pattern.compile(pattern);
-        Matcher matcher = compiledPattern.matcher(userEmail);
-        boolean isValid = matcher.matches();
+		Matcher matcher = compiledPattern.matcher(userEmail);
+		boolean isValid = matcher.matches();
 		return isValid;
 	}
 	
