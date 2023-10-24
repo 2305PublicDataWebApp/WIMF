@@ -275,26 +275,41 @@ public class DogController {
 	@ResponseBody
 	@PostMapping("/replyUpdate.dog")
 	public String updateReply(
-			@ModelAttribute DogReply dogReply
+			@ModelAttribute DogReply dogReply,HttpSession session
 			) {
-		int result = dService.updateReply(dogReply); // dogReply 객체 보내서 댓글 수정
-		if(result>0) {
-			return "success";
-		}else {
-			return "fail";
-		}
-		
+		String userId = (String) session.getAttribute("userId");
+		String replyWriter = dService.getReplyWriter(dogReply.getDogReplyNo());
+		if (userId != null && userId.equals(replyWriter)) {
+		    // 현재 사용자의 ID와 댓글 작성자의 ID를 비교하여 삭제 권한 확인
+		    int result = dService.updateReply(dogReply); // 댓글 수정
+		    if (result > 0) {
+		        return "success";
+		    } else {
+		        return "fail";
+		    }
+		} else {
+		    // 삭제 권한이 없는 경우
+		    return "no_permission";
+		}							
 	}
 
 	// ==================== 돌봄 강아지 댓글 삭제 ====================
 	@ResponseBody
 	@PostMapping("/replyDelete.dog")
-	public String deleteReply(Integer dogReplyNo) {
-		int result = dService.deleteReply(dogReplyNo); // dogReplyNo 이용해서 해당 댓글 삭제
-		if(result>0) {
-			return "success";
-		}else {
-			return "fail";
+	public String deleteReply(Integer dogReplyNo,HttpSession session) {
+		String userId = (String) session.getAttribute("userId"); // 세션에서 현재 사용자의 ID 가져오기
+		String replyWriter = dService.getReplyWriter(dogReplyNo);// 이전에 댓글 작성자의 ID를 가져오는 코드 (DB 등)
+		if (userId != null && userId.equals(replyWriter)) {
+		    // 현재 사용자의 ID와 댓글 작성자의 ID를 비교하여 삭제 권한 확인
+		    int result = dService.deleteReply(dogReplyNo); // 댓글 삭제
+		    if (result > 0) {
+		        return "success";
+		    } else {
+		        return "fail";
+		    }
+		} else {
+		    // 삭제 권한이 없는 경우
+		    return "no_permission";
 		}
 	}
 

@@ -240,6 +240,13 @@ public interface DogService {
 	 */
 	int getTotalDonationByDogNo(int dogNo);
 
+	/**
+	 * 댓글 작성자 조회 Service
+	 * @param dogReplyNo
+	 * @return
+	 */
+	String getReplyWriter(Integer dogReplyNo);
+
 	
 
 

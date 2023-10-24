@@ -360,6 +360,12 @@ public class DogServiceImpl implements DogService{
 		int result = dStore.getTotalDonationByDogNo(session,dogNo);
 		return result;
 	}
+
+	@Override
+	public String getReplyWriter(Integer dogReplyNo) {
+		String result = dStore.getReplyWriter(session,dogReplyNo);
+		return result;
+	}
 	
 	
 
