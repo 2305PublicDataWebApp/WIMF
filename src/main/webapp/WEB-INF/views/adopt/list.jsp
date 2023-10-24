@@ -120,7 +120,12 @@
 									</h2>
 									
 									<div class="d-flex align-items-center">
-										<img src = "${aList.userFilePath }"alt="프로필사진" class="img-fluid post-author-img flex-shrink-0">
+										<c:if test="${aList.userFilePath == null}">
+											<img src="/img/user/default-profile.png" class="img-fluid post-author-img flex-shrink-0" alt="">
+										</c:if>
+										<c:if test="${aList.userFilePath != null}">
+											<img src = "${aList.userFilePath }"alt="프로필사진" class="img-fluid post-author-img flex-shrink-0">
+										</c:if>
 										<div class="post-meta">
 											<p class="post-author">${aList.userNickName }</p>
 											<p class="post-date">
