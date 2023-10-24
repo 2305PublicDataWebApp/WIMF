@@ -70,9 +70,7 @@
 							    <c:when test="${not empty combinedList.dog.dogPStartDate}">
 									<span class="left-align">
 									    임시보호 시작 : ${combinedList.dog.dogPStartDate }<br>
-									    임시보호 종료 : ${combinedList.dog.dogPEndDate }<br>
-									    <p class="death-date">안락사 예정일 : ${combinedList.dog.dogDeathDate }<br></p>
-									    
+									    임시보호 종료 : ${combinedList.dog.dogPEndDate }<br><br>									  									    
 									</span>						        
 							    </c:when>
 							    <c:otherwise>
@@ -83,17 +81,18 @@
 							    </c:otherwise>
 							</c:choose>
 							</p>
-							<div class="progress" style="width: 300px; margin: 15px;">
-							    <div class="progress-bar progress-bar-striped bg-success"
+						</div>
+							<div class="progress" style="width: 300px; margin: 15px; height: 30px; justify-content: space-between;">
+							    <div class="progress-bar progress-bar-striped progress-bar-animated"
 							        role="progressbar"
-							        style="width: ${combinedList.progress}%"
+							        style="width: ${combinedList.progress}%; background-color: #dc3545; text-align:left; padding-left: 5px; color:black; overflow:visible; font-weight: bold; "
 							        aria-valuenow="25"
 							        aria-valuemin="0"
 							        aria-valuemax="100">							        
+							    ${combinedList.progress}%
 							    </div>
-							</div>
-							<span>${combinedList.progress}%</span>										
-						</div>
+							    <span>1,000,000원</span>
+							</div>									
 					</div>
 				</c:forEach>
 			</div>

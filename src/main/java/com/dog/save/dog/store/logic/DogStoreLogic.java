@@ -257,6 +257,12 @@ public class DogStoreLogic implements DogStore{
 		return result;
 	}
 	// 기진 코드
+
+	@Override
+	public String getReplyWriter(SqlSession session, Integer dogReplyNo) {
+		String result = session.selectOne("DogMapper.getReplyWriter", dogReplyNo);
+		return result;
+	}
 	
 
 

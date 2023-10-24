@@ -297,6 +297,14 @@ public interface DogStore {
 	 */
 	int getTotalDonationByDogNo(SqlSession session, int dogNo);
 
+	/**
+	 * 댓글 작성자 조회 Store
+	 * @param session
+	 * @param dogReplyNo
+	 * @return
+	 */
+	String getReplyWriter(SqlSession session, Integer dogReplyNo);
+
 	
 
 	

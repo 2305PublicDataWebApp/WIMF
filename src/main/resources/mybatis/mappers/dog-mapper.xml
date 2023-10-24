@@ -90,6 +90,9 @@
 	<select id="selectReplyList" resultType="DogReply">
 		SELECT * FROM DOG_REPLY_TBL WHERE REF_DOG_NO = #{dogNo} ORDER BY DOG_REPLY_NO ASC
 	</select>
+	<select id="getReplyWriter" resultType="java.lang.String">
+		SELECT DOG_REPLY_WRITER FROM DOG_REPLY_TBL WHERE DOG_REPLY_NO = #{dogReplyNo}
+	</select>
 	
 	<select id="getTotalDonationByDogNo" resultType="_int">
 		SELECT COALESCE(SUM(DONATION_MONEY), 0) AS TOTAL_DONATION

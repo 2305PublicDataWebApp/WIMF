@@ -383,8 +383,10 @@
 					if(data == "success"){
 						alert("댓글 수정 성공!");
 						getReplyList();
-					}else{
+					}else if(data == "fail"){
 						alert("댓글 수정 실패!");
+					}else if(data == "no_permission"){
+						alert("본인 작성 댓글만 수정 가능합니다.")
 					}
 				},
 				error : function() {
@@ -403,8 +405,10 @@
 					if(data == "success"){
 						alert("댓글 삭제 성공!");
 						getReplyList();						
-					}else{
+					}else if(data == "fail"){
 						alert("댓글 삭제 실패!");
+					}else if(data == "no_permission"){
+						alert("본인 작성 댓글만 삭제 가능합니다.")
 					}
 				},
 				error : function(){
