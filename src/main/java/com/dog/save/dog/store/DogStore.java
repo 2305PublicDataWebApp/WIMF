@@ -261,6 +261,14 @@ public interface DogStore {
 	List<Dog> selectNoneList(SqlSession session);
 	// 기진 코드
 
+	/**
+	 * 강아지 번호로 후원 금액 조회 Store
+	 * @param session
+	 * @param dogNo
+	 * @return
+	 */
+	int getTotalDonationByDogNo(SqlSession session, int dogNo);
+
 	
 
 	

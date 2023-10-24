@@ -226,6 +226,12 @@ public class DogStoreLogic implements DogStore{
 		return noneList;
 	}
 
+	@Override
+	public int getTotalDonationByDogNo(SqlSession session, int dogNo) {
+		int result = session.selectOne("DogMapper.getTotalDonationByDogNo", dogNo);
+		return result;
+	}
+
 	
 
 

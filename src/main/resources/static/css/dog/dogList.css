@@ -62,14 +62,14 @@ text-align: center;
 }
 
 .custom-btn {
-    width: 100px;
+    width: 70px;
     height: 40px;
     border: none; /* 기존의 border 속성 제거 */
     border-radius: 5px;
     padding: 10px 25px;
     font-family: 'SUITE-Regular';
     font-weight: 500;
-    background: rgb(200, 76, 76);
+    background: #e84545;
     color: #ffffff; /* 텍스트 색상 추가 */
     cursor: pointer;
     transition: all 0.3s ease;
@@ -139,7 +139,7 @@ text-align: center;
 
 .dog_info {
 	/* margin: 10px; */
-	height: 170px;
+	height: 200px;
     text-align: center;
 	/* border: 1px solid black; */
 }
@@ -161,7 +161,7 @@ img {
     border: 1px solid #C4C4C4;
     box-sizing: border-box;
     border-radius: 10px;
-    padding: 12px 13px;
+    padding: 5x;
 	font-family: 'SUITE-Regular';
     font-style: normal;
     font-weight: 400;
@@ -291,3 +291,16 @@ input {
 .pagination:hover {
   color: gray;
 }
+
+.image_thumbnail img {
+  opacity: 0; /* 초기에 투명 상태로 설정 */
+  transform: translateY(20px); /* 초기 위치 설정 (옵션) */
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out; /* 투명도와 위치 애니메이션 설정 */
+}
+
+.image_thumbnail img.show {
+  opacity: 1; /* 투명도를 1로 변경하여 나타나게 함 */
+  transform: translateY(0); /* 위치를 0으로 변경하여 원래 위치로 이동 (옵션) */
+}
+
+

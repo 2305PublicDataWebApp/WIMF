@@ -36,8 +36,8 @@
 				
 				<div>
 					<c:if test="${adminCheck eq 'Y' }">					
-						<button onclick="location.href='/dog/modify.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;">수정하기</button>
-						<button onclick="location.href='/dog/delete.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;">삭제하기</button>
+						<button onclick="location.href='/dog/modify.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;" class="custom-btn btn-11">수정하기</button>
+						<button onclick="confirmDelete();" style="cursor: pointer;" class="custom-btn btn-11">삭제하기</button>
 					</c:if>
 					<p>${dog.dogRegion } > ${dog.dogKind }</p>
 					<h2  id="detail_h2">${dog.dogName }</h2><br>
@@ -75,58 +75,60 @@
 				</div>
 				<div>
 					<c:if test ="${userId ne null }">
-						<button id="likeSubmit">좋아요</button>
+						<div class="placement">
+						  <div class="heart"></div>
+						</div>
 					</c:if>
 				</div>
 			</div>
 			<div id="dog_info_container">
 			    <table>
 			        <tr>
-			            <td style="width: 30%;">품종</td>
+			            <td style="width: 30%;" class="infoKey">품종</td>
 			            <td style="width: 70%;">${dog.dogKind }</td>
 			        </tr>
 			        <tr>
-			            <td>보호소</td>
+			            <td class="infoKey">보호소</td>
 			            <td>${dog.dogAgency }</td>
 			        </tr>
 			        <tr>
-			            <td>나이</td>
+			            <td class="infoKey">나이</td>
 			            <td>${dog.dogAge }살</td>
 			        </tr>
 			        <tr>
-			            <td>성별</td>
+			            <td class="infoKey">성별</td>
 			            <td>${dog.dogGender }</td>
 			        </tr>
 			        <tr>
-			            <td>구조장소</td>
+			            <td class="infoKey">구조장소</td>
 			            <td>${dog.dogRLocation }</td>
 			        </tr>
 			        <tr>
-			            <td>몸무게</td>
+			            <td class="infoKey">몸무게</td>
 			            <td>${dog.dogWeight }kg</td>
 			        </tr>
 			        <tr>
-			            <td>성격</td>
+			            <td class="infoKey">성격</td>
 			            <td>${dog.dogPersonality }</td>
 			        </tr>
 			        <tr>
-			            <td>건강상태</td>
+			            <td class="infoKey">건강상태</td>
 			            <td>${dog.dogHealth }</td>
 			        </tr>
 			        <tr>
-			            <td>발견일시</td>
+			            <td class="infoKey">발견일시</td>
 			            <td>${dog.dogRDate }</td>
 			        </tr>
 			        <tr>
-			            <td>참고사항</td>
+			            <td class="infoKey">참고사항</td>
 			            <td>${dog.dogInfo }</td>
 			        </tr>
 			        <tr>
-			            <td>안락사 예정일</td>
+			            <td class="infoKey">안락사 예정일</td>
 			            <td>${dog.dogDeathDate }</td>
 			        </tr>
 			    </table>
-			    <br><br><br><br>
+			    <br><br>
 			    <div id="btn-area">
 				    <button onclick="location.href='/app/insert.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;" class="btn"><span>돌봄신청서로 이동</span></button>		    
 				    <button onclick="location.href='/donation/money.dog?dogNo=${dog.dogNo}';" style="cursor: pointer;" class="btn"><span>${dog.dogName } 후원하러 가기</span></button>				    
@@ -199,7 +201,18 @@
 		
 		// ================ 지도 종료 ================
 		
-		
+		// 강아지 삭제 확인
+		function confirmDelete() {
+		    var result = confirm("정말 삭제하시겠습니까?");
+		    if (result) {
+		        // 사용자가 확인을 선택한 경우
+		        // 페이지 이동
+		        var dogNo = ${dog.dogNo}; 
+		        window.location.href = '/dog/modify.dog?dogNo=' + dogNo;
+		    } else {
+		        alert("삭제가 취소되었습니다.");
+		    }
+		}		
 		
 		
 		
@@ -209,7 +222,7 @@
 		  // 페이지 로딩 시 "좋아요" 상태 가져오기
 		  checkLikeStatus();		  
 		  // 좋아요 버튼 클릭 이벤트 처리
-		  $("#likeSubmit").on("click", function() {
+		  $(".heart").on("click", function() {
 		    toggleLikeStatus();
 		  });
 		});
@@ -227,7 +240,7 @@
 		      if (result == "liked") {
 		        isLiked = true; // 이미 "좋아요"한 상태임을 설정
 		        // 버튼을 빨간색으로 변경
-		        $("#likeSubmit").css("background-color", "red");
+		        $(".heart").addClass("is-active");
 		      }
 		    },
 		    error: function() {
@@ -250,13 +263,11 @@
 			        if (dogLike == 'Y') {
 			          isLiked = true; // "좋아요" 상태로 변경
 			          // 버튼을 빨간색으로 변경
-			          $("#likeSubmit").css("background-color", "red");
-			          alert("좋아요 성공!!");
+			          $(".heart").addClass("is-active");
 			        } else {
 			          isLiked = false; // "좋아요" 취소 상태로 변경
 			          // 버튼 색상 제거
-			          $("#likeSubmit").css("background-color", "");
-			          alert("좋아요 취소 성공!!");
+			          $(".heart").removeClass("is-active");
 			        }
 			      } else {
 			        alert("좋아요 업데이트 실패!!");
@@ -305,8 +316,8 @@
 		    if (data.length > 0) {
 		        for (let i in data) {
 		            const tr = $("<tr>");
-		            const dogReplyWriter = $("<td>").text(data[i].dogReplyWriter);
-		            const dogReplyContent = $("<td>").text(data[i].dogReplyContent).attr("id", "content-input");
+		            const dogReplyWriter = $("<td>").text(data[i].dogReplyWriter).addClass('custom-td');
+		            const dogReplyContent = $("<td>").text(data[i].dogReplyContent).attr("id", "content-input").addClass('custom-td');
 		            const dogReplyCreateDate = new Date(data[i].dogReplyCreateDate);
 		            const formattedDate = dogReplyCreateDate.toLocaleString('ko-KR', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
 		            const dogReplyUpdateDate = new Date(data[i].dogReplyUpdateDate);
@@ -314,10 +325,10 @@
 		            if (formattedDate !== formattedDate2) {
 		                formattedDate2 += " (수정됨)";
 		            }		            		            
-		            const btnArea = $("<td>")		            	
+		            const btnArea = $("<td>").addClass('custom-td')		            	
 		                .append("<a href='javascript:void(0)' onclick='modifyView(this, " + data[i].dogReplyNo + ", \"" + data[i].dogReplyContent + "\");'>수정</a>&nbsp;&nbsp;")
 		                .append("<a href='javascript:void(0)' onclick='removeReply(" + data[i].dogReplyNo + ");'>삭제</a>");
-		            const dateCell = $("<td>").text(formattedDate2).attr("id", "date-cell");		            
+		            const dateCell = $("<td>").text(formattedDate2).attr("id", "date-cell").addClass('custom-td');		            
 		            tr.append(dogReplyWriter);
 		            tr.append(dogReplyContent);		        		            		            
 		            tr.append(dateCell);
@@ -354,7 +365,7 @@
 		        // 새로운 수정 입력 행 생성
 		        let tr = $("<tr class='edit-row'>");
 		        tr.append("<td colspan='3'><input type='text' size='50' value='" + dogReplyContent + "'></td>");
-		        tr.append("<td colspan='2'><button onclick='modifyReply(" + dogReplyNo + ", this)'>수정</button></td>");
+		        tr.append("<td colspan='2'><button onclick='modifyReply(" + dogReplyNo + ", this)'>수정</button></td>").addClass('modify-reply');
 		        $(obj).parent().parent().after(tr);
 		    }
 		}

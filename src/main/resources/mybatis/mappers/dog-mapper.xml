@@ -91,6 +91,12 @@
 		SELECT * FROM DOG_REPLY_TBL WHERE REF_DOG_NO = #{dogNo} ORDER BY DOG_REPLY_NO ASC
 	</select>
 	
+	<select id="getTotalDonationByDogNo" resultType="_int">
+		SELECT COALESCE(SUM(DONATION_MONEY), 0) AS TOTAL_DONATION
+		FROM DONATION_TBL
+		WHERE DONATION_DOG_NO = #{dogNo}			
+	</select>
+	
 	<!-- 기진 코드 -->
 	<select id="selectAllDogList" resultType="Dog">
 		SELECT * FROM DOG_TBL ORDER BY DOG_NO DESC

@@ -24,7 +24,7 @@
 		
 		<!-- My Code -->
         <main>
-			<h1>돌봄 동물 수정</h1><hr>
+			<h1 id="insert">돌봄 동물 수정</h1><hr>
 			<form action="/dog/modify.dog" method="POST" enctype="multipart/form-data">
 			<input type="hidden" name="dogNo" value="${dog.dogNo }">
             <select name="dogRegion" id="dogRegion" class="pl">
