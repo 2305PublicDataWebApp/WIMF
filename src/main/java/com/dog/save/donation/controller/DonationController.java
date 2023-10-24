@@ -76,10 +76,10 @@ public class DonationController {
 			if(donationUser != null && !donationUser.isEmpty()) {
 				donation.setDonationUser(donationUser);
 				int result = dnService.insertDonation(donation);
-				return "redirect:/donation/money.dog?dogNo=" + dog;
+				return "redirect:/donation/money.dog?dogNo=" + dogNo;
 			}else {
 				model.addAttribute("msg", "후원에 실패하셨습니다.");
-				model.addAttribute("url", "/donation/money.dog?dogNo=" + dog);
+				model.addAttribute("url", "/donation/money.dog?dogNo=" + dogNo);
 				return "common/error";
 			}
 		} catch (Exception e) {

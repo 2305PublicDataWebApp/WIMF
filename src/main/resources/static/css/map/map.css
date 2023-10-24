@@ -1,5 +1,7 @@
 @charset "UTF-8"; /* 문자 인코딩을 UTF-8로 설정합니다. */
-
+#session-id {
+    color: black !important;
+}
 .customoverlay {
     position: relative; /* 요소의 위치를 상대적으로 설정합니다. */
     bottom: 120px; /* 하단으로부터의 거리를 120px로 설정합니다. */

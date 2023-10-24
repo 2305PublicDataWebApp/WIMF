@@ -112,7 +112,7 @@
 				        <c:param name="region" value="${region}"></c:param>
 				        <c:param name="sort" value="${sort}"></c:param>
 				    </c:url>
-				    <a href="${prevUrl}">[이전]</a>
+				    <a href="${prevUrl}">[이전]&nbsp&nbsp</a>
 				</c:if>
 				
 				<!-- 페이지 번호 링크 -->

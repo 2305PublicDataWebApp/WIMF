@@ -189,6 +189,29 @@ public class AppController {
 						result = aService.allowAdopt(app);
 					}else {
 						result = aService.allowCare(app);
+						
+						// 기진 코드
+						Calendar calendar = new Calendar();
+						calendar.setDogNo(app.getDogNo());
+						Dog dogOne = dService.selectDogByDogNo(app.getDogNo());
+						String dogName = dogOne.getDogName();
+						calendar.setUserId(app.getUserId());
+						calendar.setSchStartDate(app.getAppStartDate());
+						
+						if(app.getAppEndDate() == null) {
+							calendar.setSchEndDate(app.getAppStartDate());
+							calendar.setSchTitle("'" + dogName + "' 임시보호 시작");
+							calendar.setSchContent("'" + dogName + "' 임시보호 시작");
+						} else {
+							calendar.setSchEndDate(app.getAppEndDate());
+							calendar.setSchTitle("'" + dogName + "' 임시보호");
+							calendar.setSchContent("'" + dogName + "' 임시보호");
+						}
+						calendar.setSchOption("임시보호");
+						calendar.setSchTitleCount(1);
+						
+						cService.insertEvent(calendar);
+						// 기진 코드
 					}
 					if(result > 0) {
 						System.out.println("값 넣기 성공");
@@ -204,43 +227,15 @@ public class AppController {
 						mv.setViewName("common/error");
 					}
 				}else {
-					result = aService.allowCare(app);
-					
-					// 기진 코드
-					Calendar calendar = new Calendar();
-					calendar.setDogNo(app.getDogNo());
-					Dog dogOne = dService.selectDogByDogNo(app.getDogNo());
-					String dogName = dogOne.getDogName();
-					calendar.setUserId(app.getUserId());
-					calendar.setSchStartDate(app.getAppStartDate());
-					
-					if(app.getAppEndDate() == null) {
-						calendar.setSchEndDate(app.getAppStartDate());
-						calendar.setSchTitle("'" + dogName + "' 임시보호 시작");
-						calendar.setSchContent("'" + dogName + "' 임시보호 시작");
-					} else {
-						calendar.setSchEndDate(app.getAppEndDate());
-						calendar.setSchTitle("'" + dogName + "' 임시보호");
-						calendar.setSchContent("'" + dogName + "' 임시보호");
-					}
-					calendar.setSchOption("임시보호");
-					calendar.setSchTitleCount(1);
-					
-					cService.insertEvent(calendar);
-					// 기진 코드
-				}
-				if(result > 0) {
-					System.out.println("값 넣기 성공");
 					statusResult = aService.updateStatus(app);
-					
 					if(statusResult > 0) {
 						mv.setViewName("redirect:/app/detail.dog?appNo=" + app.getAppNo());
 					}else {
 						mv.addObject("msg", "[서비스실패] 상태변경 실패");
 						mv.setViewName("common/error");
 					}
-					
 				}
+					
 			}else {
 				mv.addObject("msg", "[서비스실패] 관리자만 접속할 수 있습니다.");
 				mv.addObject("url", "/");

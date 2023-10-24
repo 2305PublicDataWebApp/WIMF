@@ -8,7 +8,9 @@
   height: 100%;
   margin-bottom: 5%;
 }
-
+#session-id {
+    color: black !important;
+}
 #container #board-content {
   padding: 5%;
 }

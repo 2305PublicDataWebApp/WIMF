@@ -52,6 +52,10 @@ text-align: center;
     align-items: center;
 }
 
+#session-id {
+    color: black !important;
+}
+
 .seven h1:after,.seven h1:before {
     content: " ";
     display: block;
