@@ -21,5 +21,11 @@ public interface DonationService {
 	 * @return List<UserDonation>
 	 */
 	List<UserDonation> selectListById(String userId);
+	/**
+	 * 후원 금액
+	 * @param dogNo
+	 * @return
+	 */
+	int totalDonationAmount(int dogNo);
 
 }

@@ -25,5 +25,12 @@ public interface DonationStore {
 	 * @return List<UserDonation>
 	 */
 	List<UserDonation> selectListById(SqlSession sqlSession, String userId);
+	/**
+	 * 후원 금액
+	 * @param sqlSession
+	 * @param dogNo
+	 * @return
+	 */
+	int totalDonationAmount(SqlSession sqlSession, int dogNo);
 
 }

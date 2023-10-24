@@ -1,6 +1,8 @@
 package com.dog.save.donation.store.logic;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -24,6 +26,12 @@ public class DonationStoreLogic implements DonationStore{
 	public List<UserDonation> selectListById(SqlSession sqlSession, String userId) {
 		List<UserDonation> dnList =  sqlSession.selectList("DonationMapper.selectListById", userId);
 		return dnList;
+	}
+
+	@Override
+	public int totalDonationAmount(SqlSession sqlSession, int dogNo) {
+		int result = sqlSession.selectOne("DonationMapper.totalDonationAmount", dogNo);
+		return result;
 	}
 
 }
