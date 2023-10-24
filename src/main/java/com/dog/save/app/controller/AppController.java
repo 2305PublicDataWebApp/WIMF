@@ -75,11 +75,12 @@ public class AppController {
 	// 지원자 지원서 제출
 	@PostMapping("/insert.dog")
 	public ModelAndView insertApplication(ModelAndView mv
-			, @ModelAttribute App app) {
-		int result = aService.insertApplication(app);
+			, @ModelAttribute App app, HttpSession session) {
 		try {
+			int result = aService.insertApplication(app);
+			String userId = (String)session.getAttribute("userId");
 			if(result > 0) {
-				mv.setViewName("/index");
+				mv.setViewName("redirect:/user/myPage.dog?userId=" + userId);
 			} else {
 				mv.addObject("msg", "[서비스실패] 문의를 조회할 수 없습니다.");
 				mv.setViewName("common/error");
