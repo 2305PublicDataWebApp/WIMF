@@ -20,9 +20,9 @@ public class CalendarStoreLogic implements CalendarStore {
 	}
 
 	@Override
-	public Optional<Calendar> findEventByUserIdAndTitleAndStartDateAndEndDate(SqlSession session,
-			Map<String, Object> params) {
-		return Optional.ofNullable(session.selectOne("CalendarMapper.findEventByUserIdAndTitleAndStartDateAndEndDate", params));
+	public int updateEvent(SqlSession session, Map<String, Object> newParams) {
+		int result = session.update("CalendarMapper.updateEvent", newParams);
+		return result;
 	}
 
 	@Override
@@ -30,11 +30,11 @@ public class CalendarStoreLogic implements CalendarStore {
 		int result = session.delete("CalendarMapper.deleteEvent", schNo);
 		return result;
 	}
-
+	
 	@Override
-	public int updateEvent(SqlSession session, Map<String, Object> newParams) {
-		int result = session.update("CalendarMapper.updateEvent", newParams);
-		return result;
+	public List<Calendar> getAllEventList(SqlSession session, String userId) {
+		List<Calendar> allEventList = session.selectList("CalendarMapper.getAllEventList", userId);
+		return allEventList;
 	}
 
 	@Override
@@ -42,11 +42,11 @@ public class CalendarStoreLogic implements CalendarStore {
 		List<Calendar> eventList = session.selectList("CalendarMapper.getEventListByDate", dateRange);
 		return eventList;
 	}
-
+	
 	@Override
-	public List<Calendar> getAllEventList(SqlSession session, String userId) {
-		List<Calendar> AllEventList = session.selectList("CalendarMapper.getAllEventList", userId);
-		return AllEventList;
+	public Optional<Calendar> findEventByUserIdAndTitleAndStartDateAndEndDate(SqlSession session,
+			Map<String, Object> params) {
+		return Optional.ofNullable(session.selectOne("CalendarMapper.findEventByUserIdAndTitleAndStartDateAndEndDate", params));
 	}
 	
 }
