@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.dog.save.app.domain.App;
 import com.dog.save.app.service.AppService;
@@ -111,6 +112,14 @@ public class UserController {
 			model.addAttribute("url", "/user/login.dog");
 			return "common/error";
 		}
+	}
+	
+	// 어드민 페이지 url
+	@GetMapping(value="adminPage.dog")
+	public ModelAndView showAdminPage(ModelAndView mv) {
+		
+		
+		return mv;
 	}
 	
 	// ajax 마이페이지 후원중인 강아지 리스트 출력
