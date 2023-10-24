@@ -65,7 +65,6 @@
 								<button class="mypage-btn" onclick="location.href='/user/myPage.dog?userId=${sessionScope.userId}'">My page</button>
 							</c:if>
 							<c:if test="${sessionScope.userId eq 'admin' }">
-<!-- 								<button class="mypage-btn" onclick="location.href='/user/adminPage.dog'">Admin page</button> -->
 								<button class="mypage-btn" onclick="location.href='/app/list.dog'">Admin page</button>
 							</c:if>
 						</div>

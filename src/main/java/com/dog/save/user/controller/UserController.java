@@ -114,13 +114,6 @@ public class UserController {
 		}
 	}
 	
-	// 어드민 페이지 url
-	@GetMapping(value="adminPage.dog")
-	public ModelAndView showAdminPage(ModelAndView mv) {
-		
-		
-		return mv;
-	}
 	
 	// ajax 마이페이지 후원중인 강아지 리스트 출력
 	@ResponseBody
