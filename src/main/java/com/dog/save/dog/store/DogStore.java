@@ -259,6 +259,34 @@ public interface DogStore {
 	 * @return
 	 */
 	List<Dog> selectNoneList(SqlSession session);
+	
+	/**
+	 * 전체 강아지 마릿수 가져오기 store
+	 * @param session
+	 * @return
+	 */
+	int getAllDogCount(SqlSession session);
+
+	/**
+	 * 돌봄 강아지 마릿수 가져오기 store
+	 * @param session
+	 * @return
+	 */
+	int getCareDogCount(SqlSession session);
+
+	/**
+	 * 입양 강아지 마릿수 가져오기 store
+	 * @param session
+	 * @return
+	 */
+	int getAdoptDogCount(SqlSession session);
+
+	/**
+	 * 대기 강아지 마릿수 가져오기 store
+	 * @param session
+	 * @return
+	 */
+	int getNoneDogCount(SqlSession session);
 	// 기진 코드
 
 	

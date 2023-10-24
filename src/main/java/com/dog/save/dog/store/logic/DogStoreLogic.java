@@ -226,6 +226,31 @@ public class DogStoreLogic implements DogStore{
 		return noneList;
 	}
 
+	// 기진 코드
+	@Override
+	public int getAllDogCount(SqlSession session) {
+		int result = session.selectOne("DogMapper.getAllDogCount");
+		return result;
+	}
+
+	@Override
+	public int getCareDogCount(SqlSession session) {
+		int result = session.selectOne("DogMapper.getCareDogCount");
+		return result;
+	}
+
+	@Override
+	public int getAdoptDogCount(SqlSession session) {
+		int result = session.selectOne("DogMapper.getAdoptDogCount");
+		return result;
+	}
+
+	@Override
+	public int getNoneDogCount(SqlSession session) {
+		int result = session.selectOne("DogMapper.getNoneDogCount");
+		return result;
+	}
+	// 기진 코드
 	
 
 

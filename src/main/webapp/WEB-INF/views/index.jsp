@@ -619,75 +619,21 @@
       <div class="container">
 
         <div class="row g-4">
-
-          <!-- <div class="col"> -->
-            <!-- <div class="pricing-item">
-              <h3>Free Plan</h3>
-              <div class="icon">
-                <i class="bi bi-box"></i>
-              </div>
-              <h4><sup>$</sup>0<span> / month</span></h4>
-              <ul>
-                <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                <li class="na"><i class="bi bi-x"></i> <span>Pharetra massa massa ultricies</span></li>
-                <li class="na"><i class="bi bi-x"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-              </ul>
-              <div class="text-center"><a href="#" class="buy-btn">Buy Now</a></div>
-            </div> -->
-          <!-- </div> -->
-          <!-- End Pricing Item -->
-
-          <!-- <div class="col-lg-12"> -->
-            <div class="pricing-item"> <!-- class="featured" -->
-            <div id='calendar'></div>
-            <!-- 날짜 누르면 표시되는 날짜에 대한 일정 가져오기 div -->
-            <div class="calendarList" id="calendarList">
-              <ul id="eventList">
-                <li></li>
-              </ul>
+        
+        	<div class="pricing-item"> <!-- class="featured" -->
+        	
+	            <div id='calendar'></div>
+	            <!-- 날짜 누르면 표시되는 날짜에 대한 일정 가져오기 div -->
+	            <div class="calendarList" id="calendarList">
+	              <ul id="eventList">
+	                <li></li>
+	              </ul>
+	            </div>
+		        <div class="text-center">              
+		          <button type="button" onclick="openPopup1();" class="buy-btn text-center calendarPopupBtn">등록</button>
+		        </div>
+		        
             </div>
-            
-            
-              <!-- <h3>Business Plan</h3>
-              <div class="icon">
-                <i class="bi bi-rocket"></i>
-              </div>
-
-              <h4><sup>$</sup>29<span> / month</span></h4>
-              <ul>
-                <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
-                <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-              </ul> -->
-              <div class="text-center">              
-                <button type="button" onclick="openPopup1();" class="buy-btn text-center calendarPopupBtn">등록</button>
-              </div>
-            </div>
-          <!-- </div> -->
-          <!-- End Pricing Item -->
-
-          <!-- <div class="col"> -->
-            <!-- <div class="pricing-item">
-              <h3>Developer Plan</h3>
-              <div class="icon">
-                <i class="bi bi-send"></i>
-              </div>
-              <h4><sup>$</sup>49<span> / month</span></h4>
-              <ul>
-                <li><i class="bi bi-check"></i> <span>Quam adipiscing vitae proin</span></li>
-                <li><i class="bi bi-check"></i> <span>Nec feugiat nisl pretium</span></li>
-                <li><i class="bi bi-check"></i> <span>Nulla at volutpat diam uteera</span></li>
-                <li><i class="bi bi-check"></i> <span>Pharetra massa massa ultricies</span></li>
-                <li><i class="bi bi-check"></i> <span>Massa ultricies mi quis hendrerit</span></li>
-              </ul>
-              <div class="text-center"><a href="#" class="buy-btn">Buy Now</a></div>
-            </div> -->
-          <!-- </div> -->
-          <!-- End Pricing Item -->
 
         </div>
 
@@ -882,7 +828,12 @@
                   </h2>
     
                   <div class="d-flex align-items-center">
-                    <img src = "${aList.userProfile }"alt="프로필사진" class="img-fluid post-author-img flex-shrink-0">
+                    <c:if test="${aList.userProfile == null}">
+                      <img src="/img/user/default-profile.png" alt="프로필사진" class="img-fluid post-author-img flex-shrink-0">
+                    </c:if>
+                    <c:if test="${aList.userProfile != null}">
+                      <img src = "${aList.userProfile }" alt="프로필사진" class="img-fluid post-author-img flex-shrink-0">
+	                </c:if>
                     <div class="post-meta">
                       <p class="post-author">${aList.userNickName }</p>
                       <p class="post-date">
@@ -1028,58 +979,6 @@
 		            <!-- End Portfolio Item -->
 	                </c:if>
 	            </c:forEach>
-	            
-           <%-- <c:forEach var="combinedList" items="${combinedList}" varStatus="loop">
-          	<c:if test="${loop.index < 10}">
-          	
-          		<!-- 돌봄 -->
-	            <c:if test="${String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate ne null}">
-		            <!-- Start Portfolio Item -->
-		            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-		              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
-		              <div class="portfolio-info">
-		                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
-		                <p>${combinedList.dog.dogPStartDate } ~ ${combinedList.dog.dogPEndDate }</p>
-		                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-app" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-		                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-		              </div>
-		            </div>
-		            <!-- End Portfolio Item -->
-	            </c:if>
-          
-	            <!-- 입양 -->
-	            <c:if test="${String(combinedList.dog.dogAdopt) eq 'Y'}">
-		            <!-- Start Portfolio Item -->
-		            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-		              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
-		              <div class="portfolio-info">
-		                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
-		                <p>입양 완료</p>
-		                <p>${combinedList.dog.dogPStartDate }~</p>
-		                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-product" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-		                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-		              </div>
-		            </div>
-		            <!-- End Portfolio Item -->
-	            </c:if>
-	            
-	            <!-- 대기 -->
-	            <c:if test="${String(combinedList.dog.dogAdopt) eq 'N' && combinedList.dog.dogPStartDate eq null}">
-		            <!-- Start Portfolio Item -->
-			        <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-		              <img src="${combinedList.dogFile.dogFilePath}" class="img-fluid" alt="${combinedList.dogFile.dogFileName}">
-		              <div class="portfolio-info">
-		                <h4>No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }</h4>
-		                <p>${combinedList.dog.dogAge }살, ${combinedList.dog.dogWeight }kg, ${combinedList.dog.dogHealth }, ${combinedList.dog.dogInfo }</p>
-		                <a href="${combinedList.dogFile.dogFilePath}" title="No.${combinedList.dog.dogNo } ${combinedList.dog.dogName }" data-gallery="portfolio-gallery-branding" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-		                <a href="/dog/detail.dog?dogNo=${combinedList.dog.dogNo }" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-		              </div>
-		            </div>
-		            <!-- End Portfolio Item -->
-	            </c:if>
-	            
-            </c:if>
-          </c:forEach> --%>
 
           </div><!-- End Portfolio Container -->
 
@@ -1199,75 +1098,6 @@
 
     </section><!-- End Services Section -->
 
-    <!-- Faq Section - Home Page -->
-    <!-- <section id="faq" class="faq">
-
-      <div class="container">
-
-        <div class="row gy-4">
-
-          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="content px-xl-5">
-              <h3><span>Frequently Asked </span><strong>Questions</strong></h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-              </p>
-            </div>
-          </div>
-
-          <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-
-            <div class="faq-container">
-              <div class="faq-item faq-active">
-                <h3><span class="num">1.</span> <span>Non consectetur a erat nam at lectus urna duis?</span></h3>
-                <div class="faq-content">
-                  <p>Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div>End Faq item
-
-              <div class="faq-item">
-                <h3><span class="num">2.</span> <span>Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque?</span></h3>
-                <div class="faq-content">
-                  <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div>End Faq item
-
-              <div class="faq-item">
-                <h3><span class="num">3.</span> <span>Dolor sit amet consectetur adipiscing elit pellentesque?</span></h3>
-                <div class="faq-content">
-                  <p>Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div>End Faq item
-
-              <div class="faq-item">
-                <h3><span class="num">4.</span> <span>Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla?</span></h3>
-                <div class="faq-content">
-                  <p>Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div>End Faq item
-
-              <div class="faq-item">
-                <h3><span class="num">5.</span> <span>Tempus quam pellentesque nec nam aliquam sem et tortor consequat?</span></h3>
-                <div class="faq-content">
-                  <p>Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in</p>
-                </div>
-                <i class="faq-toggle bi bi-chevron-right"></i>
-              </div>End Faq item
-
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-
-    </section> -->
-    <!-- End Faq Section -->
-
     <!-- About Section - Home Page -->
     <section id="about" class="about">
 
@@ -1282,7 +1112,6 @@
               <br>
               임시보호에 부담을 덜어드릴게요!
             </p>
-            <!-- <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a> -->
           </div>
 
           <div class="col-xl-7">
@@ -1357,7 +1186,8 @@
                 <div class="info-item" data-aos="fade" data-aos-delay="300">
                   <i class="bi bi-telephone"></i>
                   <h3>Call Us</h3>
-                  <p>02 5321 2312</p>
+                  <p>02-5321-2312</p>
+                  <p>02-2613-5542</p>
                 </div>
               </div><!-- End Info Item -->
 
@@ -1366,6 +1196,7 @@
                   <i class="bi bi-envelope"></i>
                   <h3>Email Us</h3>
                   <p>teamWIMF@wimf.com</p>
+                  <p>WIMF@wimf.com</p>
                 </div>
               </div><!-- End Info Item -->
 
@@ -1426,7 +1257,6 @@
   
 <!-- footer -->
 <jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
-
 
   <!-- Preloader -->
   <div id="preloader">

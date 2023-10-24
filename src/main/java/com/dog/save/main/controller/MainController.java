@@ -69,10 +69,15 @@ public class MainController {
 		List<Dog> adoptList = dService.selectAdoptList();
 		List<Dog> noneList = dService.selectNoneList();
 		// count 정보 가져오기
-		int allDogCount = (dList == null) ? 0 : dList.size();
-		int careCount = (careList == null) ? 0 : careList.size();
-		int adoptCount = (adoptList == null) ? 0 : adoptList.size();
-		int noneCount = (noneList == null) ? 0 : noneList.size();
+//		int allDogCount = (dList == null) ? 0 : dList.size();
+//		int careCount = (careList == null) ? 0 : careList.size();
+//		int adoptCount = (adoptList == null) ? 0 : adoptList.size();
+//		int noneCount = (noneList == null) ? 0 : noneList.size();
+		
+		int allDogCount = dService.getAllDogCount();
+		int careCount = dService.getCareDogCount();
+		int adoptCount = dService.getAdoptDogCount();
+		int noneCount = dService.getNoneDogCount();
 		model.addAttribute("allDogCount", allDogCount);
 		model.addAttribute("careCount", careCount);
 		model.addAttribute("adoptCount", adoptCount);
