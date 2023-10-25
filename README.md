@@ -157,4 +157,25 @@ WIMF는 Where Is My Family? 의 약자로<br/><br/> 주인에게 버림받아 �
 5-1 지도
 ![지도](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/87228377-5a3c-46b4-8c31-d93a2f2fc795)
 
+### 6. 소통 게시판
+6-1 게시판 목록
+![소통 게시판](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/0bc534e7-6ce6-484f-9562-7a2e375367e2)
 
+6-2 게시글 작성
+![소통 작성](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/9be5992c-5712-4cdf-b9dd-e91d0a02b7b3)
+
+6-3 게시글 상세
+![소통 상세](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/b66c1e5f-4795-4a50-9912-26aaa8fd22cd)
+
+6-4 게시글 수정
+![소통 수정](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/8cc0015b-c80c-4e8f-90a1-800a6c3ca438)
+
+### 7. 후원
+7-1 후원페이지
+![후원](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/132ea85e-ce95-4cef-bfd8-ac9672a38ec1)
+
+7-2 후원방식 (카카오페이)
+![후원(카카오페이 결제)](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/2c4d828a-183f-4a2e-a34d-d56fe8c8c40c)
+
+7-3 후원방식 (신용카드)
+![후원(신용카드 결제)](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/c6d33ac0-4850-47e4-9cd8-0c892fdfc4ef)
