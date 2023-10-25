@@ -99,7 +99,7 @@
 								
 								<div class="input-user-info-box">
 								    <label for="user-pw-email">이메일</label>
-								    <input type="text" id="user-pw-email" class="find-user-idpw-input" name="userEmail" placeholder="가입 시 입력 했던 본인 이메일을 입력해주세요." required>
+								    <input type="text" id="user-email" class="find-user-idpw-input" name="userEmail" placeholder="가입 시 입력 했던 본인 이메일을 입력해주세요." required>
 								</div>
 								
 								<div id="pw-msg" style="display=none;"></div>
@@ -158,7 +158,7 @@
                             </div>
                         </div>
                         <div id="btn-box">
-                            <a id="prev-btn2" class="next-btn" style="color:#ffffff;" onclick="showStep(2)">이전</a>
+<!--                             <a id="prev-btn2" class="next-btn" style="color:#ffffff;" onclick="showStep(2)">이전</a> -->
                             <!-- <a id="next-btn3" class="next-btn" style="color:#ffffff;" onclick="showStep(3)">다음</a> -->
                         </div>
                     </div>
@@ -205,23 +205,18 @@
 				$("#certification-btn").on("click",function(){
 					var emailVal = $("#user-email").val();
 					var emailPwVal = $("#user-pw-email").val();
-					if(emailVal == null || emailVal == ""){
-							alert("이메일을 먼저 입력해주세요.");
-							return;
-					} else {
-						alert("인증번호가 발송되었습니다. 이메일을 확인해주세요.");
-						$.ajax({
-							url : "/user/sendMail.dog",
-							type : "POST",
-							data : { mail : emailVal },
-							success : function(data) {
-								$("#send-certification-number").attr("value", data);
-							},
-							error : function() {
-								alert:("ajax 오류, 관리자에게 문의 바랍니다.");
-							}
-						});
-					}
+					alert("인증번호가 발송되었습니다. 이메일을 확인해주세요.");
+					$.ajax({
+						url : "/user/sendMail.dog",
+						type : "POST",
+						data : { mail : emailVal },
+						success : function(data) {
+							$("#send-certification-number").attr("value", data);
+						},
+						error : function() {
+							alert:("ajax 오류, 관리자에게 문의 바랍니다.");
+						}
+					});
 				});
 			});
 	     	
