@@ -124,7 +124,7 @@
 		          		<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray"><fmt:formatDate pattern="yyyy-MM-dd" value="${reply.replyCreateDate }"/></td>
 		          		<c:choose>
 		          			<c:when test="${reply.replyBoardWriter eq userId}">
-		          				<td style="padding-top: 1%; padding-bottom:1%; text-align: center; border-bottom: 1px solid darkgray">
+		          				<td style="text-align: center; border-bottom: 1px solid darkgray">
 				          			<a id="reply-update" href="javascript:void(0);" onclick="showModifyForm(this, '${reply.replyBoardContent}');">수정</a>
 				          			<c:url var="delUrl" value="/reply/delete.dog">
 										<c:param name="replyNo" value="${reply.replyNo }"></c:param>

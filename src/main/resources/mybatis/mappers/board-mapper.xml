@@ -47,7 +47,7 @@
 	</select>
 	<!-- 게시글 키워드 검색 -->
 	<select id="selectBoardByKeyword" resultType="Board">
-		SELECT BOARD_TBL.*, USER_TBL.USER_NICKNAME
+		SELECT BOARD_TBL.*, USER_TBL.USER_NICKNAME, (SELECT COUNT(*) FROM REPLY_TBL WHERE REPLY_BOARD_NO = BOARD_TBL.BOARD_NO) AS REPLY_COUNT
 	    FROM BOARD_TBL
 	    LEFT JOIN USER_TBL ON BOARD_TBL.BOARD_WRITER = USER_TBL.USER_ID 
 		<if test="searchCondition == 'all'">
