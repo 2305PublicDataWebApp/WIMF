@@ -314,6 +314,6 @@ input {
 	transform: translateY(0); /* 위치를 0으로 변경하여 원래 위치로 이동 (옵션) */
 }
 
-#regionCount{
-	font-weight:bold;
+#regionCount {
+	font-weight: bold;
 }
