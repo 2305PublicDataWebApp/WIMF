@@ -14,7 +14,7 @@ public interface AdoptStore {
 	 * 게시글 작성 Store
 	 * @param sqlSession
 	 * @param adopt
-	 * @return
+	 * @return int
 	 */
 	int insertAdopt(SqlSession sqlSession, Adopt adopt);
 	
@@ -22,7 +22,7 @@ public interface AdoptStore {
 	 * 게시글 수정 Store
 	 * @param sqlSession
 	 * @param adopt
-	 * @return
+	 * @return int
 	 */
 	int updateAdopt(SqlSession sqlSession, Adopt adopt);
 	
@@ -30,7 +30,7 @@ public interface AdoptStore {
 	 * 게시글 삭제 Store
 	 * @param sqlSession
 	 * @param adopt
-	 * @return
+	 * @return int
 	 */
 	int deleteAdopt(SqlSession sqlSession, Adopt adopt);
 	
@@ -38,15 +38,16 @@ public interface AdoptStore {
 	 * 게시글 상세조회 Store
 	 * @param sqlSession
 	 * @param adoptNo
-	 * @return
+	 * @return Adopt
 	 */
 	Adopt selectOneByAdopt(SqlSession sqlSession, Integer adoptNo);
 	
 	/**
 	 * 게시판 리스트 Store
 	 * @param sqlSession
-	 * @param adoptType 
-	 * @return
+	 * @param bpInfo
+	 * @param adoptType
+	 * @return List<Adopt>
 	 */
 	List<Adopt> selectAdoptList(SqlSession sqlSession, bPageInfo bpInfo, String adoptType);
 	
@@ -54,20 +55,24 @@ public interface AdoptStore {
 	 * 전체 게시글 개수 Store
 	 * @param sqlSession
 	 * @param adoptType 
-	 * @return
+	 * @return int
 	 */
 	int selectListCount(SqlSession sqlSession, String adoptType);
 	
 	/**
 	 * 조건에 따라 키워드 검색 Store
+	 * @param sqlSession
+	 * @param bpInfo
+	 * @param paramMap
+	 * @return List<Adopt>
 	 */
 	List<Adopt> selectAdoptByKeyword(SqlSession sqlSession, bPageInfo bpInfo, Map<String, String> paramMap);
 	
 	/**
 	 * 게시글 조회수 증가 Store
 	 * @param sqlSession
-	 * @param adoptNo
-	 * @return
+	 * @param adoptNo 
+	 * @return int
 	 */
 	int increaseViewCount(SqlSession sqlSession, Integer adoptNo);
 
@@ -75,7 +80,7 @@ public interface AdoptStore {
 	 * 검색 게시글 개수 Store
 	 * @param sqlSession
 	 * @param paramMap 
-	 * @return
+	 * @return int
 	 */
 	int getSelectAdoptByKeywordCount(SqlSession sqlSession, Map<String, String> paramMap);
 
@@ -83,7 +88,7 @@ public interface AdoptStore {
 	/**
 	 * 전체 리스트 가져오기 Store
 	 * @param sqlSession
-	 * @return
+	 * @return List<Adopt>
 	 */
 	List<Adopt> selectAllAdobtList(SqlSession sqlSession);
 	// 기진 코드
