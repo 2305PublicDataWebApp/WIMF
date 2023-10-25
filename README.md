@@ -108,4 +108,23 @@ WIMF는 Where Is My Family? 의 약자로<br/><br/> 주인에게 버림받아 �
 </div>
 
 ## 📺 구현 화면
+
+### 2. 강아지 돌봄
+2-1 돌봄 동물 리스트
 ![돌봄 동물 리스트](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/c7328d13-988f-431b-b873-f835a466f6d9)
+
+2-2 돌봄 동물 상세페이지
+![돌봄 동물 상세페이지](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/6807b73a-143c-4897-a8e7-e0b4aa913efd)
+
+2-3 돌봄 동물 등록폼
+![돌봄 동물 등록폼](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/bcede09e-8ce7-4c3c-b27d-d9634ea47b4a)
+
+2-4 돌봄 동물 수정폼
+![돌봄 동물 수정폼](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/eb69ff5c-4560-499e-9b4f-c9259262e4ac)
+
+2-5 돌봄 동물 리스트(관리자)
+![돌봄 동물 리스트(관리자)](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/444311a2-a9c6-4f7b-9cca-048d55bd4eba)
+
+2-6 돌봄 동물 상세페이지(관리자)
+![돌봄 동물 상세페이지(관리자)](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/56e6e72d-f2bb-4cb4-82ba-4420fe53a4c8)
+
