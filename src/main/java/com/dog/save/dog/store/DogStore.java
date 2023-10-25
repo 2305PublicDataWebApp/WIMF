@@ -259,13 +259,6 @@ public interface DogStore {
 	 * @return
 	 */
 	List<Dog> selectNoneList(SqlSession session);
-	
-	/**
-	 * 전체 강아지 마릿수 가져오기 store
-	 * @param session
-	 * @return
-	 */
-	int getAllDogCount(SqlSession session);
 
 	/**
 	 * 돌봄 강아지 마릿수 가져오기 store

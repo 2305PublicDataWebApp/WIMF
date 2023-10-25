@@ -757,7 +757,7 @@
                           </div> -->
                         </div>
                       </div>
-                      <div style="overflow-y: scroll; height: 350px;">
+                      <div style="overflow-y: scroll; height: 400px;">
                         <p>
                           <i class="bi bi-quote quote-icon-left"></i>
                           <span>${bList.boardContent }</span>
