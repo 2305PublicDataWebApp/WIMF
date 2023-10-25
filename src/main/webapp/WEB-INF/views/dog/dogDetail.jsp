@@ -208,7 +208,7 @@
 		        // 사용자가 확인을 선택한 경우
 		        // 페이지 이동
 		        var dogNo = ${dog.dogNo}; 
-		        window.location.href = '/dog/modify.dog?dogNo=' + dogNo;
+		        window.location.href = '/dog/delete.dog?dogNo=' + dogNo;
 		    } else {
 		        alert("삭제가 취소되었습니다.");
 		    }

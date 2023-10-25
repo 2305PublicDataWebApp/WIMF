@@ -113,7 +113,7 @@
 						        <img src="${dogFileList[0].dogFilePath}" alt="Dog Image 1">
 						    </div><br>
 						    <div id="image_reg_btn1" class="image_reg_btn">
-						        <input type="file" id="image1" name="uploadFiles" onchange="handleFileSelection(this, 'dogFileRename1')"/>
+						        <input type="file" id="image1" name="uploadFiles" onchange="handleFileSelection2(this, 'dogFileRename1')"/>
 						        <input type="hidden" id="dogFileRename1" name="noChangeFileOrder" value="${dogFileList[0].dogFileOrder }">
 						    </div>
 						</div>
@@ -122,7 +122,7 @@
 						        <img src="${dogFileList[1].dogFilePath}" alt="Dog Image 2">
 						    </div><br>
 						    <div id="image_reg_btn2" class="image_reg_btn">
-						        <input type="file" id="image2" name="uploadFiles" onchange="handleFileSelection(this, 'dogFileRename2')"/>
+						        <input type="file" id="image2" name="uploadFiles" onchange="handleFileSelection2(this, 'dogFileRename2')"/>
 						        <input type="hidden" id="dogFileRename2" name="noChangeFileOrder" value="${dogFileList[1].dogFileOrder }">
 						    </div>
 						</div>
@@ -131,7 +131,7 @@
 						        <img src="${dogFileList[2].dogFilePath}" alt="Dog Image 3">
 						    </div><br>
 						    <div id="image_reg_btn3" class="image_reg_btn">
-						        <input type="file" id="image3" name="uploadFiles" onchange="handleFileSelection(this, 'dogFileRename3')"/>
+						        <input type="file" id="image3" name="uploadFiles" onchange="handleFileSelection2(this, 'dogFileRename3')"/>
 						        <input type="hidden" id="dogFileRename3" name="noChangeFileOrder" value="${dogFileList[2].dogFileOrder }">
 						    </div>
 						</div>
@@ -146,15 +146,13 @@
 		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 	<script>
 	// 파일 선택 시 호출되는 함수
-	function handleFileSelection(input, hiddenInputId) {
+	function handleFileSelection2(input, hiddenInputId) {
 	    const selectedFile = input.files[0];
 	    const hiddenInput = document.getElementById(hiddenInputId);
-
 	    if (selectedFile) {
-	        // 파일을 선택한 경우, 해당 hidden input을 제거
 	        hiddenInput.parentNode.removeChild(hiddenInput);
 	    }
-	}	
+	};	
 	
     document.addEventListener('DOMContentLoaded', function () {
         var submitButton = document.getElementById('submit-button');
