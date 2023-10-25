@@ -229,6 +229,7 @@
                     success: function(response) {
                         // 성공적으로 요청이 처리된 후에 실행되는 코드
                         console.log(response); // 서버에서 받은 응답을 콘솔에 출력
+                        location.reload(); // 페이지 리로드
                     },
                     error: function(error) {
                         // AJAX 요청이 실패한 경우 실행되는 코드
@@ -250,6 +251,7 @@
             }
         });
     }
+    
     function formatNumber(number) {
         return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
