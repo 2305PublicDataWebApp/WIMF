@@ -6,8 +6,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,16 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dog.save.adopt.domain.Adopt;
 import com.dog.save.adopt.service.AdoptService;
-import com.dog.save.app.domain.App;
-import com.dog.save.app.service.AppService;
 import com.dog.save.board.domain.Board;
 import com.dog.save.board.service.BoardService;
 import com.dog.save.dog.domain.Dog;
 import com.dog.save.dog.domain.DogFile;
 import com.dog.save.dog.domain.DogSet;
 import com.dog.save.dog.service.DogService;
-import com.dog.save.donation.domain.Donation;
-import com.dog.save.donation.service.DonationService;
 import com.dog.save.mail.service.MailService;
 import com.dog.save.user.domain.User;
 import com.dog.save.user.service.UserService;
@@ -63,12 +57,14 @@ public class MainController {
 		}
 		model.addAttribute("bList", bList);
 		
-			// count 정보 가져오기
-		//		int allDogCount = (dList == null) ? 0 : dList.size();
-		//		int careCount = (careList == null) ? 0 : careList.size();
-		//		int adoptCount = (adoptList == null) ? 0 : adoptList.size();
-		//		int noneCount = (noneList == null) ? 0 : noneList.size();
-		int allDogCount = dService.getAllDogCount();
+			// dog List 가져오기
+		List<Dog> dList = dService.selectAllDogList();
+		List<Dog> careList = dService.selectCareList();
+		List<Dog> adoptList = dService.selectAdoptList();
+		List<Dog> noneList = dService.selectNoneList();
+
+		// count 정보 가져오기
+		int allDogCount = (dList == null) ? 0 : dList.size();
 		int careCount = dService.getCareDogCount();
 		int adoptCount = dService.getAdoptDogCount();
 		int noneCount = dService.getNoneDogCount();
@@ -76,12 +72,6 @@ public class MainController {
 		model.addAttribute("careCount", careCount);
 		model.addAttribute("adoptCount", adoptCount);
 		model.addAttribute("noneCount", noneCount);
-		
-			// dog List 가져오기
-		List<Dog> dList = dService.selectAllDogList();
-		List<Dog> careList = dService.selectCareList();
-		List<Dog> adoptList = dService.selectAdoptList();
-		List<Dog> noneList = dService.selectNoneList();
 		
 			// 사진 매칭
 		List<DogFile> dogFileList;

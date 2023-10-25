@@ -234,12 +234,6 @@ public class DogStoreLogic implements DogStore{
 
 	// 기진 코드
 	@Override
-	public int getAllDogCount(SqlSession session) {
-		int result = session.selectOne("DogMapper.getAllDogCount");
-		return result;
-	}
-
-	@Override
 	public int getCareDogCount(SqlSession session) {
 		int result = session.selectOne("DogMapper.getCareDogCount");
 		return result;

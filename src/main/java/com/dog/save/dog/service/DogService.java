@@ -209,12 +209,6 @@ public interface DogService {
 	List<Dog> selectNoneList();
 
 	/**
-	 * 전체 강아지 마릿수 가져오기 service
-	 * @return
-	 */
-	int getAllDogCount();
-
-	/**
 	 * 돌봄 강아지 마릿수 가져오기 service
 	 * @return
 	 */

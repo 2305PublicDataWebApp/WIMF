@@ -331,12 +331,6 @@ public class DogServiceImpl implements DogService{
 	}
 
 	@Override
-	public int getAllDogCount() {
-		int result = dStore.getAllDogCount(session);
-		return result;
-	}
-
-	@Override
 	public int getCareDogCount() {
 		int result = dStore.getCareDogCount(session);
 		return result;
