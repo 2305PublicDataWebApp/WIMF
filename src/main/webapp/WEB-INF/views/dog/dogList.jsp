@@ -28,8 +28,8 @@
 			  <h1>강아지 리스트</h1>
 			</div>
 			<div class="divider div-transparent"></div>
-			지역 : ${region }		
-			<br> <p>돌봄 강아지 수 : ${pInfo.totalCount }</p> <br>
+			<p id="regionCount">지역 : ${region }		
+			<br> 돌봄 강아지 수 : ${pInfo.totalCount }</p> <br>
 			<form action="/dog/list.dog" method="get">
 			  <label for="region">지역</label>
 			  <select name="region" id="region" class="pl" style="width: 80px;">
@@ -85,13 +85,13 @@
 							<div class="progress" style="width: 300px; margin: 15px; height: 30px; justify-content: space-between;">
 							    <div class="progress-bar progress-bar-striped progress-bar-animated"
 							        role="progressbar"
-							        style="width: ${combinedList.progress}%; background-color: #dc3545; text-align:left; padding-left: 5px; color:black; overflow:visible; font-weight: bold; "
+							        style="width: ${combinedList.progress}%; background-color: #faafaf; text-align:left; padding-left: 5px; color:black; overflow:visible; font-weight: bold; "
 							        aria-valuenow="25"
 							        aria-valuemin="0"
 							        aria-valuemax="100">							        
 							    ${combinedList.progress}%
 							    </div>
-							    <span>1,000,000원</span>
+							    <span style="font-weight:bold;">1,000,000원</span>
 							</div>									
 					</div>
 				</c:forEach>
@@ -140,11 +140,15 @@
 		<jsp:include page="/WEB-INF/views/include/footer.jsp" />
 		<script>	
 		document.addEventListener('DOMContentLoaded', function () {
-			  var imageThumbnails = document.querySelectorAll('.image_thumbnail img');
-			  imageThumbnails.forEach(function (img) {
-			    img.classList.add('show');
-			  });
-			});		
+		    var imageThumbnails = document.querySelectorAll('.image_thumbnail img');
+		    
+		    imageThumbnails.forEach(function (img, index) {
+		        setTimeout(function () {
+		            img.classList.add('show');
+		        }, index * 300); 
+		    });
+		});
+	
 		
 	      function showDogDetail(dogNo) {    	    	    	       	       
 	    	        var url = "/dog/detail.dog?dogNo=" + dogNo;
