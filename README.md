@@ -109,6 +109,10 @@ WIMF는 Where Is My Family? 의 약자로<br/><br/> 주인에게 버림받아 �
 
 ## 📺 구현 화면
 
+### 1. 메인페이지
+1-1 메인페이지
+![메인페이지](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/431ddafa-136a-4fbb-8480-cc1d4faf024f)
+
 ### 2. 강아지 돌봄
 2-1 돌봄 동물 리스트
 ![돌봄 동물 리스트](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/c7328d13-988f-431b-b873-f835a466f6d9)
