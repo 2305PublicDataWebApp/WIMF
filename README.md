@@ -110,7 +110,8 @@ WIMF는 Where Is My Family? 의 약자로<br/><br/> 주인에게 버림받아 �
 
 ### 1. 메인페이지
 1-1 메인페이지
-![메인페이지](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/431ddafa-136a-4fbb-8480-cc1d4faf024f)
+![메인페이지](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/a01cb603-d9f1-4967-acad-f11e3c8ba96d)
+
 ### 2. 회원기능
 2-1. 회원 가입
 ![WIMF 회원기능 회원가입 페이지1](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/01bb9ff0-229c-4a8f-994f-af679046ab0a)
@@ -168,30 +169,30 @@ WIMF는 Where Is My Family? 의 약자로<br/><br/> 주인에게 버림받아 �
 
 ### 4. 후기
 4-1 후기 목록
-![후기 목록](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/0e32728e-4839-4e41-a5a0-007af9823465)
+![후기 목록](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/350979b9-a3e7-4358-bac0-d61b83af3bc1)
 
 4-2 후기 상세
-![후기 상세](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/e6fa6db0-1c44-4b5e-ba58-b7d3be658f66)
+![후기 상세](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/c8d06fbb-740a-4bc6-80f4-3f1b083b16e0)
 
 4-3 후기 작성
-![후기 작성](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/90495560-6d04-4f68-9af2-06b5955dea3d)
+![후기 작성](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/40f03e12-3443-486a-a19c-9daab447575a)
 
 4-4 후기 수정
-![후기 수정](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/cb0c08ef-640d-4b78-a9e9-52ce5e9731b1)
+![후기 수정](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/39a94945-c74e-4016-97e4-9e94f4664b2f)
 
 ### 5. 신청서
 5-1 신청서 목록
-![신청서 목록](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/bfeb4b6c-ff21-4142-962d-2b228d00c6a6)
+![신청서 목록](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/628fad6a-0136-4c9a-a317-e19a57009b75)
 
 5-2 신청서 상세
-![신청서 상세](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/55518f96-2524-4114-bd9f-5ab8dff53138)
+![신청서 상세](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/15ab2d02-0889-4375-9f13-775b60a7d265)
 
 5-3 신청서 작성
-![신청서 작성](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/4dca1a4f-ce6d-4ef0-a2a4-77ef10ec4f21)
+![신청서 작성](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/e73547a3-b6f5-494f-b95e-4928899081ed)
 
 ### 6. 지도
 6-1 지도
-![지도](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/87228377-5a3c-46b4-8c31-d93a2f2fc795)
+![지도](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/49b221fb-ad01-458d-951e-d8ebaa7ec26f)
 
 ### 7. 소통 게시판
 7-1 게시판 목록
