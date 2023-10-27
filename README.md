@@ -149,22 +149,22 @@ WIMF는 Where Is My Family? 의 약자로<br/><br/> 주인에게 버림받아 �
 
 ### 3. 강아지 돌봄
 3-1 돌봄 동물 리스트
-![돌봄 동물 리스트](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/c7328d13-988f-431b-b873-f835a466f6d9)
+![돌봄 동물 리스트(비관리자)](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/704a059b-eb7a-413d-8c4a-93e932363bc3)
 
 3-2 돌봄 동물 상세페이지
-![돌봄 동물 상세페이지](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/6807b73a-143c-4897-a8e7-e0b4aa913efd)
+![돌봄 동물 상세페이지(비회원)](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/b094427f-d1f2-4fe4-8bdf-590e5ffa2698)
 
 3-3 돌봄 동물 등록폼
-![돌봄 동물 등록폼](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/bcede09e-8ce7-4c3c-b27d-d9634ea47b4a)
+![돌봄 동물 등록페이지](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/608cd688-45ef-42a1-8750-77f7ac953b59)
 
 3-4 돌봄 동물 수정폼
-![돌봄 동물 수정폼](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/eb69ff5c-4560-499e-9b4f-c9259262e4ac)
+![돌봄 동물 수정페이지](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/883babab-282f-4434-85c7-1585b0fd2845)
 
 3-5 돌봄 동물 리스트(관리자)
-![돌봄 동물 리스트(관리자)](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/444311a2-a9c6-4f7b-9cca-048d55bd4eba)
+![돌봄 동물 리스트(관리자)](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/814cf2d7-0267-4f99-a194-0d0d40440b11)
 
 3-6 돌봄 동물 상세페이지(관리자)
-![돌봄 동물 상세페이지(관리자)](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/56e6e72d-f2bb-4cb4-82ba-4420fe53a4c8)
+![돌봄 동물 상세페이지(관리자)](https://github.com/2305PublicDataWebApp/WIMF/assets/134674212/127d7112-d76c-4b20-b0ef-23087b4de209)
 
 ### 4. 후기
 4-1 후기 목록
