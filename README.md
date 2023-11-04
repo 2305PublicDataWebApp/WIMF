@@ -11,7 +11,7 @@ WIMF는 Where Is My Family? 의 약자로<br/><br/> 주인에게 버림받아 �
 ### 팀명 : 개판오분전
 
 ## 👨‍👦‍👦 팀 역할 
-![Team_1](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/73df8905-366c-4ab1-abf8-d413c713774d)
+![팀 역할](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/9a1fe320-6020-47cd-a98c-fd7688062aa9)
   
 ## 📝 프로젝트 개요
 
@@ -200,7 +200,7 @@ WIMF는 Where Is My Family? 의 약자로<br/><br/> 주인에게 버림받아 �
 ![신청서 상세](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/15ab2d02-0889-4375-9f13-775b60a7d265)
 
 5-3 신청서 작성
-![신청서 작성](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/e73547a3-b6f5-494f-b95e-4928899081ed)
+![신청서 작성](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/901e531c-382d-4502-a6ac-1f2efc064f15)
 
 ### 6. 지도
 6-1 지도
