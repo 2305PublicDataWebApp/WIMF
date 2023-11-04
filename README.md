@@ -2,7 +2,8 @@
 
 WIMF는 Where Is My Family? 의 약자로<br/><br/> 주인에게 버림받아 안락사 위기에 처한 강아지들에게 새로운 가족을 연결시켜줍니다.
 -
-![WIMF 메인](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/a01cb603-d9f1-4967-acad-f11e3c8ba96d)
+![메인](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/a49f31af-8c48-4006-8a56-79a2ae03e492)
+
 
 ## 🖥  Spring Tool Suite 4 - Final Team Project
 
