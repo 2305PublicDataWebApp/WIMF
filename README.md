@@ -2,7 +2,8 @@
 
 WIMF는 Where Is My Family? 의 약자로<br/><br/> 주인에게 버림받아 안락사 위기에 처한 강아지들에게 새로운 가족을 연결시켜줍니다.
 -
-![메인페이지](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/a01cb603-d9f1-4967-acad-f11e3c8ba96d)
+
+![메인](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/a49f31af-8c48-4006-8a56-79a2ae03e492)
 
 ## 🖥  Spring Tool Suite 4 - Final Team Project
 
@@ -11,7 +12,7 @@ WIMF는 Where Is My Family? 의 약자로<br/><br/> 주인에게 버림받아 �
 ### 팀명 : 개판오분전
 
 ## 👨‍👦‍👦 팀 역할 
-![Team_1](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/73df8905-366c-4ab1-abf8-d413c713774d)
+![팀 역할](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/9a1fe320-6020-47cd-a98c-fd7688062aa9)
   
 ## 📝 프로젝트 개요
 
@@ -114,39 +115,51 @@ WIMF는 Where Is My Family? 의 약자로<br/><br/> 주인에게 버림받아 �
 
 ### 2. 회원기능
 2-1. 회원 가입
-![WIMF 회원기능 회원가입 페이지1](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/01bb9ff0-229c-4a8f-994f-af679046ab0a)
-![WIMF 회원기능 회원가입 페이지2](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/3f1083a9-469a-4a31-bd66-c9aa17b21622)
-![WIMF 회원기능 회원가입 페이지3](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/f663944a-de64-4067-bd8c-5484d919179d)
+![WIMF 회원기능 회원가입 페이지1](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/13f03000-eec5-4d50-8320-999a7bc1bc2e)
+![WIMF 회원기능 회원가입 페이지2](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/ce230c03-aec0-4044-8847-c75b93f8d126)
+![WIMF 회원기능 회원가입 페이지3](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/2557f292-04f8-43b0-b00a-ada6772f1d43)
+
 
 2-2 로그인
-![WIMF 회원기능 로그인페이지](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/76856c8a-2f42-4a21-84da-8b47d2fe152e)
+![WIMF 회원기능 로그인페이지](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/29e9b106-15dd-433e-abdd-37571bd64402)
+
 
 2-3 아이디찾기, 비밀번호 찾기
 2-3-1 아이디 찾기
-![WIMF 회원기능 아이디찾기 페이지1](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/a743fdf9-6c9e-4bfd-b9c1-9b362a8e7ab5)
-![WIMF 회원기능 아이디찾기 페이지2](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/e5fede51-af20-4bf7-9a3a-a2cdbabcfa0c)
-![WIMF 회원기능 아이디찾기 페이지3](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/55598691-fff8-48e1-86ef-28f70d55dc87)
+![WIMF 회원기능 아이디찾기 페이지1](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/81955aa5-98da-4a92-91b6-c85cda10b4e1)
+![WIMF 회원기능 아이디찾기 페이지2](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/1259ce39-7f6f-4658-8732-d9e1ca7a2c8f)
+![WIMF 회원기능 아이디찾기 페이지3](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/8f92be26-be90-4345-b83f-d7d7bfb7ad2f)
+
+
 2-3-2 비밀번호 찾기
-![WIMF 회원기능 비밀번호찾기 페이지1](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/cc3da1c9-7bfb-4056-8cb1-6cb58adad4a3)
-![WIMF 회원기능 아이디찾기 페이지2](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/117415ca-c76f-4d67-9417-5ac3671811b1)
-![WIMF 회원기능 비밀번호찾기 페이지3](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/526221f5-d63a-4cdb-8bb5-8eda97108eaa)
+![WIMF 회원기능 비밀번호찾기 페이지1](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/43d37bab-6796-4b91-845a-d6fd10512063)
+![WIMF 회원기능 아이디찾기 페이지2](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/065430c6-f741-4353-8807-d6d62f10c117)
+![WIMF 회원기능 비밀번호찾기 페이지3](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/b7039b86-3da4-41a5-a908-84c36fe57f0a)
+
 
 2-4 마이페이지
 2-4-1 개인정보 수정 및 후원한 유기견 리스트
-![WIMF 회원기능 마이페이지1](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/787b249b-1223-4060-8d87-b45b92ec33bc)
+![WIMF 회원기능 마이페이지1](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/b0db25e9-fb53-4e31-af02-e43007ca31cf)
+
 2-4-2 나의 활동(작성한 게시글)
-![WIMF 회원기능 마이페이지2](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/c41d6fb4-2bc0-4278-8e77-8c9807c73e20)
+![WIMF 회원기능 마이페이지2](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/4f67db22-1ba3-4281-9199-00228741aef2)
+
 2-4-3 나의 활동(좋아요 한 유기견 리스트)
-![WIMF 회원기능 마이페이지3](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/ba82eaca-603c-4e9f-9e3d-310d67adcef4)
+![WIMF 회원기능 마이페이지3](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/bfbe087f-cb49-4820-8312-8725915c5db2)
+
 2-4-4 나의 활동(작성한 입양신청서 리스트)
-![WIMF 회원기능 마이페이지4](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/8764f700-9289-450c-9b38-7089142e3572)
+![WIMF 회원기능 마이페이지4](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/cd318fd2-473e-4c56-b760-eb11689f5e47)
+
 2-4-5 비밀번호 변경
-![WIMF 회원기능 마이페이지5](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/9919e5bc-19cb-453f-8fe0-dc97a8a148e6)
+![WIMF 회원기능 마이페이지5](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/eb3206a1-c625-4425-80e1-5ea69215ab69)
+
 2-4-6 회원 탈퇴
-![WIMF 회원기능 마이페이지6](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/9bf4d418-03b0-43fa-a9dd-13544c559ae4)
+![WIMF 회원기능 마이페이지6](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/882dc433-7596-474b-8017-302eca5cd7c0)
+
 
 2-5 인증번호 수신 페이지
-![WIMF 회원기능 인증번호 이메일](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/68bff830-d59c-4f5d-a80f-27b16658edd1)
+![WIMF 회원기능 인증번호 이메일](https://github.com/2305PublicDataWebApp/WIMF/assets/134674191/10875d31-56af-4436-91f6-556192f7533a)
+
 
 ### 3. 강아지 돌봄
 3-1 돌봄 동물 리스트
@@ -188,7 +201,7 @@ WIMF는 Where Is My Family? 의 약자로<br/><br/> 주인에게 버림받아 �
 ![신청서 상세](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/15ab2d02-0889-4375-9f13-775b60a7d265)
 
 5-3 신청서 작성
-![신청서 작성](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/e73547a3-b6f5-494f-b95e-4928899081ed)
+![신청서 작성](https://github.com/2305PublicDataWebApp/WIMF/assets/134674363/901e531c-382d-4502-a6ac-1f2efc064f15)
 
 ### 6. 지도
 6-1 지도
@@ -196,23 +209,23 @@ WIMF는 Where Is My Family? 의 약자로<br/><br/> 주인에게 버림받아 �
 
 ### 7. 소통 게시판
 7-1 게시판 목록
-![소통 게시판](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/0bc534e7-6ce6-484f-9562-7a2e375367e2)
+![소통 게시판](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/25fc659b-8e7a-4e18-82b0-75c68174afcb)
 
 7-2 게시글 작성
-![소통 작성](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/9be5992c-5712-4cdf-b9dd-e91d0a02b7b3)
+![소통 작성](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/618f1672-621b-4820-b139-32e0db8fd5e6)
 
 7-3 게시글 상세
-![소통 상세](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/b66c1e5f-4795-4a50-9912-26aaa8fd22cd)
+![소통 상세](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/181bc19d-f49e-4857-8bf5-6179eb232eea)
 
 7-4 게시글 수정
-![소통 수정](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/8cc0015b-c80c-4e8f-90a1-800a6c3ca438)
+![소통 수정](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/9c611adf-67b2-479d-90ba-598f0e0a0676)
 
 ### 8. 후원
 8-1 후원페이지
-![후원](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/132ea85e-ce95-4cef-bfd8-ac9672a38ec1)
+![후원](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/70e47130-009a-4d8a-b002-fe1d1c293fb6)
 
 8-2 후원방식 (카카오페이)
-![후원(카카오페이 결제)](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/2c4d828a-183f-4a2e-a34d-d56fe8c8c40c)
+![후원(카카오페이 결제)](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/2d3d1fdb-383b-4c82-8e87-7b5ec86d4a15)
 
 8-3 후원방식 (신용카드)
-![후원(신용카드 결제)](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/c6d33ac0-4850-47e4-9cd8-0c892fdfc4ef)
+![후원(신용카드 결제)](https://github.com/2305PublicDataWebApp/WIMF/assets/134577399/04c0b19a-6eb0-451e-b22b-e7caf84a39db)
